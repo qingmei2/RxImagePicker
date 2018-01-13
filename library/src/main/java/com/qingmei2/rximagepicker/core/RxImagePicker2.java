@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker;
+package com.qingmei2.rximagepicker.core;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -18,9 +18,10 @@ import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
-import com.qingmei2.rximagepicker.core.RxImagePicker2;
+import com.qingmei2.rximagepicker.delegate.ProxyProviders;
 import com.qingmei2.rximagepicker.mode.Sources;
 
+import java.lang.reflect.Proxy;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,30 +35,33 @@ import io.reactivex.subjects.PublishSubject;
 import static android.app.Activity.RESULT_OK;
 
 /**
- * You should not call any method {@link RxImagePicker}, it may be replaced at any time in
- * the code iteration, please use {@link RxImagePicker2}.
+ * Created by qingmei2 on 2018/1/13.
  */
-@Deprecated
-public class RxImagePicker extends Fragment {
+public class RxImagePicker2 extends Fragment {
+
+    public Builder builder;
 
     private static final int SELECT_PHOTO = 100;
     private static final int TAKE_PHOTO = 101;
 
-    private static final String TAG = RxImagePicker.class.getSimpleName();
+    private static final String TAG = RxImagePicker2.class.getSimpleName();
     private static Uri cameraPictureUrl;
 
     private PublishSubject<Boolean> attachedSubject;
     private PublishSubject<Uri> publishSubject;
     private PublishSubject<List<Uri>> publishSubjectMultipleImages;
+
     private PublishSubject<Integer> canceledSubject;
 
     private boolean allowMultipleImages = false;
     private Sources imageSource;
 
-    public static RxImagePicker with(FragmentManager fragmentManager) {
-        RxImagePicker rxImagePickerFragment = (RxImagePicker) fragmentManager.findFragmentByTag(TAG);
+    private static RxImagePicker2 instance(Builder builder) {
+        FragmentManager fragmentManager = builder.getFragmentManager();
+        RxImagePicker2 rxImagePickerFragment = (RxImagePicker2) fragmentManager.findFragmentByTag(TAG);
         if (rxImagePickerFragment == null) {
-            rxImagePickerFragment = new RxImagePicker();
+            rxImagePickerFragment = new RxImagePicker2();
+            rxImagePickerFragment.init(builder);
             fragmentManager.beginTransaction()
                     .add(rxImagePickerFragment, TAG)
                     .commit();
@@ -65,11 +69,24 @@ public class RxImagePicker extends Fragment {
         return rxImagePickerFragment;
     }
 
-    public Observable<Uri> requestImage(final Sources source) {
+    public void init(Builder builder) {
+        this.builder = builder;
         publishSubject = PublishSubject.create();
         attachedSubject = PublishSubject.create();
         canceledSubject = PublishSubject.create();
         allowMultipleImages = false;
+    }
+
+    public <T> T create(final Class<T> classProviders) {
+        ProxyProviders proxyProviders = new ProxyProviders(builder, classProviders);
+
+        return (T) Proxy.newProxyInstance(
+                classProviders.getClassLoader(),
+                new Class<?>[]{classProviders},
+                proxyProviders);
+    }
+
+    public Observable<Uri> requestImage(final Sources source) {
         imageSource = source;
         requestPickImage();
         return publishSubject.takeUntil(canceledSubject);
@@ -227,4 +244,29 @@ public class RxImagePicker extends Fragment {
         }
     }
 
+    public static class Builder {
+
+        private FragmentManager fragmentManager;
+
+        public Builder with(Fragment fragment) {
+            this.fragmentManager = fragment.getFragmentManager();
+            return this;
+        }
+
+        public Builder with(Activity activity) {
+            this.fragmentManager = activity.getFragmentManager();
+            return this;
+        }
+
+        public RxImagePicker2 build() {
+            if (fragmentManager == null) {
+                throw new NullPointerException("You should instance the FragmentManager by RxImagePicker.Builder().with(fragmentManagerOwner).");
+            }
+            return RxImagePicker2.instance(this);
+        }
+
+        public FragmentManager getFragmentManager() {
+            return fragmentManager;
+        }
+    }
 }

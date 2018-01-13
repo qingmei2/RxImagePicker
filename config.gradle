@@ -36,10 +36,8 @@ project.ext {
             "rxbinding"                  : "com.jakewharton.rxbinding2:rxbinding:2.0.0",
 
             //dagger
-            "dagger-android"             : "com.google.dagger:dagger-android:${dagger_version}",
-            "dagger-android-support"     : "com.google.dagger:dagger-android-support:${dagger_version}",
+            "dagger"                     : "com.google.dagger:dagger:${dagger_version}",
             "dagger-compiler"            : "com.google.dagger:dagger-compiler:${dagger_version}",
-            "dagger-android-processor"   : "com.google.dagger:dagger-android-processor:${dagger_version}",
 
             //lombok
             "lombok"                     : "org.projectlombok:lombok:${lombok_version}",

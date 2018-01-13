@@ -1,6 +1,7 @@
 package com.qingmei2.sample;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -11,18 +12,20 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.qingmei2.rximagepicker.RxImageConverters;
-import com.qingmei2.rximagepicker.RxImagePicker;
-import com.qingmei2.rximagepicker.Sources;
+import com.qingmei2.rximagepicker.core.RxImagePicker2;
 
 import java.io.File;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.Function;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     private ImageView ivPickedImage;
     private RadioGroup converterRadioGroup;
+    private IRxImagePicker rxImagePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,24 +38,45 @@ public class MainActivity extends AppCompatActivity {
         converterRadioGroup = (RadioGroup) findViewById(R.id.radio_group);
         converterRadioGroup.check(R.id.radio_uri);
 
-        fabCamera.setOnClickListener(view -> pickImageFromSource(Sources.CAMERA));
-        fabGallery.setOnClickListener(view -> pickImageFromSource(Sources.GALLERY));
+        initRxImagePicker();
+        fabCamera.setOnClickListener(view -> openCamera());
+        fabGallery.setOnClickListener(view -> openGallery());
     }
 
-    private void pickImageFromSource(Sources source) {
-        RxImagePicker.with(getFragmentManager()).requestImage(source)
-                .flatMap(uri -> {
-                    switch (converterRadioGroup.getCheckedRadioButtonId()) {
-                        case R.id.radio_file:
-                            return RxImageConverters.uriToFile(MainActivity.this, uri, createTempFile());
-                        case R.id.radio_bitmap:
-                            return RxImageConverters.uriToBitmap(MainActivity.this, uri);
-                        default:
-                            return Observable.just(uri);
-                    }
-                })
-                .subscribe(this::onImagePicked, throwable -> Toast.makeText(MainActivity.this, String.format("Error: %s", throwable), Toast.LENGTH_LONG).show());
+    private void initRxImagePicker() {
+        rxImagePicker = new RxImagePicker2.Builder()
+                .with(this)
+                .build()
+                .create(IRxImagePicker.class);
     }
+
+    private void openCamera() {
+        rxImagePicker.openCamera()
+                .flatMap(FUNCTION)
+                .subscribe(this::onImagePicked,
+                        e -> Toast.makeText(MainActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show());
+    }
+
+    private void openGallery() {
+        rxImagePicker.openGallery()
+                .flatMap(FUNCTION)
+                .subscribe(this::onImagePicked,
+                        e -> Toast.makeText(MainActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show());
+    }
+
+    public Function<Uri, ObservableSource<?>> FUNCTION = new Function<Uri, ObservableSource<?>>() {
+        @Override
+        public ObservableSource<?> apply(Uri uri) throws Exception {
+            switch (converterRadioGroup.getCheckedRadioButtonId()) {
+                case R.id.radio_file:
+                    return RxImageConverters.uriToFile(MainActivity.this, uri, createTempFile());
+                case R.id.radio_bitmap:
+                    return RxImageConverters.uriToBitmap(MainActivity.this, uri);
+                default:
+                    return Observable.just(uri);
+            }
+        }
+    };
 
     private void onImagePicked(Object result) {
         Toast.makeText(this, String.format("Result: %s", result), Toast.LENGTH_LONG).show();
