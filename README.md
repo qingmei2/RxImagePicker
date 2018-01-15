@@ -1,4 +1,6 @@
-# RxImagePicker2
+# RxImagePicker
+
+[中文文档](https://github.com/qingmei2/RxImagePicker/blob/master/README_ZH.md)
 
 **The library choosing pictures from your camera or gallery and load it on your Android device screen.** 
 
@@ -19,7 +21,7 @@ allprojects {
 ```
 dependencies {
      
-     compile 'com.github.qingmei2:RxImagePicker2:x.x.x'
+     compile 'com.github.qingmei2:RxImagePicker:x.x.x'
 }
 ```
 
@@ -31,10 +33,12 @@ This Library currently in development mode, please refer to the source code.
 public interface IRxImagePicker {
 
     @Gallery
-    Observable<Uri> openGallery();
+    @AsBitmap
+    Observable<Bitmap> openGallery();
 
     @Camera
-    Observable<Uri> openCamera();
+    @AsFile
+    Observable<File> openCamera();
 }
 ```
 
@@ -42,22 +46,24 @@ public interface IRxImagePicker {
 
 ```Java
 public void openCamera(){
-    new RxImagePicker2.Builder()
+    new RxImagePicker.Builder()
                     .with(MainActivity.this)
                     .build()
                     .create(IRxImagePicker.class)
-                    .openGallery()
-                    .subscribe(uri -> {
+                    .openCamera()
+                    .subscribe(file -> {
                         //do what you want
                      });
 }
 ```
 
-Lisence
+## Contributor
+
+* [13kmsteady](https://github.com/13kmsteady)
+
+License
 -------
-        The RxImagePicker2 License：
-        
-        MIT License
+        The RxImagePicker：MIT License
         
         Copyright (c) 2018 qingmei2
         

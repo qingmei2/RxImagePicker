@@ -1,9 +1,13 @@
 package com.qingmei2.sample;
 
-import android.net.Uri;
+import android.graphics.Bitmap;
 
-import com.qingmei2.rximagepicker.mode.Camera;
-import com.qingmei2.rximagepicker.mode.Gallery;
+import com.qingmei2.rximagepicker.config.observeras.AsBitmap;
+import com.qingmei2.rximagepicker.config.observeras.AsFile;
+import com.qingmei2.rximagepicker.config.sources.Camera;
+import com.qingmei2.rximagepicker.config.sources.Gallery;
+
+import java.io.File;
 
 import io.reactivex.Observable;
 
@@ -13,8 +17,11 @@ import io.reactivex.Observable;
 public interface IRxImagePicker {
 
     @Gallery
-    Observable<Uri> openGallery();
+    @AsBitmap
+    Observable<Bitmap> openGalleryReturnBitmap();
 
     @Camera
-    Observable<Uri> openCamera();
+    @AsFile
+    Observable<File> openCameraReturnFile();
+
 }

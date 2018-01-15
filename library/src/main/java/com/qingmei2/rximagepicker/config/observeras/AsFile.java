@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker.mode;
+package com.qingmei2.rximagepicker.config.observeras;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,11 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation will be marked open Gallery，it will conflict with {@link Camera}
- * <p>
- * Created by qingmei2 on 2018/1/13.
+ * Created by WYJ on 2018/1/16.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Gallery {
+public @interface AsFile {
 }

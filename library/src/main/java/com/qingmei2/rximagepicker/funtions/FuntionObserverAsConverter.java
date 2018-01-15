@@ -1,10 +1,13 @@
-package com.qingmei2.rximagepicker;
+package com.qingmei2.rximagepicker.funtions;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+
+import com.qingmei2.rximagepicker.config.observeras.ObserverAs;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,13 +18,46 @@ import java.io.OutputStream;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-public class RxImageConverters {
+/**
+ * Created by QingMei on 2018/1/16.
+ */
+public final class FuntionObserverAsConverter implements Function<Uri, ObservableSource<?>> {
 
-    public static Observable<File> uriToFile(final Context context, final Uri uri, final File file) {
+    private static final String TAG = "FuntionObserverAs";
+
+    private final ObserverAs observerAs;
+    private final Context context;
+
+    public FuntionObserverAsConverter(ObserverAs observerAs,
+                                      Context context) {
+        this.observerAs = observerAs;
+        this.context = context;
+    }
+
+    @Override
+    public ObservableSource<?> apply(Uri uri) throws Exception {
+        switch (observerAs) {
+            case FILE:
+                return uriToFile(context, uri, createTempFile());
+            case BITMAP:
+                return uriToBitmap(context, uri);
+            case URI:
+            default:
+                return Observable.just(uri);
+        }
+    }
+
+    private File createTempFile() {
+        return new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), System.currentTimeMillis() + "_image.jpeg");
+    }
+
+    private static Observable<File> uriToFile(final Context context, final Uri uri, final File file) {
         return Observable.create(new ObservableOnSubscribe<File>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<File> emitter) throws Exception {
@@ -31,14 +67,14 @@ public class RxImageConverters {
                     emitter.onNext(file);
                     emitter.onComplete();
                 } catch (Exception e) {
-                    Log.e(RxImageConverters.class.getSimpleName(), "Error converting uri", e);
+                    Log.e(TAG, "Error converting uri", e);
                     emitter.onError(e);
                 }
             }
         }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Observable<Bitmap> uriToBitmap(final Context context, final Uri uri) {
+    private static Observable<Bitmap> uriToBitmap(final Context context, final Uri uri) {
         return Observable.create(new ObservableOnSubscribe<Bitmap>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Bitmap> emitter) throws Exception {
@@ -47,7 +83,7 @@ public class RxImageConverters {
                     emitter.onNext(bitmap);
                     emitter.onComplete();
                 } catch (IOException e) {
-                    Log.e(RxImageConverters.class.getSimpleName(), "Error converting uri", e);
+                    Log.e(TAG, "Error converting uri", e);
                     emitter.onError(e);
                 }
             }
@@ -64,5 +100,4 @@ public class RxImageConverters {
         out.close();
         in.close();
     }
-
 }

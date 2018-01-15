@@ -1,6 +1,6 @@
 package com.qingmei2.rximagepicker.core;
 
-import android.net.Uri;
+import com.qingmei2.rximagepicker.config.RxImagePickerConfigProvider;
 
 import io.reactivex.Observable;
 
@@ -10,5 +10,5 @@ import io.reactivex.Observable;
  */
 public interface IRxImagePickerProcessor {
 
-    Observable<Uri> process(final RxImagePickerConfigProvider configProvider);
+    Observable<?> process(final RxImagePickerConfigProvider configProvider);
 }
