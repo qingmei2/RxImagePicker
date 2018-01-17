@@ -47,32 +47,4 @@
 
     </LinearLayout>
 
-    <RadioGroup
-        android:id="@+id/radio_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:orientation="vertical"
-        android:padding="8dp">
-
-        <RadioButton
-            android:id="@+id/radio_uri"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/load_from_uri" />
-
-        <RadioButton
-            android:id="@+id/radio_file"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/convert_uri_to_file" />
-
-        <RadioButton
-            android:id="@+id/radio_bitmap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/convert_uri_to_bitmap" />
-
-    </RadioGroup>
-
 </android.support.design.widget.CoordinatorLayout>

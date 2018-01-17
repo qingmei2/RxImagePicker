@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -16,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     private ImageView ivPickedImage;
-    private RadioGroup converterRadioGroup;
     private IRxImagePicker rxImagePicker;
 
     @Override
@@ -24,11 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ivPickedImage = (ImageView) findViewById(R.id.iv_picked_image);
-        FloatingActionButton fabCamera = (FloatingActionButton) findViewById(R.id.fab_pick_camera);
-        FloatingActionButton fabGallery = (FloatingActionButton) findViewById(R.id.fab_pick_gallery);
-        converterRadioGroup = (RadioGroup) findViewById(R.id.radio_group);
-        converterRadioGroup.check(R.id.radio_uri);
+        ivPickedImage = findViewById(R.id.iv_picked_image);
+        FloatingActionButton fabCamera = findViewById(R.id.fab_pick_camera);
+        FloatingActionButton fabGallery = findViewById(R.id.fab_pick_gallery);
 
         initRxImagePicker();
         fabCamera.setOnClickListener(view -> openCamera());
