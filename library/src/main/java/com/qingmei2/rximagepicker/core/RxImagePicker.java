@@ -1,11 +1,8 @@
 package com.qingmei2.rximagepicker.core;
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,17 +12,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.SupportActivity;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import com.qingmei2.rximagepicker.config.sources.SourcesFrom;
 import com.qingmei2.rximagepicker.delegate.ProxyProviders;
 
 import java.lang.reflect.Proxy;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import io.reactivex.Observable;
@@ -49,24 +44,22 @@ public class RxImagePicker extends Fragment {
 
     private PublishSubject<Boolean> attachedSubject;
     private PublishSubject<Uri> publishSubject;
-    private PublishSubject<List<Uri>> publishSubjectMultipleImages;
 
     private PublishSubject<Integer> canceledSubject;
 
-    private boolean allowMultipleImages = false;
     private SourcesFrom imageSource;
 
     private static RxImagePicker instance(Builder builder) {
         FragmentManager fragmentManager = builder.getFragmentManager();
-        RxImagePicker rxImagePickerFragment = (RxImagePicker) fragmentManager.findFragmentByTag(TAG);
-        if (rxImagePickerFragment == null) {
-            rxImagePickerFragment = new RxImagePicker();
-            rxImagePickerFragment.init(builder);
+        RxImagePicker fragment = (RxImagePicker) fragmentManager.findFragmentByTag(TAG);
+        if (fragment == null) {
+            fragment = new RxImagePicker();
+            fragment.init(builder);
             fragmentManager.beginTransaction()
-                    .add(rxImagePickerFragment, TAG)
+                    .add(fragment, TAG)
                     .commit();
         }
-        return rxImagePickerFragment;
+        return fragment;
     }
 
     private void init(Builder builder) {
@@ -74,7 +67,6 @@ public class RxImagePicker extends Fragment {
         publishSubject = PublishSubject.create();
         attachedSubject = PublishSubject.create();
         canceledSubject = PublishSubject.create();
-        allowMultipleImages = false;
     }
 
     public <T> T create(final Class<T> classProviders) {
@@ -92,17 +84,6 @@ public class RxImagePicker extends Fragment {
         return publishSubject.takeUntil(canceledSubject);
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public Observable<List<Uri>> requestMultipleImages() {
-        publishSubjectMultipleImages = PublishSubject.create();
-        attachedSubject = PublishSubject.create();
-        canceledSubject = PublishSubject.create();
-        imageSource = SourcesFrom.GALLERY;
-        allowMultipleImages = true;
-        requestPickImage();
-        return publishSubjectMultipleImages.takeUntil(canceledSubject);
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,18 +98,9 @@ public class RxImagePicker extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        attachedSubject.onNext(true);
-        attachedSubject.onComplete();
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        Log.e("test", "Permission granted");
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             pickImage();
-            Log.e("test", "pick image");
         }
     }
 
@@ -149,20 +121,7 @@ public class RxImagePicker extends Fragment {
     }
 
     private void handleGalleryResult(Intent data) {
-        if (allowMultipleImages) {
-            ArrayList<Uri> imageUris = new ArrayList<>();
-            ClipData clipData = data.getClipData();
-            if (clipData != null) {
-                for (int i = 0; i < clipData.getItemCount(); i++) {
-                    imageUris.add(clipData.getItemAt(i).getUri());
-                }
-            } else {
-                imageUris.add(data.getData());
-            }
-            onImagesPicked(imageUris);
-        } else {
-            onImagePicked(data.getData());
-        }
+        onImagePicked(data.getData());
     }
 
     private void requestPickImage() {
@@ -196,7 +155,6 @@ public class RxImagePicker extends Fragment {
             case GALLERY:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     pictureChooseIntent = new Intent(Intent.ACTION_PICK);
-                    pictureChooseIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, allowMultipleImages);
                     pictureChooseIntent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
                 } else {
                     pictureChooseIntent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -230,13 +188,6 @@ public class RxImagePicker extends Fragment {
         return contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv);
     }
 
-    private void onImagesPicked(List<Uri> uris) {
-        if (publishSubjectMultipleImages != null) {
-            publishSubjectMultipleImages.onNext(uris);
-            publishSubjectMultipleImages.onComplete();
-        }
-    }
-
     private void onImagePicked(Uri uri) {
         if (publishSubject != null) {
             publishSubject.onNext(uri);
@@ -253,7 +204,7 @@ public class RxImagePicker extends Fragment {
             return this;
         }
 
-        public Builder with(Activity activity) {
+        public Builder with(SupportActivity activity) {
             this.fragmentManager = activity.getFragmentManager();
             return this;
         }

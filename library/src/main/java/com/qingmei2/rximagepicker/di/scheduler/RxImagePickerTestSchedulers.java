@@ -4,11 +4,11 @@ import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * An extra layer of packaging, using {@link RxTestSchedulers} for easier testing.
+ * An extra layer of packaging, using {@link RxImagePickerTestSchedulers} for easier testing.
  * <p>
  * Created by QingMei on 2018/1/18.
  */
-public class RxTestSchedulers implements IRxSchedulers {
+public class RxImagePickerTestSchedulers implements IRxImagePickerSchedulers {
 
     @Override
     public Scheduler ui() {

@@ -19,10 +19,8 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by QingMei on 2018/1/16.
@@ -71,7 +69,7 @@ public final class FuntionObserverAsConverter implements Function<Uri, Observabl
                     emitter.onError(e);
                 }
             }
-        }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
+        });
     }
 
     private static Observable<Bitmap> uriToBitmap(final Context context, final Uri uri) {
@@ -87,7 +85,7 @@ public final class FuntionObserverAsConverter implements Function<Uri, Observabl
                     emitter.onError(e);
                 }
             }
-        }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
+        });
     }
 
     private static void copyInputStreamToFile(InputStream in, File file) throws IOException {
