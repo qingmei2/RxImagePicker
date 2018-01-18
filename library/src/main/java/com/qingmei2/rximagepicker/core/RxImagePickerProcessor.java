@@ -4,9 +4,8 @@ package com.qingmei2.rximagepicker.core;
 import android.net.Uri;
 
 import com.qingmei2.rximagepicker.config.RxImagePickerConfigProvider;
+import com.qingmei2.rximagepicker.di.scheduler.IRxSchedulers;
 import com.qingmei2.rximagepicker.funtions.FuntionObserverAsConverter;
-
-import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -18,10 +17,12 @@ import io.reactivex.functions.Function;
 public final class RxImagePickerProcessor implements IRxImagePickerProcessor {
 
     private final RxImagePicker rxImagePicker;
+    private final IRxSchedulers schedulers;
 
-    @Inject
-    public RxImagePickerProcessor(RxImagePicker rxImagePicker) {
+    public RxImagePickerProcessor(RxImagePicker rxImagePicker,
+                                  IRxSchedulers schedulers) {
         this.rxImagePicker = rxImagePicker;
+        this.schedulers = schedulers;
     }
 
     @Override

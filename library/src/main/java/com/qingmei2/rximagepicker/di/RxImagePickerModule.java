@@ -3,6 +3,8 @@ package com.qingmei2.rximagepicker.di;
 import com.qingmei2.rximagepicker.core.IRxImagePickerProcessor;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker.core.RxImagePickerProcessor;
+import com.qingmei2.rximagepicker.di.scheduler.IRxSchedulers;
+import com.qingmei2.rximagepicker.di.scheduler.RxSchedulers;
 
 import dagger.Module;
 import dagger.Provides;
@@ -27,7 +29,12 @@ public final class RxImagePickerModule {
     }
 
     @Provides
-    IRxImagePickerProcessor providesRxImagePickerProcessor(RxImagePickerProcessor processor) {
-        return processor;
+    IRxImagePickerProcessor providesRxImagePickerProcessor(IRxSchedulers schedulers) {
+        return new RxImagePickerProcessor(rxImagePicker, schedulers);
+    }
+
+    @Provides
+    IRxSchedulers providesRxSchedulers() {
+        return new RxSchedulers();
     }
 }

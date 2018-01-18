@@ -69,7 +69,7 @@ public class RxImagePicker extends Fragment {
         return rxImagePickerFragment;
     }
 
-    public void init(Builder builder) {
+    private void init(Builder builder) {
         this.builder = builder;
         publishSubject = PublishSubject.create();
         attachedSubject = PublishSubject.create();
