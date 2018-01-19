@@ -28,7 +28,7 @@ dependencies {
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["design"]
     implementation rootProject.ext.dependencies["glide"]
-    implementation project(':library')
+    implementation project(':rximagepicker')
 
     testImplementation rootProject.ext.dependencies["junit"]
 }
