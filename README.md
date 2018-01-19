@@ -57,6 +57,10 @@ public void openCamera(){
 }
 ```
 
+## Screen Shot
+
+![sample_screenshot](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/sample_screenshot.png)
+
 ## Contributor
 
 * [13kmsteady](https://github.com/13kmsteady)
