@@ -4,15 +4,16 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.RestrictTo;
 
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView;
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
 
 import io.reactivex.Observable;
 
-/**
- * Created by QingMei on 2018/1/19.
- */
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+
+@RestrictTo(LIBRARY)
 public final class RxSystemGalleryPickerView extends BaseSystemPickerView implements IGalleryPickerView {
 
     private static final String TAG = RxSystemGalleryPickerView.class.getSimpleName();

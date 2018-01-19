@@ -22,9 +22,6 @@ import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
-/**
- * Created by QingMei on 2018/1/16.
- */
 public final class FuntionObserverAsConverter implements Function<Uri, ObservableSource<?>> {
 
     private static final String TAG = "FuntionObserverAs";

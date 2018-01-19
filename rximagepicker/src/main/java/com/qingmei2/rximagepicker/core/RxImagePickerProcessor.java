@@ -16,8 +16,6 @@ import io.reactivex.functions.Function;
 
 /**
  * {@link RxImagePickerProcessor} is the class that processing reactive data stream.
- * <p>
- * Created by qingmei2 on 2018/1/13.
  */
 public final class RxImagePickerProcessor implements
         IRxImagePickerProcessor {

@@ -9,9 +9,6 @@ import com.qingmei2.rximagepicker.delegate.ProxyProviders;
 
 import java.lang.reflect.Proxy;
 
-/**
- * Created by qingmei2 on 2018/1/13.
- */
 public class RxImagePicker {
 
     private Builder builder;

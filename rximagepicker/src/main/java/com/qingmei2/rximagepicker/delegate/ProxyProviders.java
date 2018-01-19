@@ -10,9 +10,6 @@ import java.lang.reflect.Method;
 
 import io.reactivex.Observable;
 
-/**
- * Created by qingmei2 on 2018/1/13.
- */
 public final class ProxyProviders implements InvocationHandler {
 
     private final IRxImagePickerProcessor rxImagePickerProcessor;

@@ -16,9 +16,6 @@ import io.reactivex.subjects.PublishSubject;
 
 import static android.app.Activity.RESULT_OK;
 
-/**
- * Created by QingMei on 2018/1/19.
- */
 public abstract class BaseSystemPickerView extends Fragment {
 
     public static final int GALLERY_REQUEST_CODE = 100;

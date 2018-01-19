@@ -4,9 +4,7 @@ import com.qingmei2.rximagepicker.config.observeras.ObserverAs;
 import com.qingmei2.rximagepicker.config.sources.SourcesFrom;
 
 /**
- * Entity class for user config
- * <p>
- * Created by qingmei2 on 2018/1/13.
+ * Entity class for user config.
  */
 public final class RxImagePickerConfigProvider {
 

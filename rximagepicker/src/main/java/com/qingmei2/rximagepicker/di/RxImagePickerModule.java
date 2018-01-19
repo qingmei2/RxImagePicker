@@ -18,8 +18,6 @@ import dagger.Provides;
 
 /**
  * {@link RxImagePickerModule} be used from {@link RxImagePickerComponent}
- * <p>
- * Created by qingmei2 on 2018/1/13.
  */
 @Module
 public final class RxImagePickerModule {

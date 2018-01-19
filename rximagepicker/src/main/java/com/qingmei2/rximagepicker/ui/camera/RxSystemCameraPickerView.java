@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.RestrictTo;
 
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
@@ -16,10 +17,10 @@ import java.util.Locale;
 
 import io.reactivex.Observable;
 
-/**
- * Created by QingMei on 2018/1/19.
- */
-public class RxSystemCameraPickerView extends BaseSystemPickerView implements ICameraPickerView {
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+
+@RestrictTo(LIBRARY)
+public final class RxSystemCameraPickerView extends BaseSystemPickerView implements ICameraPickerView {
 
     private static final String TAG = RxSystemCameraPickerView.class.getSimpleName();
     private static Uri cameraPictureUrl;
@@ -45,10 +46,8 @@ public class RxSystemCameraPickerView extends BaseSystemPickerView implements IC
         if (!checkPermission()) {
             return;
         }
-        Intent pictureChooseIntent = null;
-
         cameraPictureUrl = createImageUri();
-        pictureChooseIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent pictureChooseIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         pictureChooseIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraPictureUrl);
 
         startActivityForResult(pictureChooseIntent, CAMERA_REQUEST_CODE);

@@ -20,8 +20,6 @@ import io.reactivex.Single;
  * {@link ProxyTranslator} is used to handle the annotation configuration above the method in the user's
  * custom interface, after completed parsing configuration, the configrations will be stored in an object
  * {@link RxImagePickerConfigProvider}.
- * <p>
- * Created by qingmei2 on 2018/1/13.
  */
 public final class ProxyTranslator {
 
