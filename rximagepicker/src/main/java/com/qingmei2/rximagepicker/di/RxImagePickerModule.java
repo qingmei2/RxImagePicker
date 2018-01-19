@@ -1,10 +1,17 @@
 package com.qingmei2.rximagepicker.di;
 
+import android.app.FragmentManager;
+import android.content.Context;
+
 import com.qingmei2.rximagepicker.core.IRxImagePickerProcessor;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker.core.RxImagePickerProcessor;
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
 import com.qingmei2.rximagepicker.di.scheduler.RxImagePickerSchedulers;
+import com.qingmei2.rximagepicker.ui.ICameraPickerView;
+import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
+import com.qingmei2.rximagepicker.ui.camera.RxSystemCameraPickerView;
+import com.qingmei2.rximagepicker.ui.gallery.RxSystemGalleryPickerView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -17,20 +24,35 @@ import dagger.Provides;
 @Module
 public final class RxImagePickerModule {
 
-    private final RxImagePicker rxImagePicker;
+    private final ICameraPickerView cameraPickerView;
+    private final IGalleryPickerView galleryPickerView;
+    private final Context context;
 
     public RxImagePickerModule(RxImagePicker.Builder builder) {
-        this.rxImagePicker = builder.build();
+        FragmentManager fragmentManager = builder.getFragmentManager();
+        this.cameraPickerView = RxSystemCameraPickerView.instance(fragmentManager);
+        this.galleryPickerView = RxSystemGalleryPickerView.instance(fragmentManager);
+        this.context = builder.getRootContext();
     }
 
     @Provides
-    RxImagePicker provideRxImagePicker() {
-        return rxImagePicker;
+    ICameraPickerView providesCameraPickerView() {
+        return cameraPickerView;
+    }
+
+    @Provides
+    IGalleryPickerView provideGalleryPickerView() {
+        return galleryPickerView;
     }
 
     @Provides
     IRxImagePickerProcessor providesRxImagePickerProcessor(IRxImagePickerSchedulers schedulers) {
-        return new RxImagePickerProcessor(rxImagePicker, schedulers);
+        return new RxImagePickerProcessor(
+                context,
+                cameraPickerView,
+                galleryPickerView,
+                schedulers
+        );
     }
 
     @Provides

@@ -1,11 +1,14 @@
 package com.qingmei2.rximagepicker.core;
 
 
+import android.content.Context;
 import android.net.Uri;
 
 import com.qingmei2.rximagepicker.config.RxImagePickerConfigProvider;
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
 import com.qingmei2.rximagepicker.funtions.FuntionObserverAsConverter;
+import com.qingmei2.rximagepicker.ui.ICameraPickerView;
+import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -19,12 +22,18 @@ import io.reactivex.functions.Function;
 public final class RxImagePickerProcessor implements
         IRxImagePickerProcessor {
 
-    private final RxImagePicker imagePicker;
+    private final Context context;
+    private final ICameraPickerView cameraPickerView;
+    private final IGalleryPickerView galleryPickerView;
     private final IRxImagePickerSchedulers schedulers;
 
-    public RxImagePickerProcessor(RxImagePicker imagePicker,
+    public RxImagePickerProcessor(Context context,
+                                  ICameraPickerView cameraPickerView,
+                                  IGalleryPickerView galleryPickerView,
                                   IRxImagePickerSchedulers schedulers) {
-        this.imagePicker = imagePicker;
+        this.context = context;
+        this.cameraPickerView = cameraPickerView;
+        this.galleryPickerView = galleryPickerView;
         this.schedulers = schedulers;
     }
 
@@ -34,10 +43,17 @@ public final class RxImagePickerProcessor implements
                 .flatMap(new Function<RxImagePickerConfigProvider, ObservableSource<Uri>>() {
                     @Override
                     public ObservableSource<Uri> apply(RxImagePickerConfigProvider provider) throws Exception {
-                        return imagePicker.requestImage(provider.getSourcesFrom());
+                        switch (provider.getSourcesFrom()) {
+                            case GALLERY:
+                                return galleryPickerView.pickImage();
+                            case CAMERA:
+                                return cameraPickerView.takePhoto();
+                            default:
+                                throw new IllegalArgumentException("unknown SourceFrom data.");
+                        }
                     }
                 })
-                .flatMap(new FuntionObserverAsConverter(configProvider.getObserverAs(), imagePicker.getActivity()))
+                .flatMap(new FuntionObserverAsConverter(configProvider.getObserverAs(), context))
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.ui());
     }
