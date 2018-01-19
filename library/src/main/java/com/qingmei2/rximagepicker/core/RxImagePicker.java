@@ -64,9 +64,6 @@ public class RxImagePicker extends Fragment {
 
     private void init(Builder builder) {
         this.builder = builder;
-        publishSubject = PublishSubject.create();
-        attachedSubject = PublishSubject.create();
-        canceledSubject = PublishSubject.create();
     }
 
     public <T> T create(final Class<T> classProviders) {
@@ -79,6 +76,10 @@ public class RxImagePicker extends Fragment {
     }
 
     public Observable<Uri> requestImage(final SourcesFrom source) {
+        publishSubject = PublishSubject.create();
+        attachedSubject = PublishSubject.create();
+        canceledSubject = PublishSubject.create();
+
         imageSource = source;
         requestPickImage();
         return publishSubject.takeUntil(canceledSubject);
