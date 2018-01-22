@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -29,5 +31,10 @@ dependencies {
     implementation rootProject.ext.dependencies["dagger"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     testImplementation rootProject.ext.dependencies["junit"]
+    testImplementation rootProject.ext.dependencies["kotlin-android"]
+    testImplementation rootProject.ext.dependencies["mockito-kotlin"]
+}
+repositories {
+    mavenCentral()
 }
 
