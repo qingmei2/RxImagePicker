@@ -5,15 +5,18 @@ import android.app.FragmentManager
 import android.support.v4.app.SupportActivity
 import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Single
-import org.junit.Assert.assertTrue
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import org.mockito.internal.verification.Times
 
 class RxImagePickerTest {
 
     private val mockFragment: Fragment = mock()
     private val mockActivity: SupportActivity = mock()
     private val mockFragmentManager: FragmentManager = mock()
+
+    private val mockPicker: RxDefaultImagePicker = mock()
 
     @Before
     fun setUp() {
@@ -24,34 +27,65 @@ class RxImagePickerTest {
 
     @Test
     @Throws(Exception::class)
-    fun builderWithActivitySuccess() {
-        val rxImagePicker = RxImagePicker.Builder()
-                .with(mockActivity)
-                .build()
+    fun buildTestWithActivitySuccess() {
+        val rxImagePicker = instanceWithActivityBuilder()
+
         verify(mockActivity, times(1)).fragmentManager
 
-        assertTrue(rxImagePicker != null)
+        assertEquals(rxImagePicker.builder.fragmentManager, mockFragmentManager)
+        assertEquals(rxImagePicker.builder.rootContext, mockActivity)
     }
 
     @Test
     @Throws(Exception::class)
-    fun builderWithFragmentSuccess() {
-        val rxImagePicker = RxImagePicker.Builder()
-                .with(mockFragment)
-                .build()
+    fun buildTestWithFragmentSuccess() {
+        val rxImagePicker = instanceWithFragmentBuilder()
+
         verify(mockFragment, times(1)).fragmentManager
         verify(mockFragment, times(1)).activity
 
-        assertTrue(rxImagePicker != null)
+        assertEquals(rxImagePicker.builder.fragmentManager, mockFragmentManager)
+        assertEquals(rxImagePicker.builder.rootContext, mockActivity)
     }
 
     @Test
-    fun builderNoWithFailed() {
-        Single.just(RxImagePicker.Builder())
+    fun buildTestWithNoContextFailed() {
+        Single.just(instanceWithNoContextBuilder())
                 .map { it.build() }
                 .test()
                 .assertNotComplete()
                 .assertNoValues()
                 .assertError(NullPointerException::class.java)
+    }
+
+    @Test
+    fun createTestWithNoParamSuccess() {
+        val spy = instanceWithActivityBuilder()
+                .let { spy(it) }
+        doReturn(mockPicker).whenever(spy).create(RxDefaultImagePicker::class.java)
+
+        val defaultImagePicker = spy.create()
+
+        argumentCaptor<Class<Any>>().apply {
+            verify(spy, Times(1)).create(capture())
+            assertEquals(firstValue, RxDefaultImagePicker::class.java)
+        }
+        assertEquals(defaultImagePicker, mockPicker)
+    }
+
+    private fun instanceWithActivityBuilder(): RxImagePicker {
+        return RxImagePicker.Builder()
+                .with(mockActivity)
+                .build()
+    }
+
+    private fun instanceWithFragmentBuilder(): RxImagePicker {
+        return RxImagePicker.Builder()
+                .with(mockFragment)
+                .build()
+    }
+
+    private fun instanceWithNoContextBuilder(): RxImagePicker.Builder {
+        return RxImagePicker.Builder()
     }
 }

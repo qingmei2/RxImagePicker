@@ -3,6 +3,7 @@ package com.qingmei2.rximagepicker.core;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.SupportActivity;
 
 import com.qingmei2.rximagepicker.delegate.ProxyProviders;
@@ -11,23 +12,24 @@ import java.lang.reflect.Proxy;
 
 public class RxImagePicker {
 
-    private Builder builder;
+    @VisibleForTesting
+    public Builder builder;
 
     private RxImagePicker(Builder builder) {
         this.builder = builder;
     }
 
-    private <T> T create(final Class<T> classProviders) {
+    public RxDefaultImagePicker create() {
+        return create(RxDefaultImagePicker.class);
+    }
+
+    public <T> T create(final Class<T> classProviders) {
         ProxyProviders proxyProviders = new ProxyProviders(builder, classProviders);
 
         return (T) Proxy.newProxyInstance(
                 classProviders.getClassLoader(),
                 new Class<?>[]{classProviders},
                 proxyProviders);
-    }
-
-    private static RxImagePicker instance(Builder builder) {
-        return new RxImagePicker(builder);
     }
 
     public static class Builder {
@@ -47,16 +49,11 @@ public class RxImagePicker {
             return this;
         }
 
-        public <T> T build(final Class<T> classProviders) {
+        public RxImagePicker build() {
             if (fragmentManager == null) {
-                throw new NullPointerException("You should instance the FragmentManager by RxImagePicker.Builder().with(fragmentManagerOwner).");
+                throw new NullPointerException("You should instance the FragmentManager by RxImagePicker.Builder().with(activity or fragment).");
             }
-            return new RxImagePicker(this)
-                    .create(classProviders);
-        }
-
-        public RxDefaultImagePicker build() {
-            return build(RxDefaultImagePicker.class);
+            return new RxImagePicker(this);
         }
 
         public FragmentManager getFragmentManager() {

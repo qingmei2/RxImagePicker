@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private void initRxImagePicker() {
         rxImagePicker = new RxImagePicker.Builder()
                 .with(this)
-                .build();
+                .build()
+                .create();
     }
 
     private void openCamera() {
