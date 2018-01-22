@@ -17,17 +17,17 @@ public class RxImagePicker {
         this.builder = builder;
     }
 
-    private static RxImagePicker instance(Builder builder) {
-        return new RxImagePicker(builder);
-    }
-
-    public <T> T create(final Class<T> classProviders) {
+    private <T> T create(final Class<T> classProviders) {
         ProxyProviders proxyProviders = new ProxyProviders(builder, classProviders);
 
         return (T) Proxy.newProxyInstance(
                 classProviders.getClassLoader(),
                 new Class<?>[]{classProviders},
                 proxyProviders);
+    }
+
+    private static RxImagePicker instance(Builder builder) {
+        return new RxImagePicker(builder);
     }
 
     public static class Builder {
@@ -47,11 +47,16 @@ public class RxImagePicker {
             return this;
         }
 
-        public RxImagePicker build() {
+        public <T> T build(final Class<T> classProviders) {
             if (fragmentManager == null) {
                 throw new NullPointerException("You should instance the FragmentManager by RxImagePicker.Builder().with(fragmentManagerOwner).");
             }
-            return RxImagePicker.instance(this);
+            return new RxImagePicker(this)
+                    .create(classProviders);
+        }
+
+        public RxDefaultImagePicker build() {
+            return build(RxDefaultImagePicker.class);
         }
 
         public FragmentManager getFragmentManager() {
