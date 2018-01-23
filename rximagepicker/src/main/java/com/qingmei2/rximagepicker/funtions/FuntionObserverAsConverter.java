@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.qingmei2.rximagepicker.config.observeras.ObserverAs;
@@ -26,8 +27,10 @@ public final class FuntionObserverAsConverter implements Function<Uri, Observabl
 
     private static final String TAG = "FuntionObserverAs";
 
-    private final ObserverAs observerAs;
-    private final Context context;
+    @VisibleForTesting
+    public final ObserverAs observerAs;
+    @VisibleForTesting
+    public final Context context;
 
     public FuntionObserverAsConverter(ObserverAs observerAs,
                                       Context context) {

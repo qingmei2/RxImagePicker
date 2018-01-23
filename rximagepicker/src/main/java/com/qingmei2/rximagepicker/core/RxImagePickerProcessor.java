@@ -3,6 +3,7 @@ package com.qingmei2.rximagepicker.core;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.VisibleForTesting;
 
 import com.qingmei2.rximagepicker.config.RxImagePickerConfigProvider;
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
@@ -20,10 +21,14 @@ import io.reactivex.functions.Function;
 public final class RxImagePickerProcessor implements
         IRxImagePickerProcessor {
 
-    private final Context context;
-    private final ICameraPickerView cameraPickerView;
-    private final IGalleryPickerView galleryPickerView;
-    private final IRxImagePickerSchedulers schedulers;
+    @VisibleForTesting
+    public final Context context;
+    @VisibleForTesting
+    public final ICameraPickerView cameraPickerView;
+    @VisibleForTesting
+    public final IGalleryPickerView galleryPickerView;
+    @VisibleForTesting
+    public final IRxImagePickerSchedulers schedulers;
 
     public RxImagePickerProcessor(Context context,
                                   ICameraPickerView cameraPickerView,
@@ -38,21 +43,35 @@ public final class RxImagePickerProcessor implements
     @Override
     public Observable<?> process(RxImagePickerConfigProvider configProvider) {
         return Observable.just(configProvider)
-                .flatMap(new Function<RxImagePickerConfigProvider, ObservableSource<Uri>>() {
-                    @Override
-                    public ObservableSource<Uri> apply(RxImagePickerConfigProvider provider) throws Exception {
-                        switch (provider.getSourcesFrom()) {
-                            case GALLERY:
-                                return galleryPickerView.pickImage();
-                            case CAMERA:
-                                return cameraPickerView.takePhoto();
-                            default:
-                                throw new IllegalArgumentException("unknown SourceFrom data.");
-                        }
-                    }
-                })
-                .flatMap(new FuntionObserverAsConverter(configProvider.getObserverAs(), context))
+                .flatMap(sourceFrom(cameraPickerView, galleryPickerView))
+                .flatMap(observerAs(configProvider, context))
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.ui());
+    }
+
+    @VisibleForTesting
+    public Function<RxImagePickerConfigProvider, ObservableSource<Uri>> sourceFrom(
+            ICameraPickerView cameraPickerView,
+            IGalleryPickerView galleryPickerView) {
+        return new Function<RxImagePickerConfigProvider, ObservableSource<Uri>>() {
+            @Override
+            public ObservableSource<Uri> apply(RxImagePickerConfigProvider provider) throws Exception {
+                switch (provider.getSourcesFrom()) {
+                    case GALLERY:
+                        return galleryPickerView.pickImage();
+                    case CAMERA:
+                        return cameraPickerView.takePhoto();
+                    default:
+                        throw new IllegalArgumentException("unknown SourceFrom data.");
+                }
+            }
+        };
+    }
+
+    @VisibleForTesting
+    public Function<Uri, ObservableSource<?>> observerAs(
+            RxImagePickerConfigProvider configProvider,
+            Context context) {
+        return new FuntionObserverAsConverter(configProvider.getObserverAs(), context);
     }
 }
