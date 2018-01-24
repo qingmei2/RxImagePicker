@@ -1,5 +1,7 @@
 package com.qingmei2.rximagepicker.delegate;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.qingmei2.rximagepicker.config.RxImagePickerConfigProvider;
 import com.qingmei2.rximagepicker.config.observeras.AsBitmap;
 import com.qingmei2.rximagepicker.config.observeras.AsFile;
@@ -39,7 +41,8 @@ public final class ProxyTranslator {
      *
      * @return {@link SourcesFrom#CAMERA} or {@link SourcesFrom#GALLERY}
      */
-    private SourcesFrom getStreamSourcesFrom(Method method) {
+    @VisibleForTesting
+    public SourcesFrom getStreamSourcesFrom(Method method) {
         final boolean camera = method.getAnnotation(Camera.class) != null;
         final boolean gallery = method.getAnnotation(Gallery.class) != null;
         if (camera && !gallery) {
@@ -62,7 +65,8 @@ public final class ProxyTranslator {
      * @return By default, it return as {@link ObserverAs#URI} if no annotation was configured above
      * the method.
      */
-    private ObserverAs getStreamObserverAs(Method method) {
+    @VisibleForTesting
+    public ObserverAs getStreamObserverAs(Method method) {
         final boolean asBitmap = method.getAnnotation(AsBitmap.class) != null;
         final boolean asFile = method.getAnnotation(AsFile.class) != null;
         final boolean asUri = method.getAnnotation(AsUri.class) != null;
