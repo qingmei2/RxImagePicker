@@ -6,7 +6,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.RestrictTo;
 
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
@@ -17,9 +16,6 @@ import java.util.Locale;
 
 import io.reactivex.Observable;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
-
-@RestrictTo(LIBRARY)
 public final class RxSystemCameraPickerView extends BaseSystemPickerView implements ICameraPickerView {
 
     private static final String TAG = RxSystemCameraPickerView.class.getSimpleName();

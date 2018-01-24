@@ -25,10 +25,10 @@ android {
 }
 
 dependencies {
-    implementation rootProject.ext.dependencies["appcompat-v7"]
+    api rootProject.ext.dependencies["appcompat-v7"]
     api rootProject.ext.dependencies["rxJava2"]
     api rootProject.ext.dependencies["rxandroid"]
-    implementation rootProject.ext.dependencies["dagger"]
+    api rootProject.ext.dependencies["dagger"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     testImplementation rootProject.ext.dependencies["junit"]
     testImplementation rootProject.ext.dependencies["kotlin-android"]
@@ -37,4 +37,4 @@ dependencies {
 repositories {
     mavenCentral()
 }
-
+apply from: 'bintray.gradle'
