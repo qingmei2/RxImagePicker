@@ -4,7 +4,6 @@ import android.app.Fragment
 import android.app.FragmentManager
 import android.support.v4.app.SupportActivity
 import com.nhaarman.mockito_kotlin.*
-import io.reactivex.Single
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -48,14 +47,9 @@ class RxImagePickerTest {
         assertEquals(rxImagePicker.builder.rootContext, mockActivity)
     }
 
-    @Test
+    @Test(expected = java.lang.NullPointerException::class)
     fun buildTestWithNoContextFailed() {
-        Single.just(instanceWithNoContextBuilder())
-                .map { it.build() }
-                .test()
-                .assertNotComplete()
-                .assertNoValues()
-                .assertError(NullPointerException::class.java)
+        instanceWithNoContextBuilder().build()
     }
 
     @Test

@@ -20,7 +20,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.ArgumentCaptor
 
 class RxImagePickerProcessorTest {
 
@@ -77,20 +76,6 @@ class RxImagePickerProcessorTest {
                 .assertNoErrors()
                 .assertValueCount(1)
                 .assertValueAt(0, mockUri)
-    }
-
-    @Test
-    fun sourceFromTestFailed() {
-//        val sourceFrom: SourcesFrom = SourcesFrom.valueOf("123")
-//        val observable = processor.sourceFrom(processor.cameraPickerView, processor.galleryPickerView)
-//                .apply(instanceProvider(sourceFrom)) as Observable<Uri>
-//
-//        observable.test()
-//                .assertNotComplete()
-//                .assertError(IllegalArgumentException::class.java)
-//
-//        verify(processor.cameraPickerView, never()).takePhoto()
-//        verify(processor.galleryPickerView, never()).pickImage()
     }
 
     @Test
