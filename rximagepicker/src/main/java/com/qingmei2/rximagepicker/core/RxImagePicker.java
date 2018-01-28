@@ -19,8 +19,8 @@ public class RxImagePicker {
         this.builder = builder;
     }
 
-    public RxDefaultImagePicker create() {
-        return create(RxDefaultImagePicker.class);
+    public DefaultImagePicker create() {
+        return create(DefaultImagePicker.class);
     }
 
     public <T> T create(final Class<T> classProviders) {

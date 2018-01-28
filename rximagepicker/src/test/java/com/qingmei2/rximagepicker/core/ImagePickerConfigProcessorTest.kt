@@ -4,11 +4,10 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import com.nhaarman.mockito_kotlin.*
-import com.qingmei2.rximagepicker.config.RxImagePickerConfigProvider
 import com.qingmei2.rximagepicker.config.observeras.ObserverAs
 import com.qingmei2.rximagepicker.config.sources.SourcesFrom
 import com.qingmei2.rximagepicker.di.scheduler.RxImagePickerTestSchedulers
-import com.qingmei2.rximagepicker.funtions.FuntionObserverAsConverter
+import com.qingmei2.rximagepicker.funtions.ObserverAsConverter
 import com.qingmei2.rximagepicker.rule.TestSchedulerRule
 import com.qingmei2.rximagepicker.ui.ICameraPickerView
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView
@@ -21,7 +20,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class RxImagePickerProcessorTest {
+class ImagePickerConfigProcessorTest {
 
     @Rule
     @JvmField
@@ -36,11 +35,11 @@ class RxImagePickerProcessorTest {
     private val mockUri2: Uri = mock()
     private val mockBitmap: Bitmap = mock()
 
-    lateinit var processor: RxImagePickerProcessor
+    lateinit var processor: ImagePickerConfigProcessor
 
     @Before
     fun setUp() {
-        processor = RxImagePickerProcessor(mockContext,
+        processor = ImagePickerConfigProcessor(mockContext,
                 mockCameraPickerView,
                 mockGalleryPickerView,
                 schedulers)
@@ -81,7 +80,7 @@ class RxImagePickerProcessorTest {
     @Test
     fun observerAsTest() {
         val provider = instanceProvider()
-        val function = processor.observerAs(provider, processor.context) as FuntionObserverAsConverter
+        val function = processor.observerAs(provider, processor.context) as ObserverAsConverter
 
         assertEquals(function.context, processor.context)
         assertEquals(function.observerAs, provider.observerAs)
@@ -135,11 +134,11 @@ class RxImagePickerProcessorTest {
 
     private fun instanceProvider(sourcesFrom: SourcesFrom = SourcesFrom.CAMERA,
                                  observerAs: ObserverAs = ObserverAs.URI)
-            : RxImagePickerConfigProvider {
-        return RxImagePickerConfigProvider(sourcesFrom, observerAs)
+            : ImagePickerConfigProvider {
+        return ImagePickerConfigProvider(sourcesFrom, observerAs)
     }
 
-    private fun testSourceFrom(): Function<RxImagePickerConfigProvider, ObservableSource<Uri>> {
+    private fun testSourceFrom(): Function<ImagePickerConfigProvider, ObservableSource<Uri>> {
         return Function { provider -> Observable.just(mockUri) }
     }
 

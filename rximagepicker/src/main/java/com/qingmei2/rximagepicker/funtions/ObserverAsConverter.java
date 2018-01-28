@@ -23,7 +23,7 @@ import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
-public final class FuntionObserverAsConverter implements Function<Uri, ObservableSource<?>> {
+public final class ObserverAsConverter implements Function<Uri, ObservableSource<?>> {
 
     private static final String TAG = "FuntionObserverAs";
 
@@ -32,8 +32,8 @@ public final class FuntionObserverAsConverter implements Function<Uri, Observabl
     @VisibleForTesting
     public final Context context;
 
-    public FuntionObserverAsConverter(ObserverAs observerAs,
-                                      Context context) {
+    public ObserverAsConverter(ObserverAs observerAs,
+                               Context context) {
         this.observerAs = observerAs;
         this.context = context;
     }

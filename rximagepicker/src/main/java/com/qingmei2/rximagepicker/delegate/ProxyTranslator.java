@@ -2,7 +2,7 @@ package com.qingmei2.rximagepicker.delegate;
 
 import android.support.annotation.VisibleForTesting;
 
-import com.qingmei2.rximagepicker.config.RxImagePickerConfigProvider;
+import com.qingmei2.rximagepicker.core.ImagePickerConfigProvider;
 import com.qingmei2.rximagepicker.config.observeras.AsBitmap;
 import com.qingmei2.rximagepicker.config.observeras.AsFile;
 import com.qingmei2.rximagepicker.config.observeras.AsUri;
@@ -21,12 +21,12 @@ import io.reactivex.Single;
 /**
  * {@link ProxyTranslator} is used to handle the annotation configuration above the method in the user's
  * custom interface, after completed parsing configuration, the configrations will be stored in an object
- * {@link RxImagePickerConfigProvider}.
+ * {@link ImagePickerConfigProvider}.
  */
 public final class ProxyTranslator {
 
-    public RxImagePickerConfigProvider processMethod(Method method, Object[] objectsMethod) {
-        RxImagePickerConfigProvider configProvider = new RxImagePickerConfigProvider(
+    public ImagePickerConfigProvider processMethod(Method method, Object[] objectsMethod) {
+        ImagePickerConfigProvider configProvider = new ImagePickerConfigProvider(
                 this.getStreamSourcesFrom(method),
                 this.getStreamObserverAs(method)
         );

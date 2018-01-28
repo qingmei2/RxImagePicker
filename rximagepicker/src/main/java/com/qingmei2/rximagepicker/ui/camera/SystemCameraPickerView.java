@@ -16,15 +16,15 @@ import java.util.Locale;
 
 import io.reactivex.Observable;
 
-public final class RxSystemCameraPickerView extends BaseSystemPickerView implements ICameraPickerView {
+public final class SystemCameraPickerView extends BaseSystemPickerView implements ICameraPickerView {
 
-    private static final String TAG = RxSystemCameraPickerView.class.getSimpleName();
+    private static final String TAG = SystemCameraPickerView.class.getSimpleName();
     private static Uri cameraPictureUrl;
 
     public static ICameraPickerView instance(FragmentManager fragmentManager) {
-        RxSystemCameraPickerView fragment = (RxSystemCameraPickerView) fragmentManager.findFragmentByTag(TAG);
+        SystemCameraPickerView fragment = (SystemCameraPickerView) fragmentManager.findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = new RxSystemCameraPickerView();
+            fragment = new SystemCameraPickerView();
             fragmentManager.beginTransaction()
                     .add(fragment, TAG)
                     .commit();

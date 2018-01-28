@@ -10,14 +10,14 @@ import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
 
 import io.reactivex.Observable;
 
-public final class RxSystemGalleryPickerView extends BaseSystemPickerView implements IGalleryPickerView {
+public final class SystemGalleryPickerView extends BaseSystemPickerView implements IGalleryPickerView {
 
-    private static final String TAG = RxSystemGalleryPickerView.class.getSimpleName();
+    private static final String TAG = SystemGalleryPickerView.class.getSimpleName();
 
     public static IGalleryPickerView instance(FragmentManager fragmentManager) {
-        RxSystemGalleryPickerView fragment = (RxSystemGalleryPickerView) fragmentManager.findFragmentByTag(TAG);
+        SystemGalleryPickerView fragment = (SystemGalleryPickerView) fragmentManager.findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = new RxSystemGalleryPickerView();
+            fragment = new SystemGalleryPickerView();
             fragmentManager.beginTransaction()
                     .add(fragment, TAG)
                     .commit();

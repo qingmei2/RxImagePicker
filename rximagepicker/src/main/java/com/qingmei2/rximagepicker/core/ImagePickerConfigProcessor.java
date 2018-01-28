@@ -5,9 +5,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.VisibleForTesting;
 
-import com.qingmei2.rximagepicker.config.RxImagePickerConfigProvider;
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
-import com.qingmei2.rximagepicker.funtions.FuntionObserverAsConverter;
+import com.qingmei2.rximagepicker.funtions.ObserverAsConverter;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
 
@@ -16,10 +15,10 @@ import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 
 /**
- * {@link RxImagePickerProcessor} is the class that processing reactive data stream.
+ * {@link ImagePickerConfigProcessor} is the class that processing reactive data stream.
  */
-public final class RxImagePickerProcessor implements
-        IRxImagePickerProcessor {
+public final class ImagePickerConfigProcessor implements
+        IImagePickerProcessor {
 
     @VisibleForTesting
     public final Context context;
@@ -30,10 +29,10 @@ public final class RxImagePickerProcessor implements
     @VisibleForTesting
     public final IRxImagePickerSchedulers schedulers;
 
-    public RxImagePickerProcessor(Context context,
-                                  ICameraPickerView cameraPickerView,
-                                  IGalleryPickerView galleryPickerView,
-                                  IRxImagePickerSchedulers schedulers) {
+    public ImagePickerConfigProcessor(Context context,
+                                      ICameraPickerView cameraPickerView,
+                                      IGalleryPickerView galleryPickerView,
+                                      IRxImagePickerSchedulers schedulers) {
         this.context = context;
         this.cameraPickerView = cameraPickerView;
         this.galleryPickerView = galleryPickerView;
@@ -41,7 +40,7 @@ public final class RxImagePickerProcessor implements
     }
 
     @Override
-    public Observable<?> process(RxImagePickerConfigProvider configProvider) {
+    public Observable<?> process(ImagePickerConfigProvider configProvider) {
         return Observable.just(configProvider)
                 .flatMap(sourceFrom(cameraPickerView, galleryPickerView))
                 .flatMap(observerAs(configProvider, context))
@@ -50,12 +49,12 @@ public final class RxImagePickerProcessor implements
     }
 
     @VisibleForTesting
-    public Function<RxImagePickerConfigProvider, ObservableSource<Uri>> sourceFrom(
+    public Function<ImagePickerConfigProvider, ObservableSource<Uri>> sourceFrom(
             ICameraPickerView cameraPickerView,
             IGalleryPickerView galleryPickerView) {
-        return new Function<RxImagePickerConfigProvider, ObservableSource<Uri>>() {
+        return new Function<ImagePickerConfigProvider, ObservableSource<Uri>>() {
             @Override
-            public ObservableSource<Uri> apply(RxImagePickerConfigProvider provider) throws Exception {
+            public ObservableSource<Uri> apply(ImagePickerConfigProvider provider) throws Exception {
                 switch (provider.getSourcesFrom()) {
                     case GALLERY:
                         return galleryPickerView.pickImage();
@@ -70,8 +69,8 @@ public final class RxImagePickerProcessor implements
 
     @VisibleForTesting
     public Function<Uri, ObservableSource<?>> observerAs(
-            RxImagePickerConfigProvider configProvider,
+            ImagePickerConfigProvider configProvider,
             Context context) {
-        return new FuntionObserverAsConverter(configProvider.getObserverAs(), context);
+        return new ObserverAsConverter(configProvider.getObserverAs(), context);
     }
 }

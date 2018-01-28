@@ -9,7 +9,7 @@ import com.qingmei2.rximagepicker.config.sources.Gallery;
 
 import io.reactivex.Observable;
 
-public interface RxDefaultImagePicker {
+public interface DefaultImagePicker {
 
     @Gallery
     @AsUri

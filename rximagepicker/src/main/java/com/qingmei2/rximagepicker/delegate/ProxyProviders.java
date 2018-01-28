@@ -1,6 +1,6 @@
 package com.qingmei2.rximagepicker.delegate;
 
-import com.qingmei2.rximagepicker.core.IRxImagePickerProcessor;
+import com.qingmei2.rximagepicker.core.IImagePickerProcessor;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker.di.DaggerRxImagePickerComponent;
 import com.qingmei2.rximagepicker.di.RxImagePickerModule;
@@ -18,7 +18,7 @@ import io.reactivex.Single;
 
 public final class ProxyProviders implements InvocationHandler {
 
-    private final IRxImagePickerProcessor rxImagePickerProcessor;
+    private final IImagePickerProcessor rxImagePickerProcessor;
     private final ProxyTranslator proxyTranslator;
 
     public ProxyProviders(RxImagePicker.Builder builder,
