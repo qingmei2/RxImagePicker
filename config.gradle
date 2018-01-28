@@ -52,6 +52,10 @@ project.ext {
             //mock
             "mockito-kotlin"             : "com.nhaarman:mockito-kotlin-kt1.1:1.5.0",
 
+            //robolectric
+            "robolectric"                : "org.robolectric:robolectric:3.3.2",
+            "robolectric-v4"             : "org.robolectric:shadows-support-v4:3.3.2",
+
             //espresso
             "espresso-core"              : "com.android.support.test.espresso:espresso-core:${espresso_version}",
             "espresso-contrib"           : "com.android.support.test.espresso:espresso-contrib:${espresso_version}",

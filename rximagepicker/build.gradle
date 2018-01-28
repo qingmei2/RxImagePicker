@@ -27,6 +27,8 @@ dependencies {
     testImplementation rootProject.ext.dependencies["junit"]
     testImplementation rootProject.ext.dependencies["kotlin-android"]
     testImplementation rootProject.ext.dependencies["mockito-kotlin"]
+    testImplementation rootProject.ext.dependencies["robolectric"]
+    testImplementation rootProject.ext.dependencies["robolectric-v4"]
 }
 repositories {
     mavenCentral()
