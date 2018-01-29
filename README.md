@@ -7,70 +7,106 @@
 It is based on [MLSDev's](https://github.com/MLSDev) library [RxImagePicker](https://github.com/MLSDev/RxImagePicker) for secondary development
 
 ## <h2 id="Usage">Usage</h2>
-### ~~1. Add code into your Project Build.gradle:~~
+
+### 1. Add Code into your Moudle build.gradle:
+
+```gradle
+compile 'com.github.qingmei2:rximagepicker:0.1.0-alpha'
 ```
-allprojects {
-  repositories {
-    ...
-    maven { url 'https://jitpack.io' }
-  }
+### 2. Customize your ImagePicker interface ，to configure your own custom methods and response data types for return values:
+
+```java
+public interface MyRxImagePicker {
+
+    @Gallery       // this annotation is used to picture selection
+    @AsFile        // the return type is File
+    Observable<File> openGallery();
+
+    @Camera        // this annotation is used to take photo
+    @AsBitmap      // the return type is Bitmap
+    Observable<Bitmap> openCamera();
+
 }
 ```
-### 2.~~Add code into your Module Build.gradle:~~
+Precautions:
 
-```
-dependencies {
-     
-     compile 'com.github.qingmei2:RxImagePicker:x.x.x'
+* **SourceFrom** annotation :
+
+**@Gallery**, **@ Camera** Methods in your interface **Must** and **At most** Add one of these annotations ，to tell the ImagePicker what to do.
+
+* **ObserverAs** annotation:
+
+**@AsBitmap**, **@AsFile**, **@AsUri** Methods in your interface **Up to** Add one of these annotations ，to tell the ImagePicker the type of data in the response data returned by.
+
+If you do not use the **ObserverAs** annotation, Uri type of response data **(Observable <Uri>)** is returned by default.
+
+### 3. Register your custom ImagePicker in your Activity or Fragment:
+
+```java
+private void onButtonClick() {
+        new RxImagePicker.Builder()
+                .with(MainActivity.this)       
+                .build()
+                .create(MyRxImagePicker.class)  //  register your custom imagePicker interface
+                .openGallery()                  // use your own custom method 「take photo」or 「picture selection」
+                .subscribe(new Consumer<File>() {
+                    @Override
+                    public void accept(File file) throws Exception {
+                        // do what you want to do
+                    }
+                });
 }
 ```
+### 4. You can also don't custom ImagePicker and register, this library will implicitly select RxDefaultImagePicker to register:
 
-This Library currently in development mode, please refer to the source code.
+```java
+private ovid openGallery(){
+        new RxImagePicker.Builder()
+                .with(MainActivity.this)
+                .build()
+                .create()   // implicitly select RxDefaultImagePicker 
+                .openGallery()
+                .subscribe(new Consumer<Uri>() {
+                    @Override
+                    public void accept(Uri uri) throws Exception {
+                        // do what you want to do 
+                    }
+                });
 
-### 3.Add the Interface to config your RxImagePicker:
-
-```Java
-public interface IRxImagePicker {
-
-    @Gallery
-    @AsBitmap
-    Observable<Bitmap> openGallery();
-
-    @Camera
-    @AsFile
-    Observable<File> openCamera();
+         //  The interfaces provided in the RxImagePicker library，don't need to customize
+        public interface RxDefaultImagePicker {
+        
+            @Gallery
+            @AsUri
+            Observable<Uri> openGallery();
+        
+            @Camera
+            @AsUri
+            Observable<Uri> openCamera();
+        }
 }
 ```
-
-### 4.Initialize your RxImagePicker and use it:
-
-```Java
-public void openCamera(){
-    new RxImagePicker.Builder()
-                    .with(MainActivity.this)
-                    .build()
-                    .create(IRxImagePicker.class)
-                    .openCamera()
-                    .subscribe(file -> {
-                        //do what you want
-                     });
-}
-```
-
-## Screen Shot
-
-![sample_screenshot](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/sample_screenshot.png)
-
 ## Contributor
 
 * [13kmsteady](https://github.com/13kmsteady)
 
+## Coming soon:
+
+* 1. more responsive data type support (Flowable, Single ...)
+
+* 2. custom image selector UI support
+
+* 3. the choice of video files
+
+* n.  under development...
+
 License
 -------
+
         The RxImagePicker：MIT License
-        
+
         Copyright (c) 2018 qingmei2
-        
+
         Permission is hereby granted, free of charge, to any person obtaining a copy
         of this software and associated documentation files (the "Software"), to deal
         in the Software without restriction, including without limitation the rights
