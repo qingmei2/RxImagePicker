@@ -52,9 +52,9 @@ public final class ProxyTranslator {
         Camera camera = method.getAnnotation(Camera.class);
         Gallery gallery = method.getAnnotation(Gallery.class);
         if (camera != null) {
-            return cameraViews.get(camera.pickerView());
+            return checkPickerViewNotNull(cameraViews.get(camera.pickerView()));
         } else {
-            return galleryViews.get(gallery.pickerView());
+            return checkPickerViewNotNull(galleryViews.get(gallery.pickerView()));
         }
     }
 
@@ -108,4 +108,10 @@ public final class ProxyTranslator {
         }
     }
 
+    private IPickerView checkPickerViewNotNull(IPickerView pickerView) {
+        if (pickerView == null)
+            throw new NullPointerException("Can't find Custom PickerView.");
+        else
+            return pickerView;
+    }
 }
