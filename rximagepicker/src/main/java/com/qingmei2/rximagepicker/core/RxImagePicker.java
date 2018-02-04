@@ -7,6 +7,10 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.SupportActivity;
 
 import com.qingmei2.rximagepicker.delegate.ProxyProviders;
+import com.qingmei2.rximagepicker.ui.ICameraPickerView;
+import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
+import com.qingmei2.rximagepicker.ui.camera.SystemCameraPickerView;
+import com.qingmei2.rximagepicker.ui.gallery.SystemGalleryPickerView;
 
 import java.lang.reflect.Proxy;
 
@@ -36,6 +40,8 @@ public class RxImagePicker {
 
         private FragmentManager fragmentManager;
         private Context context;
+        private ICameraPickerView cameraView;
+        private IGalleryPickerView galleryView;
 
         public Builder with(Fragment fragment) {
             this.fragmentManager = fragment.getFragmentManager();
@@ -46,6 +52,16 @@ public class RxImagePicker {
         public Builder with(SupportActivity activity) {
             this.fragmentManager = activity.getFragmentManager();
             this.context = activity;
+            return this;
+        }
+
+        public Builder customGallery(IGalleryPickerView gallery) {
+            this.galleryView = gallery;
+            return this;
+        }
+
+        public Builder customCamera(ICameraPickerView camera) {
+            this.cameraView = camera;
             return this;
         }
 
@@ -62,6 +78,16 @@ public class RxImagePicker {
 
         public Context getRootContext() {
             return context;
+        }
+
+        public IGalleryPickerView getGallery() {
+            return galleryView == null ?
+                    SystemGalleryPickerView.instance(fragmentManager) : galleryView;
+        }
+
+        public ICameraPickerView getCamera() {
+            return cameraView == null ?
+                    SystemCameraPickerView.instance(fragmentManager) : cameraView;
         }
     }
 }

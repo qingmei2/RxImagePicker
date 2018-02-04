@@ -1,17 +1,14 @@
 package com.qingmei2.rximagepicker.di;
 
-import android.app.FragmentManager;
 import android.content.Context;
 
 import com.qingmei2.rximagepicker.core.IImagePickerProcessor;
-import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker.core.ImagePickerConfigProcessor;
+import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
 import com.qingmei2.rximagepicker.di.scheduler.RxImagePickerSchedulers;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
-import com.qingmei2.rximagepicker.ui.camera.SystemCameraPickerView;
-import com.qingmei2.rximagepicker.ui.gallery.SystemGalleryPickerView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -27,9 +24,8 @@ public final class RxImagePickerModule {
     private final Context context;
 
     public RxImagePickerModule(RxImagePicker.Builder builder) {
-        FragmentManager fragmentManager = builder.getFragmentManager();
-        this.cameraPickerView = SystemCameraPickerView.instance(fragmentManager);
-        this.galleryPickerView = SystemGalleryPickerView.instance(fragmentManager);
+        this.cameraPickerView = builder.getCamera();
+        this.galleryPickerView = builder.getGallery();
         this.context = builder.getRootContext();
     }
 
