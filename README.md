@@ -8,9 +8,9 @@ It is based on [MLSDev's](https://github.com/MLSDev) library [RxImagePicker](htt
 
 ## <h2 id="Usage">Usage</h2>
 
-### 1. Add Code into your Moudle build.gradle:
+### 1. Add Code to your Module build.gradle:
 
-```gradle
+```groovy
 compile 'com.github.qingmei2:rximagepicker:0.1.0-alpha'
 ```
 ### 2. Customize your ImagePicker interface ，to configure your own custom methods and response data types for return values:
@@ -32,7 +32,7 @@ Precautions:
 
 * **SourceFrom** annotation :
 
-**@Gallery**, **@ Camera** Methods in your interface **Must** and **At most** Add one of these annotations ，to tell the ImagePicker what to do.
+**@Gallery**, **@Camera** Methods in your interface **Must** and **At most** Add one of these annotations ，to tell the ImagePicker what to do.
 
 * **ObserverAs** annotation:
 
@@ -72,20 +72,24 @@ private ovid openGallery(){
                         // do what you want to do 
                     }
                 });
+}
+//  The interfaces provided in the RxImagePicker library，don't need to customize
+public interface RxDefaultImagePicker {
 
-         //  The interfaces provided in the RxImagePicker library，don't need to customize
-        public interface RxDefaultImagePicker {
-        
-            @Gallery
-            @AsUri
-            Observable<Uri> openGallery();
-        
-            @Camera
-            @AsUri
-            Observable<Uri> openCamera();
-        }
+    @Gallery
+    @AsUri
+    Observable<Uri> openGallery();
+
+    @Camera
+    @AsUri
+    Observable<Uri> openCamera();
 }
 ```
+
+## 屏幕截图
+
+![sample_02](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/sample_screenshot.png)
+
 ## Contributor
 
 * [13kmsteady](https://github.com/13kmsteady)
