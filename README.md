@@ -86,7 +86,7 @@ public interface RxDefaultImagePicker {
 }
 ```
 
-## 屏幕截图
+## ScreenShot
 
 ![sample_02](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/sample_screenshot.png)
 
