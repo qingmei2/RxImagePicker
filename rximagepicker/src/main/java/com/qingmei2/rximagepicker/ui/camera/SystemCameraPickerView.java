@@ -33,7 +33,7 @@ public final class SystemCameraPickerView extends BaseSystemPickerView implement
     }
 
     @Override
-    public Observable<Uri> takePhoto() {
+    public Observable<Uri> pickImage() {
         return getUriObserver();
     }
 

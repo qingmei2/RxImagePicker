@@ -5,10 +5,13 @@ import android.content.Context;
 import com.qingmei2.rximagepicker.core.IImagePickerProcessor;
 import com.qingmei2.rximagepicker.core.ImagePickerConfigProcessor;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
+import com.qingmei2.rximagepicker.delegate.ProxyTranslator;
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
 import com.qingmei2.rximagepicker.di.scheduler.RxImagePickerSchedulers;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
+
+import java.util.Map;
 
 import dagger.Module;
 import dagger.Provides;
@@ -19,34 +22,48 @@ import dagger.Provides;
 @Module
 public final class RxImagePickerModule {
 
-    private final ICameraPickerView cameraPickerView;
-    private final IGalleryPickerView galleryPickerView;
+    private final Map<String, ICameraPickerView> cameraViews;
+    private final Map<String, IGalleryPickerView> galleryViews;
     private final Context context;
 
     public RxImagePickerModule(RxImagePicker.Builder builder) {
-        this.cameraPickerView = builder.getCamera();
-        this.galleryPickerView = builder.getGallery();
+        this.cameraViews = builder.getCameraViews();
+        this.galleryViews = builder.getGalleryViews();
         this.context = builder.getRootContext();
     }
 
     @Provides
-    ICameraPickerView providesCameraPickerView() {
-        return cameraPickerView;
+    Map<String, ICameraPickerView> providesCameraViews() {
+        return cameraViews;
     }
 
     @Provides
-    IGalleryPickerView provideGalleryPickerView() {
-        return galleryPickerView;
+    Map<String, IGalleryPickerView> provideGalleryViews() {
+        return galleryViews;
     }
 
     @Provides
-    IImagePickerProcessor providesRxImagePickerProcessor(IRxImagePickerSchedulers schedulers) {
+    Context provideContext() {
+        return context;
+    }
+
+    @Provides
+    IImagePickerProcessor providesRxImagePickerProcessor(Context context,
+                                                         Map<String, IGalleryPickerView> galleryViews,
+                                                         Map<String, ICameraPickerView> cameraViews,
+                                                         IRxImagePickerSchedulers schedulers) {
         return new ImagePickerConfigProcessor(
                 context,
-                cameraPickerView,
-                galleryPickerView,
+                cameraViews,
+                galleryViews,
                 schedulers
         );
+    }
+
+    @Provides
+    ProxyTranslator proxyTranslator(Map<String, IGalleryPickerView> galleryViews,
+                                    Map<String, ICameraPickerView> cameraViews) {
+        return new ProxyTranslator(galleryViews, cameraViews);
     }
 
     @Provides

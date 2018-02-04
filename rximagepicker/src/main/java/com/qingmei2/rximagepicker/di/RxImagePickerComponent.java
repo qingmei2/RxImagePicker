@@ -1,6 +1,7 @@
 package com.qingmei2.rximagepicker.di;
 
 import com.qingmei2.rximagepicker.core.IImagePickerProcessor;
+import com.qingmei2.rximagepicker.delegate.ProxyTranslator;
 
 import dagger.Component;
 
@@ -8,4 +9,6 @@ import dagger.Component;
 public interface RxImagePickerComponent {
 
     IImagePickerProcessor rxImagePickerProcessor();
+
+    ProxyTranslator proxyTranslator();
 }

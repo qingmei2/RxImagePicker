@@ -10,6 +10,8 @@ import com.qingmei2.rximagepicker.funtions.ObserverAsConverter;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
@@ -23,26 +25,26 @@ public final class ImagePickerConfigProcessor implements
     @VisibleForTesting
     public final Context context;
     @VisibleForTesting
-    public final ICameraPickerView cameraPickerView;
+    public final Map<String, ICameraPickerView> cameraViews;
     @VisibleForTesting
-    public final IGalleryPickerView galleryPickerView;
+    public final Map<String, IGalleryPickerView> galleryViews;
     @VisibleForTesting
     public final IRxImagePickerSchedulers schedulers;
 
     public ImagePickerConfigProcessor(Context context,
-                                      ICameraPickerView cameraPickerView,
-                                      IGalleryPickerView galleryPickerView,
+                                      Map<String, ICameraPickerView> cameraViews,
+                                      Map<String, IGalleryPickerView> galleryViews,
                                       IRxImagePickerSchedulers schedulers) {
         this.context = context;
-        this.cameraPickerView = cameraPickerView;
-        this.galleryPickerView = galleryPickerView;
+        this.cameraViews = cameraViews;
+        this.galleryViews = galleryViews;
         this.schedulers = schedulers;
     }
 
     @Override
     public Observable<?> process(ImagePickerConfigProvider configProvider) {
         return Observable.just(configProvider)
-                .flatMap(sourceFrom(cameraPickerView, galleryPickerView))
+                .flatMap(sourceFrom(cameraViews, galleryViews))
                 .flatMap(observerAs(configProvider, context))
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.ui());
@@ -50,16 +52,16 @@ public final class ImagePickerConfigProcessor implements
 
     @VisibleForTesting
     public Function<ImagePickerConfigProvider, ObservableSource<Uri>> sourceFrom(
-            ICameraPickerView cameraPickerView,
-            IGalleryPickerView galleryPickerView) {
+            Map<String, ICameraPickerView> cameraViews,
+            Map<String, IGalleryPickerView> galleryViews) {
         return new Function<ImagePickerConfigProvider, ObservableSource<Uri>>() {
             @Override
             public ObservableSource<Uri> apply(ImagePickerConfigProvider provider) throws Exception {
                 switch (provider.getSourcesFrom()) {
                     case GALLERY:
-                        return galleryPickerView.pickImage();
+                        return provider.getPickerView().pickImage();
                     case CAMERA:
-                        return cameraPickerView.takePhoto();
+                        return provider.getPickerView().pickImage();
                     default:
                         throw new IllegalArgumentException("unknown SourceFrom data.");
                 }

@@ -2,7 +2,6 @@ package com.qingmei2.rximagepicker.delegate;
 
 import android.support.annotation.VisibleForTesting;
 
-import com.qingmei2.rximagepicker.core.ImagePickerConfigProvider;
 import com.qingmei2.rximagepicker.config.observeras.AsBitmap;
 import com.qingmei2.rximagepicker.config.observeras.AsFile;
 import com.qingmei2.rximagepicker.config.observeras.AsUri;
@@ -10,8 +9,13 @@ import com.qingmei2.rximagepicker.config.observeras.ObserverAs;
 import com.qingmei2.rximagepicker.config.sources.Camera;
 import com.qingmei2.rximagepicker.config.sources.Gallery;
 import com.qingmei2.rximagepicker.config.sources.SourcesFrom;
+import com.qingmei2.rximagepicker.core.ImagePickerConfigProvider;
+import com.qingmei2.rximagepicker.ui.ICameraPickerView;
+import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
+import com.qingmei2.rximagepicker.ui.IPickerView;
 
 import java.lang.reflect.Method;
+import java.util.Map;
 
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
@@ -25,12 +29,33 @@ import io.reactivex.Single;
  */
 public final class ProxyTranslator {
 
+    private final Map<String, IGalleryPickerView> galleryViews;
+    private final Map<String, ICameraPickerView> cameraViews;
+
+    public ProxyTranslator(Map<String, IGalleryPickerView> galleryViews,
+                           Map<String, ICameraPickerView> cameraViews) {
+        this.galleryViews = galleryViews;
+        this.cameraViews = cameraViews;
+    }
+
     public ImagePickerConfigProvider processMethod(Method method, Object[] objectsMethod) {
         ImagePickerConfigProvider configProvider = new ImagePickerConfigProvider(
                 this.getStreamSourcesFrom(method),
-                this.getStreamObserverAs(method)
+                this.getStreamObserverAs(method),
+                this.getPickerView(method)
         );
         return configProvider;
+    }
+
+    @VisibleForTesting
+    public IPickerView getPickerView(Method method) {
+        Camera camera = method.getAnnotation(Camera.class);
+        Gallery gallery = method.getAnnotation(Gallery.class);
+        if (camera != null) {
+            return cameraViews.get(camera.pickerView());
+        } else {
+            return galleryViews.get(gallery.pickerView());
+        }
     }
 
     /**
@@ -82,4 +107,5 @@ public final class ProxyTranslator {
             throw new IllegalArgumentException("You can't add conflicting annotation to this method: @AsBitmap/@AsFile/@AsUri");
         }
     }
+
 }

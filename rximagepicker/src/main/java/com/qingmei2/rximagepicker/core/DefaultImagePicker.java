@@ -11,6 +11,8 @@ import io.reactivex.Observable;
 
 public interface DefaultImagePicker {
 
+    String DEFAULT_PICKER = "com.qingmei2.rximagepicker.pickerview.default";
+
     @Gallery
     @AsUri
     Observable<Uri> openGallery();

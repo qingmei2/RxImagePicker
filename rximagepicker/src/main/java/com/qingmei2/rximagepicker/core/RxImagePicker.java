@@ -13,6 +13,10 @@ import com.qingmei2.rximagepicker.ui.camera.SystemCameraPickerView;
 import com.qingmei2.rximagepicker.ui.gallery.SystemGalleryPickerView;
 
 import java.lang.reflect.Proxy;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.qingmei2.rximagepicker.core.DefaultImagePicker.DEFAULT_PICKER;
 
 public class RxImagePicker {
 
@@ -40,8 +44,8 @@ public class RxImagePicker {
 
         private FragmentManager fragmentManager;
         private Context context;
-        private ICameraPickerView cameraView;
-        private IGalleryPickerView galleryView;
+        private Map<String, ICameraPickerView> cameraViews = new HashMap<>();
+        private Map<String, IGalleryPickerView> galleryViews = new HashMap<>();
 
         public Builder with(Fragment fragment) {
             this.fragmentManager = fragment.getFragmentManager();
@@ -55,13 +59,13 @@ public class RxImagePicker {
             return this;
         }
 
-        public Builder customGallery(IGalleryPickerView gallery) {
-            this.galleryView = gallery;
+        public Builder addCustomGallery(String viewKey, IGalleryPickerView gallery) {
+            this.galleryViews.put(viewKey, gallery);
             return this;
         }
 
-        public Builder customCamera(ICameraPickerView camera) {
-            this.cameraView = camera;
+        public Builder addCustomCamera(String viewKey, ICameraPickerView camera) {
+            this.cameraViews.put(viewKey, camera);
             return this;
         }
 
@@ -69,6 +73,10 @@ public class RxImagePicker {
             if (fragmentManager == null) {
                 throw new NullPointerException("You should instance the FragmentManager by RxImagePicker.Builder().with(activity or fragment).");
             }
+
+            this.cameraViews.put(DEFAULT_PICKER, SystemCameraPickerView.instance(fragmentManager));
+            this.galleryViews.put(DEFAULT_PICKER, SystemGalleryPickerView.instance(fragmentManager));
+
             return new RxImagePicker(this);
         }
 
@@ -80,14 +88,12 @@ public class RxImagePicker {
             return context;
         }
 
-        public IGalleryPickerView getGallery() {
-            return galleryView == null ?
-                    SystemGalleryPickerView.instance(fragmentManager) : galleryView;
+        public Map<String, IGalleryPickerView> getGalleryViews() {
+            return galleryViews;
         }
 
-        public ICameraPickerView getCamera() {
-            return cameraView == null ?
-                    SystemCameraPickerView.instance(fragmentManager) : cameraView;
+        public Map<String, ICameraPickerView> getCameraViews() {
+            return cameraViews;
         }
     }
 }

@@ -3,6 +3,7 @@ package com.qingmei2.rximagepicker.delegate;
 import com.qingmei2.rximagepicker.core.IImagePickerProcessor;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker.di.DaggerRxImagePickerComponent;
+import com.qingmei2.rximagepicker.di.RxImagePickerComponent;
 import com.qingmei2.rximagepicker.di.RxImagePickerModule;
 
 import java.lang.reflect.InvocationHandler;
@@ -23,12 +24,12 @@ public final class ProxyProviders implements InvocationHandler {
 
     public ProxyProviders(RxImagePicker.Builder builder,
                           Class<?> providersClass) {
-        rxImagePickerProcessor = DaggerRxImagePickerComponent.builder()
+        RxImagePickerComponent component = DaggerRxImagePickerComponent.builder()
                 .rxImagePickerModule(new RxImagePickerModule(builder))
-                .build()
-                .rxImagePickerProcessor();
+                .build();
 
-        proxyTranslator = new ProxyTranslator();
+        rxImagePickerProcessor = component.rxImagePickerProcessor();
+        proxyTranslator = component.proxyTranslator();
     }
 
     @Override
@@ -44,7 +45,8 @@ public final class ProxyProviders implements InvocationHandler {
 
                 if (methodType == Observable.class) return Observable.just(observable);
 
-                if (methodType == Single.class) return Observable.just(Single.fromObservable(observable));
+                if (methodType == Single.class)
+                    return Observable.just(Single.fromObservable(observable));
 
                 if (methodType == Maybe.class)
                     return Observable.just(Maybe.fromSingle(Single.fromObservable(observable)));
