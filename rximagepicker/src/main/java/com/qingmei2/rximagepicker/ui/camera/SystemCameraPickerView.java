@@ -1,11 +1,11 @@
 package com.qingmei2.rximagepicker.ui.camera;
 
-import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentManager;
 
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;

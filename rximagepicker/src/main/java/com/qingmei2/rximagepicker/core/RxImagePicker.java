@@ -1,10 +1,10 @@
 package com.qingmei2.rximagepicker.core;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.app.SupportActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 
 import com.qingmei2.rximagepicker.delegate.ProxyProviders;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
@@ -53,8 +53,8 @@ public class RxImagePicker {
             return this;
         }
 
-        public Builder with(SupportActivity activity) {
-            this.fragmentManager = activity.getFragmentManager();
+        public Builder with(FragmentActivity activity) {
+            this.fragmentManager = activity.getSupportFragmentManager();
             this.context = activity;
             return this;
         }

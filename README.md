@@ -60,7 +60,7 @@ private void onButtonClick() {
 ### 4. You can also don't custom ImagePicker and register, this library will implicitly select RxDefaultImagePicker to register:
 
 ```java
-private ovid openGallery(){
+private void openGallery(){
         new RxImagePicker.Builder()
                 .with(MainActivity.this)
                 .build()

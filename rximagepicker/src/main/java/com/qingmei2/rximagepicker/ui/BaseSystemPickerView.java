@@ -1,13 +1,13 @@
 package com.qingmei2.rximagepicker.ui;
 
 import android.Manifest;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 import io.reactivex.Observable;
@@ -22,7 +22,7 @@ public abstract class BaseSystemPickerView extends Fragment {
     public static final int CAMERA_REQUEST_CODE = 101;
 
     private PublishSubject<Boolean> attachedSubject = PublishSubject.create();
-    ;
+
     private PublishSubject<Uri> publishSubject;
 
     private PublishSubject<Integer> canceledSubject;

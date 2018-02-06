@@ -1,9 +1,9 @@
 package com.qingmei2.rximagepicker.ui.gallery;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.app.FragmentManager;
 
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView;
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
