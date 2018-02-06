@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView;
@@ -21,7 +22,8 @@ public final class SystemCameraPickerView extends BaseSystemPickerView implement
     private static final String TAG = SystemCameraPickerView.class.getSimpleName();
     private static Uri cameraPictureUrl;
 
-    public static ICameraPickerView instance(FragmentManager fragmentManager) {
+    public static ICameraPickerView instance(FragmentActivity fragmentActivity) {
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
         SystemCameraPickerView fragment = (SystemCameraPickerView) fragmentManager.findFragmentByTag(TAG);
         if (fragment == null) {
             fragment = new SystemCameraPickerView();

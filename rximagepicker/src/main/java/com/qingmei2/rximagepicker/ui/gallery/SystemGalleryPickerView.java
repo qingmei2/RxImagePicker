@@ -3,6 +3,7 @@ package com.qingmei2.rximagepicker.ui.gallery;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView;
@@ -14,7 +15,8 @@ public final class SystemGalleryPickerView extends BaseSystemPickerView implemen
 
     private static final String TAG = SystemGalleryPickerView.class.getSimpleName();
 
-    public static IGalleryPickerView instance(FragmentManager fragmentManager) {
+    public static IGalleryPickerView instance(FragmentActivity fragmentActivity) {
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
         SystemGalleryPickerView fragment = (SystemGalleryPickerView) fragmentManager.findFragmentByTag(TAG);
         if (fragment == null) {
             fragment = new SystemGalleryPickerView();
@@ -36,8 +38,7 @@ public final class SystemGalleryPickerView extends BaseSystemPickerView implemen
             return;
         }
 
-        Intent pictureChooseIntent = null;
-
+        Intent pictureChooseIntent;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             pictureChooseIntent = new Intent(Intent.ACTION_PICK);
             pictureChooseIntent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);

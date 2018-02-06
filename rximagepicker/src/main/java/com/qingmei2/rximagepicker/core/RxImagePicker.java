@@ -1,10 +1,8 @@
 package com.qingmei2.rximagepicker.core;
 
-import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 
 import com.qingmei2.rximagepicker.delegate.ProxyProviders;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
@@ -42,20 +40,17 @@ public class RxImagePicker {
 
     public static class Builder {
 
-        private FragmentManager fragmentManager;
-        private Context context;
+        private FragmentActivity activity;
         private Map<String, ICameraPickerView> cameraViews = new HashMap<>();
         private Map<String, IGalleryPickerView> galleryViews = new HashMap<>();
 
         public Builder with(Fragment fragment) {
-            this.fragmentManager = fragment.getFragmentManager();
-            this.context = fragment.getActivity();
+            this.activity = fragment.getActivity();
             return this;
         }
 
         public Builder with(FragmentActivity activity) {
-            this.fragmentManager = activity.getSupportFragmentManager();
-            this.context = activity;
+            this.activity = activity;
             return this;
         }
 
@@ -70,22 +65,18 @@ public class RxImagePicker {
         }
 
         public RxImagePicker build() {
-            if (fragmentManager == null) {
-                throw new NullPointerException("You should instance the FragmentManager by RxImagePicker.Builder().with(activity or fragment).");
+            if (activity == null) {
+                throw new NullPointerException("You should instance the FragmentActivity or v4.app.Fragment by RxImagePicker.Builder().with().");
             }
 
-            this.cameraViews.put(DEFAULT_PICKER, SystemCameraPickerView.instance(fragmentManager));
-            this.galleryViews.put(DEFAULT_PICKER, SystemGalleryPickerView.instance(fragmentManager));
+            this.cameraViews.put(DEFAULT_PICKER, SystemCameraPickerView.instance(activity));
+            this.galleryViews.put(DEFAULT_PICKER, SystemGalleryPickerView.instance(activity));
 
             return new RxImagePicker(this);
         }
 
-        public FragmentManager getFragmentManager() {
-            return fragmentManager;
-        }
-
-        public Context getRootContext() {
-            return context;
+        public FragmentActivity getFragmentActivity() {
+            return activity;
         }
 
         public Map<String, IGalleryPickerView> getGalleryViews() {

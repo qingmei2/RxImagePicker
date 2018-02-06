@@ -1,6 +1,7 @@
 package com.qingmei2.rximagepicker.di;
 
-import android.content.Context;
+import android.arch.lifecycle.Lifecycle;
+import android.support.v4.app.FragmentActivity;
 
 import com.qingmei2.rximagepicker.core.IImagePickerProcessor;
 import com.qingmei2.rximagepicker.core.ImagePickerConfigProcessor;
@@ -24,12 +25,12 @@ public final class RxImagePickerModule {
 
     private final Map<String, ICameraPickerView> cameraViews;
     private final Map<String, IGalleryPickerView> galleryViews;
-    private final Context context;
+    private final FragmentActivity fragmentActivity;
 
     public RxImagePickerModule(RxImagePicker.Builder builder) {
         this.cameraViews = builder.getCameraViews();
         this.galleryViews = builder.getGalleryViews();
-        this.context = builder.getRootContext();
+        this.fragmentActivity = builder.getFragmentActivity();
     }
 
     @Provides
@@ -43,17 +44,22 @@ public final class RxImagePickerModule {
     }
 
     @Provides
-    Context provideContext() {
-        return context;
+    FragmentActivity provideFragmentActivity() {
+        return fragmentActivity;
     }
 
     @Provides
-    IImagePickerProcessor providesRxImagePickerProcessor(Context context,
+    Lifecycle provideLifecycle() {
+        return fragmentActivity.getLifecycle();
+    }
+
+    @Provides
+    IImagePickerProcessor providesRxImagePickerProcessor(FragmentActivity fragmentActivity,
                                                          Map<String, IGalleryPickerView> galleryViews,
                                                          Map<String, ICameraPickerView> cameraViews,
                                                          IRxImagePickerSchedulers schedulers) {
         return new ImagePickerConfigProcessor(
-                context,
+                fragmentActivity,
                 cameraViews,
                 galleryViews,
                 schedulers
