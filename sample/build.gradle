@@ -29,6 +29,7 @@ dependencies {
     implementation rootProject.ext.dependencies["design"]
     implementation rootProject.ext.dependencies["glide"]
     implementation project(':rximagepicker')
+    implementation project(':rximagepicker_extension')
 
     testImplementation rootProject.ext.dependencies["junit"]
 }
