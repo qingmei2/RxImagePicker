@@ -14,7 +14,7 @@ import io.reactivex.Single;
 
 public interface MyImagePicker {
 
-    @Gallery
+    @Gallery(pickerView = "WeChatPickerView")
     @AsBitmap
     Observable<Bitmap> openGallery();
 
