@@ -1,6 +1,6 @@
 package com.qingmei2.sample;
 
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -64,20 +64,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openGallery() {
-        rxImagePicker.openGallery()
-                .subscribe(new Consumer<Bitmap>() {
-                    @Override
-                    public void accept(Bitmap bitmap) throws Exception {
-                        Log.d(TAG, "return bitmap: " + bitmap.toString());
-                        ivPickedImage.setImageBitmap(bitmap);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable e) throws Exception {
-                        Log.d(TAG, "return bitmap error: " + e.getMessage());
-                        Toast.makeText(MainActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
-                    }
-                });
+//        rxImagePicker.openGallery()
+//                .subscribe(new Consumer<Bitmap>() {
+//                    @Override
+//                    public void accept(Bitmap bitmap) throws Exception {
+//                        Log.d(TAG, "return bitmap: " + bitmap.toString());
+//                        ivPickedImage.setImageBitmap(bitmap);
+//                    }
+//                }, new Consumer<Throwable>() {
+//                    @Override
+//                    public void accept(Throwable e) throws Exception {
+//                        Log.d(TAG, "return bitmap error: " + e.getMessage());
+//                        Toast.makeText(MainActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
+//                    }
+//                });
+        Intent intent = new Intent(this, WeChatImagePicker.class);
+        startActivity(intent);
     }
 
 }

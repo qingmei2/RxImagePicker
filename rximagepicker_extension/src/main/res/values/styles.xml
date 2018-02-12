@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="WeChat" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/wechat_primary</item>
+        <item name="colorPrimaryDark">@color/wechat_primary_dark</item>
+        <item name="toolbar">@style/Toolbar.WeChat</item>
+        <item name="album.element.color">@android:color/white</item>
+        <item name="page.bg">@color/wechat_page_bg</item>
+    </style>
+
+    <style name="Toolbar.WeChat" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+</resources>

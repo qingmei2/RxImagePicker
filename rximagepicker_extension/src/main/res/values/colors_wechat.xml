@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--https://material.io/guidelines/style/color.html#color-color-palette-->
+    <color name="wechat_primary">#37474F</color>
+    <color name="wechat_primary_dark">#263238</color>
+    <color name="wechat_colorAccent">#B0BEC5</color>
+
+    <color name="wechat_page_bg">#FFFFFF</color>
+
+    <color name="wechat_white">#ECEFF1</color>
+    <color name="wechat_white_dark">#CFD8DC</color>
+
+</resources>

@@ -20,11 +20,8 @@ android {
 }
 
 dependencies {
-    api rootProject.ext.dependencies["appcompat-v7"]
-    api rootProject.ext.dependencies["rxJava2"]
-    api rootProject.ext.dependencies["rxandroid"]
-    api rootProject.ext.dependencies["dagger"]
     implementation project(':rximagepicker')
+    implementation rootProject.ext.dependencies["constraint-layout"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     testImplementation rootProject.ext.dependencies["junit"]
     testImplementation rootProject.ext.dependencies["kotlin-android"]

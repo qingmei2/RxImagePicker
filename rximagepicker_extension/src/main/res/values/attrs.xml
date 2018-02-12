@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="toolbar" format="reference"/>
+    <attr name="album.element.color" format="reference|color"/>
+    <attr name="page.bg" format="reference|color"/>
+</resources>
