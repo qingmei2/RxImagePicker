@@ -20,6 +20,8 @@
             android:id="@+id/selected_album"
             android:layout_width="wrap_content"
             android:layout_height="?actionBarSize"
+            android:drawableRight="@drawable/ic_arrow_drop_down_white_24dp"
+            android:foreground="?selectableItemBackground"
             android:gravity="center"
             android:text="选择图片"
             android:textColor="?attr/album.element.color"

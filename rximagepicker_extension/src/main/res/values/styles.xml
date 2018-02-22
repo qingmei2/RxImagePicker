@@ -5,6 +5,9 @@
         <item name="colorPrimary">@color/wechat_primary</item>
         <item name="colorPrimaryDark">@color/wechat_primary_dark</item>
         <item name="toolbar">@style/Toolbar.WeChat</item>
+        <item name="album.dropdown.title.color">@color/wechat_album_dropdown_title_text</item>
+        <item name="album.dropdown.count.color">@color/wechat_album_dropdown_count_text</item>
+        <item name="album.thumbnail.placeholder">@color/wechat_album_dropdown_thumbnail_placeholder</item>
         <item name="album.element.color">@android:color/white</item>
         <item name="page.bg">@color/wechat_page_bg</item>
     </style>
