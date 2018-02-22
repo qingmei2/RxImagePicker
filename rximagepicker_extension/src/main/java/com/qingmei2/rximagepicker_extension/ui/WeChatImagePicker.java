@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker_extension;
+package com.qingmei2.rximagepicker_extension.ui;
 
 import android.content.res.TypedArray;
 import android.database.Cursor;
@@ -9,28 +9,37 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
+import com.qingmei2.rximagepicker_extension.R;
 import com.qingmei2.rximagepicker_extension.entity.Album;
 import com.qingmei2.rximagepicker_extension.model.AlbumCollection;
-import com.qingmei2.rximagepicker_extension.ui.AlbumsAdapter;
+import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumsAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner;
 
 import io.reactivex.Observable;
 
 public class WeChatImagePicker extends AppCompatActivity implements
-        IGalleryPickerView, AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener {
+        IGalleryPickerView, AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
+        View.OnClickListener {
 
     private final AlbumCollection mAlbumCollection = new AlbumCollection();
 
     private AlbumsSpinner mAlbumsSpinner;
     private AlbumsAdapter mAlbumsAdapter;
+
+    private TextView mButtonPreview;
+    private TextView mButtonApply;
+    private View mContainer;
+    private View mEmptyView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +48,15 @@ public class WeChatImagePicker extends AppCompatActivity implements
         setContentView(R.layout.activity_image_picker);
 
         initToolbar();
+
+        mButtonPreview = (TextView) findViewById(R.id.button_preview);
+        mButtonApply = (TextView) findViewById(R.id.button_apply);
+        mButtonPreview.setOnClickListener(this);
+        mButtonApply.setOnClickListener(this);
+        mContainer = findViewById(R.id.container);
+        mEmptyView = findViewById(R.id.empty_view);
+
+        updateBottomToolbar();
 
         mAlbumsAdapter = new AlbumsAdapter(this, null, false);
         mAlbumsSpinner = new AlbumsSpinner(this);
@@ -111,18 +129,45 @@ public class WeChatImagePicker extends AppCompatActivity implements
 
     }
 
+    private void updateBottomToolbar() {
+//        int selectedCount = mSelectedCollection.count();
+        int selectedCount = 10;
+        if (selectedCount == 0) {
+            mButtonPreview.setEnabled(false);
+            mButtonApply.setEnabled(false);
+            mButtonApply.setText(getString(R.string.button_apply_default));
+        } else if (selectedCount == 1) {
+            mButtonPreview.setEnabled(true);
+            mButtonApply.setText(R.string.button_apply_default);
+            mButtonApply.setEnabled(true);
+        } else {
+            mButtonPreview.setEnabled(true);
+            mButtonApply.setEnabled(true);
+            mButtonApply.setText(getString(R.string.button_apply, selectedCount));
+        }
+    }
+
     private void onAlbumSelected(Album album) {
-//        if (album.isAll() && album.isEmpty()) {
-//            mContainer.setVisibility(View.GONE);
-//            mEmptyView.setVisibility(View.VISIBLE);
-//        } else {
-//            mContainer.setVisibility(View.VISIBLE);
-//            mEmptyView.setVisibility(View.GONE);
-//            Fragment fragment = MediaSelectionFragment.newInstance(album);
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.container, fragment, MediaSelectionFragment.class.getSimpleName())
-//                    .commitAllowingStateLoss();
-//        }
+        if (album.isAll() && album.isEmpty()) {
+            mContainer.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            mContainer.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.GONE);
+            Fragment fragment = WeChatListFragment.instance(album);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, fragment, WeChatListFragment.class.getSimpleName())
+                    .commitAllowingStateLoss();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.button_preview) {
+            Toast.makeText(this, "preview", Toast.LENGTH_SHORT).show();
+        } else if (v.getId() == R.id.button_apply) {
+            Toast.makeText(this, "apply", Toast.LENGTH_SHORT).show();
+        }
     }
 }

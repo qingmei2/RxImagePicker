@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
-import com.qingmei2.rximagepicker_extension.WeChatImagePicker;
+import com.qingmei2.rximagepicker_extension.ui.WeChatImagePicker;
 
 import java.io.File;
 

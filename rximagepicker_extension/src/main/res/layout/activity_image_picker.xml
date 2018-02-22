@@ -23,13 +23,91 @@
             android:drawableRight="@drawable/ic_arrow_drop_down_white_24dp"
             android:foreground="?selectableItemBackground"
             android:gravity="center"
-            android:text="选择图片"
             android:textColor="?attr/album.element.color"
             android:textSize="20sp"
             tools:layout_height="50dp"
+            tools:text="选择图片"
             tools:textColor="@color/wechat_white" />
 
     </android.support.v7.widget.Toolbar>
 
+    <FrameLayout
+        android:id="@+id/bottom_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/bottomToolbar.bg"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:background="@color/wechat_primary"
+        tools:targetApi="lollipop">
 
+        <TextView
+            android:id="@+id/button_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:foreground="?selectableItemBackground"
+            android:padding="16dp"
+            android:text="@string/button_preview"
+            android:textColor="?attr/bottomToolbar.preview.textColor"
+            android:textSize="16sp"
+            tools:layout_height="50dp"
+            tools:text="@string/button_preview"
+            tools:textColor="@color/wechat_white" />
+
+        <TextView
+            android:id="@+id/button_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:foreground="?selectableItemBackground"
+            android:padding="16dp"
+            android:textColor="?attr/bottomToolbar.apply.textColor"
+            android:textSize="16sp"
+            tools:layout_height="50dp"
+            tools:text="@string/button_apply_default"
+            tools:textColor="@color/wechat_white" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <FrameLayout
+        android:id="@+id/empty_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/empty_view_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawablePadding="8dp"
+            android:drawableTop="?attr/album.emptyView"
+            android:gravity="center"
+            android:text="@string/empty_text"
+            android:textColor="?attr/album.emptyView.textColor"
+            android:textSize="16sp"
+            tools:drawableTop="@drawable/ic_empty_zhihu"
+            tools:layout_height="50dp"
+            tools:text="@string/empty_text"
+            tools:textColor="@color/wechat_album_empty_view" />
+
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>

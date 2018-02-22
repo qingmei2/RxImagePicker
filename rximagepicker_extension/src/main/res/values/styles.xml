@@ -10,6 +10,12 @@
         <item name="album.thumbnail.placeholder">@color/wechat_album_dropdown_thumbnail_placeholder</item>
         <item name="album.element.color">@android:color/white</item>
         <item name="page.bg">@color/wechat_page_bg</item>
+
+        <item name="album.emptyView">@drawable/ic_empty_zhihu</item>
+        <item name="album.emptyView.textColor">@color/wechat_album_empty_view</item>
+        <item name="bottomToolbar.bg">@color/wechat_primary</item>
+        <item name="bottomToolbar.preview.textColor">@android:color/white</item>
+        <item name="bottomToolbar.apply.textColor">@android:color/white</item>
     </style>
 
     <style name="Toolbar.WeChat" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

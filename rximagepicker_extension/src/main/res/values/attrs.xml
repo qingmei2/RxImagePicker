@@ -6,4 +6,11 @@
     <attr name="album.element.color" format="reference|color"/>
     <attr name="album.thumbnail.placeholder" format="reference|color"/>
     <attr name="page.bg" format="reference|color"/>
+
+    <attr name="bottomToolbar.bg" format="reference|color"/>
+    <attr name="bottomToolbar.preview.textColor" format="reference|color"/>
+    <attr name="bottomToolbar.apply.textColor" format="reference|color"/>
+
+    <attr name="album.emptyView" format="reference"/>
+    <attr name="album.emptyView.textColor" format="reference|color"/>
 </resources>
