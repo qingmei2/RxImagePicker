@@ -87,7 +87,9 @@ private void openGallery() {
 ```
 ## 屏幕截图
 
-![sample_02](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/sample_screenshot.png)
+![sample_screenshot](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/sample_screenshot.png)
+
+![sample_media_list_preview](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/sample_media_list_preview.png)
 
 ## 贡献者
 
