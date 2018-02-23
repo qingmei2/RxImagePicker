@@ -13,4 +13,9 @@
     <color name="wechat_album_dropdown_title_text">#DE000000</color>
     <color name="wechat_album_dropdown_count_text">#999999</color>
     <color name="wechat_album_dropdown_thumbnail_placeholder">#EAEEF4</color>
+
+    <color name="wechat_item_placeholder">#EAEEF4</color>
+    <color name="wechat_item_checkCircle_backgroundColor">#37474F</color>
+    <color name="wechat_item_checkCircle_borderColor">#FFFFFF</color>
+    <color name="wechat_capture">#424242</color>
 </resources>

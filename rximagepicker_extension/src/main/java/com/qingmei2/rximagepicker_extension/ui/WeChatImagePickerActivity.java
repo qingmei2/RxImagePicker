@@ -19,22 +19,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
+import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension.R;
 import com.qingmei2.rximagepicker_extension.entity.Album;
+import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
 import com.qingmei2.rximagepicker_extension.model.AlbumCollection;
+import com.qingmei2.rximagepicker_extension.model.SelectedItemCollection;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumsAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner;
 
 import io.reactivex.Observable;
 
-public class WeChatImagePicker extends AppCompatActivity implements
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
+
+public class WeChatImagePickerActivity extends AppCompatActivity implements
         IGalleryPickerView, AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
-        View.OnClickListener {
+        View.OnClickListener, WeChatListFragment.SelectionProvider {
 
     private final AlbumCollection mAlbumCollection = new AlbumCollection();
 
     private AlbumsSpinner mAlbumsSpinner;
     private AlbumsAdapter mAlbumsAdapter;
+
+    private SelectedItemCollection mSelectedCollection = new SelectedItemCollection(this);
 
     private TextView mButtonPreview;
     private TextView mButtonApply;
@@ -48,7 +55,8 @@ public class WeChatImagePicker extends AppCompatActivity implements
         setContentView(R.layout.activity_image_picker);
 
         initToolbar();
-
+        initSelectSpec();
+        
         mButtonPreview = (TextView) findViewById(R.id.button_preview);
         mButtonApply = (TextView) findViewById(R.id.button_apply);
         mButtonPreview.setOnClickListener(this);
@@ -56,6 +64,7 @@ public class WeChatImagePicker extends AppCompatActivity implements
         mContainer = findViewById(R.id.container);
         mEmptyView = findViewById(R.id.empty_view);
 
+        mSelectedCollection.onCreate(savedInstanceState);
         updateBottomToolbar();
 
         mAlbumsAdapter = new AlbumsAdapter(this, null, false);
@@ -67,6 +76,13 @@ public class WeChatImagePicker extends AppCompatActivity implements
         mAlbumCollection.onCreate(this, this);
         mAlbumCollection.onRestoreInstanceState(savedInstanceState);
         mAlbumCollection.loadAlbums();
+    }
+
+    private void initSelectSpec() {
+        SelectionSpec mSelectionSpec = SelectionSpec.getCleanInstance();
+        mSelectionSpec.mimeTypeSet = MimeType.ofAll();
+        mSelectionSpec.mediaTypeExclusive = false;
+        mSelectionSpec.orientation = SCREEN_ORIENTATION_UNSPECIFIED;
     }
 
     private void initToolbar() {
@@ -97,7 +113,7 @@ public class WeChatImagePicker extends AppCompatActivity implements
             @Override
             public void run() {
                 cursor.moveToPosition(mAlbumCollection.getCurrentSelection());
-                mAlbumsSpinner.setSelection(WeChatImagePicker.this,
+                mAlbumsSpinner.setSelection(WeChatImagePickerActivity.this,
                         mAlbumCollection.getCurrentSelection());
                 Album album = Album.valueOf(cursor);
                 if (album.isAll()) {
@@ -130,8 +146,7 @@ public class WeChatImagePicker extends AppCompatActivity implements
     }
 
     private void updateBottomToolbar() {
-//        int selectedCount = mSelectedCollection.count();
-        int selectedCount = 10;
+        int selectedCount = mSelectedCollection.count();
         if (selectedCount == 0) {
             mButtonPreview.setEnabled(false);
             mButtonApply.setEnabled(false);
@@ -169,5 +184,16 @@ public class WeChatImagePicker extends AppCompatActivity implements
         } else if (v.getId() == R.id.button_apply) {
             Toast.makeText(this, "apply", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAlbumCollection.onDestroy();
+    }
+
+    @Override
+    public SelectedItemCollection provideSelectedItemCollection() {
+        return mSelectedCollection;
     }
 }

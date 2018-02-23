@@ -27,7 +27,8 @@ android {
 dependencies {
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["design"]
-    implementation rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     implementation project(':rximagepicker')
     implementation project(':rximagepicker_extension')
 

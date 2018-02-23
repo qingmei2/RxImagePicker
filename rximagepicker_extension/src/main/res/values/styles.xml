@@ -16,6 +16,10 @@
         <item name="bottomToolbar.bg">@color/wechat_primary</item>
         <item name="bottomToolbar.preview.textColor">@android:color/white</item>
         <item name="bottomToolbar.apply.textColor">@android:color/white</item>
+
+        <item name="item.checkCircle.backgroundColor">@color/wechat_item_checkCircle_backgroundColor</item>
+        <item name="item.checkCircle.borderColor">@color/wechat_item_checkCircle_borderColor</item>
+        <item name="capture.textColor">@color/wechat_capture</item>
     </style>
 
     <style name="Toolbar.WeChat" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

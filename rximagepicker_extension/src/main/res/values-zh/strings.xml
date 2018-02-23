@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">rximagepicker_extension</string>
+    <string name="album_name_all">全部</string>
+    <string name="button_preview">预览</string>
+    <string name="button_apply_default">使用</string>
+    <string name="button_apply">使用(%1$d)</string>
+    <string name="empty_text">还没有图片或视频</string>
+</resources>

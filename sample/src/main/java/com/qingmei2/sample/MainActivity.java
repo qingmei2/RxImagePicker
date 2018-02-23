@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
-import com.qingmei2.rximagepicker_extension.ui.WeChatImagePicker;
+import com.qingmei2.rximagepicker_extension.ui.WeChatImagePickerActivity;
 
 import java.io.File;
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private void initRxImagePicker() {
         rxImagePicker = new RxImagePicker.Builder()
                 .with(this)
-                .addCustomGallery("WeChatPickerView", new WeChatImagePicker())
+                .addCustomGallery("WeChatPickerView", new WeChatImagePickerActivity())
                 .build()
                 .create(MyImagePicker.class);
     }
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 //                        Toast.makeText(MainActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
 //                    }
 //                });
-        Intent intent = new Intent(this, WeChatImagePicker.class);
+        Intent intent = new Intent(this, WeChatImagePickerActivity.class);
         startActivity(intent);
     }
 

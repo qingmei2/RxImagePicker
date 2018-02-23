@@ -13,4 +13,9 @@
 
     <attr name="album.emptyView" format="reference"/>
     <attr name="album.emptyView.textColor" format="reference|color"/>
+
+    <attr name="item.placeholder" format="reference|color"/>
+    <attr name="item.checkCircle.backgroundColor" format="reference|color"/>
+    <attr name="item.checkCircle.borderColor" format="reference|color"/>
+    <attr name="capture.textColor" format="reference|color"/>
 </resources>
