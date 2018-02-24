@@ -5,4 +5,5 @@
     <string name="button_apply_default">使用</string>
     <string name="button_apply">使用(%1$d)</string>
     <string name="empty_text">还没有图片或视频</string>
+    <string name="button_back">返回</string>
 </resources>

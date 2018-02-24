@@ -10,13 +10,13 @@
         <item name="album.thumbnail.placeholder">@color/wechat_album_dropdown_thumbnail_placeholder</item>
         <item name="album.element.color">@android:color/white</item>
         <item name="page.bg">@color/wechat_page_bg</item>
-
+        <item name="preview.bottomToolbar.back.textColor">@color/wechat_white</item>
+        <item name="preview.bottomToolbar.apply.textColor">@color/wechat_white</item>
         <item name="album.emptyView">@drawable/ic_empty_zhihu</item>
         <item name="album.emptyView.textColor">@color/wechat_album_empty_view</item>
         <item name="bottomToolbar.bg">@color/wechat_primary</item>
         <item name="bottomToolbar.preview.textColor">@android:color/white</item>
         <item name="bottomToolbar.apply.textColor">@android:color/white</item>
-
         <item name="item.checkCircle.backgroundColor">@color/wechat_item_checkCircle_backgroundColor</item>
         <item name="item.checkCircle.borderColor">@color/wechat_item_checkCircle_borderColor</item>
         <item name="capture.textColor">@color/wechat_capture</item>

@@ -1,5 +1,6 @@
 package com.qingmei2.rximagepicker_extension.ui;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
@@ -22,9 +23,11 @@ import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
 import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension.R;
 import com.qingmei2.rximagepicker_extension.entity.Album;
+import com.qingmei2.rximagepicker_extension.entity.Item;
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
 import com.qingmei2.rximagepicker_extension.model.AlbumCollection;
 import com.qingmei2.rximagepicker_extension.model.SelectedItemCollection;
+import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumsAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner;
 
@@ -34,7 +37,11 @@ import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
 
 public class WeChatImagePickerActivity extends AppCompatActivity implements
         IGalleryPickerView, AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
-        View.OnClickListener, WeChatListFragment.SelectionProvider {
+        View.OnClickListener, WeChatListFragment.SelectionProvider,
+        AlbumMediaAdapter.OnMediaClickListener{
+
+    private static final int REQUEST_CODE_PREVIEW = 23;
+    private static final int REQUEST_CODE_CAPTURE = 24;
 
     private final AlbumCollection mAlbumCollection = new AlbumCollection();
 
@@ -190,6 +197,15 @@ public class WeChatImagePickerActivity extends AppCompatActivity implements
     protected void onDestroy() {
         super.onDestroy();
         mAlbumCollection.onDestroy();
+    }
+
+    @Override
+    public void onMediaClick(Album album, Item item, int adapterPosition) {
+        Intent intent = new Intent(this, AlbumPreviewActivity.class);
+        intent.putExtra(AlbumPreviewActivity.EXTRA_ALBUM, album);
+        intent.putExtra(AlbumPreviewActivity.EXTRA_ITEM, item);
+        intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.getDataWithBundle());
+        startActivityForResult(intent, REQUEST_CODE_PREVIEW);
     }
 
     @Override
