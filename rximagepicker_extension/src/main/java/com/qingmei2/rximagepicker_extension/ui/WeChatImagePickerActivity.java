@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -31,6 +32,8 @@ import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumsAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner;
 
+import java.util.ArrayList;
+
 import io.reactivex.Observable;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
@@ -38,7 +41,10 @@ import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
 public class WeChatImagePickerActivity extends AppCompatActivity implements
         IGalleryPickerView, AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
         View.OnClickListener, WeChatListFragment.SelectionProvider,
-        AlbumMediaAdapter.OnMediaClickListener{
+        AlbumMediaAdapter.OnMediaClickListener, AlbumMediaAdapter.CheckStateListener {
+
+    public static final String EXTRA_RESULT_SELECTION = "extra_result_selection";
+    public static final String EXTRA_RESULT_SELECTION_PATH = "extra_result_selection_path";
 
     private static final int REQUEST_CODE_PREVIEW = 23;
     private static final int REQUEST_CODE_CAPTURE = 24;
@@ -47,6 +53,7 @@ public class WeChatImagePickerActivity extends AppCompatActivity implements
 
     private AlbumsSpinner mAlbumsSpinner;
     private AlbumsAdapter mAlbumsAdapter;
+    private SelectionSpec mSpec;
 
     private SelectedItemCollection mSelectedCollection = new SelectedItemCollection(this);
 
@@ -63,7 +70,7 @@ public class WeChatImagePickerActivity extends AppCompatActivity implements
 
         initToolbar();
         initSelectSpec();
-        
+
         mButtonPreview = findViewById(R.id.button_preview);
         mButtonApply = findViewById(R.id.button_apply);
         mButtonPreview.setOnClickListener(this);
@@ -86,10 +93,10 @@ public class WeChatImagePickerActivity extends AppCompatActivity implements
     }
 
     private void initSelectSpec() {
-        SelectionSpec mSelectionSpec = SelectionSpec.getCleanInstance();
-        mSelectionSpec.mimeTypeSet = MimeType.ofAll();
-        mSelectionSpec.mediaTypeExclusive = false;
-        mSelectionSpec.orientation = SCREEN_ORIENTATION_UNSPECIFIED;
+        mSpec = SelectionSpec.getCleanInstance();
+        mSpec.mimeTypeSet = MimeType.ofAll();
+        mSpec.mediaTypeExclusive = false;
+        mSpec.orientation = SCREEN_ORIENTATION_UNSPECIFIED;
     }
 
     private void initToolbar() {
@@ -158,7 +165,7 @@ public class WeChatImagePickerActivity extends AppCompatActivity implements
             mButtonPreview.setEnabled(false);
             mButtonApply.setEnabled(false);
             mButtonApply.setText(getString(R.string.button_apply_default));
-        } else if (selectedCount == 1) {
+        } else if (selectedCount == 1 && mSpec.singleSelectionModeEnabled()) {
             mButtonPreview.setEnabled(true);
             mButtonApply.setText(R.string.button_apply_default);
             mButtonApply.setEnabled(true);
@@ -185,15 +192,6 @@ public class WeChatImagePickerActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.button_preview) {
-            Toast.makeText(this, "preview", Toast.LENGTH_SHORT).show();
-        } else if (v.getId() == R.id.button_apply) {
-            Toast.makeText(this, "apply", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         mAlbumCollection.onDestroy();
@@ -209,7 +207,29 @@ public class WeChatImagePickerActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onUpdate() {
+        updateBottomToolbar();
+    }
+
+    @Override
     public SelectedItemCollection provideSelectedItemCollection() {
         return mSelectedCollection;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.button_preview) {
+            Intent intent = new Intent(this, SelectedPreviewActivity.class);
+            intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.getDataWithBundle());
+            startActivityForResult(intent, REQUEST_CODE_PREVIEW);
+        } else if (v.getId() == R.id.button_apply) {
+            Intent result = new Intent();
+            ArrayList<Uri> selectedUris = (ArrayList<Uri>) mSelectedCollection.asListOfUri();
+            result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
+            ArrayList<String> selectedPaths = (ArrayList<String>) mSelectedCollection.asListOfString();
+            result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
+            setResult(RESULT_OK, result);
+            finish();
+        }
     }
 }

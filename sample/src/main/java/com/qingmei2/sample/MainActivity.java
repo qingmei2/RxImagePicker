@@ -1,8 +1,12 @@
 package com.qingmei2.sample;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
@@ -22,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ivPickedImage;
     private MyImagePicker rxImagePicker;
 
+    private final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA = 99;
+    private final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +39,25 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fabGallery = findViewById(R.id.fab_pick_gallery);
 
         initRxImagePicker();
-        fabCamera.setOnClickListener(view -> openCamera());
-        fabGallery.setOnClickListener(view -> openGallery());
+        fabCamera.setOnClickListener(__ ->
+                checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA));
+        fabGallery.setOnClickListener(__ ->
+                checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY));
+    }
+
+    private void checkPermissionAndRequest(int permissionCode) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    permissionCode);
+        } else {
+            if (permissionCode == REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA) {
+                openCamera();
+            } else {
+                openGallery();
+            }
+        }
     }
 
     private void initRxImagePicker() {
@@ -82,4 +106,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            openCamera();
+        } else if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            openGallery();
+        } else {
+            Toast.makeText(this, "Please allow the Permission first.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
