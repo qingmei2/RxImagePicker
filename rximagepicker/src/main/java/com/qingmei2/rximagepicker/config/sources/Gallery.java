@@ -1,5 +1,7 @@
 package com.qingmei2.rximagepicker.config.sources;
 
+import android.support.annotation.IdRes;
+
 import com.qingmei2.rximagepicker.core.DefaultImagePicker;
 
 import java.lang.annotation.ElementType;
@@ -14,6 +16,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Gallery {
 
-    String pickerView() default DefaultImagePicker.DEFAULT_PICKER;
+    String tag() default DefaultImagePicker.DEFAULT_PICKER_GALLERY;
+
+    @IdRes int containerViewId() default 0;
 
 }

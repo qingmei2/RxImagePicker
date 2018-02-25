@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
+import com.qingmei2.rximagepicker.ui.IPickerView;
 import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension.R;
 import com.qingmei2.rximagepicker_extension.entity.Album;
@@ -96,6 +98,8 @@ public class WeChatImagePickerActivity extends AppCompatActivity implements
         mSpec = SelectionSpec.getCleanInstance();
         mSpec.mimeTypeSet = MimeType.ofAll();
         mSpec.mediaTypeExclusive = false;
+        mSpec.countable = true;
+        mSpec.maxSelectable = 9;
         mSpec.orientation = SCREEN_ORIENTATION_UNSPECIFIED;
     }
 
@@ -110,6 +114,11 @@ public class WeChatImagePickerActivity extends AppCompatActivity implements
         int color = ta.getColor(0, 0);
         ta.recycle();
         navigationIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+    }
+
+    @Override
+    public IPickerView display(FragmentManager fragmentManager, int viewContainer, String tag) {
+        return null;
     }
 
     @Override

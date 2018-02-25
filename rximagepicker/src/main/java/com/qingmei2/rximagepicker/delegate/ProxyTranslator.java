@@ -1,6 +1,7 @@
 package com.qingmei2.rximagepicker.delegate;
 
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.app.FragmentManager;
 
 import com.qingmei2.rximagepicker.config.observeras.AsBitmap;
 import com.qingmei2.rximagepicker.config.observeras.AsFile;
@@ -10,6 +11,7 @@ import com.qingmei2.rximagepicker.config.sources.Camera;
 import com.qingmei2.rximagepicker.config.sources.Gallery;
 import com.qingmei2.rximagepicker.config.sources.SourcesFrom;
 import com.qingmei2.rximagepicker.core.ImagePickerConfigProvider;
+import com.qingmei2.rximagepicker.core.ImagePickerProjector;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
 import com.qingmei2.rximagepicker.ui.IPickerView;
@@ -42,9 +44,19 @@ public final class ProxyTranslator {
         ImagePickerConfigProvider configProvider = new ImagePickerConfigProvider(
                 this.getStreamSourcesFrom(method),
                 this.getStreamObserverAs(method),
-                this.getPickerView(method)
+                this.getPickerView(method),
+                this.getContainerViewId(method),
+                this.getPickerViewTag(method)
         );
         return configProvider;
+    }
+
+    public ImagePickerProjector instanceProjector(ImagePickerConfigProvider provider,
+                                                  FragmentManager fragmentManager) {
+        return new ImagePickerProjector(provider.getPickerView(),
+                fragmentManager,
+                provider.getContainerViewId(),
+                provider.getPickViewTag());
     }
 
     @VisibleForTesting
@@ -52,9 +64,19 @@ public final class ProxyTranslator {
         Camera camera = method.getAnnotation(Camera.class);
         Gallery gallery = method.getAnnotation(Gallery.class);
         if (camera != null) {
-            return checkPickerViewNotNull(cameraViews.get(camera.pickerView()));
+            return checkPickerViewNotNull(cameraViews.get(camera.tag()));
         } else {
-            return checkPickerViewNotNull(galleryViews.get(gallery.pickerView()));
+            return checkPickerViewNotNull(galleryViews.get(gallery.tag()));
+        }
+    }
+
+    public String getPickerViewTag(Method method) {
+        Camera camera = method.getAnnotation(Camera.class);
+        Gallery gallery = method.getAnnotation(Gallery.class);
+        if (camera != null) {
+            return camera.tag();
+        } else {
+            return gallery.tag();
         }
     }
 
@@ -105,6 +127,16 @@ public final class ProxyTranslator {
             return ObserverAs.URI;
         } else {
             throw new IllegalArgumentException("You can't add conflicting annotation to this method: @AsBitmap/@AsFile/@AsUri");
+        }
+    }
+
+    public int getContainerViewId(Method method) {
+        Camera camera = method.getAnnotation(Camera.class);
+        Gallery gallery = method.getAnnotation(Gallery.class);
+        if (camera != null) {
+            return camera.containerViewId();
+        } else {
+            return gallery.containerViewId();
         }
     }
 

@@ -5,11 +5,15 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
+import com.qingmei2.rximagepicker.ui.IPickerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,19 +23,25 @@ import io.reactivex.Observable;
 
 public final class SystemCameraPickerView extends BaseSystemPickerView implements ICameraPickerView {
 
-    private static final String TAG = SystemCameraPickerView.class.getSimpleName();
+    public static final String TAG = SystemCameraPickerView.class.getSimpleName();
     private static Uri cameraPictureUrl;
 
-    public static ICameraPickerView instance(FragmentActivity fragmentActivity) {
-        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
-        SystemCameraPickerView fragment = (SystemCameraPickerView) fragmentManager.findFragmentByTag(TAG);
-        if (fragment == null) {
-            fragment = new SystemCameraPickerView();
-            fragmentManager.beginTransaction()
-                    .add(fragment, TAG)
-                    .commit();
+    @Override
+    public IPickerView display(FragmentManager fragmentManager,
+                               @IdRes int containerViewId,
+                               String tag) {
+        SystemCameraPickerView fragment = (SystemCameraPickerView) fragmentManager.findFragmentByTag(tag);
+        if (fragment != null) {
+            return fragment;
+        } else {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            if (containerViewId != 0) {
+                transaction.add(containerViewId, this, tag).commit();
+            } else {
+                transaction.add(this, tag).commit();
+            }
+            return this;
         }
-        return fragment;
     }
 
     @Override

@@ -4,6 +4,7 @@ package com.qingmei2.rximagepicker.core;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.app.FragmentManager;
 
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
 import com.qingmei2.rximagepicker.funtions.ObserverAsConverter;
@@ -59,7 +60,6 @@ public final class ImagePickerConfigProcessor implements
             public ObservableSource<Uri> apply(ImagePickerConfigProvider provider) throws Exception {
                 switch (provider.getSourcesFrom()) {
                     case GALLERY:
-                        return provider.getPickerView().pickImage();
                     case CAMERA:
                         return provider.getPickerView().pickImage();
                     default:

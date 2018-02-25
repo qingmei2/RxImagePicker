@@ -11,7 +11,8 @@ import io.reactivex.Observable;
 
 public interface DefaultImagePicker {
 
-    String DEFAULT_PICKER = "com.qingmei2.rximagepicker.pickerview.default";
+    String DEFAULT_PICKER_GALLERY = "com.qingmei2.rximagepicker.pickerview.default.gallery";
+    String DEFAULT_PICKER_CAMERA = "com.qingmei2.rximagepicker.pickerview.default.camera";
 
     @Gallery
     @AsUri

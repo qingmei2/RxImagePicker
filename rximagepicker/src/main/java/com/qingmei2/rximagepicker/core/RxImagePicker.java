@@ -14,7 +14,8 @@ import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.qingmei2.rximagepicker.core.DefaultImagePicker.DEFAULT_PICKER;
+import static com.qingmei2.rximagepicker.core.DefaultImagePicker.DEFAULT_PICKER_CAMERA;
+import static com.qingmei2.rximagepicker.core.DefaultImagePicker.DEFAULT_PICKER_GALLERY;
 
 public class RxImagePicker {
 
@@ -69,8 +70,8 @@ public class RxImagePicker {
                 throw new NullPointerException("You should instance the FragmentActivity or v4.app.Fragment by RxImagePicker.Builder().with().");
             }
 
-            this.cameraViews.put(DEFAULT_PICKER, SystemCameraPickerView.instance(activity));
-            this.galleryViews.put(DEFAULT_PICKER, SystemGalleryPickerView.instance(activity));
+            this.cameraViews.put(DEFAULT_PICKER_CAMERA, new SystemCameraPickerView());
+            this.galleryViews.put(DEFAULT_PICKER_GALLERY, new SystemGalleryPickerView());
 
             return new RxImagePicker(this);
         }

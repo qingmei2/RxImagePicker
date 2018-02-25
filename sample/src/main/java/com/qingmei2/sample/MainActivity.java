@@ -3,6 +3,7 @@ package com.qingmei2.sample;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -88,22 +89,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openGallery() {
-//        rxImagePicker.openGallery()
-//                .subscribe(new Consumer<Bitmap>() {
-//                    @Override
-//                    public void accept(Bitmap bitmap) throws Exception {
-//                        Log.d(TAG, "return bitmap: " + bitmap.toString());
-//                        ivPickedImage.setImageBitmap(bitmap);
-//                    }
-//                }, new Consumer<Throwable>() {
-//                    @Override
-//                    public void accept(Throwable e) throws Exception {
-//                        Log.d(TAG, "return bitmap error: " + e.getMessage());
-//                        Toast.makeText(MainActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
-//                    }
-//                });
-        Intent intent = new Intent(this, WeChatImagePickerActivity.class);
-        startActivity(intent);
+        rxImagePicker.openGallery()
+                .subscribe(new Consumer<Bitmap>() {
+                    @Override
+                    public void accept(Bitmap bitmap) throws Exception {
+                        Log.d(TAG, "return bitmap: " + bitmap.toString());
+                        ivPickedImage.setImageBitmap(bitmap);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable e) throws Exception {
+                        Log.d(TAG, "return bitmap error: " + e.getMessage());
+                        Toast.makeText(MainActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
+                    }
+                });
+//        Intent intent = new Intent(this, WeChatImagePickerActivity.class);
+//        startActivity(intent);
     }
 
     @Override
