@@ -14,11 +14,11 @@ import io.reactivex.Single;
 
 public interface MyImagePicker {
 
-    @Gallery
     @AsBitmap
+    @Gallery(tag = "wechat_picker", containerViewId = R.id.fl_container)
     Observable<Bitmap> openGallery();
 
-    @Camera
     @AsFile
+    @Camera
     Single<File> openCamera();
 }

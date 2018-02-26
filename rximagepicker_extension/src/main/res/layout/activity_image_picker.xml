@@ -8,11 +8,12 @@
     android:orientation="vertical"
     tools:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-    <android.support.v7.widget.Toolbar
+    <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
+        android:orientation="horizontal"
         tools:background="@color/wechat_primary">
 
         <TextView
@@ -28,7 +29,7 @@
             tools:text="选择图片"
             tools:textColor="@color/wechat_white" />
 
-    </android.support.v7.widget.Toolbar>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/bottom_toolbar"

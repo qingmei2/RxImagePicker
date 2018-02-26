@@ -1,7 +1,6 @@
 package com.qingmei2.sample;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
-import com.qingmei2.rximagepicker_extension.ui.WeChatImagePickerActivity;
+import com.qingmei2.rximagepicker_extension.ui.WeChatImagePicker;
 
 import java.io.File;
 
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private void initRxImagePicker() {
         rxImagePicker = new RxImagePicker.Builder()
                 .with(this)
-                .addCustomGallery("WeChatPickerView", new WeChatImagePickerActivity())
+                .addCustomGallery("wechat_picker", new WeChatImagePicker())
                 .build()
                 .create(MyImagePicker.class);
     }

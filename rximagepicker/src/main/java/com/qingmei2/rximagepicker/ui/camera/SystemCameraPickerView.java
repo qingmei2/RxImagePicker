@@ -6,14 +6,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.IdRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
-import com.qingmei2.rximagepicker.ui.IPickerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,20 +24,17 @@ public final class SystemCameraPickerView extends BaseSystemPickerView implement
     private static Uri cameraPictureUrl;
 
     @Override
-    public IPickerView display(FragmentManager fragmentManager,
+    public void display(FragmentManager fragmentManager,
                                @IdRes int containerViewId,
                                String tag) {
         SystemCameraPickerView fragment = (SystemCameraPickerView) fragmentManager.findFragmentByTag(tag);
-        if (fragment != null) {
-            return fragment;
-        } else {
+        if (fragment == null) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             if (containerViewId != 0) {
                 transaction.add(containerViewId, this, tag).commit();
             } else {
                 transaction.add(this, tag).commit();
             }
-            return this;
         }
     }
 

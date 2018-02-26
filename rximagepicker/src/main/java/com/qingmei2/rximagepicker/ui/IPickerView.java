@@ -9,7 +9,7 @@ import io.reactivex.Observable;
 
 public interface IPickerView extends LifecycleObserver {
 
-    IPickerView display(FragmentManager fragmentManager,
+    void display(FragmentManager fragmentManager,
                         @IdRes int viewContainer,
                         String tag);
 

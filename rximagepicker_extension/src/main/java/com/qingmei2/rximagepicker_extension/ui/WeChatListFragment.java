@@ -22,6 +22,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ import com.qingmei2.rximagepicker_extension.utils.UIUtils;
 
 public class WeChatListFragment extends Fragment implements
         AlbumMediaAdapter.CheckStateListener, AlbumMediaAdapter.OnMediaClickListener,
-        AlbumMediaCollection.AlbumMediaCallbacks{
+        AlbumMediaCollection.AlbumMediaCallbacks {
 
     public static final String EXTRA_ALBUM = "extra_album";
 
@@ -57,27 +58,26 @@ public class WeChatListFragment extends Fragment implements
         return fragment;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof SelectionProvider) {
-            mSelectionProvider = (SelectionProvider) context;
+    public void injectDependencies(SelectionProvider selectionProvider,
+                                   AlbumMediaAdapter.CheckStateListener checkStateListener,
+                                   AlbumMediaAdapter.OnMediaClickListener mediaClickListener) {
+        if (null != selectionProvider) {
+            this.mSelectionProvider = selectionProvider;
         } else {
             throw new IllegalStateException("Context must implement SelectionProvider.");
         }
-        if (context instanceof AlbumMediaAdapter.CheckStateListener) {
-            mCheckStateListener = (AlbumMediaAdapter.CheckStateListener) context;
-        }
-        if (context instanceof AlbumMediaAdapter.OnMediaClickListener) {
-            mOnMediaClickListener = (AlbumMediaAdapter.OnMediaClickListener) context;
-        }
+        this.mCheckStateListener = checkStateListener;
+        this.mOnMediaClickListener = mediaClickListener;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_media_selection, container, false);
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.WeChat);
+        LayoutInflater localInflater = inflater
+                .cloneInContext(contextThemeWrapper);
+        return localInflater.inflate(R.layout.fragment_media_selection, container, false);
     }
 
     @Override
