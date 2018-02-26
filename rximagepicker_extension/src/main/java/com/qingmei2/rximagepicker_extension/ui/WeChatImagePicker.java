@@ -80,7 +80,7 @@ public class WeChatImagePicker extends Fragment implements
         context = getContext();
         mSelectedCollection = new SelectedItemCollection(context);
 
-        initToolbar();
+        initToolbar(view);
         initSelectSpec();
 
         mButtonPreview = view.findViewById(R.id.button_preview);
@@ -113,14 +113,15 @@ public class WeChatImagePicker extends Fragment implements
         mSpec.orientation = SCREEN_ORIENTATION_UNSPECIFIED;
     }
 
-    private void initToolbar() {
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        ActionBar actionBar = getSupportActionBar();
+    private void initToolbar(View view) {
+//        Toolbar toolbar = view.findViewById(R.id.toolbar);
+//        AppCompatActivity activity = (AppCompatActivity) getActivity();
+//        activity.setSupportActionBar(toolbar);
+//        ActionBar actionBar = activity.getSupportActionBar();
 //        actionBar.setDisplayShowTitleEnabled(false);
 //        actionBar.setDisplayHomeAsUpEnabled(true);
 //        Drawable navigationIcon = toolbar.getNavigationIcon();
-//        TypedArray ta = getTheme().obtainStyledAttributes(new int[]{R.attr.album_element_color});
+//        TypedArray ta = activity.getTheme().obtainStyledAttributes(new int[]{R.attr.album_element_color});
 //        int color = ta.getColor(0, 0);
 //        ta.recycle();
 //        navigationIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN);
