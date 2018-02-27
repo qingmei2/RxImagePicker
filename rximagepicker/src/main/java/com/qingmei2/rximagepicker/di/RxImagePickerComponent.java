@@ -1,6 +1,6 @@
 package com.qingmei2.rximagepicker.di;
 
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 
 import com.qingmei2.rximagepicker.core.IImagePickerProcessor;
 import com.qingmei2.rximagepicker.delegate.ProxyTranslator;
@@ -14,5 +14,5 @@ public interface RxImagePickerComponent {
 
     ProxyTranslator proxyTranslator();
 
-    FragmentManager fragmentManager();
+    FragmentActivity fragmentActivity();
 }

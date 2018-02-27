@@ -1,7 +1,7 @@
 package com.qingmei2.rximagepicker.delegate;
 
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 
 import com.qingmei2.rximagepicker.config.observeras.AsBitmap;
 import com.qingmei2.rximagepicker.config.observeras.AsFile;
@@ -46,17 +46,23 @@ public final class ProxyTranslator {
                 this.getStreamObserverAs(method),
                 this.getPickerView(method),
                 this.getContainerViewId(method),
-                this.getPickerViewTag(method)
-        );
+                this.getPickerViewTag(method),
+                this.singleActivity(method));
         return configProvider;
     }
 
     public ImagePickerProjector instanceProjector(ImagePickerConfigProvider provider,
-                                                  FragmentManager fragmentManager) {
+                                                  FragmentActivity fragmentActivity) {
         return new ImagePickerProjector(provider.getPickerView(),
-                fragmentManager,
+                fragmentActivity,
                 provider.getContainerViewId(),
-                provider.getPickViewTag());
+                provider.getPickViewTag(),
+                provider.isSingleActivity());
+    }
+
+    public boolean singleActivity(Method method) {
+        Gallery gallery = method.getAnnotation(Gallery.class);
+        return gallery != null && gallery.singleActivity();
     }
 
     @VisibleForTesting

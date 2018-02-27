@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
+import com.qingmei2.rximagepicker.ui.ImagePickerHolderActivity;
 import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension.R;
 import com.qingmei2.rximagepicker_extension.entity.Album;
@@ -38,16 +39,12 @@ import io.reactivex.subjects.PublishSubject;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
 
-public class WeChatImagePicker extends Fragment implements
+public class WeChatImagePickerFragment extends Fragment implements
         IGalleryPickerView, AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
         View.OnClickListener, WeChatListFragment.SelectionProvider,
         AlbumMediaAdapter.OnMediaClickListener, AlbumMediaAdapter.CheckStateListener {
 
-    public static final String EXTRA_RESULT_SELECTION = "extra_result_selection";
-    public static final String EXTRA_RESULT_SELECTION_PATH = "extra_result_selection_path";
-
     private static final int REQUEST_CODE_PREVIEW = 23;
-    private static final int REQUEST_CODE_CAPTURE = 24;
 
     private final AlbumCollection mAlbumCollection = new AlbumCollection();
 
@@ -72,7 +69,7 @@ public class WeChatImagePicker extends Fragment implements
         final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.WeChat);
         LayoutInflater localInflater = inflater
                 .cloneInContext(contextThemeWrapper);
-        return localInflater.inflate(R.layout.activity_image_picker, container, false);
+        return localInflater.inflate(R.layout.fragment_image_picker, container, false);
     }
 
     @Override
@@ -147,9 +144,13 @@ public class WeChatImagePicker extends Fragment implements
     }
 
     public void closure() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.remove(this);
+        if (getActivity() instanceof ImagePickerHolderActivity) {
+
+        } else {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.remove(this);
+        }
     }
 
     @Override

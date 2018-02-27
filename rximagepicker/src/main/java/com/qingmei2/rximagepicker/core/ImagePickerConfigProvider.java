@@ -17,16 +17,21 @@ public final class ImagePickerConfigProvider {
     private final int containerViewId;
     private final String pickViewTag;
 
+    private final boolean singleActivity;
+
     public ImagePickerConfigProvider(SourcesFrom sourcesFrom,
                                      ObserverAs observerAs,
                                      IPickerView pickerView,
                                      @IdRes int containerViewId,
-                                     String pickViewTag) {
+                                     String pickViewTag,
+                                     boolean singleActivity
+    ) {
         this.sourcesFrom = sourcesFrom;
         this.observerAs = observerAs;
         this.pickerView = pickerView;
         this.containerViewId = containerViewId;
         this.pickViewTag = pickViewTag;
+        this.singleActivity = singleActivity;
     }
 
     public SourcesFrom getSourcesFrom() {
@@ -47,5 +52,9 @@ public final class ImagePickerConfigProvider {
 
     public String getPickViewTag() {
         return pickViewTag;
+    }
+
+    public boolean isSingleActivity() {
+        return singleActivity;
     }
 }

@@ -16,8 +16,13 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Gallery {
 
+    /**
+     * If set the {@link #singleActivity()} param equals true, then the {@link com.qingmei2.rximagepicker.ui.IPickerView}
+     * will be injected into the {@link BasePickerActivity}.
+     */
+    boolean singleActivity() default true;
+
     String tag() default DefaultImagePicker.DEFAULT_PICKER_GALLERY;
 
     @IdRes int containerViewId() default 0;
-
 }

@@ -4,12 +4,12 @@ package com.qingmei2.rximagepicker.core;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.app.FragmentManager;
 
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
 import com.qingmei2.rximagepicker.funtions.ObserverAsConverter;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
+import com.qingmei2.rximagepicker.ui.ImagePickerHolderActivity;
 
 import java.util.Map;
 
@@ -58,6 +58,9 @@ public final class ImagePickerConfigProcessor implements
         return new Function<ImagePickerConfigProvider, ObservableSource<Uri>>() {
             @Override
             public ObservableSource<Uri> apply(ImagePickerConfigProvider provider) throws Exception {
+                if (provider.isSingleActivity()) {
+                    return ImagePickerHolderActivity.subject;
+                }
                 switch (provider.getSourcesFrom()) {
                     case GALLERY:
                     case CAMERA:

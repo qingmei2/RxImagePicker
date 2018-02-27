@@ -1,10 +1,9 @@
 package com.qingmei2.rximagepicker.delegate;
 
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 
 import com.qingmei2.rximagepicker.core.IImagePickerProcessor;
 import com.qingmei2.rximagepicker.core.ImagePickerConfigProvider;
-import com.qingmei2.rximagepicker.core.ImagePickerProjector;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker.di.DaggerRxImagePickerComponent;
 import com.qingmei2.rximagepicker.di.RxImagePickerComponent;
@@ -25,7 +24,7 @@ public final class ProxyProviders implements InvocationHandler {
 
     private final IImagePickerProcessor rxImagePickerProcessor;
     private final ProxyTranslator proxyTranslator;
-    private final FragmentManager fragmentManager;
+    private final FragmentActivity fragmentActivity;
 
     public ProxyProviders(RxImagePicker.Builder builder,
                           Class<?> providersClass) {
@@ -34,7 +33,7 @@ public final class ProxyProviders implements InvocationHandler {
                 .build();
 
         rxImagePickerProcessor = component.rxImagePickerProcessor();
-        fragmentManager = component.fragmentManager();
+        fragmentActivity = component.fragmentActivity();
         proxyTranslator = component.proxyTranslator();
     }
 
@@ -47,8 +46,8 @@ public final class ProxyProviders implements InvocationHandler {
 
                 ImagePickerConfigProvider configProvider = proxyTranslator.processMethod(method, args);
 
-                ImagePickerProjector pickerProjector = proxyTranslator.instanceProjector(configProvider, fragmentManager);
-                pickerProjector.displayPickerView();
+                proxyTranslator.instanceProjector(configProvider, fragmentActivity)
+                        .display();
 
                 Observable<?> observable = rxImagePickerProcessor.process(configProvider);
 
