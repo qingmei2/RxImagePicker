@@ -13,6 +13,10 @@ import io.reactivex.functions.Consumer;
 
 public class WeChatImagePickerActivity extends AppCompatActivity {
 
+    private WeChatImagePickerFragment fragment;
+
+    public static final int REQUEST_CODE_PREVIEW = 23;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(R.style.WeChat);
@@ -22,7 +26,7 @@ public class WeChatImagePickerActivity extends AppCompatActivity {
     }
 
     private void displayPickerView() {
-        WeChatImagePickerFragment fragment = new WeChatImagePickerFragment();
+        fragment = new WeChatImagePickerFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fl_container, fragment)
@@ -47,7 +51,7 @@ public class WeChatImagePickerActivity extends AppCompatActivity {
                 });
     }
 
-    private void closure() {
+    public void closure() {
         HolderActivity.finishSubject.onNext(true);
         HolderActivity.finishSubject.onComplete();
         HolderActivity.publishSubject.onComplete();
@@ -59,4 +63,5 @@ public class WeChatImagePickerActivity extends AppCompatActivity {
     public void onBackPressed() {
         closure();
     }
+
 }

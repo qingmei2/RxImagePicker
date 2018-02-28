@@ -16,10 +16,18 @@
         android:orientation="horizontal"
         tools:background="@color/wechat_primary">
 
+        <ImageView
+            android:id="@+id/button_back"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:padding="12dp"
+            android:src="@drawable/ic_arrow_back_" />
+
         <TextView
             android:id="@+id/selected_album"
             android:layout_width="wrap_content"
             android:layout_height="?actionBarSize"
+            android:layout_marginLeft="8dp"
             android:drawableRight="@drawable/ic_arrow_drop_down_white_24dp"
             android:foreground="?selectableItemBackground"
             android:gravity="center"

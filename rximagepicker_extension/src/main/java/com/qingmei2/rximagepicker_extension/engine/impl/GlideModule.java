@@ -1,6 +1,7 @@
 package com.qingmei2.rximagepicker_extension.engine.impl;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
@@ -8,7 +9,6 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.module.AppGlideModule;
-import com.qingmei2.rximagepicker_extension.R;
 
 @com.bumptech.glide.annotation.GlideModule
 public final class GlideModule extends AppGlideModule {
@@ -56,6 +56,6 @@ public final class GlideModule extends AppGlideModule {
      * set the disk cache folder's name.
      */
     private String diskCacheFolderName(Context context) {
-        return context.getString(R.string.app_name);
+        return ContextCompat.getCodeCacheDir(context).getPath() + "/rximagepicker";
     }
 }

@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">rximagepicker_extension</string>
     <string name="album_name_all">All Media</string>
     <string name="button_preview">Preview</string>
     <string name="button_apply_default">Apply</string>

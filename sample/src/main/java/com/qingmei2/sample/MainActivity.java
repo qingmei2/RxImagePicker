@@ -102,11 +102,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
                     }
                 });
-//        Intent intent = new Intent(this, WeChatImagePickerActivity.class);
-//        startActivity(intent);
-//        HolderActivity.publishSubject
-//                .firstElement()
-//                .subscribe(uri -> GlideApp.with(this).load(uri).into(ivPickedImage));
     }
 
     @Override

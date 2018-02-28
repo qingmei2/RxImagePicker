@@ -76,17 +76,17 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
             mSelectedCollection.onCreate(savedInstanceState);
         }
 
-        mButtonBack = (TextView) findViewById(R.id.button_back);
-        mButtonApply = (TextView) findViewById(R.id.button_apply);
-        mSize = (TextView) findViewById(R.id.size);
+        mButtonBack = findViewById(R.id.button_back);
+        mButtonApply = findViewById(R.id.button_apply);
+        mSize = findViewById(R.id.size);
         mButtonBack.setOnClickListener(this);
         mButtonApply.setOnClickListener(this);
 
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = findViewById(R.id.pager);
         mPager.addOnPageChangeListener(this);
         mAdapter = new PreviewPagerAdapter(getSupportFragmentManager(), null);
         mPager.setAdapter(mAdapter);
-        mCheckView = (CheckView) findViewById(R.id.check_view);
+        mCheckView = findViewById(R.id.check_view);
         mCheckView.setCountable(mSpec.countable);
 
         mCheckView.setOnClickListener(new View.OnClickListener() {
