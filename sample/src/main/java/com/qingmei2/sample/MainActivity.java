@@ -1,8 +1,8 @@
 package com.qingmei2.sample;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker_extension.ui.WeChatImagePickerActivity;
-import com.qingmei2.rximagepicker_extension.ui.WeChatImagePickerFragment;
 
 import java.io.File;
 
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private void initRxImagePicker() {
         rxImagePicker = new RxImagePicker.Builder()
                 .with(this)
-                .addCustomGallery("wechat_picker", new WeChatImagePickerFragment())
+                .addCustomGallery("wechat_picker", WeChatImagePickerActivity.class)
                 .build()
                 .create(MyImagePicker.class);
     }
@@ -89,24 +88,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openGallery() {
-//        rxImagePicker.openGallery()
-//                .subscribe(new Consumer<Bitmap>() {
-//                    @Override
-//                    public void accept(Bitmap bitmap) throws Exception {
-//                        Log.d(TAG, "return bitmap: " + bitmap.toString());
-//                        ivPickedImage.setImageBitmap(bitmap);
-//                    }
-//                }, new Consumer<Throwable>() {
-//                    @Override
-//                    public void accept(Throwable e) throws Exception {
-//                        Log.d(TAG, "return bitmap error: " + e.getMessage());
-//                        Toast.makeText(MainActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
-//                    }
-//                });
-        Intent intent = new Intent(this, WeChatImagePickerActivity.class);
-        startActivity(intent);
-        WeChatImagePickerActivity.subject
-                .subscribe(uri -> Log.d(TAG, "return uri : " + uri.getPath()));
+        rxImagePicker.openGallery()
+                .subscribe(new Consumer<Bitmap>() {
+                    @Override
+                    public void accept(Bitmap bitmap) throws Exception {
+                        Log.d(TAG, "return bitmap: " + bitmap.toString());
+                        ivPickedImage.setImageBitmap(bitmap);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable e) throws Exception {
+                        Log.d(TAG, "return bitmap error: " + e.getMessage());
+                        Toast.makeText(MainActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
+                    }
+                });
+//        Intent intent = new Intent(this, WeChatImagePickerActivity.class);
+//        startActivity(intent);
+//        HolderActivity.publishSubject
+//                .firstElement()
+//                .subscribe(uri -> GlideApp.with(this).load(uri).into(ivPickedImage));
     }
 
     @Override

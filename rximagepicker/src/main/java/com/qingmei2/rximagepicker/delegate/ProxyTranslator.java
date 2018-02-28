@@ -50,7 +50,7 @@ public final class ProxyTranslator {
         return new ImagePickerConfigProvider(
                 this.getStreamSourcesFrom(method),
                 this.getStreamObserverAs(method),
-                this.getPickerView(method),
+                singleActivity ? null : this.getPickerView(method),
                 singleActivity ? 0 : this.getContainerViewId(method),
                 pickerViewTag,
                 singleActivity,

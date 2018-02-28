@@ -2,5 +2,8 @@
     package="com.qingmei2.rximagepicker">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    
+
+    <application>
+        <activity android:name=".ui.HolderActivity" />
+    </application>
 </manifest>

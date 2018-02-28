@@ -15,7 +15,7 @@ import io.reactivex.Single;
 public interface MyImagePicker {
 
     @AsBitmap
-    @Gallery(tag = "wechat_picker", containerViewId = R.id.fl_container)
+    @Gallery(tag = "wechat_picker", singleActivity = true)
     Observable<Bitmap> openGallery();
 
     @AsFile

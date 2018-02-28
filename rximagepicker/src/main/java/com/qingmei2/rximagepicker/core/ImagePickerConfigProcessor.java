@@ -59,7 +59,7 @@ public final class ImagePickerConfigProcessor implements
             @Override
             public ObservableSource<Uri> apply(ImagePickerConfigProvider provider) throws Exception {
                 if (provider.isSingleActivity()) {
-                    return HolderActivity.subject;
+                    return HolderActivity.publishSubject;
                 }
                 switch (provider.getSourcesFrom()) {
                     case GALLERY:

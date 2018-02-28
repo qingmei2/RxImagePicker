@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Gallery {
 
-    boolean singleActivity() default true;
+    boolean singleActivity() default false;
 
     String tag() default DefaultImagePicker.DEFAULT_PICKER_GALLERY;
 
