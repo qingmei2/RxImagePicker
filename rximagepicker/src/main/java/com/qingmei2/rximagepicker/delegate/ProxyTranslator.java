@@ -1,5 +1,6 @@
 package com.qingmei2.rximagepicker.delegate;
 
+import android.app.Activity;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.FragmentActivity;
 
@@ -33,22 +34,27 @@ public final class ProxyTranslator {
 
     private final Map<String, IGalleryPickerView> galleryViews;
     private final Map<String, ICameraPickerView> cameraViews;
+    private final Map<String, Class<? extends Activity>> activityClasses;
 
     public ProxyTranslator(Map<String, IGalleryPickerView> galleryViews,
-                           Map<String, ICameraPickerView> cameraViews) {
+                           Map<String, ICameraPickerView> cameraViews,
+                           Map<String, Class<? extends Activity>> activityClasses) {
         this.galleryViews = galleryViews;
         this.cameraViews = cameraViews;
+        this.activityClasses = activityClasses;
     }
 
     public ImagePickerConfigProvider processMethod(Method method, Object[] objectsMethod) {
-        ImagePickerConfigProvider configProvider = new ImagePickerConfigProvider(
+        final boolean singleActivity = this.singleActivity(method);
+        final String pickerViewTag = this.getPickerViewTag(method);
+        return new ImagePickerConfigProvider(
                 this.getStreamSourcesFrom(method),
                 this.getStreamObserverAs(method),
                 this.getPickerView(method),
-                this.getContainerViewId(method),
-                this.getPickerViewTag(method),
-                this.singleActivity(method));
-        return configProvider;
+                singleActivity ? 0 : this.getContainerViewId(method),
+                pickerViewTag,
+                singleActivity,
+                singleActivity ? this.getActivityClass(pickerViewTag) : null);
     }
 
     public ImagePickerProjector instanceProjector(ImagePickerConfigProvider provider,
@@ -57,7 +63,8 @@ public final class ProxyTranslator {
                 fragmentActivity,
                 provider.getContainerViewId(),
                 provider.getPickViewTag(),
-                provider.isSingleActivity());
+                provider.isSingleActivity(),
+                provider.getActivityClass());
     }
 
     public boolean singleActivity(Method method) {
@@ -84,6 +91,14 @@ public final class ProxyTranslator {
         } else {
             return gallery.tag();
         }
+    }
+
+    private Class<? extends Activity> getActivityClass(String tag) {
+        Class<? extends Activity> aClass = activityClasses.get(tag);
+        if (aClass == null) {
+            throw new NullPointerException("please set the ActivityClass by RxImagePicker.addCustomGallery(String viewKey, Class<Activity> gallery)");
+        }
+        return aClass;
     }
 
     /**

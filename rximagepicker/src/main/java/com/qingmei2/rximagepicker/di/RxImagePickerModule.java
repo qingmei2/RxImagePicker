@@ -1,5 +1,6 @@
 package com.qingmei2.rximagepicker.di;
 
+import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
 import android.support.v4.app.FragmentActivity;
 
@@ -25,11 +26,13 @@ public final class RxImagePickerModule {
 
     private final Map<String, ICameraPickerView> cameraViews;
     private final Map<String, IGalleryPickerView> galleryViews;
+    private final Map<String, Class<? extends Activity>> activityClasses;
     private final FragmentActivity fragmentActivity;
 
     public RxImagePickerModule(RxImagePicker.Builder builder) {
         this.cameraViews = builder.getCameraViews();
         this.galleryViews = builder.getGalleryViews();
+        this.activityClasses = builder.getActivityClasses();
         this.fragmentActivity = builder.getFragmentActivity();
     }
 
@@ -41,6 +44,11 @@ public final class RxImagePickerModule {
     @Provides
     Map<String, IGalleryPickerView> provideGalleryViews() {
         return galleryViews;
+    }
+
+    @Provides
+    Map<String, Class<? extends Activity>> provideGalleryActivities() {
+        return activityClasses;
     }
 
     @Provides
@@ -68,8 +76,9 @@ public final class RxImagePickerModule {
 
     @Provides
     ProxyTranslator proxyTranslator(Map<String, IGalleryPickerView> galleryViews,
-                                    Map<String, ICameraPickerView> cameraViews) {
-        return new ProxyTranslator(galleryViews, cameraViews);
+                                    Map<String, ICameraPickerView> cameraViews,
+                                    Map<String, Class<? extends Activity>> activityClasses) {
+        return new ProxyTranslator(galleryViews, cameraViews, activityClasses);
     }
 
     @Provides

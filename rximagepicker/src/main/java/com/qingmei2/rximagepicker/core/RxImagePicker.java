@@ -1,5 +1,6 @@
 package com.qingmei2.rximagepicker.core;
 
+import android.app.Activity;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -44,6 +45,7 @@ public class RxImagePicker {
         private FragmentActivity activity;
         private Map<String, ICameraPickerView> cameraViews = new HashMap<>();
         private Map<String, IGalleryPickerView> galleryViews = new HashMap<>();
+        private Map<String, Class<? extends Activity>> activityClasses = new HashMap<>();
 
         public Builder with(Fragment fragment) {
             this.activity = fragment.getActivity();
@@ -57,6 +59,11 @@ public class RxImagePicker {
 
         public Builder addCustomGallery(String viewKey, IGalleryPickerView gallery) {
             this.galleryViews.put(viewKey, gallery);
+            return this;
+        }
+
+        public Builder addCustomGallery(String viewKey, Class<? extends Activity> activity) {
+            this.activityClasses.put(viewKey, activity);
             return this;
         }
 
@@ -86,6 +93,10 @@ public class RxImagePicker {
 
         public Map<String, ICameraPickerView> getCameraViews() {
             return cameraViews;
+        }
+
+        public Map<String, Class<? extends Activity>> getActivityClasses() {
+            return activityClasses;
         }
     }
 }

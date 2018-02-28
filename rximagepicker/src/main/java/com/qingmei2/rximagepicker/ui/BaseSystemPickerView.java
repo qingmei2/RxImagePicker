@@ -63,6 +63,8 @@ public abstract class BaseSystemPickerView extends Fragment {
 
     public abstract void startRequest();
 
+    public abstract Uri getActivityResultUri(Intent data);
+
     private void onImagePicked(Uri uri) {
         if (publishSubject != null) {
             publishSubject.onNext(uri);
@@ -101,6 +103,4 @@ public abstract class BaseSystemPickerView extends Fragment {
             canceledSubject.onNext(requestCode);
         }
     }
-
-    public abstract Uri getActivityResultUri(Intent data);
 }

@@ -1,35 +1,36 @@
-package com.qingmei2.rximagepicker.ui;
+package com.qingmei2.rximagepicker_extension.ui;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.qingmei2.rximagepicker.R;
+import com.qingmei2.rximagepicker_extension.R;
 
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.subjects.PublishSubject;
 
-public class ImagePickerHolderActivity extends AppCompatActivity {
-
-    public static final String EXTRA_PICKER_VIEW = "ImagePickerHolderActivity.pickerView";
-    public static final String EXTRA_PICKER_VIEW_TAG = "ImagePickerHolderActivity.tag";
+public class WeChatImagePickerActivity extends AppCompatActivity {
 
     public static PublishSubject<Uri> subject = PublishSubject.create();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        setTheme(R.style.WeChat);
+        setTheme(R.style.WeChat);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_picker_holder);
-        displayPickerView(getIntent().getStringExtra(EXTRA_PICKER_VIEW_TAG));
+        displayPickerView();
     }
 
-    private void displayPickerView(String pickerViewTag) {
-        IPickerView pickerView = (IPickerView) getIntent().getSerializableExtra(EXTRA_PICKER_VIEW);
-        pickerView.display(getSupportFragmentManager(), R.id.fl_container, pickerViewTag);
-        pickerView.pickImage()
+    private void displayPickerView() {
+        WeChatImagePickerFragment fragment = new WeChatImagePickerFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fl_container, fragment)
+                .commit();
+
+        fragment.pickImage()
                 .subscribe(new Consumer<Uri>() {
                     @Override
                     public void accept(Uri uri) throws Exception {
@@ -44,7 +45,7 @@ public class ImagePickerHolderActivity extends AppCompatActivity {
                     @Override
                     public void run() throws Exception {
                         subject.onComplete();
-                        ImagePickerHolderActivity.this.finish();
+                        WeChatImagePickerActivity.this.finish();
                     }
                 });
     }

@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
-import com.qingmei2.rximagepicker.ui.ImagePickerHolderActivity;
+import com.qingmei2.rximagepicker_extension.ui.WeChatImagePickerActivity;
 import com.qingmei2.rximagepicker_extension.ui.WeChatImagePickerFragment;
 
 import java.io.File;
@@ -103,9 +103,9 @@ public class MainActivity extends AppCompatActivity {
 //                        Toast.makeText(MainActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
 //                    }
 //                });
-        Intent intent = new Intent(this, ImagePickerHolderActivity.class);
+        Intent intent = new Intent(this, WeChatImagePickerActivity.class);
         startActivity(intent);
-        ImagePickerHolderActivity.subject
+        WeChatImagePickerActivity.subject
                 .subscribe(uri -> Log.d(TAG, "return uri : " + uri.getPath()));
     }
 

@@ -20,7 +20,6 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
-import com.qingmei2.rximagepicker.ui.ImagePickerHolderActivity;
 import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension.R;
 import com.qingmei2.rximagepicker_extension.entity.Album;
@@ -144,7 +143,7 @@ public class WeChatImagePickerFragment extends Fragment implements
     }
 
     public void closure() {
-        if (getActivity() instanceof ImagePickerHolderActivity) {
+        if (getActivity() instanceof WeChatImagePickerActivity) {
 
         } else {
             FragmentManager fragmentManager = getFragmentManager();
