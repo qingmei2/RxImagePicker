@@ -16,18 +16,18 @@ public class ImagePickerProjector {
     private final Class<? extends Activity> activityClass;
     private FragmentActivity fragmentActivity;
     private int containerViewId;
-    private String tag;
+    private String viewKey;
 
-    public ImagePickerProjector(IPickerView pickerView,
+    public ImagePickerProjector(boolean singleActivity,
+                                String viewKey,
+                                IPickerView pickerView,
                                 FragmentActivity fragmentActivity,
                                 @IdRes int containerViewId,
-                                String tag,
-                                boolean singleActivity,
                                 Class<? extends Activity> activityClass) {
         this.pickerView = pickerView;
         this.fragmentActivity = fragmentActivity;
         this.containerViewId = containerViewId;
-        this.tag = tag;
+        this.viewKey = viewKey;
         this.singleActivity = singleActivity;
         this.activityClass = activityClass;
     }
@@ -45,6 +45,6 @@ public class ImagePickerProjector {
     }
 
     private void displayPickerViewAsFragment() {
-        pickerView.display(fragmentActivity.getSupportFragmentManager(), containerViewId, tag);
+        pickerView.display(fragmentActivity.getSupportFragmentManager(), containerViewId, viewKey);
     }
 }

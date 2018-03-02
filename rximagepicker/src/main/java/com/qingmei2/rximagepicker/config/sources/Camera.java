@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Camera {
 
-    String tag() default DefaultImagePicker.DEFAULT_PICKER_CAMERA;
+    String viewKey() default DefaultImagePicker.DEFAULT_PICKER_CAMERA;
 
     @IdRes int containerViewId() default 0;
 }

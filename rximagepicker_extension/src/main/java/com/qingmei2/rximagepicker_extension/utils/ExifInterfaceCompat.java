@@ -116,7 +116,7 @@ final class ExifInterfaceCompat {
         if (orientation == EXIF_DEGREE_FALLBACK_VALUE) {
             return 0;
         }
-        // We only recognize a subset of orientation tag values.
+        // We only recognize a subset of orientation viewKey values.
         switch (orientation) {
             case ExifInterface.ORIENTATION_ROTATE_90:
                 return 90;

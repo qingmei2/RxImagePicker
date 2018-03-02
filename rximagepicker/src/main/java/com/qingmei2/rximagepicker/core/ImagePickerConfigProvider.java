@@ -12,29 +12,30 @@ import com.qingmei2.rximagepicker.ui.IPickerView;
  */
 public final class ImagePickerConfigProvider {
 
+    private final String viewKey;
+    private final boolean singleActivity;
+
     private final SourcesFrom sourcesFrom;
     private final ObserverAs observerAs;
-    private final IPickerView pickerView;
-    private final int containerViewId;
-    private final String pickViewTag;
 
-    private final boolean singleActivity;
+    private final int containerViewId;
+    private final IPickerView pickerView;
+
     private final Class<? extends Activity> activityClass;
 
-    public ImagePickerConfigProvider(SourcesFrom sourcesFrom,
+    public ImagePickerConfigProvider(boolean singleActivity,
+                                     String viewKey,
+                                     SourcesFrom sourcesFrom,
                                      ObserverAs observerAs,
                                      IPickerView pickerView,
                                      @IdRes int containerViewId,
-                                     String pickViewTag,
-                                     boolean singleActivity,
                                      Class<? extends Activity> activityClass
     ) {
         this.sourcesFrom = sourcesFrom;
         this.observerAs = observerAs;
         this.pickerView = pickerView;
         this.containerViewId = containerViewId;
-        this.pickViewTag = pickViewTag;
-
+        this.viewKey = viewKey;
         this.singleActivity = singleActivity;
         this.activityClass = activityClass;
     }
@@ -55,8 +56,8 @@ public final class ImagePickerConfigProvider {
         return containerViewId;
     }
 
-    public String getPickViewTag() {
-        return pickViewTag;
+    public String getViewKey() {
+        return viewKey;
     }
 
     public boolean isSingleActivity() {

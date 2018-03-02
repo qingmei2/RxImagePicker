@@ -45,55 +45,64 @@ public final class ProxyTranslator {
     }
 
     public ImagePickerConfigProvider processMethod(Method method, Object[] objectsMethod) {
-        final boolean singleActivity = this.singleActivity(method);
-        final String pickerViewTag = this.getPickerViewTag(method);
+        final boolean singleActivity = singleActivity(method);
+        final String viewKey = getViewKey(method);
         return new ImagePickerConfigProvider(
+                singleActivity,
+                viewKey,
                 this.getStreamSourcesFrom(method),
                 this.getStreamObserverAs(method),
-                singleActivity ? null : this.getPickerView(method),
-                singleActivity ? 0 : this.getContainerViewId(method),
-                pickerViewTag,
-                singleActivity,
-                singleActivity ? this.getActivityClass(pickerViewTag) : null);
+                this.getPickerView(method, singleActivity),
+                this.getContainerViewId(method, singleActivity),
+                this.getActivityClass(viewKey, singleActivity));
     }
 
     public ImagePickerProjector instanceProjector(ImagePickerConfigProvider provider,
                                                   FragmentActivity fragmentActivity) {
-        return new ImagePickerProjector(provider.getPickerView(),
+        return new ImagePickerProjector(
+                provider.isSingleActivity(),
+                provider.getViewKey(),
+                provider.getPickerView(),
                 fragmentActivity,
                 provider.getContainerViewId(),
-                provider.getPickViewTag(),
-                provider.isSingleActivity(),
-                provider.getActivityClass());
+                provider.getActivityClass()
+        );
     }
 
-    public boolean singleActivity(Method method) {
+    private boolean singleActivity(Method method) {
         Gallery gallery = method.getAnnotation(Gallery.class);
-        return gallery != null && gallery.singleActivity();
+        return gallery != null && activityClasses.containsKey(gallery.viewKey());
     }
 
     @VisibleForTesting
-    public IPickerView getPickerView(Method method) {
+    public IPickerView getPickerView(Method method, boolean singleActivity) {
+        if (singleActivity) {
+            return null;
+        }
         Camera camera = method.getAnnotation(Camera.class);
         Gallery gallery = method.getAnnotation(Gallery.class);
         if (camera != null) {
-            return checkPickerViewNotNull(cameraViews.get(camera.tag()));
+            return checkPickerViewNotNull(cameraViews.get(camera.viewKey()));
         } else {
-            return checkPickerViewNotNull(galleryViews.get(gallery.tag()));
+            return checkPickerViewNotNull(galleryViews.get(gallery.viewKey()));
         }
     }
 
-    public String getPickerViewTag(Method method) {
+    public String getViewKey(Method method) {
         Camera camera = method.getAnnotation(Camera.class);
         Gallery gallery = method.getAnnotation(Gallery.class);
         if (camera != null) {
-            return camera.tag();
+            return camera.viewKey();
         } else {
-            return gallery.tag();
+            return gallery.viewKey();
         }
     }
 
-    private Class<? extends Activity> getActivityClass(String tag) {
+    private Class<? extends Activity> getActivityClass(String tag, boolean singleActivity) {
+        if (!singleActivity) {
+            return null;
+        }
+
         Class<? extends Activity> aClass = activityClasses.get(tag);
         if (aClass == null) {
             throw new NullPointerException("please set the ActivityClass by RxImagePicker.addCustomGallery(String viewKey, Class<Activity> gallery)");
@@ -151,7 +160,10 @@ public final class ProxyTranslator {
         }
     }
 
-    public int getContainerViewId(Method method) {
+    public int getContainerViewId(Method method, boolean singleActivity) {
+        if (singleActivity) {
+            return -1;
+        }
         Camera camera = method.getAnnotation(Camera.class);
         Gallery gallery = method.getAnnotation(Gallery.class);
         if (camera != null) {

@@ -15,10 +15,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Gallery {
-
-    boolean singleActivity() default false;
-
-    String tag() default DefaultImagePicker.DEFAULT_PICKER_GALLERY;
+    
+    String viewKey() default DefaultImagePicker.DEFAULT_PICKER_GALLERY;
 
     @IdRes int containerViewId() default 0;
 }
