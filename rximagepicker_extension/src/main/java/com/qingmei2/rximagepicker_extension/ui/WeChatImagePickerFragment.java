@@ -12,9 +12,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,7 +68,11 @@ public class WeChatImagePickerFragment extends Fragment implements
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_image_picker, container, false);
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.WeChat);
+        LayoutInflater localInflater = inflater
+                .cloneInContext(contextThemeWrapper);
+        return localInflater.inflate(R.layout.fragment_image_picker, container, false);
+
     }
 
     @Override
@@ -262,6 +268,11 @@ public class WeChatImagePickerFragment extends Fragment implements
     private void endPickImage() {
         publishSubject.onComplete();
         closure();
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return super.onCreateAnimation(transit, enter, nextAnim);
     }
 
     @Override
