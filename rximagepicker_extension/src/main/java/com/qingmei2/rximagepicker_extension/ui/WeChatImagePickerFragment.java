@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.ContextThemeWrapper;
@@ -21,7 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.qingmei2.rximagepicker.ui.HolderActivity;
+import com.qingmei2.rximagepicker.core.ActivityHolder;
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
 import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension.R;
@@ -116,7 +117,8 @@ public class WeChatImagePickerFragment extends Fragment implements
     }
 
     @Override
-    public void display(FragmentManager fragmentManager, int viewContainer, String tag) {
+    public void display(FragmentActivity fragmentActivity, int viewContainer, String tag) {
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
         if (fragment == null) {
             if (viewContainer != 0)
@@ -141,6 +143,7 @@ public class WeChatImagePickerFragment extends Fragment implements
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.remove(this);
+            fragmentTransaction.commit();
         }
     }
 
@@ -289,7 +292,7 @@ public class WeChatImagePickerFragment extends Fragment implements
             if (data.getBooleanExtra(BasePreviewActivity.EXTRA_RESULT_APPLY, false)) {  // apply event
                 if (selected != null) {
                     for (Item item : selected) {
-                        HolderActivity.publishSubject.onNext(item.getContentUri());
+                        ActivityHolder.getInstance().emitUri(item.getContentUri());
                     }
                 }
                 closure();

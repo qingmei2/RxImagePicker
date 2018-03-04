@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.IdRes;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -17,9 +18,10 @@ public final class SystemGalleryPickerView extends BaseSystemPickerView implemen
     public static final String TAG = SystemGalleryPickerView.class.getSimpleName();
 
     @Override
-    public void display(FragmentManager fragmentManager,
-                               @IdRes int containerViewId,
-                               String tag) {
+    public void display(FragmentActivity fragmentActivity,
+                        @IdRes int containerViewId,
+                        String tag) {
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
         SystemGalleryPickerView fragment = (SystemGalleryPickerView) fragmentManager.findFragmentByTag(tag);
         if (fragment == null) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();

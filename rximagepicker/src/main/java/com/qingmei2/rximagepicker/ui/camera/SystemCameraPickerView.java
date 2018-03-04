@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.IdRes;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -24,9 +25,10 @@ public final class SystemCameraPickerView extends BaseSystemPickerView implement
     private static Uri cameraPictureUrl;
 
     @Override
-    public void display(FragmentManager fragmentManager,
+    public void display(FragmentActivity fragmentActivity,
                                @IdRes int containerViewId,
                                String tag) {
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
         SystemCameraPickerView fragment = (SystemCameraPickerView) fragmentManager.findFragmentByTag(tag);
         if (fragment == null) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();

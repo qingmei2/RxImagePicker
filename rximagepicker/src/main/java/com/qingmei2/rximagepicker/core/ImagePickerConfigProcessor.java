@@ -7,7 +7,6 @@ import android.support.annotation.VisibleForTesting;
 
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
 import com.qingmei2.rximagepicker.funtions.ObserverAsConverter;
-import com.qingmei2.rximagepicker.ui.HolderActivity;
 import com.qingmei2.rximagepicker.ui.ICameraPickerView;
 import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
 
@@ -59,7 +58,7 @@ public final class ImagePickerConfigProcessor implements
             @Override
             public ObservableSource<Uri> apply(ImagePickerConfigProvider provider) throws Exception {
                 if (provider.isSingleActivity()) {
-                    return HolderActivity.publishSubject;
+                    return ActivityHolder.getInstance().pickImage();
                 }
                 switch (provider.getSourcesFrom()) {
                     case GALLERY:

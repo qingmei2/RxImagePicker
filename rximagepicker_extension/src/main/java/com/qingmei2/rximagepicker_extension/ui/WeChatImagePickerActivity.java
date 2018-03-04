@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.qingmei2.rximagepicker.ui.HolderActivity;
+import com.qingmei2.rximagepicker.core.ActivityHolder;
 import com.qingmei2.rximagepicker_extension.R;
 
 import io.reactivex.functions.Action;
@@ -36,12 +36,12 @@ public class WeChatImagePickerActivity extends AppCompatActivity {
                 .subscribe(new Consumer<Uri>() {
                     @Override
                     public void accept(Uri uri) throws Exception {
-                        HolderActivity.publishSubject.onNext(uri);
+                        ActivityHolder.getInstance().emitUri(uri);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        HolderActivity.publishSubject.onError(throwable);
+                        ActivityHolder.getInstance().emitError(throwable);
                     }
                 }, new Action() {
                     @Override
@@ -52,10 +52,7 @@ public class WeChatImagePickerActivity extends AppCompatActivity {
     }
 
     public void closure() {
-        HolderActivity.finishSubject.onNext(true);
-        HolderActivity.finishSubject.onComplete();
-        HolderActivity.publishSubject.onComplete();
-        HolderActivity.resetSubject();
+        ActivityHolder.getInstance().endUriEmitAndReset();
         finish();
     }
 

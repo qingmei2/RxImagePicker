@@ -1,14 +1,12 @@
 package com.qingmei2.rximagepicker.core;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentActivity;
 
-import com.qingmei2.rximagepicker.ui.HolderActivity;
 import com.qingmei2.rximagepicker.ui.IPickerView;
 
-public class ImagePickerProjector {
+public final class ImagePickerProjector {
 
     private IPickerView pickerView;
 
@@ -40,11 +38,13 @@ public class ImagePickerProjector {
     }
 
     private void displayPickerViewAsActivity() {
-        HolderActivity.setActivityClass(activityClass);
-        fragmentActivity.startActivity(new Intent(fragmentActivity, HolderActivity.class));
+        ActivityHolder activityHolder = ActivityHolder.getInstance();
+        activityHolder.setActivityClass(activityClass);
+        activityHolder.display(fragmentActivity, containerViewId, viewKey);
     }
 
     private void displayPickerViewAsFragment() {
-        pickerView.display(fragmentActivity.getSupportFragmentManager(), containerViewId, viewKey);
+        pickerView.display(fragmentActivity, containerViewId, viewKey);
     }
+
 }

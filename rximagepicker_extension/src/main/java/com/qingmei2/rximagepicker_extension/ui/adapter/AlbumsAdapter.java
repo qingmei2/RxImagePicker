@@ -20,6 +20,7 @@ import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,10 @@ public class AlbumsAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.album_list_item, parent, false);
+        final Context contextThemeWrapper = new ContextThemeWrapper(context, R.style.WeChat);
+        return LayoutInflater.from(context)
+                .cloneInContext(contextThemeWrapper)
+                .inflate(R.layout.album_list_item, parent, false);
     }
 
     @Override
