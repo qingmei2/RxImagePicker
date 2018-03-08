@@ -42,11 +42,11 @@ import io.reactivex.subjects.PublishSubject;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
-import static com.qingmei2.rximagepicker_extension.ui.WeChatImagePickerActivity.REQUEST_CODE_PREVIEW;
+import static com.qingmei2.rximagepicker_extension.ui.ZhiHuImagePickerActivity.REQUEST_CODE_PREVIEW;
 
-public class WeChatImagePickerFragment extends Fragment implements
+public class ZhiHuImagePickerFragment extends Fragment implements
         IGalleryPickerView, AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
-        View.OnClickListener, WeChatImageListGridFragment.SelectionProvider,
+        View.OnClickListener, ZhiHuImageListGridFragment.SelectionProvider,
         AlbumMediaAdapter.OnMediaClickListener, AlbumMediaAdapter.CheckStateListener {
 
     private final AlbumCollection mAlbumCollection = new AlbumCollection();
@@ -69,7 +69,7 @@ public class WeChatImagePickerFragment extends Fragment implements
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.WeChat);
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.ZhiHu);
         LayoutInflater localInflater = inflater
                 .cloneInContext(contextThemeWrapper);
         return localInflater.inflate(R.layout.fragment_image_picker, container, false);
@@ -137,8 +137,8 @@ public class WeChatImagePickerFragment extends Fragment implements
     }
 
     public void closure() {
-        if (getActivity() instanceof WeChatImagePickerActivity) {
-            ((WeChatImagePickerActivity) getActivity()).closure();
+        if (getActivity() instanceof ZhiHuImagePickerActivity) {
+            ((ZhiHuImagePickerActivity) getActivity()).closure();
         } else {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -213,11 +213,11 @@ public class WeChatImagePickerFragment extends Fragment implements
         } else {
             mContainer.setVisibility(View.VISIBLE);
             mEmptyView.setVisibility(View.GONE);
-            WeChatImageListGridFragment fragment = WeChatImageListGridFragment.instance(album);
+            ZhiHuImageListGridFragment fragment = ZhiHuImageListGridFragment.instance(album);
             fragment.injectDependencies(this, this, this);
             getChildFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.container, fragment, WeChatImageListGridFragment.class.getSimpleName())
+                    .replace(R.id.container, fragment, ZhiHuImageListGridFragment.class.getSimpleName())
                     .commitAllowingStateLoss();
         }
     }
@@ -299,9 +299,9 @@ public class WeChatImagePickerFragment extends Fragment implements
             } else {         // back event
                 mSelectedCollection.overwrite(selected, collectionType);
                 Fragment weChatListFragment = getChildFragmentManager().findFragmentByTag(
-                        WeChatImageListGridFragment.class.getSimpleName());
-                if (weChatListFragment instanceof WeChatImageListGridFragment) {
-                    ((WeChatImageListGridFragment) weChatListFragment).refreshMediaGrid();
+                        ZhiHuImageListGridFragment.class.getSimpleName());
+                if (weChatListFragment instanceof ZhiHuImageListGridFragment) {
+                    ((ZhiHuImageListGridFragment) weChatListFragment).refreshMediaGrid();
                 }
                 updateBottomToolbar();
             }

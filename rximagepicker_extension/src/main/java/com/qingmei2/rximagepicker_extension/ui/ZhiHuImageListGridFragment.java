@@ -37,7 +37,7 @@ import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.MediaGridInset;
 import com.qingmei2.rximagepicker_extension.utils.UIUtils;
 
-public class WeChatImageListGridFragment extends Fragment implements
+public class ZhiHuImageListGridFragment extends Fragment implements
         AlbumMediaAdapter.CheckStateListener, AlbumMediaAdapter.OnMediaClickListener,
         AlbumMediaCollection.AlbumMediaCallbacks {
 
@@ -50,8 +50,8 @@ public class WeChatImageListGridFragment extends Fragment implements
     private AlbumMediaAdapter.CheckStateListener mCheckStateListener;
     private AlbumMediaAdapter.OnMediaClickListener mOnMediaClickListener;
 
-    public static WeChatImageListGridFragment instance(Album album) {
-        WeChatImageListGridFragment fragment = new WeChatImageListGridFragment();
+    public static ZhiHuImageListGridFragment instance(Album album) {
+        ZhiHuImageListGridFragment fragment = new ZhiHuImageListGridFragment();
         Bundle args = new Bundle();
         args.putParcelable(EXTRA_ALBUM, album);
         fragment.setArguments(args);
@@ -74,7 +74,7 @@ public class WeChatImageListGridFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.WeChat);
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.ZhiHu);
         LayoutInflater localInflater = inflater
                 .cloneInContext(contextThemeWrapper);
         return localInflater.inflate(R.layout.fragment_media_selection, container, false);

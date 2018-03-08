@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--https://material.io/guidelines/style/color.html#color-color-palette-->
+    <color name="zhihu_primary">#37474F</color>
+    <color name="zhihu_primary_dark">#263238</color>
+    <color name="zhihu_colorAccent">#B0BEC5</color>
+
+    <color name="zhihu_page_bg">#FFFFFF</color>
+
+    <color name="zhihu_white">#ECEFF1</color>
+    <color name="zhihu_white_dark">#CFD8DC</color>
+    <color name="zhihu_album_empty_view">#4D000000</color>
+    <color name="zhihu_album_dropdown_title_text">#DE000000</color>
+    <color name="zhihu_album_dropdown_count_text">#999999</color>
+    <color name="zhihu_album_dropdown_thumbnail_placeholder">#EAEEF4</color>
+
+    <color name="zhihu_item_placeholder">#EAEEF4</color>
+    <color name="zhihu_item_checkCircle_backgroundColor">#37474F</color>
+    <color name="zhihu_item_checkCircle_borderColor">#FFFFFF</color>
+    <color name="zhihu_capture">#424242</color>
+</resources>

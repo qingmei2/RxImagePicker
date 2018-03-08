@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 import io.reactivex.Observable;
 
-public interface IPickerView extends Serializable {
+public interface IPickerView {
 
     void display(FragmentActivity fragmentActivity,
                  @IdRes int viewContainer,

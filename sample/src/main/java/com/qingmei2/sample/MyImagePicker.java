@@ -14,15 +14,15 @@ import io.reactivex.Single;
 
 public interface MyImagePicker {
 
-    String KEY_WECHAT_PICKER_ACTIVITY = "key_wechat_picker_activity";
-    String KEY_WECHAT_PICKER_FRAGMENT = "key_wechat_picker_fragment";
+    String KEY_ZHIHU_PICKER_ACTIVITY = "key_zhihu_picker_as_activity";
+    String KEY_ZHIHU_PICKER_FRAGMENT = "key_zhihu_picker_as_fragment";
 
     @AsBitmap
-    @Gallery(viewKey = KEY_WECHAT_PICKER_ACTIVITY)
+    @Gallery(viewKey = KEY_ZHIHU_PICKER_ACTIVITY)
     Observable<Bitmap> openGallery();
 
     @AsBitmap
-    @Gallery(viewKey = KEY_WECHAT_PICKER_FRAGMENT, containerViewId = R.id.fl_container)
+    @Gallery(viewKey = KEY_ZHIHU_PICKER_FRAGMENT, containerViewId = R.id.fl_container)
     Observable<Bitmap> openGalleryWithFragment();
 
     @AsFile

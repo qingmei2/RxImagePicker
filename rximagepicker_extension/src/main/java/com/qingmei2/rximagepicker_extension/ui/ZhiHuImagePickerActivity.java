@@ -11,22 +11,22 @@ import com.qingmei2.rximagepicker_extension.R;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
-public class WeChatImagePickerActivity extends AppCompatActivity {
+public class ZhiHuImagePickerActivity extends AppCompatActivity {
 
-    private WeChatImagePickerFragment fragment;
+    private ZhiHuImagePickerFragment fragment;
 
     public static final int REQUEST_CODE_PREVIEW = 23;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        setTheme(R.style.WeChat);
+        setTheme(R.style.ZhiHu);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_picker_holder);
         displayPickerView();
     }
 
     private void displayPickerView() {
-        fragment = new WeChatImagePickerFragment();
+        fragment = new ZhiHuImagePickerFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fl_container, fragment)

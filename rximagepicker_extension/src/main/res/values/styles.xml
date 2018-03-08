@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="WeChat" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/wechat_primary</item>
-        <item name="colorPrimaryDark">@color/wechat_primary_dark</item>
-        <item name="toolbar">@style/Toolbar.WeChat</item>
-        <item name="album.dropdown.title.color">@color/wechat_album_dropdown_title_text</item>
-        <item name="album.dropdown.count.color">@color/wechat_album_dropdown_count_text</item>
-        <item name="album.thumbnail.placeholder">@color/wechat_album_dropdown_thumbnail_placeholder</item>
+    <style name="ZhiHu" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/zhihu_primary</item>
+        <item name="colorPrimaryDark">@color/zhihu_primary_dark</item>
+        <item name="toolbar">@style/Toolbar.ZhiHu</item>
+        <item name="album.dropdown.title.color">@color/zhihu_album_dropdown_title_text</item>
+        <item name="album.dropdown.count.color">@color/zhihu_album_dropdown_count_text</item>
+        <item name="album.thumbnail.placeholder">@color/zhihu_album_dropdown_thumbnail_placeholder</item>
         <item name="album.element.color">@android:color/white</item>
-        <item name="page.bg">@color/wechat_page_bg</item>
-        <item name="preview.bottomToolbar.back.textColor">@color/wechat_white</item>
-        <item name="preview.bottomToolbar.apply.textColor">@color/wechat_white</item>
+        <item name="page.bg">@color/zhihu_page_bg</item>
+        <item name="preview.bottomToolbar.back.textColor">@color/zhihu_white</item>
+        <item name="preview.bottomToolbar.apply.textColor">@color/zhihu_white</item>
         <item name="album.emptyView">@drawable/ic_empty_zhihu</item>
-        <item name="album.emptyView.textColor">@color/wechat_album_empty_view</item>
-        <item name="bottomToolbar.bg">@color/wechat_primary</item>
+        <item name="album.emptyView.textColor">@color/zhihu_album_empty_view</item>
+        <item name="bottomToolbar.bg">@color/zhihu_primary</item>
         <item name="bottomToolbar.preview.textColor">@android:color/white</item>
         <item name="bottomToolbar.apply.textColor">@android:color/white</item>
-        <item name="item.checkCircle.backgroundColor">@color/wechat_item_checkCircle_backgroundColor</item>
-        <item name="item.checkCircle.borderColor">@color/wechat_item_checkCircle_borderColor</item>
-        <item name="capture.textColor">@color/wechat_capture</item>
+        <item name="item.checkCircle.backgroundColor">@color/zhihu_item_checkCircle_backgroundColor</item>
+        <item name="item.checkCircle.borderColor">@color/zhihu_item_checkCircle_borderColor</item>
+        <item name="capture.textColor">@color/zhihu_capture</item>
     </style>
 
-    <style name="Toolbar.WeChat" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Toolbar.ZhiHu" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 </resources>

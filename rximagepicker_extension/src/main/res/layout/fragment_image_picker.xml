@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
         android:orientation="horizontal"
-        tools:background="@color/wechat_primary">
+        tools:background="@color/zhihu_primary">
 
         <ImageView
             android:id="@+id/button_back"
@@ -35,7 +35,7 @@
             android:textSize="20sp"
             tools:layout_height="50dp"
             tools:text="选择图片"
-            tools:textColor="@color/wechat_white" />
+            tools:textColor="@color/zhihu_white" />
 
     </LinearLayout>
 
@@ -46,7 +46,7 @@
         android:layout_alignParentBottom="true"
         android:background="?attr/bottomToolbar.bg"
         android:elevation="4dp"
-        tools:background="@color/wechat_primary"
+        tools:background="@color/zhihu_primary"
         tools:targetApi="lollipop">
 
         <TextView
@@ -61,7 +61,7 @@
             android:textSize="16sp"
             tools:layout_height="50dp"
             tools:text="@string/button_preview"
-            tools:textColor="@color/wechat_white" />
+            tools:textColor="@color/zhihu_white" />
 
         <TextView
             android:id="@+id/button_apply"
@@ -74,7 +74,7 @@
             android:textSize="16sp"
             tools:layout_height="50dp"
             tools:text="@string/button_apply_default"
-            tools:textColor="@color/wechat_white" />
+            tools:textColor="@color/zhihu_white" />
 
     </FrameLayout>
 
@@ -109,7 +109,7 @@
             tools:drawableTop="@drawable/ic_empty_zhihu"
             tools:layout_height="50dp"
             tools:text="@string/empty_text"
-            tools:textColor="@color/wechat_album_empty_view" />
+            tools:textColor="@color/zhihu_album_empty_view" />
 
     </FrameLayout>
 </RelativeLayout>

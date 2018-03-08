@@ -6,6 +6,6 @@
     <application>
         <activity android:name=".ui.AlbumPreviewActivity" />
         <activity android:name=".ui.SelectedPreviewActivity" />
-        <activity android:name=".ui.WeChatImagePickerActivity" />
+        <activity android:name=".ui.ZhiHuImagePickerActivity" />
     </application>
 </manifest>
