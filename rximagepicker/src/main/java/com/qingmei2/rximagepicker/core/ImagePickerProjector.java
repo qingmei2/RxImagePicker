@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentActivity;
 
+import com.qingmei2.rximagepicker.entity.CustomPickConfigurations;
+import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker.ui.ICustomPickerView;
 
 public final class ImagePickerProjector {
@@ -30,21 +32,22 @@ public final class ImagePickerProjector {
         this.activityClass = activityClass;
     }
 
-    public void display() {
+    public void display(CustomPickConfigurations customPickConfigurations) {
+        ICustomPickerConfiguration configuration = customPickConfigurations.findConfigurationByKey(viewKey);
         if (singleActivity)
-            displayPickerViewAsActivity();
+            displayPickerViewAsActivity(configuration);
         else
-            displayPickerViewAsFragment();
+            displayPickerViewAsFragment(configuration);
     }
 
-    private void displayPickerViewAsActivity() {
+    private void displayPickerViewAsActivity(ICustomPickerConfiguration configuration) {
         ActivityHolder activityHolder = ActivityHolder.getInstance();
         activityHolder.setActivityClass(activityClass);
-        activityHolder.display(fragmentActivity, containerViewId, viewKey);
+        activityHolder.display(fragmentActivity, containerViewId, viewKey, configuration);
     }
 
-    private void displayPickerViewAsFragment() {
-        pickerView.display(fragmentActivity, containerViewId, viewKey);
+    private void displayPickerViewAsFragment(ICustomPickerConfiguration configuration) {
+        pickerView.display(fragmentActivity, containerViewId, viewKey, configuration);
     }
 
 }

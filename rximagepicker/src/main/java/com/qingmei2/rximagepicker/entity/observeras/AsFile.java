@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker.config.observeras;
+package com.qingmei2.rximagepicker.entity.observeras;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

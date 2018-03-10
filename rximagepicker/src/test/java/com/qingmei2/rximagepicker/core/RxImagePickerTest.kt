@@ -4,6 +4,7 @@ import android.app.Fragment
 import android.app.FragmentManager
 import android.support.v4.app.SupportActivity
 import com.nhaarman.mockito_kotlin.*
+import com.qingmei2.rximagepicker.ui.DefaultImagePicker
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

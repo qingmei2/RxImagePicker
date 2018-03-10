@@ -1,11 +1,11 @@
-package com.qingmei2.rximagepicker.core;
+package com.qingmei2.rximagepicker.ui;
 
 
 import android.net.Uri;
 
-import com.qingmei2.rximagepicker.config.observeras.AsUri;
-import com.qingmei2.rximagepicker.config.sources.Camera;
-import com.qingmei2.rximagepicker.config.sources.Gallery;
+import com.qingmei2.rximagepicker.entity.observeras.AsUri;
+import com.qingmei2.rximagepicker.entity.sources.Camera;
+import com.qingmei2.rximagepicker.entity.sources.Gallery;
 
 import io.reactivex.Observable;
 

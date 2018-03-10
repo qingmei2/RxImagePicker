@@ -8,7 +8,7 @@ import android.provider.MediaStore;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
-import com.qingmei2.rximagepicker.config.observeras.ObserverAs;
+import com.qingmei2.rximagepicker.entity.observeras.ObserverAs;
 
 import java.io.File;
 import java.io.FileOutputStream;

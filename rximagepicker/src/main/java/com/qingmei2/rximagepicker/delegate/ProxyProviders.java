@@ -8,6 +8,7 @@ import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker.di.DaggerRxImagePickerComponent;
 import com.qingmei2.rximagepicker.di.RxImagePickerComponent;
 import com.qingmei2.rximagepicker.di.RxImagePickerModule;
+import com.qingmei2.rximagepicker.entity.CustomPickConfigurations;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -25,6 +26,7 @@ public final class ProxyProviders implements InvocationHandler {
     private final IImagePickerProcessor rxImagePickerProcessor;
     private final ProxyTranslator proxyTranslator;
     private final FragmentActivity fragmentActivity;
+    private final CustomPickConfigurations customPickConfigurations;
 
     public ProxyProviders(RxImagePicker.Builder builder,
                           Class<?> providersClass) {
@@ -35,6 +37,7 @@ public final class ProxyProviders implements InvocationHandler {
         rxImagePickerProcessor = component.rxImagePickerProcessor();
         fragmentActivity = component.fragmentActivity();
         proxyTranslator = component.proxyTranslator();
+        customPickConfigurations = component.customPickConfigurations();
     }
 
     @Override
@@ -47,7 +50,7 @@ public final class ProxyProviders implements InvocationHandler {
                 ImagePickerConfigProvider configProvider = proxyTranslator.processMethod(method, args);
 
                 proxyTranslator.instanceProjector(configProvider, fragmentActivity)
-                        .display();
+                        .display(customPickConfigurations);
 
                 Observable<?> observable = rxImagePickerProcessor.process(configProvider);
 

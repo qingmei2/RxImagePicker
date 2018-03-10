@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.qingmei2.rximagepicker.core.IImagePickerProcessor;
 import com.qingmei2.rximagepicker.delegate.ProxyTranslator;
+import com.qingmei2.rximagepicker.entity.CustomPickConfigurations;
 
 import dagger.Component;
 
@@ -15,4 +16,6 @@ public interface RxImagePickerComponent {
     ProxyTranslator proxyTranslator();
 
     FragmentActivity fragmentActivity();
+
+    CustomPickConfigurations customPickConfigurations();
 }

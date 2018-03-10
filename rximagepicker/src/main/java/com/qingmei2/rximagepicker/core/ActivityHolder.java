@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 
+import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker.ui.ICustomPickerView;
 
 import java.util.List;
@@ -14,21 +15,21 @@ import io.reactivex.subjects.PublishSubject;
 
 public final class ActivityHolder implements ICustomPickerView {
 
-    private volatile static ActivityHolder instance;
+    private volatile static ActivityHolder INSTANCE;
 
     private PublishSubject<Uri> publishSubject;
 
     private Class<? extends Activity> activityClass;
 
     public static ActivityHolder getInstance() {
-        if (instance == null) {
+        if (INSTANCE == null) {
             synchronized (ActivityHolder.class) {
-                if (instance == null) {
-                    instance = new ActivityHolder();
+                if (INSTANCE == null) {
+                    INSTANCE = new ActivityHolder();
                 }
             }
         }
-        return instance;
+        return INSTANCE;
     }
 
     private ActivityHolder() {
@@ -44,7 +45,10 @@ public final class ActivityHolder implements ICustomPickerView {
     }
 
     @Override
-    public void display(FragmentActivity fragmentActivity, int viewContainer, String tag) {
+    public void display(FragmentActivity fragmentActivity,
+                        int viewContainer,
+                        String tag,
+                        ICustomPickerConfiguration configuration) {
         resetSubject();
         fragmentActivity.startActivity(new Intent(fragmentActivity, activityClass));
     }

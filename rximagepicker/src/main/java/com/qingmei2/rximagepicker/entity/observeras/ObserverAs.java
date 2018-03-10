@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker.config.observeras;
+package com.qingmei2.rximagepicker.entity.observeras;
 
 public enum ObserverAs {
     BITMAP,

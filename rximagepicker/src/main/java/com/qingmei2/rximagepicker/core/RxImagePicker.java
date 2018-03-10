@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.qingmei2.rximagepicker.delegate.ProxyProviders;
+import com.qingmei2.rximagepicker.ui.DefaultImagePicker;
 import com.qingmei2.rximagepicker.ui.ICameraCustomPickerView;
+import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
 import com.qingmei2.rximagepicker.ui.camera.SystemCameraPickerView;
 import com.qingmei2.rximagepicker.ui.gallery.SystemGalleryPickerView;
@@ -15,8 +17,8 @@ import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.qingmei2.rximagepicker.core.DefaultImagePicker.DEFAULT_PICKER_CAMERA;
-import static com.qingmei2.rximagepicker.core.DefaultImagePicker.DEFAULT_PICKER_GALLERY;
+import static com.qingmei2.rximagepicker.ui.DefaultImagePicker.DEFAULT_PICKER_CAMERA;
+import static com.qingmei2.rximagepicker.ui.DefaultImagePicker.DEFAULT_PICKER_GALLERY;
 
 public class RxImagePicker {
 
@@ -42,38 +44,55 @@ public class RxImagePicker {
 
     public static class Builder {
 
-        private FragmentActivity activity;
+        private FragmentActivity fragmentActivity;
         private Map<String, ICameraCustomPickerView> cameraViews = new HashMap<>();
         private Map<String, IGalleryCustomPickerView> galleryViews = new HashMap<>();
         private Map<String, Class<? extends Activity>> activityClasses = new HashMap<>();
 
+        private Map<String, ICustomPickerConfiguration> customPickerConfigurationMap = new HashMap<>();
+
         public Builder with(Fragment fragment) {
-            this.activity = fragment.getActivity();
-            return this;
+            return with(fragment.getActivity());
         }
 
         public Builder with(FragmentActivity activity) {
-            this.activity = activity;
+            this.fragmentActivity = activity;
             return this;
         }
 
-        public Builder addCustomGallery(String viewKey, IGalleryCustomPickerView gallery) {
-            this.galleryViews.put(viewKey, gallery);
+        public Builder addCustomGallery(String viewKey,
+                                        IGalleryCustomPickerView gallery) {
+            return addCustomGallery(viewKey, gallery, null);
+        }
+
+        public Builder addCustomGallery(String viewKey,
+                                        Class<? extends Activity> activity) {
+            return addCustomGallery(viewKey, activity, null);
+        }
+
+        public Builder addCustomGallery(String viewKey,
+                                        IGalleryCustomPickerView gallery,
+                                        ICustomPickerConfiguration configuration) {
+            putICustomPickerConfiguration(viewKey, configuration);
+            this.galleryViews.put(checkViewKeyNotRepeat(viewKey), gallery);
             return this;
         }
 
-        public Builder addCustomGallery(String viewKey, Class<? extends Activity> activity) {
-            this.activityClasses.put(viewKey, activity);
+        public Builder addCustomGallery(String viewKey,
+                                        Class<? extends Activity> activity,
+                                        ICustomPickerConfiguration configuration) {
+            putICustomPickerConfiguration(viewKey, configuration);
+            this.activityClasses.put(checkViewKeyNotRepeat(viewKey), activity);
             return this;
         }
 
         public Builder addCustomCamera(String viewKey, ICameraCustomPickerView camera) {
-            this.cameraViews.put(viewKey, camera);
+            this.cameraViews.put(checkViewKeyNotRepeat(viewKey), camera);
             return this;
         }
 
         public RxImagePicker build() {
-            if (activity == null) {
+            if (fragmentActivity == null) {
                 throw new NullPointerException("You should instance the FragmentActivity or v4.app.Fragment by RxImagePicker.Builder().with().");
             }
 
@@ -83,8 +102,24 @@ public class RxImagePicker {
             return new RxImagePicker(this);
         }
 
+        private String checkViewKeyNotRepeat(String viewKey) {
+            if (cameraViews.containsKey(viewKey) ||
+                    galleryViews.containsKey(viewKey) ||
+                    activityClasses.containsKey(viewKey)) {
+                throw new IllegalArgumentException(String.format("Can't use s% repeatedly as viewKey", viewKey));
+            }
+            return viewKey;
+        }
+
+        private void putICustomPickerConfiguration(String viewKey,
+                                                   ICustomPickerConfiguration configuration) {
+            if (null != configuration &&
+                    !customPickerConfigurationMap.containsKey(viewKey))
+                customPickerConfigurationMap.put(viewKey, configuration);
+        }
+
         public FragmentActivity getFragmentActivity() {
-            return activity;
+            return fragmentActivity;
         }
 
         public Map<String, IGalleryCustomPickerView> getGalleryViews() {
@@ -97,6 +132,10 @@ public class RxImagePicker {
 
         public Map<String, Class<? extends Activity>> getActivityClasses() {
             return activityClasses;
+        }
+
+        public Map<String, ICustomPickerConfiguration> getCustomPickerConfigurations() {
+            return customPickerConfigurationMap;
         }
     }
 }

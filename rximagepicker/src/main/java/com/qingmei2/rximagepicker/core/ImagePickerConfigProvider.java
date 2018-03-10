@@ -3,8 +3,8 @@ package com.qingmei2.rximagepicker.core;
 import android.app.Activity;
 import android.support.annotation.IdRes;
 
-import com.qingmei2.rximagepicker.config.observeras.ObserverAs;
-import com.qingmei2.rximagepicker.config.sources.SourcesFrom;
+import com.qingmei2.rximagepicker.entity.observeras.ObserverAs;
+import com.qingmei2.rximagepicker.entity.sources.SourcesFrom;
 import com.qingmei2.rximagepicker.ui.ICustomPickerView;
 
 /**

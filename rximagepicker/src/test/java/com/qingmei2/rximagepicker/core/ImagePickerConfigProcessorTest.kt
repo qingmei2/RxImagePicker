@@ -7,8 +7,8 @@ import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.spy
 import com.nhaarman.mockito_kotlin.whenever
-import com.qingmei2.rximagepicker.config.observeras.ObserverAs
-import com.qingmei2.rximagepicker.config.sources.SourcesFrom
+import com.qingmei2.rximagepicker.entity.observeras.ObserverAs
+import com.qingmei2.rximagepicker.entity.sources.SourcesFrom
 import com.qingmei2.rximagepicker.di.scheduler.RxImagePickerTestSchedulers
 import com.qingmei2.rximagepicker.funtions.ObserverAsConverter
 import com.qingmei2.rximagepicker.rule.TestSchedulerRule

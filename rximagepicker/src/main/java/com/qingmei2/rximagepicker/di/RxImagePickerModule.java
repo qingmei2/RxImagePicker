@@ -10,7 +10,9 @@ import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker.delegate.ProxyTranslator;
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
 import com.qingmei2.rximagepicker.di.scheduler.RxImagePickerSchedulers;
+import com.qingmei2.rximagepicker.entity.CustomPickConfigurations;
 import com.qingmei2.rximagepicker.ui.ICameraCustomPickerView;
+import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
 
 import java.util.Map;
@@ -27,6 +29,7 @@ public final class RxImagePickerModule {
     private final Map<String, ICameraCustomPickerView> cameraViews;
     private final Map<String, IGalleryCustomPickerView> galleryViews;
     private final Map<String, Class<? extends Activity>> activityClasses;
+    private final CustomPickConfigurations customPickConfigurations;
     private final FragmentActivity fragmentActivity;
 
     public RxImagePickerModule(RxImagePicker.Builder builder) {
@@ -34,6 +37,9 @@ public final class RxImagePickerModule {
         this.galleryViews = builder.getGalleryViews();
         this.activityClasses = builder.getActivityClasses();
         this.fragmentActivity = builder.getFragmentActivity();
+        this.customPickConfigurations = new CustomPickConfigurations(
+                builder.getCustomPickerConfigurations()
+        );
     }
 
     @Provides
@@ -49,6 +55,11 @@ public final class RxImagePickerModule {
     @Provides
     Map<String, Class<? extends Activity>> provideGalleryActivities() {
         return activityClasses;
+    }
+
+    @Provides
+    CustomPickConfigurations provideCustomPickConfigurations() {
+        return customPickConfigurations;
     }
 
     @Provides
