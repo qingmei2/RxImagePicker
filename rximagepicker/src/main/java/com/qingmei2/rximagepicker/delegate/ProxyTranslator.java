@@ -13,9 +13,9 @@ import com.qingmei2.rximagepicker.config.sources.Gallery;
 import com.qingmei2.rximagepicker.config.sources.SourcesFrom;
 import com.qingmei2.rximagepicker.core.ImagePickerConfigProvider;
 import com.qingmei2.rximagepicker.core.ImagePickerProjector;
-import com.qingmei2.rximagepicker.ui.ICameraPickerView;
-import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
-import com.qingmei2.rximagepicker.ui.IPickerView;
+import com.qingmei2.rximagepicker.ui.ICameraCustomPickerView;
+import com.qingmei2.rximagepicker.ui.ICustomPickerView;
+import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -32,12 +32,12 @@ import io.reactivex.Single;
  */
 public final class ProxyTranslator {
 
-    private final Map<String, IGalleryPickerView> galleryViews;
-    private final Map<String, ICameraPickerView> cameraViews;
+    private final Map<String, IGalleryCustomPickerView> galleryViews;
+    private final Map<String, ICameraCustomPickerView> cameraViews;
     private final Map<String, Class<? extends Activity>> activityClasses;
 
-    public ProxyTranslator(Map<String, IGalleryPickerView> galleryViews,
-                           Map<String, ICameraPickerView> cameraViews,
+    public ProxyTranslator(Map<String, IGalleryCustomPickerView> galleryViews,
+                           Map<String, ICameraCustomPickerView> cameraViews,
                            Map<String, Class<? extends Activity>> activityClasses) {
         this.galleryViews = galleryViews;
         this.cameraViews = cameraViews;
@@ -75,7 +75,7 @@ public final class ProxyTranslator {
     }
 
     @VisibleForTesting
-    public IPickerView getPickerView(Method method, boolean singleActivity) {
+    public ICustomPickerView getPickerView(Method method, boolean singleActivity) {
         if (singleActivity) {
             return null;
         }
@@ -173,7 +173,7 @@ public final class ProxyTranslator {
         }
     }
 
-    private IPickerView checkPickerViewNotNull(IPickerView pickerView) {
+    private ICustomPickerView checkPickerViewNotNull(ICustomPickerView pickerView) {
         if (pickerView == null)
             throw new NullPointerException("Can't find Custom PickerView.");
         else

@@ -6,8 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.qingmei2.rximagepicker.delegate.ProxyProviders;
-import com.qingmei2.rximagepicker.ui.ICameraPickerView;
-import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
+import com.qingmei2.rximagepicker.ui.ICameraCustomPickerView;
+import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
 import com.qingmei2.rximagepicker.ui.camera.SystemCameraPickerView;
 import com.qingmei2.rximagepicker.ui.gallery.SystemGalleryPickerView;
 
@@ -43,8 +43,8 @@ public class RxImagePicker {
     public static class Builder {
 
         private FragmentActivity activity;
-        private Map<String, ICameraPickerView> cameraViews = new HashMap<>();
-        private Map<String, IGalleryPickerView> galleryViews = new HashMap<>();
+        private Map<String, ICameraCustomPickerView> cameraViews = new HashMap<>();
+        private Map<String, IGalleryCustomPickerView> galleryViews = new HashMap<>();
         private Map<String, Class<? extends Activity>> activityClasses = new HashMap<>();
 
         public Builder with(Fragment fragment) {
@@ -57,7 +57,7 @@ public class RxImagePicker {
             return this;
         }
 
-        public Builder addCustomGallery(String viewKey, IGalleryPickerView gallery) {
+        public Builder addCustomGallery(String viewKey, IGalleryCustomPickerView gallery) {
             this.galleryViews.put(viewKey, gallery);
             return this;
         }
@@ -67,7 +67,7 @@ public class RxImagePicker {
             return this;
         }
 
-        public Builder addCustomCamera(String viewKey, ICameraPickerView camera) {
+        public Builder addCustomCamera(String viewKey, ICameraCustomPickerView camera) {
             this.cameraViews.put(viewKey, camera);
             return this;
         }
@@ -87,11 +87,11 @@ public class RxImagePicker {
             return activity;
         }
 
-        public Map<String, IGalleryPickerView> getGalleryViews() {
+        public Map<String, IGalleryCustomPickerView> getGalleryViews() {
             return galleryViews;
         }
 
-        public Map<String, ICameraPickerView> getCameraViews() {
+        public Map<String, ICameraCustomPickerView> getCameraViews() {
             return cameraViews;
         }
 

@@ -5,16 +5,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 
-import com.qingmei2.rximagepicker.ui.IPickerView;
+import com.qingmei2.rximagepicker.ui.ICustomPickerView;
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Predicate;
 import io.reactivex.subjects.PublishSubject;
 
-public final class ActivityHolder implements IPickerView {
+public final class ActivityHolder implements ICustomPickerView {
 
     private volatile static ActivityHolder instance;
 

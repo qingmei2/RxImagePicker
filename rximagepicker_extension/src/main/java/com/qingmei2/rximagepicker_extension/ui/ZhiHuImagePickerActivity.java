@@ -13,7 +13,7 @@ import io.reactivex.functions.Consumer;
 
 public class ZhiHuImagePickerActivity extends AppCompatActivity {
 
-    private ZhiHuImagePickerFragment fragment;
+    private ZhiHuImageCustomPickerFragment fragment;
 
     public static final int REQUEST_CODE_PREVIEW = 23;
 
@@ -26,7 +26,7 @@ public class ZhiHuImagePickerActivity extends AppCompatActivity {
     }
 
     private void displayPickerView() {
-        fragment = new ZhiHuImagePickerFragment();
+        fragment = new ZhiHuImageCustomPickerFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fl_container, fragment)

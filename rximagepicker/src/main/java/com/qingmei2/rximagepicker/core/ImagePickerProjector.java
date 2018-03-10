@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentActivity;
 
-import com.qingmei2.rximagepicker.ui.IPickerView;
+import com.qingmei2.rximagepicker.ui.ICustomPickerView;
 
 public final class ImagePickerProjector {
 
-    private IPickerView pickerView;
+    private ICustomPickerView pickerView;
 
     private final boolean singleActivity;
     private final Class<? extends Activity> activityClass;
@@ -18,7 +18,7 @@ public final class ImagePickerProjector {
 
     public ImagePickerProjector(boolean singleActivity,
                                 String viewKey,
-                                IPickerView pickerView,
+                                ICustomPickerView pickerView,
                                 FragmentActivity fragmentActivity,
                                 @IdRes int containerViewId,
                                 Class<? extends Activity> activityClass) {

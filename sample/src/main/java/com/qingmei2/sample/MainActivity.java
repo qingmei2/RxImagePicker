@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
+import com.qingmei2.rximagepicker_extension.ui.ZhiHuImageCustomPickerFragment;
 import com.qingmei2.rximagepicker_extension.ui.ZhiHuImagePickerActivity;
-import com.qingmei2.rximagepicker_extension.ui.ZhiHuImagePickerFragment;
 
 import java.io.File;
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         rxImagePicker = new RxImagePicker.Builder()
                 .with(this)
                 .addCustomGallery(MyImagePicker.KEY_ZHIHU_PICKER_ACTIVITY, ZhiHuImagePickerActivity.class)
-                .addCustomGallery(MyImagePicker.KEY_ZHIHU_PICKER_FRAGMENT, new ZhiHuImagePickerFragment())
+                .addCustomGallery(MyImagePicker.KEY_ZHIHU_PICKER_FRAGMENT, new ZhiHuImageCustomPickerFragment())
                 .build()
                 .create(MyImagePicker.class);
     }

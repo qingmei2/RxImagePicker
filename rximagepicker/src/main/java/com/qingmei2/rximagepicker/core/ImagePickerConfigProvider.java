@@ -5,7 +5,7 @@ import android.support.annotation.IdRes;
 
 import com.qingmei2.rximagepicker.config.observeras.ObserverAs;
 import com.qingmei2.rximagepicker.config.sources.SourcesFrom;
-import com.qingmei2.rximagepicker.ui.IPickerView;
+import com.qingmei2.rximagepicker.ui.ICustomPickerView;
 
 /**
  * Entity class for user config.
@@ -19,7 +19,7 @@ public final class ImagePickerConfigProvider {
     private final ObserverAs observerAs;
 
     private final int containerViewId;
-    private final IPickerView pickerView;
+    private final ICustomPickerView pickerView;
 
     private final Class<? extends Activity> activityClass;
 
@@ -27,7 +27,7 @@ public final class ImagePickerConfigProvider {
                                      String viewKey,
                                      SourcesFrom sourcesFrom,
                                      ObserverAs observerAs,
-                                     IPickerView pickerView,
+                                     ICustomPickerView pickerView,
                                      @IdRes int containerViewId,
                                      Class<? extends Activity> activityClass
     ) {
@@ -48,7 +48,7 @@ public final class ImagePickerConfigProvider {
         return observerAs;
     }
 
-    public IPickerView getPickerView() {
+    public ICustomPickerView getPickerView() {
         return pickerView;
     }
 

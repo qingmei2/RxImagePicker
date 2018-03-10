@@ -7,8 +7,8 @@ import android.support.annotation.VisibleForTesting;
 
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
 import com.qingmei2.rximagepicker.funtions.ObserverAsConverter;
-import com.qingmei2.rximagepicker.ui.ICameraPickerView;
-import com.qingmei2.rximagepicker.ui.IGalleryPickerView;
+import com.qingmei2.rximagepicker.ui.ICameraCustomPickerView;
+import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
 
 import java.util.Map;
 
@@ -25,15 +25,15 @@ public final class ImagePickerConfigProcessor implements
     @VisibleForTesting
     public final Context context;
     @VisibleForTesting
-    public final Map<String, ICameraPickerView> cameraViews;
+    public final Map<String, ICameraCustomPickerView> cameraViews;
     @VisibleForTesting
-    public final Map<String, IGalleryPickerView> galleryViews;
+    public final Map<String, IGalleryCustomPickerView> galleryViews;
     @VisibleForTesting
     public final IRxImagePickerSchedulers schedulers;
 
     public ImagePickerConfigProcessor(Context context,
-                                      Map<String, ICameraPickerView> cameraViews,
-                                      Map<String, IGalleryPickerView> galleryViews,
+                                      Map<String, ICameraCustomPickerView> cameraViews,
+                                      Map<String, IGalleryCustomPickerView> galleryViews,
                                       IRxImagePickerSchedulers schedulers) {
         this.context = context;
         this.cameraViews = cameraViews;
@@ -52,8 +52,8 @@ public final class ImagePickerConfigProcessor implements
 
     @VisibleForTesting
     public Function<ImagePickerConfigProvider, ObservableSource<Uri>> sourceFrom(
-            Map<String, ICameraPickerView> cameraViews,
-            Map<String, IGalleryPickerView> galleryViews) {
+            Map<String, ICameraCustomPickerView> cameraViews,
+            Map<String, IGalleryCustomPickerView> galleryViews) {
         return new Function<ImagePickerConfigProvider, ObservableSource<Uri>>() {
             @Override
             public ObservableSource<Uri> apply(ImagePickerConfigProvider provider) throws Exception {

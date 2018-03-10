@@ -12,8 +12,8 @@ import com.qingmei2.rximagepicker.config.sources.SourcesFrom
 import com.qingmei2.rximagepicker.di.scheduler.RxImagePickerTestSchedulers
 import com.qingmei2.rximagepicker.funtions.ObserverAsConverter
 import com.qingmei2.rximagepicker.rule.TestSchedulerRule
-import com.qingmei2.rximagepicker.ui.ICameraPickerView
-import com.qingmei2.rximagepicker.ui.IGalleryPickerView
+import com.qingmei2.rximagepicker.ui.ICameraCustomPickerView
+import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.functions.Function
@@ -30,8 +30,8 @@ class ImagePickerConfigProcessorTest {
     val rxRule = TestSchedulerRule()
 
     private val mockContext: Context = mock()
-    private val mockCameraPickerViews: Map<String, ICameraPickerView> = mock()
-    private val mockGalleryPickerViews: Map<String, IGalleryPickerView> = mock()
+    private val mockCameraPickerViews: Map<String, ICameraCustomPickerView> = mock()
+    private val mockGalleryPickerViews: Map<String, IGalleryCustomPickerView> = mock()
     private val schedulers = RxImagePickerTestSchedulers()
 
     private val mockUri: Uri = mock()
