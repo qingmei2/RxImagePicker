@@ -7,26 +7,27 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.qingmei2.rximagepicker.core.ActivityHolder;
 import com.qingmei2.rximagepicker_extension.R;
+import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
 
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
-public class ZhiHuImagePickerActivity extends AppCompatActivity {
+public class ZhihuImagePickerActivity extends AppCompatActivity {
 
-    private ZhiHuImageCustomPickerFragment fragment;
+    private ZhihuImagePickerFragment fragment;
 
     public static final int REQUEST_CODE_PREVIEW = 23;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        setTheme(R.style.ZhiHu);
+        setTheme(SelectionSpec.getInstance().themeId);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_picker_holder);
         displayPickerView();
     }
 
     private void displayPickerView() {
-        fragment = new ZhiHuImageCustomPickerFragment();
+        fragment = new ZhihuImagePickerFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fl_container, fragment)

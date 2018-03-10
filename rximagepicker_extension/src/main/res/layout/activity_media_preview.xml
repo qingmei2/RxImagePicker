@@ -45,7 +45,7 @@
             android:textSize="16sp"
             tools:height="50dp"
             tools:text="back"
-            tools:textColor="@color/zhihu_white"
+            tools:textColor="@color/zhihu_dracula_white"
             tools:visibility="visible" />
 
         <TextView
@@ -68,7 +68,7 @@
             android:textSize="16sp"
             tools:height="50dp"
             tools:text="apply"
-            tools:textColor="@color/zhihu_white" />
+            tools:textColor="@color/zhihu_dracula_white" />
 
     </FrameLayout>
 

@@ -19,6 +19,7 @@ package com.qingmei2.rximagepicker_extension.entity;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.StyleRes;
 
+import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension.R;
 import com.qingmei2.rximagepicker_extension.engine.ImageEngine;
@@ -28,7 +29,9 @@ import com.qingmei2.rximagepicker_extension.filter.Filter;
 import java.util.List;
 import java.util.Set;
 
-public final class SelectionSpec {
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+
+public final class SelectionSpec implements ICustomPickerConfiguration {
 
     public Set<MimeType> mimeTypeSet;
     public boolean mediaTypeExclusive;
@@ -49,6 +52,7 @@ public final class SelectionSpec {
     public ImageEngine imageEngine;
 
     private SelectionSpec() {
+        reset();
     }
 
     public static SelectionSpec getInstance() {
@@ -62,11 +66,11 @@ public final class SelectionSpec {
     }
 
     private void reset() {
-        mimeTypeSet = null;
+        mimeTypeSet = MimeType.ofImage();
         mediaTypeExclusive = true;
         showSingleMediaType = false;
-        themeId = R.style.ZhiHu;
-        orientation = 0;
+        themeId = R.style.Zhihu_Dracula;
+        orientation = SCREEN_ORIENTATION_PORTRAIT;
         countable = false;
         maxSelectable = 1;
         maxImageSelectable = 0;

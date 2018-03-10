@@ -57,7 +57,7 @@ public class AlbumsAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        final Context contextThemeWrapper = new ContextThemeWrapper(context, R.style.ZhiHu);
+        final Context contextThemeWrapper = new ContextThemeWrapper(context, R.style.Zhihu_Dracula);
         return LayoutInflater.from(context)
                 .cloneInContext(contextThemeWrapper)
                 .inflate(R.layout.album_list_item, parent, false);
