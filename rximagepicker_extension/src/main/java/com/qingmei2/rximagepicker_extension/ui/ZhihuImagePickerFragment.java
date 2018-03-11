@@ -282,7 +282,11 @@ public class ZhihuImagePickerFragment extends Fragment implements
             if (data.getBooleanExtra(BasePreviewActivity.EXTRA_RESULT_APPLY, false)) {  // apply event
                 if (selected != null) {
                     for (Item item : selected) {
-                        ActivityHolder.getInstance().emitUri(item.getContentUri());
+                        if (getActivity() instanceof ZhihuImagePickerActivity) {
+                            ActivityHolder.getInstance().emitUri(item.getContentUri());
+                        } else {
+                            publishSubject.onNext(item.getContentUri());
+                        }
                     }
                 }
                 closure();
