@@ -15,7 +15,7 @@ import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
 import io.reactivex.Observable;
 
 public final class SystemGalleryPickerView extends BaseSystemPickerView implements IGalleryCustomPickerView {
-    
+
     @Override
     public void display(FragmentActivity fragmentActivity,
                         @IdRes int containerViewId,

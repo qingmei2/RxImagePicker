@@ -12,7 +12,7 @@ import java.io.File;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
-public interface MyImagePicker {
+public interface ZhihuImagePicker {
 
     String KEY_ZHIHU_PICKER_ACTIVITY = "key_zhihu_picker_as_activity";
     String KEY_ZHIHU_PICKER_FRAGMENT = "key_zhihu_picker_as_fragment";
