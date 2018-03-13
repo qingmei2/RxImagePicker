@@ -59,10 +59,13 @@ public final class SelectionSpec implements ICustomPickerConfiguration {
         return InstanceHolder.INSTANCE;
     }
 
-    public static SelectionSpec getCleanInstance() {
-        SelectionSpec selectionSpec = getInstance();
-        selectionSpec.reset();
+    public static SelectionSpec getNewCleanInstance() {
+        SelectionSpec selectionSpec = new SelectionSpec();
         return selectionSpec;
+    }
+
+    public static void setInstance(SelectionSpec selectionSpec) {
+        InstanceHolder.INSTANCE = selectionSpec;
     }
 
     private void reset() {
@@ -100,7 +103,18 @@ public final class SelectionSpec implements ICustomPickerConfiguration {
         return showSingleMediaType && MimeType.ofVideo().containsAll(mimeTypeSet);
     }
 
+    @Override
+    public void onDisplay() {
+        setInstance(this);
+    }
+
+    @Override
+    public void onFinished() {
+        setInstance(new SelectionSpec());
+    }
+
     private static final class InstanceHolder {
-        private static final SelectionSpec INSTANCE = new SelectionSpec();
+        //正在使用的SelectionSpec
+        private static SelectionSpec INSTANCE = new SelectionSpec();
     }
 }

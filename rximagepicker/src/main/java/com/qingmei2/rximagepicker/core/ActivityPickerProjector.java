@@ -47,7 +47,7 @@ public final class ActivityPickerProjector implements ICustomPickerView {
     @Override
     public void display(FragmentActivity fragmentActivity,
                         int viewContainer,
-                        String tag,
+                        String viewKey,
                         ICustomPickerConfiguration configuration) {
         resetSubject();
         fragmentActivity.startActivity(new Intent(fragmentActivity, activityClass));

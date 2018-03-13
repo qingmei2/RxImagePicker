@@ -67,7 +67,7 @@ public final class ZhihuConfigurationBuilder {
      * @param mimeTypes MIME type set to select.
      */
     public ZhihuConfigurationBuilder(@NonNull Set<MimeType> mimeTypes, boolean mediaTypeExclusive) {
-        mSelectionSpec = SelectionSpec.getCleanInstance();
+        mSelectionSpec = SelectionSpec.getNewCleanInstance();
         mSelectionSpec.mimeTypeSet = mimeTypes;
         mSelectionSpec.mediaTypeExclusive = mediaTypeExclusive;
         mSelectionSpec.orientation = SCREEN_ORIENTATION_UNSPECIFIED;

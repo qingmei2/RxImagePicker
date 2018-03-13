@@ -135,6 +135,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
             fragmentTransaction.remove(this);
             fragmentTransaction.commit();
         }
+        SelectionSpec.getInstance().onFinished();
     }
 
     @Override
