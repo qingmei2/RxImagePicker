@@ -41,7 +41,7 @@ public final class ImagePickerProjector {
     }
 
     private void displayPickerViewAsActivity(ICustomPickerConfiguration configuration) {
-        ActivityHolder activityHolder = ActivityHolder.getInstance();
+        ActivityPickerProjector activityHolder = ActivityPickerProjector.getInstance();
         activityHolder.setActivityClass(activityClass);
         activityHolder.display(fragmentActivity, containerViewId, viewKey, configuration);
     }

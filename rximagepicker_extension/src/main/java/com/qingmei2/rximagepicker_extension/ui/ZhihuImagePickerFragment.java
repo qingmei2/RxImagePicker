@@ -22,7 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.qingmei2.rximagepicker.core.ActivityHolder;
+import com.qingmei2.rximagepicker.core.ActivityPickerProjector;
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
 import com.qingmei2.rximagepicker_extension.R;
@@ -283,7 +283,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
                 if (selected != null) {
                     for (Item item : selected) {
                         if (getActivity() instanceof ZhihuImagePickerActivity) {
-                            ActivityHolder.getInstance().emitUri(item.getContentUri());
+                            ActivityPickerProjector.getInstance().emitUri(item.getContentUri());
                         } else {
                             publishSubject.onNext(item.getContentUri());
                         }

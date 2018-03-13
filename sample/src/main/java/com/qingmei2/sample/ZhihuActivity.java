@@ -2,7 +2,6 @@ package com.qingmei2.sample;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -13,12 +12,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
+import com.qingmei2.rximagepicker_extension.MimeType;
+import com.qingmei2.rximagepicker_extension.ZhihuConfigurationBuilder;
 import com.qingmei2.rximagepicker_extension.ui.ZhihuImagePickerActivity;
 import com.qingmei2.rximagepicker_extension.ui.ZhihuImagePickerFragment;
-
-import java.io.File;
-
-import io.reactivex.functions.Consumer;
 
 public class ZhihuActivity extends AppCompatActivity {
 
@@ -62,8 +59,24 @@ public class ZhihuActivity extends AppCompatActivity {
     private void initRxImagePicker() {
         rxImagePicker = new RxImagePicker.Builder()
                 .with(this)
-                .addCustomGallery(ZhihuImagePicker.KEY_ZHIHU_PICKER_ACTIVITY, ZhihuImagePickerActivity.class)
-                .addCustomGallery(ZhihuImagePicker.KEY_ZHIHU_PICKER_FRAGMENT, new ZhihuImagePickerFragment())
+                .addCustomGallery(
+                        ZhihuImagePicker.KEY_ZHIHU_PICKER_ACTIVITY,
+                        ZhihuImagePickerActivity.class,
+                        new ZhihuConfigurationBuilder(MimeType.ofAll(), false)
+                                .maxSelectable(9)
+                                .spanCount(4)
+                                .theme(R.style.Zhihu_Normal)
+                                .build()
+                )
+                .addCustomGallery(
+                        ZhihuImagePicker.KEY_ZHIHU_PICKER_FRAGMENT,
+                        new ZhihuImagePickerFragment(),
+                        new ZhihuConfigurationBuilder(MimeType.ofAll(), false)
+                                .spanCount(3)
+                                .maxSelectable(1)
+                                .theme(R.style.Zhihu_Dracula)
+                                .build()
+                )
                 .build()
                 .create(ZhihuImagePicker.class);
     }
@@ -83,57 +96,24 @@ public class ZhihuActivity extends AppCompatActivity {
         } else if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_ACTIVITY) {
             openGallery();
         } else {
-            openGalleryWithFragment();
+            openGalleryAsFragment();
         }
     }
 
     private void openCamera() {
-        Toast.makeText(this, "Open Camera", Toast.LENGTH_SHORT).show();
         rxImagePicker.openCamera()
-                .subscribe(new Consumer<File>() {
-                    @Override
-                    public void accept(File file) throws Exception {
-                        Glide.with(ZhihuActivity.this)
-                                .load(file)
-                                .into(ivPickedImage);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable e) throws Exception {
-                        Toast.makeText(ZhihuActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
-                    }
-                });
+                .subscribe(file -> Glide.with(ZhihuActivity.this)
+                        .load(file)
+                        .into(ivPickedImage));
     }
 
     private void openGallery() {
-        Toast.makeText(this, "Open Gallery with new Activity", Toast.LENGTH_SHORT).show();
         rxImagePicker.openGallery()
-                .subscribe(new Consumer<Bitmap>() {
-                    @Override
-                    public void accept(Bitmap bitmap) throws Exception {
-                        ivPickedImage.setImageBitmap(bitmap);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable e) throws Exception {
-                        Toast.makeText(ZhihuActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
-                    }
-                });
+                .subscribe(bitmap -> ivPickedImage.setImageBitmap(bitmap));
     }
 
-    private void openGalleryWithFragment() {
-        Toast.makeText(this, "Open Gallery with create a Fragment", Toast.LENGTH_SHORT).show();
+    private void openGalleryAsFragment() {
         rxImagePicker.openGalleryWithFragment()
-                .subscribe(new Consumer<Bitmap>() {
-                    @Override
-                    public void accept(Bitmap bitmap) throws Exception {
-                        ivPickedImage.setImageBitmap(bitmap);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable e) throws Exception {
-                        Toast.makeText(ZhihuActivity.this, String.format("Error: %s", e), Toast.LENGTH_LONG).show();
-                    }
-                });
+                .subscribe(bitmap -> ivPickedImage.setImageBitmap(bitmap));
     }
 }

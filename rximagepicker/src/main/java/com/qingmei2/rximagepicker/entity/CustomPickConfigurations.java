@@ -1,6 +1,5 @@
 package com.qingmei2.rximagepicker.entity;
 
-import com.qingmei2.rximagepicker.core.ActivityHolder;
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 
 import java.util.Map;

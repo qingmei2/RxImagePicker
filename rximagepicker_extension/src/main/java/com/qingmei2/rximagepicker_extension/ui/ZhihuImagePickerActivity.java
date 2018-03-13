@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.qingmei2.rximagepicker.core.ActivityHolder;
+import com.qingmei2.rximagepicker.core.ActivityPickerProjector;
 import com.qingmei2.rximagepicker_extension.R;
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
 
@@ -37,12 +37,12 @@ public class ZhihuImagePickerActivity extends AppCompatActivity {
                 .subscribe(new Consumer<Uri>() {
                     @Override
                     public void accept(Uri uri) throws Exception {
-                        ActivityHolder.getInstance().emitUri(uri);
+                        ActivityPickerProjector.getInstance().emitUri(uri);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        ActivityHolder.getInstance().emitError(throwable);
+                        ActivityPickerProjector.getInstance().emitError(throwable);
                     }
                 }, new Action() {
                     @Override
@@ -53,7 +53,7 @@ public class ZhihuImagePickerActivity extends AppCompatActivity {
     }
 
     public void closure() {
-        ActivityHolder.getInstance().endUriEmitAndReset();
+        ActivityPickerProjector.getInstance().endUriEmitAndReset();
         finish();
     }
 

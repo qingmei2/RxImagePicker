@@ -13,26 +13,26 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 
-public final class ActivityHolder implements ICustomPickerView {
+public final class ActivityPickerProjector implements ICustomPickerView {
 
-    private volatile static ActivityHolder INSTANCE;
+    private volatile static ActivityPickerProjector INSTANCE;
 
     private PublishSubject<Uri> publishSubject;
 
     private Class<? extends Activity> activityClass;
 
-    public static ActivityHolder getInstance() {
+    public static ActivityPickerProjector getInstance() {
         if (INSTANCE == null) {
-            synchronized (ActivityHolder.class) {
+            synchronized (ActivityPickerProjector.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new ActivityHolder();
+                    INSTANCE = new ActivityPickerProjector();
                 }
             }
         }
         return INSTANCE;
     }
 
-    private ActivityHolder() {
+    private ActivityPickerProjector() {
 
     }
 
