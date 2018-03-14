@@ -13,9 +13,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker_extension.MimeType;
-import com.qingmei2.rximagepicker_extension.ZhihuConfigurationBuilder;
-import com.qingmei2.rximagepicker_extension.ui.ZhihuImagePickerActivity;
-import com.qingmei2.rximagepicker_extension.ui.ZhihuImagePickerFragment;
+import com.qingmei2.rximagepicker_extension_zhihu.ZhihuConfigurationBuilder;
+import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerActivity;
+import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerFragment;
+
 
 public class ZhihuActivity extends AppCompatActivity {
 

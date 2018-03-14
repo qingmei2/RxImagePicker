@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker_extension.ui;
+package com.qingmei2.rximagepicker_extension_zhihu.ui;
 
 import android.net.Uri;
 import android.os.Bundle;

@@ -31,6 +31,7 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     implementation project(':rximagepicker')
     implementation project(':rximagepicker_extension')
+    implementation project(':rximagepicker_extension_zhihu')
 
     testImplementation rootProject.ext.dependencies["junit"]
 }

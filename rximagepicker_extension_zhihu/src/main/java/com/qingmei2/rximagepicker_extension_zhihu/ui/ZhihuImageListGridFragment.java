@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qingmei2.rximagepicker_extension.ui;
+package com.qingmei2.rximagepicker_extension_zhihu.ui;
 
 import android.content.Context;
 import android.database.Cursor;

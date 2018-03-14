@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker_extension.ui;
+package com.qingmei2.rximagepicker_extension_zhihu.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +31,9 @@ import com.qingmei2.rximagepicker_extension.entity.Item;
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
 import com.qingmei2.rximagepicker_extension.model.AlbumCollection;
 import com.qingmei2.rximagepicker_extension.model.SelectedItemCollection;
+import com.qingmei2.rximagepicker_extension.ui.AlbumPreviewActivity;
+import com.qingmei2.rximagepicker_extension.ui.BasePreviewActivity;
+import com.qingmei2.rximagepicker_extension.ui.SelectedPreviewActivity;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumsAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner;
@@ -41,7 +44,6 @@ import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 
 import static android.app.Activity.RESULT_OK;
-import static com.qingmei2.rximagepicker_extension.ui.ZhihuImagePickerActivity.REQUEST_CODE_PREVIEW;
 
 public class ZhihuImagePickerFragment extends Fragment implements
         IGalleryCustomPickerView, AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
@@ -225,7 +227,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
         intent.putExtra(AlbumPreviewActivity.EXTRA_ALBUM, album);
         intent.putExtra(AlbumPreviewActivity.EXTRA_ITEM, item);
         intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.getDataWithBundle());
-        startActivityForResult(intent, REQUEST_CODE_PREVIEW);
+        startActivityForResult(intent, ZhihuImagePickerActivity.REQUEST_CODE_PREVIEW);
     }
 
     @Override
@@ -243,7 +245,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
         if (v.getId() == R.id.button_preview) {
             Intent intent = new Intent(context, SelectedPreviewActivity.class);
             intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.getDataWithBundle());
-            startActivityForResult(intent, REQUEST_CODE_PREVIEW);
+            startActivityForResult(intent, ZhihuImagePickerActivity.REQUEST_CODE_PREVIEW);
         } else if (v.getId() == R.id.button_apply) {
             emitSelectUri();
         } else if (v.getId() == R.id.button_back) {
@@ -275,7 +277,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
         if (resultCode != RESULT_OK)
             return;
 
-        if (requestCode == REQUEST_CODE_PREVIEW) {
+        if (requestCode == ZhihuImagePickerActivity.REQUEST_CODE_PREVIEW) {
             Bundle resultBundle = data.getBundleExtra(BasePreviewActivity.EXTRA_RESULT_BUNDLE);
             ArrayList<Item> selected = resultBundle.getParcelableArrayList(SelectedItemCollection.STATE_SELECTION);
             int collectionType = resultBundle.getInt(SelectedItemCollection.STATE_COLLECTION_TYPE,

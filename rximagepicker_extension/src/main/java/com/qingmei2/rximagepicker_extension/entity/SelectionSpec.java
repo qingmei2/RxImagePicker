@@ -72,7 +72,7 @@ public final class SelectionSpec implements ICustomPickerConfiguration {
         mimeTypeSet = MimeType.ofImage();
         mediaTypeExclusive = true;
         showSingleMediaType = false;
-        themeId = R.style.Zhihu_Dracula;
+        themeId = R.style.Theme_AppCompat_Light;
         orientation = SCREEN_ORIENTATION_PORTRAIT;
         countable = false;
         maxSelectable = 1;

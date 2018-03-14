@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker_extension;
+package com.qingmei2.rximagepicker_extension_zhihu;
 
 import android.app.Activity;
 import android.os.Build;
@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StyleRes;
 
+import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension.engine.ImageEngine;
 import com.qingmei2.rximagepicker_extension.entity.CaptureStrategy;
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
