@@ -34,7 +34,9 @@ public final class ImagePickerProjector {
 
     public void display(CustomPickConfigurations customPickConfigurations) {
         ICustomPickerConfiguration configuration = customPickConfigurations.findConfigurationByKey(viewKey);
-        configuration.onDisplay();
+        if (configuration != null) {
+            configuration.onDisplay();
+        }
         if (singleActivity)
             displayPickerViewAsActivity(configuration);
         else
