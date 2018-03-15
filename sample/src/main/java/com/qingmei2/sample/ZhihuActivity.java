@@ -65,6 +65,7 @@ public class ZhihuActivity extends AppCompatActivity {
                         ZhihuImagePickerActivity.class,
                         new ZhihuConfigurationBuilder(MimeType.ofAll(), false)
                                 .maxSelectable(9)
+                                .countable(true)
                                 .spanCount(4)
                                 .theme(R.style.Zhihu_Normal)
                                 .build()
@@ -104,17 +105,25 @@ public class ZhihuActivity extends AppCompatActivity {
     private void openCamera() {
         rxImagePicker.openCamera()
                 .subscribe(file -> Glide.with(ZhihuActivity.this)
-                        .load(file)
-                        .into(ivPickedImage));
+                                .load(file)
+                                .into(ivPickedImage),
+                        this::toastError);
     }
 
     private void openGallery() {
         rxImagePicker.openGallery()
-                .subscribe(bitmap -> ivPickedImage.setImageBitmap(bitmap));
+                .subscribe(bitmap -> ivPickedImage.setImageBitmap(bitmap),
+                        this::toastError);
     }
 
     private void openGalleryAsFragment() {
         rxImagePicker.openGalleryWithFragment()
-                .subscribe(bitmap -> ivPickedImage.setImageBitmap(bitmap));
+                .subscribe(bitmap -> ivPickedImage.setImageBitmap(bitmap),
+                        this::toastError);
+    }
+
+    private void toastError(Throwable error) {
+        error.printStackTrace();
+        Toast.makeText(this, "Failed: " + error.toString(), Toast.LENGTH_SHORT).show();
     }
 }

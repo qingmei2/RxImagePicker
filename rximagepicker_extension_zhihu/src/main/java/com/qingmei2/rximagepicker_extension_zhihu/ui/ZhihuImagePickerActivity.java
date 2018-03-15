@@ -6,8 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.qingmei2.rximagepicker.core.ActivityPickerProjector;
-import com.qingmei2.rximagepicker_extension.R;
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
+import com.qingmei2.rximagepicker_extension_zhihu.R;
 
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
@@ -22,7 +22,7 @@ public class ZhihuImagePickerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(SelectionSpec.getInstance().themeId);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_picker_holder);
+        setContentView(R.layout.activity_picker_zhihu);
         displayPickerView();
     }
 

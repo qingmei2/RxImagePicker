@@ -35,7 +35,6 @@ import com.qingmei2.rximagepicker_extension.ui.widget.CheckView;
 import com.qingmei2.rximagepicker_extension.utils.PhotoMetadataUtils;
 import com.qingmei2.rximagepicker_extension.utils.Platform;
 
-
 public abstract class BasePreviewActivity extends AppCompatActivity implements View.OnClickListener,
         ViewPager.OnPageChangeListener {
 

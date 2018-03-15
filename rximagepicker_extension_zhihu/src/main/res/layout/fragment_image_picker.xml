@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
         android:orientation="horizontal"
-        tools:background="@color/zhihu_dracula_primary">
+        tools:background="@color/dracula_primary">
 
         <ImageView
             android:id="@+id/button_back"
@@ -35,7 +35,7 @@
             android:textSize="20sp"
             tools:layout_height="50dp"
             tools:text="选择图片"
-            tools:textColor="@color/zhihu_dracula_white" />
+            tools:textColor="@color/dracula_album_dropdown_title_text" />
 
     </LinearLayout>
 
@@ -46,7 +46,7 @@
         android:layout_alignParentBottom="true"
         android:background="?attr/bottomToolbar.bg"
         android:elevation="4dp"
-        tools:background="@color/zhihu_dracula_primary"
+        tools:background="@color/dracula_primary"
         tools:targetApi="lollipop">
 
         <TextView
@@ -61,7 +61,7 @@
             android:textSize="16sp"
             tools:layout_height="50dp"
             tools:text="@string/button_preview"
-            tools:textColor="@color/zhihu_dracula_white" />
+            tools:textColor="@color/dracula_bottom_toolbar_preview_text" />
 
         <TextView
             android:id="@+id/button_apply"
@@ -74,7 +74,7 @@
             android:textSize="16sp"
             tools:layout_height="50dp"
             tools:text="@string/button_apply_default"
-            tools:textColor="@color/zhihu_dracula_white" />
+            tools:textColor="@color/dracula_bottom_toolbar_apply_text" />
 
     </FrameLayout>
 
@@ -109,7 +109,7 @@
             tools:drawableTop="@drawable/ic_empty_zhihu"
             tools:layout_height="50dp"
             tools:text="@string/empty_text"
-            tools:textColor="@color/zhihu_dracula_album_empty_view" />
+            tools:textColor="@color/dracula_album_empty_view" />
 
     </FrameLayout>
 </RelativeLayout>

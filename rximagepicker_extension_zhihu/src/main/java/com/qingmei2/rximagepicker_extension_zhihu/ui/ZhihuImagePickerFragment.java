@@ -25,7 +25,6 @@ import android.widget.TextView;
 import com.qingmei2.rximagepicker.core.ActivityPickerProjector;
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
-import com.qingmei2.rximagepicker_extension.R;
 import com.qingmei2.rximagepicker_extension.entity.Album;
 import com.qingmei2.rximagepicker_extension.entity.Item;
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
@@ -37,6 +36,7 @@ import com.qingmei2.rximagepicker_extension.ui.SelectedPreviewActivity;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumsAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner;
+import com.qingmei2.rximagepicker_extension_zhihu.R;
 
 import java.util.ArrayList;
 
