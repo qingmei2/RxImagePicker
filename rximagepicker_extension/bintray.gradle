@@ -8,7 +8,7 @@ def siteUrl = 'https://github.com/qingmei2/RxImagePicker'
 def gitUrl = 'https://github.com/qingmei2/RxImagePicker.git'
 
 group = "com.github.qingmei2"
-def libName = "rximagepicker"
+def libName = "rximagepicker_extension"
 def versionName = "0.1.0-beta3"
 version = versionName
 
