@@ -5,16 +5,16 @@ def support_version = '27.0.2'
 def espresso_version = '2.2.2'
 def glide_version = '4.5.0'
 
-
 project.ext {
+
     android = [
             compileSdkVersion   : 27,
             buildToolsVersion   : "27.0.1",
 
             minSdkVersion       : 16,
             targetSdkVersion    : 27,
-            versionCode         : 3,
-            versionName         : "0.1.0-beta2"
+            versionCode         : 4,
+            versionName         : "0.1.0-beta4"
     ]
 
     dependencies = [
