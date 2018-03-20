@@ -6,6 +6,5 @@
     <application>
         <activity android:name=".ui.AlbumPreviewActivity" />
         <activity android:name=".ui.SelectedPreviewActivity" />
-        <activity android:name="com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerActivity" />
     </application>
 </manifest>

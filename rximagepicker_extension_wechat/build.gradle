@@ -1,6 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
@@ -22,8 +20,8 @@ android {
         abortOnError false
     }
 }
-
 dependencies {
+    implementation project(':rximagepicker_extension')
     implementation project(':rximagepicker')
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["glide"]
@@ -32,16 +30,14 @@ dependencies {
     implementation rootProject.ext.dependencies["constraint-layout"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     testImplementation rootProject.ext.dependencies["junit"]
-    implementation 'it.sephiroth.android.library.imagezoom:library:1.0.4'
 }
 repositories {
     mavenCentral()
 }
-
 publish {
     userOrg = 'mq2553299'
     groupId = 'com.github.qingmei2'
-    artifactId = 'rximagepicker_extension'
+    artifactId = 'rximagepicker_extension_wechat'
     publishVersion = rootProject.ext.android["versionName"]
     desc = 'The library which choosing pictures from camera or gallery in Android.'
     website = 'https://github.com/qingmei2/RxImagePicker'

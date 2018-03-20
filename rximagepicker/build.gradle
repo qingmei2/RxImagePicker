@@ -39,9 +39,9 @@ repositories {
 }
 
 publish {
-    userOrg = 'mq2553299'//bintray.com用户名
-    groupId = 'com.github.qingmei2'//jcenter上的路径
-    artifactId = 'rximagepicker'//项目名称
+    userOrg = 'mq2553299'
+    groupId = 'com.github.qingmei2'
+    artifactId = 'rximagepicker'
     publishVersion = rootProject.ext.android["versionName"]//版本号
     desc = 'The library which choosing pictures from camera or gallery in Android.'
     website = 'https://github.com/qingmei2/RxImagePicker'

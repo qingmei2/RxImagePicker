@@ -33,19 +33,15 @@ dependencies {
     implementation rootProject.ext.dependencies["constraint-layout"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     testImplementation rootProject.ext.dependencies["junit"]
-    testImplementation rootProject.ext.dependencies["kotlin-android"]
-    testImplementation rootProject.ext.dependencies["mockito-kotlin"]
-    testImplementation rootProject.ext.dependencies["robolectric"]
-    testImplementation rootProject.ext.dependencies["robolectric-v4"]
 }
 repositories {
     mavenCentral()
 }
 publish {
-    userOrg = 'mq2553299'//bintray.com用户名
-    groupId = 'com.github.qingmei2'//jcenter上的路径
-    artifactId = 'rximagepicker_extension_zhihu'//项目名称
-    publishVersion = rootProject.ext.android["versionName"]//版本号
+    userOrg = 'mq2553299'
+    groupId = 'com.github.qingmei2'
+    artifactId = 'rximagepicker_extension_zhihu'
+    publishVersion = rootProject.ext.android["versionName"]
     desc = 'The library which choosing pictures from camera or gallery in Android.'
     website = 'https://github.com/qingmei2/RxImagePicker'
 }
