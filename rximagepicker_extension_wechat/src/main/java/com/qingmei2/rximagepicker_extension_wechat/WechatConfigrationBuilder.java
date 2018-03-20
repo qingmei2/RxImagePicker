@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker_extension_zhihu;
+package com.qingmei2.rximagepicker_extension_wechat;
 
 import android.app.Activity;
 import android.os.Build;
@@ -35,7 +35,7 @@ import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER;
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE;
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT;
 
-public final class ZhihuConfigurationBuilder {
+public class WechatConfigrationBuilder {
 
     private final SelectionSpec mSelectionSpec;
 
@@ -67,7 +67,7 @@ public final class ZhihuConfigurationBuilder {
      *
      * @param mimeTypes MIME type set to select.
      */
-    public ZhihuConfigurationBuilder(@NonNull Set<MimeType> mimeTypes, boolean mediaTypeExclusive) {
+    public WechatConfigrationBuilder(@NonNull Set<MimeType> mimeTypes, boolean mediaTypeExclusive) {
         mSelectionSpec = SelectionSpec.getNewCleanInstance();
         mSelectionSpec.mimeTypeSet = mimeTypes;
         mSelectionSpec.mediaTypeExclusive = mediaTypeExclusive;
@@ -78,11 +78,11 @@ public final class ZhihuConfigurationBuilder {
      * Whether to show only one media type if choosing medias are only images or videos.
      *
      * @param showSingleMediaType whether to show only one media type, either images or videos.
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      * @see SelectionSpec#onlyShowImages()
      * @see SelectionSpec#onlyShowVideos()
      */
-    public ZhihuConfigurationBuilder showSingleMediaType(boolean showSingleMediaType) {
+    public WechatConfigrationBuilder showSingleMediaType(boolean showSingleMediaType) {
         mSelectionSpec.showSingleMediaType = showSingleMediaType;
         return this;
     }
@@ -90,15 +90,14 @@ public final class ZhihuConfigurationBuilder {
     /**
      * Theme for media selecting Activity.
      * <p>
-     * There are two built-in themes:
-     * 1. com.qingmei2.rximagepicker_extension_zhihu.R.style.Zhihu_Normal;
-     * 2. com.qingmei2.rximagepicker_extension_zhihu.R.style.Zhihu_Dracula.
+     * There is built-in themes:
+     * com.qingmei2.rximagepicker_extension_wechat.R.style.Wechat
      * you can define a custom theme derived from the above ones or other themes.
      *
-     * @param themeId theme resource id. Default value is com.qingmei2.rximagepicker_extension_zhihu.R.style.Zhihu_Normal
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @param themeId theme resource id. Default value is com.qingmei2.rximagepicker_extension_wechat.R.style.Wechat
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      */
-    public ZhihuConfigurationBuilder theme(@StyleRes int themeId) {
+    public WechatConfigrationBuilder theme(@StyleRes int themeId) {
         mSelectionSpec.themeId = themeId;
         return this;
     }
@@ -108,9 +107,9 @@ public final class ZhihuConfigurationBuilder {
      *
      * @param countable true for a auto-increased number from 1, false for a check mark. Default
      *                  value is false.
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      */
-    public ZhihuConfigurationBuilder countable(boolean countable) {
+    public WechatConfigrationBuilder countable(boolean countable) {
         mSelectionSpec.countable = countable;
         return this;
     }
@@ -119,9 +118,9 @@ public final class ZhihuConfigurationBuilder {
      * Maximum selectable count.
      *
      * @param maxSelectable Maximum selectable count. Default value is 1.
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      */
-    public ZhihuConfigurationBuilder maxSelectable(int maxSelectable) {
+    public WechatConfigrationBuilder maxSelectable(int maxSelectable) {
         if (maxSelectable < 1)
             throw new IllegalArgumentException("maxSelectable must be greater than or equal to one");
         if (mSelectionSpec.maxImageSelectable > 0 || mSelectionSpec.maxVideoSelectable > 0)
@@ -138,7 +137,7 @@ public final class ZhihuConfigurationBuilder {
      * @param maxVideoSelectable Maximum selectable count for video.
      * @return
      */
-    public ZhihuConfigurationBuilder maxSelectablePerMediaType(int maxImageSelectable, int maxVideoSelectable) {
+    public WechatConfigrationBuilder maxSelectablePerMediaType(int maxImageSelectable, int maxVideoSelectable) {
         if (maxImageSelectable < 1 || maxVideoSelectable < 1)
             throw new IllegalArgumentException(("max selectable must be greater than or equal to one"));
         mSelectionSpec.maxSelectable = -1;
@@ -151,9 +150,9 @@ public final class ZhihuConfigurationBuilder {
      * Add filter to filter each selecting item.
      *
      * @param filter {@link Filter}
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      */
-    public ZhihuConfigurationBuilder addFilter(@NonNull Filter filter) {
+    public WechatConfigrationBuilder addFilter(@NonNull Filter filter) {
         if (mSelectionSpec.filters == null) {
             mSelectionSpec.filters = new ArrayList<>();
         }
@@ -168,9 +167,9 @@ public final class ZhihuConfigurationBuilder {
      * If this value is set true, photo capturing entry will appear only on All Media's page.
      *
      * @param enable Whether to enable capturing or not. Default value is false;
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      */
-    public ZhihuConfigurationBuilder capture(boolean enable) {
+    public WechatConfigrationBuilder capture(boolean enable) {
         mSelectionSpec.capture = enable;
         return this;
     }
@@ -180,9 +179,9 @@ public final class ZhihuConfigurationBuilder {
      * storage and also a authority for {@link android.support.v4.content.FileProvider}.
      *
      * @param captureStrategy {@link CaptureStrategy}, needed only when capturing is enabled.
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      */
-    public ZhihuConfigurationBuilder captureStrategy(CaptureStrategy captureStrategy) {
+    public WechatConfigrationBuilder captureStrategy(CaptureStrategy captureStrategy) {
         mSelectionSpec.captureStrategy = captureStrategy;
         return this;
     }
@@ -192,10 +191,10 @@ public final class ZhihuConfigurationBuilder {
      *
      * @param orientation An orientation constant as used in {@link ScreenOrientation}.
      *                    Default value is {@link android.content.pm.ActivityInfo#SCREEN_ORIENTATION_PORTRAIT}.
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      * @see Activity#setRequestedOrientation(int)
      */
-    public ZhihuConfigurationBuilder restrictOrientation(@ScreenOrientation int orientation) {
+    public WechatConfigrationBuilder restrictOrientation(@ScreenOrientation int orientation) {
         mSelectionSpec.orientation = orientation;
         return this;
     }
@@ -206,9 +205,9 @@ public final class ZhihuConfigurationBuilder {
      * This will be ignored when {@link #gridExpectedSize(int)} is set.
      *
      * @param spanCount Requested span count.
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      */
-    public ZhihuConfigurationBuilder spanCount(int spanCount) {
+    public WechatConfigrationBuilder spanCount(int spanCount) {
         if (spanCount < 1) throw new IllegalArgumentException("spanCount cannot be less than 1");
         mSelectionSpec.spanCount = spanCount;
         return this;
@@ -220,9 +219,9 @@ public final class ZhihuConfigurationBuilder {
      * size will be as close to this value as possible.
      *
      * @param size Expected media grid size in pixel.
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      */
-    public ZhihuConfigurationBuilder gridExpectedSize(int size) {
+    public WechatConfigrationBuilder gridExpectedSize(int size) {
         mSelectionSpec.gridExpectedSize = size;
         return this;
     }
@@ -232,9 +231,9 @@ public final class ZhihuConfigurationBuilder {
      * 1.0].
      *
      * @param scale Thumbnail's scale in (0.0, 1.0]. Default value is 0.5.
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      */
-    public ZhihuConfigurationBuilder thumbnailScale(float scale) {
+    public WechatConfigrationBuilder thumbnailScale(float scale) {
         if (scale <= 0f || scale > 1f)
             throw new IllegalArgumentException("Thumbnail scale must be between (0.0, 1.0]");
         mSelectionSpec.thumbnailScale = scale;
@@ -248,16 +247,16 @@ public final class ZhihuConfigurationBuilder {
      * And you can implement your own image engine.
      *
      * @param imageEngine {@link com.qingmei2.rximagepicker_extension.engine.impl.GlideEngine}
-     * @return {@link ZhihuConfigurationBuilder} for fluent API.
+     * @return {@link WechatConfigrationBuilder} for fluent API.
      */
-    public ZhihuConfigurationBuilder imageEngine(ImageEngine imageEngine) {
+    public WechatConfigrationBuilder imageEngine(ImageEngine imageEngine) {
         mSelectionSpec.imageEngine = imageEngine;
         return this;
     }
 
     public SelectionSpec build() {
         if (mSelectionSpec.themeId == com.qingmei2.rximagepicker_extension.R.style.Theme_AppCompat_Light)
-            mSelectionSpec.themeId = R.style.Zhihu_Normal;
+            mSelectionSpec.themeId = R.style.Wechat;
 
         return mSelectionSpec;
     }

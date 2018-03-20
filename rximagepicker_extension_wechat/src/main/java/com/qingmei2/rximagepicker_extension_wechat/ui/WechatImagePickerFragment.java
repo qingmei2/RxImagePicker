@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker_extension_zhihu.ui;
+package com.qingmei2.rximagepicker_extension_wechat.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +36,7 @@ import com.qingmei2.rximagepicker_extension.ui.SelectedPreviewActivity;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumsAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner;
-import com.qingmei2.rximagepicker_extension_zhihu.R;
+import com.qingmei2.rximagepicker_extension_wechat.R;
 
 import java.util.ArrayList;
 
@@ -45,7 +45,7 @@ import io.reactivex.subjects.PublishSubject;
 
 import static android.app.Activity.RESULT_OK;
 
-public class ZhihuImagePickerFragment extends Fragment implements
+public class WechatImagePickerFragment extends Fragment implements
         IGalleryCustomPickerView, AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
         View.OnClickListener, ZhihuImageListGridFragment.SelectionProvider,
         AlbumMediaAdapter.OnMediaClickListener, AlbumMediaAdapter.CheckStateListener {
@@ -72,8 +72,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
         final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), SelectionSpec.getInstance().themeId);
         LayoutInflater localInflater = inflater
                 .cloneInContext(contextThemeWrapper);
-        return localInflater.inflate(R.layout.fragment_picker_zhihu, container, false);
-
+        return localInflater.inflate(R.layout.fragment_picker_wechat, container, false);
     }
 
     @Override
@@ -129,8 +128,8 @@ public class ZhihuImagePickerFragment extends Fragment implements
     }
 
     public void closure() {
-        if (getActivity() instanceof ZhihuImagePickerActivity) {
-            ((ZhihuImagePickerActivity) getActivity()).closure();
+        if (getActivity() instanceof WechatImagePickerActivity) {
+            ((WechatImagePickerActivity) getActivity()).closure();
         } else {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -227,7 +226,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
         intent.putExtra(AlbumPreviewActivity.EXTRA_ALBUM, album);
         intent.putExtra(AlbumPreviewActivity.EXTRA_ITEM, item);
         intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.getDataWithBundle());
-        startActivityForResult(intent, ZhihuImagePickerActivity.REQUEST_CODE_PREVIEW);
+        startActivityForResult(intent, WechatImagePickerActivity.REQUEST_CODE_PREVIEW);
     }
 
     @Override
@@ -245,7 +244,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
         if (v.getId() == R.id.button_preview) {
             Intent intent = new Intent(context, SelectedPreviewActivity.class);
             intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.getDataWithBundle());
-            startActivityForResult(intent, ZhihuImagePickerActivity.REQUEST_CODE_PREVIEW);
+            startActivityForResult(intent, WechatImagePickerActivity.REQUEST_CODE_PREVIEW);
         } else if (v.getId() == R.id.button_apply) {
             emitSelectUri();
         } else if (v.getId() == R.id.button_back) {
@@ -277,7 +276,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
         if (resultCode != RESULT_OK)
             return;
 
-        if (requestCode == ZhihuImagePickerActivity.REQUEST_CODE_PREVIEW) {
+        if (requestCode == WechatImagePickerActivity.REQUEST_CODE_PREVIEW) {
             Bundle resultBundle = data.getBundleExtra(BasePreviewActivity.EXTRA_RESULT_BUNDLE);
             ArrayList<Item> selected = resultBundle.getParcelableArrayList(SelectedItemCollection.STATE_SELECTION);
             int collectionType = resultBundle.getInt(SelectedItemCollection.STATE_COLLECTION_TYPE,
@@ -285,7 +284,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
             if (data.getBooleanExtra(BasePreviewActivity.EXTRA_RESULT_APPLY, false)) {  // apply event
                 if (selected != null) {
                     for (Item item : selected) {
-                        if (getActivity() instanceof ZhihuImagePickerActivity) {
+                        if (getActivity() instanceof WechatImagePickerActivity) {
                             ActivityPickerProjector.getInstance().emitUri(item.getContentUri());
                         } else {
                             publishSubject.onNext(item.getContentUri());
