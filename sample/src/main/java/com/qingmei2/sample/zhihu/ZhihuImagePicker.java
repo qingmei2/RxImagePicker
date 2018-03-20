@@ -1,4 +1,4 @@
-package com.qingmei2.sample;
+package com.qingmei2.sample.zhihu;
 
 import android.graphics.Bitmap;
 
@@ -6,6 +6,7 @@ import com.qingmei2.rximagepicker.entity.observeras.AsBitmap;
 import com.qingmei2.rximagepicker.entity.observeras.AsFile;
 import com.qingmei2.rximagepicker.entity.sources.Camera;
 import com.qingmei2.rximagepicker.entity.sources.Gallery;
+import com.qingmei2.sample.R;
 
 import java.io.File;
 

@@ -36,6 +36,13 @@
             android:text="@string/zhihu_name"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btn_wechat_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wechat_name"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

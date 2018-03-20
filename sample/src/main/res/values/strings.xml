@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">RxImagePicker</string>
     <string name="zhihu_name">ZhihuTheme</string>
+    <string name="wechat_name">WechatTheme</string>
     <string name="system_name">SystemTheme</string>
     <string name="action_settings">Settings</string>
     <string name="load_from_uri">Load from Uri</string>

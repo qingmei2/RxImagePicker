@@ -19,10 +19,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ZhihuActivity"
+            android:name=".zhihu.ZhihuActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SystemActivity"
+            android:name=".system.SystemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".wechat.WechatActivity"
             android:screenOrientation="portrait" />
     </application>
 

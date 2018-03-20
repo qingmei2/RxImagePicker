@@ -1,4 +1,4 @@
-package com.qingmei2.sample;
+package com.qingmei2.sample.zhihu;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -16,6 +16,7 @@ import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension_zhihu.ZhihuConfigurationBuilder;
 import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerActivity;
 import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerFragment;
+import com.qingmei2.sample.R;
 
 
 public class ZhihuActivity extends AppCompatActivity {

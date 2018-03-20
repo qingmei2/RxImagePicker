@@ -258,6 +258,7 @@ public class WechatConfigrationBuilder {
         if (mSelectionSpec.themeId == com.qingmei2.rximagepicker_extension.R.style.Theme_AppCompat_Light)
             mSelectionSpec.themeId = R.style.Wechat;
 
+
         return mSelectionSpec;
     }
 }
