@@ -6,7 +6,7 @@ RxImagePicker存在的目的是：让开发者能够**简单**并且**灵活**�
 
 它与传统的其他三方的图片选择库不同的是，后者通过跳转到固定的Activity进行图片选择，并不能满足所有应用的需求；以QQ聊天会话界面的图片选择功能为例，这种特殊的UI需求很难依靠目前市面上主流的图片选择框架实现，开发者只能花费更多的时间成本去自己实现。
 
-![screenshot_qq](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_qq.png){:height="50%" width="50%"}
+![screenshot_qq](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_qq.png)
 
 事实上，其他传统的三方图片选择库并没有解决根本的问题：以更加灵活简单的方式实现**图片选择的功能**和**自定义UI**。
 
@@ -27,10 +27,10 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 - [x] 微信主题图片选择器
 - [x] 自定义UI图片选择器
 
-![screenshot_sysytem](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_sysytem.png){:height="50%" width="50%"}
-![screenshot_zhihu_dracula](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_zhihu_dracula.png){:height="50%" width="50%"}
-![screenshot_zhihu_normal](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_zhihu_normal.png){:height="50%" width="50%"}
-![screenshot_result](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_result.png){:height="50%" width="50%"}
+![screenshot_sysytem](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_sysytem.png)
+![screenshot_zhihu_dracula](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_zhihu_dracula.png)
+![screenshot_zhihu_normal](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_zhihu_normal.png)
+![screenshot_result](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_result.png)
 
 ## <h2 id="Usage">基本使用</h2>
 
