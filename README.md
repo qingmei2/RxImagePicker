@@ -2,28 +2,35 @@
 
 ## 简介
 
-RxImagePicker存在的目的是：让开发者能够*简单*并且*灵活*的方式实现Android开发中*图片选择*的需求。
+RxImagePicker存在的目的是：让开发者能够**简单**并且**灵活**的方式实现Android开发中**图片选择**的需求。
 
 它与传统的其他三方的图片选择库不同的是，后者通过跳转到固定的Activity进行图片选择，并不能满足所有应用的需求；以QQ聊天会话界面的图片选择功能为例，这种特殊的UI需求很难依靠目前市面上主流的图片选择框架实现，开发者只能花费更多的时间成本去自己实现。
 
-事实上，其他传统的三方图片选择库并没有解决根本的问题：以更加灵活简单的方式实现*图片选择的功能*和*自定义UI*。
+![screenshot_qq](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_qq.png)
+
+事实上，其他传统的三方图片选择库并没有解决根本的问题：以更加灵活简单的方式实现**图片选择的功能**和**自定义UI**。
 
 RxImagePicker是一个用于Android的响应式图片选择器，它将您的图片选择需求转换为一个接口进行配置，并在任何一个Activity或者Fragment中展示任何样式的图片选择UI。
 
 ### 支持的功能
 
-* Android Camera拍照
-* Android 图片选择
-* 以响应式数据流的格式返回数据（支持Observable/Flowable/Single/Maybe）
-* 动态配置响应式数据流的数据类型（File,Bitmap,或是Uri）
+- [x] Android Camera拍照
+- [x] Android 图片选择
+- [x] 以响应式数据流的格式返回数据（支持Observable/Flowable/Single/Maybe）
+- [x] 动态配置响应式数据流的数据类型（File,Bitmap,或是Uri）
 
 ### UI的支持
 
 除了Android系统默认的图片选择样式，你可以选择使用这些额外的UI支持：
 
-* 知乎主题图片选择器
-* 微信主题图片选择器
-* 自定义UI图片选择器
+- [x] 知乎主题图片选择器
+- [x] 微信主题图片选择器
+- [x] 自定义UI图片选择器
+
+![screenshot_sysytem](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_sysytem.png)
+![screenshot_zhihu_dracula](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_zhihu_dracula.png)  
+![screenshot_zhihu_normal](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_zhihu_normal.png)  
+![screenshot_result](https://github.com/qingmei2/RxImagePicker/blob/dev_qingmei2/screenshot/screenshot_result.png)  
 
 ## <h2 id="Usage">基本使用</h2>
 
@@ -62,16 +69,16 @@ public interface MyImagePicker {
 
 #### @Gallery/@Camera注解声明了对应的行为：
 
-@Camera 打开相机拍照并返回图片
-@Gallery 打开相册选择并返回图片
+@Camera 打开相机拍照并返回图片  
+@Gallery 打开相册选择并返回图片  
 
 请注意，接口的每个方法都需要添加该类型的注解以声明对应的行为，若方法未配置@Gallery或@Camera，RxImagePicker会在运行时无法进行解析，并抛出对应的异常。
 
 #### @AsFile/@AsBitmap/@AsUri注解声明了数据返回的格式
 
-@AsFile 返回File类型的数据
-@AsBitmap  返回Bitmap类型的数据
-@AsUri  返回Uri类型的数据
+@AsFile 返回File类型的数据  
+@AsBitmap  返回Bitmap类型的数据  
+@AsUri  返回Uri类型的数据  
 
 请注意，若方法未配置该类型的注解以声明数据应当返回的格式，则默认会以Uri的格式进行数据的返回。
 
@@ -111,10 +118,6 @@ public interface DefaultImagePicker {
 }
 
 ```
-
-## ScreenShot
-
-![sample_02](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/sample_screenshot.png)
 
 ## Contributor
 
