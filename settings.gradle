@@ -1,1 +1,1 @@
-include ':sample', ':rximagepicker', ':rximagepicker_extension', ':rximagepicker_extension_zhihu', ':rximagepicker_extension_wechat'
+include ':sample', ':rximagepicker', ':rximagepicker_support', ':rximagepicker_support_zhihu', ':rximagepicker_support_wechat'

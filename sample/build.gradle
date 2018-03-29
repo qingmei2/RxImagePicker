@@ -17,7 +17,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -30,9 +29,9 @@ dependencies {
     api rootProject.ext.dependencies["glide"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     implementation project(':rximagepicker')
-    implementation project(':rximagepicker_extension')
-    implementation project(':rximagepicker_extension_wechat')
-    implementation project(':rximagepicker_extension_zhihu')
+    implementation project(':rximagepicker_support')
+    implementation project(':rximagepicker_support_wechat')
+    implementation project(':rximagepicker_support_zhihu')
 
     testImplementation rootProject.ext.dependencies["junit"]
 }
