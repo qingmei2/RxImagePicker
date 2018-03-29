@@ -1,5 +1,7 @@
 # RxImagePicker
 
+![Download](https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg) ](https://bintray.com/mq2553299/maven/rximagepicker/_latestVersion)
+
 ## 简介
 
 RxImagePicker存在的目的是：让开发者能够**简单**并且**灵活**的方式实现Android开发中**图片选择**的需求。
@@ -39,14 +41,14 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 ```groovy
 
 //提供了系统默认的图片选择器和拍照功能
-compile 'com.github.qingmei2:rximagepicker:0.1.0-beta4'
+compile 'com.github.qingmei2:rximagepicker:0.1.0'
 
 //提供了自定义UI图片选择器的基本组件，自定义UI的需求需要添加该依赖
-compile 'com.github.qingmei2:rximagepicker_extension:0.1.0-beta4'
+compile 'com.github.qingmei2:rximagepicker_support:0.1.0'
 
 //如果需要额外的UI支持，请选择依赖对应的UI拓展库
-compile 'com.github.qingmei2:rximagepicker_extension_zhihu:0.1.0-beta4'     //知乎图片选择器
-compile 'com.github.qingmei2:rximagepicker_extension_wechat:0.1.0-beta4'    //微信图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_zhihu:0.1.0'     //知乎图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_wechat:0.1.0'    //微信图片选择器(开发中...)
 
 ```
 ### 2. 接口配置
