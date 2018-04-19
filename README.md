@@ -1,6 +1,6 @@
 # RxImagePicker
 
-![Download](https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg) ](https://bintray.com/mq2553299/maven/rximagepicker/_latestVersion)
+![Download](https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg)
 
 ## 简介
 
