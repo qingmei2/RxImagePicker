@@ -37,7 +37,7 @@ import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.MediaGridInset;
 import com.qingmei2.rximagepicker_extension.utils.UIUtils;
 
-public class ZhihuImageListGridFragment extends Fragment implements
+public class WechatImageListGridFragment extends Fragment implements
         AlbumMediaAdapter.CheckStateListener, AlbumMediaAdapter.OnMediaClickListener,
         AlbumMediaCollection.AlbumMediaCallbacks {
 
@@ -50,8 +50,8 @@ public class ZhihuImageListGridFragment extends Fragment implements
     private AlbumMediaAdapter.CheckStateListener mCheckStateListener;
     private AlbumMediaAdapter.OnMediaClickListener mOnMediaClickListener;
 
-    public static ZhihuImageListGridFragment instance(Album album) {
-        ZhihuImageListGridFragment fragment = new ZhihuImageListGridFragment();
+    public static WechatImageListGridFragment instance(Album album) {
+        WechatImageListGridFragment fragment = new WechatImageListGridFragment();
         Bundle args = new Bundle();
         args.putParcelable(EXTRA_ALBUM, album);
         fragment.setArguments(args);

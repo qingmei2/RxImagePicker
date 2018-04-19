@@ -14,20 +14,59 @@
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
         android:orientation="horizontal"
-        tools:background="@color/dracula_primary">
+        tools:background="@color/wechat_primary">
 
         <ImageView
             android:id="@+id/button_back"
             android:layout_width="?actionBarSize"
             android:layout_height="?actionBarSize"
-            android:padding="12dp"
+            android:padding="14dp"
             android:src="@drawable/ic_arrow_back_" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="图片和视频"
+            android:textColor="@color/wechat_bottom_toolbar_preview_text"
+            android:textSize="17sp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/button_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:foreground="?selectableItemBackground"
+            android:padding="16dp"
+            android:textColor="?attr/bottomToolbar.apply.textColor"
+            android:textSize="16sp"
+            tools:layout_height="50dp"
+            tools:text="@string/button_apply_default"
+            tools:textColor="@color/wechat_bottom_toolbar_apply_text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/bottomToolbar.bg"
+        android:elevation="4dp"
+        android:orientation="horizontal"
+        tools:background="@color/wechat_primary"
+        tools:targetApi="lollipop">
 
         <TextView
             android:id="@+id/selected_album"
             android:layout_width="wrap_content"
             android:layout_height="?actionBarSize"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="16dp"
             android:drawableRight="@drawable/ic_arrow_drop_down_white_24dp"
             android:foreground="?selectableItemBackground"
             android:gravity="center"
@@ -35,19 +74,12 @@
             android:textSize="20sp"
             tools:layout_height="50dp"
             tools:text="选择图片"
-            tools:textColor="@color/dracula_album_dropdown_title_text" />
+            tools:textColor="@color/wechat_album_dropdown_title_text" />
 
-    </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/bottom_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="?attr/bottomToolbar.bg"
-        android:elevation="4dp"
-        tools:background="@color/dracula_primary"
-        tools:targetApi="lollipop">
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/button_preview"
@@ -61,22 +93,9 @@
             android:textSize="16sp"
             tools:layout_height="50dp"
             tools:text="@string/button_preview"
-            tools:textColor="@color/dracula_bottom_toolbar_preview_text" />
+            tools:textColor="@color/wechat_bottom_toolbar_preview_text" />
 
-        <TextView
-            android:id="@+id/button_apply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:foreground="?selectableItemBackground"
-            android:padding="16dp"
-            android:textColor="?attr/bottomToolbar.apply.textColor"
-            android:textSize="16sp"
-            tools:layout_height="50dp"
-            tools:text="@string/button_apply_default"
-            tools:textColor="@color/dracula_bottom_toolbar_apply_text" />
-
-    </FrameLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/container"
@@ -109,7 +128,7 @@
             tools:drawableTop="@drawable/ic_empty_zhihu"
             tools:layout_height="50dp"
             tools:text="@string/empty_text"
-            tools:textColor="@color/dracula_album_empty_view" />
+            tools:textColor="@color/wechat_album_empty_view" />
 
     </FrameLayout>
 </RelativeLayout>

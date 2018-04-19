@@ -12,9 +12,8 @@ import com.qingmei2.rximagepicker_extension_wechat.R;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
+@SuppressWarnings("CheckResult")
 public class WechatImagePickerActivity extends AppCompatActivity {
-
-    private WechatImagePickerFragment fragment;
 
     public static final int REQUEST_CODE_PREVIEW = 23;
 
@@ -27,7 +26,7 @@ public class WechatImagePickerActivity extends AppCompatActivity {
     }
 
     private void displayPickerView() {
-        fragment = new WechatImagePickerFragment();
+        WechatImagePickerFragment fragment = new WechatImagePickerFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fl_container, fragment)

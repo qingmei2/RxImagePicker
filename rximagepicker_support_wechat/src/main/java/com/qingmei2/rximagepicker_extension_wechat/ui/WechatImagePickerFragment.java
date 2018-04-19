@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,9 +35,10 @@ import com.qingmei2.rximagepicker_extension.ui.AlbumPreviewActivity;
 import com.qingmei2.rximagepicker_extension.ui.BasePreviewActivity;
 import com.qingmei2.rximagepicker_extension.ui.SelectedPreviewActivity;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter;
-import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumsAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner;
 import com.qingmei2.rximagepicker_extension_wechat.R;
+import com.qingmei2.rximagepicker_extension_wechat.ui.adapter.WechatAlbumsAdapter;
+import com.qingmei2.rximagepicker_extension_wechat.ui.widget.WechatAlbumsSpinner;
 
 import java.util.ArrayList;
 
@@ -47,13 +49,13 @@ import static android.app.Activity.RESULT_OK;
 
 public class WechatImagePickerFragment extends Fragment implements
         IGalleryCustomPickerView, AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
-        View.OnClickListener, ZhihuImageListGridFragment.SelectionProvider,
+        View.OnClickListener, WechatImageListGridFragment.SelectionProvider,
         AlbumMediaAdapter.OnMediaClickListener, AlbumMediaAdapter.CheckStateListener {
 
     private final AlbumCollection mAlbumCollection = new AlbumCollection();
 
     private AlbumsSpinner mAlbumsSpinner;
-    private AlbumsAdapter mAlbumsAdapter;
+    private CursorAdapter mAlbumsAdapter;
 
     private PublishSubject<Uri> publishSubject;
 
@@ -93,11 +95,11 @@ public class WechatImagePickerFragment extends Fragment implements
         mSelectedCollection.onCreate(savedInstanceState);
         updateBottomToolbar();
 
-        mAlbumsAdapter = new AlbumsAdapter(context, null, false);
-        mAlbumsSpinner = new AlbumsSpinner(context);
+        mAlbumsAdapter = new WechatAlbumsAdapter(context, null, false);
+        mAlbumsSpinner = new WechatAlbumsSpinner(context);
         mAlbumsSpinner.setOnItemSelectedListener(this);
         mAlbumsSpinner.setSelectedTextView(view.findViewById(R.id.selected_album));
-        mAlbumsSpinner.setPopupAnchorView(view.findViewById(R.id.toolbar));
+        mAlbumsSpinner.setPopupAnchorView(view.findViewById(R.id.bottom_toolbar));
         mAlbumsSpinner.setAdapter(mAlbumsAdapter);
         mAlbumCollection.onCreate(getActivity(), this);
         mAlbumCollection.onRestoreInstanceState(savedInstanceState);
@@ -205,11 +207,11 @@ public class WechatImagePickerFragment extends Fragment implements
         } else {
             mContainer.setVisibility(View.VISIBLE);
             mEmptyView.setVisibility(View.GONE);
-            ZhihuImageListGridFragment fragment = ZhihuImageListGridFragment.instance(album);
+            WechatImageListGridFragment fragment = WechatImageListGridFragment.instance(album);
             fragment.injectDependencies(this, this, this);
             getChildFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.container, fragment, ZhihuImageListGridFragment.class.getSimpleName())
+                    .replace(R.id.container, fragment, WechatImageListGridFragment.class.getSimpleName())
                     .commitAllowingStateLoss();
         }
     }
@@ -295,9 +297,9 @@ public class WechatImagePickerFragment extends Fragment implements
             } else {         // back event
                 mSelectedCollection.overwrite(selected, collectionType);
                 Fragment weChatListFragment = getChildFragmentManager().findFragmentByTag(
-                        ZhihuImageListGridFragment.class.getSimpleName());
-                if (weChatListFragment instanceof ZhihuImageListGridFragment) {
-                    ((ZhihuImageListGridFragment) weChatListFragment).refreshMediaGrid();
+                        WechatImageListGridFragment.class.getSimpleName());
+                if (weChatListFragment instanceof WechatImageListGridFragment) {
+                    ((WechatImageListGridFragment) weChatListFragment).refreshMediaGrid();
                 }
                 updateBottomToolbar();
             }

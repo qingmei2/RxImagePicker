@@ -33,11 +33,14 @@ import com.qingmei2.rximagepicker_extension.utils.Platform;
 
 public class AlbumsSpinner {
 
-    private static final int MAX_SHOWN_COUNT = 6;
-    private CursorAdapter mAdapter;
-    private TextView mSelected;
-    private ListPopupWindow mListPopupWindow;
-    private AdapterView.OnItemSelectedListener mOnItemSelectedListener;
+    protected static final int MAX_SHOWN_COUNT = 6;
+    protected CursorAdapter mAdapter;
+    protected TextView mSelected;
+    protected ListPopupWindow mListPopupWindow;
+    protected AdapterView.OnItemSelectedListener mOnItemSelectedListener;
+
+    public AlbumsSpinner() {
+    }
 
     public AlbumsSpinner(@NonNull Context context) {
         mListPopupWindow = new ListPopupWindow(context, null, R.attr.listPopupWindowStyle);
@@ -68,7 +71,7 @@ public class AlbumsSpinner {
         onItemSelected(context, position);
     }
 
-    private void onItemSelected(Context context, int position) {
+    protected void onItemSelected(Context context, int position) {
         mListPopupWindow.dismiss();
         Cursor cursor = mAdapter.getCursor();
         cursor.moveToPosition(position);
