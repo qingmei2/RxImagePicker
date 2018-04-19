@@ -18,7 +18,7 @@ import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerActivity;
 import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerFragment;
 import com.qingmei2.sample.R;
 
-
+@SuppressWarnings("CheckResult")
 public class ZhihuActivity extends AppCompatActivity {
 
     private ImageView ivPickedImage;

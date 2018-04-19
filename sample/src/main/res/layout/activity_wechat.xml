@@ -11,7 +11,7 @@
         android:background="?attr/colorPrimary"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
-        android:text="@string/zhihu_name"
+        android:text="@string/wechat_name"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         app:popupTheme="@style/AppTheme.PopupOverlay" />

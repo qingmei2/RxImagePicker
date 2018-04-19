@@ -12,6 +12,7 @@ import com.qingmei2.rximagepicker.ui.DefaultImagePicker;
 import com.qingmei2.rximagepicker_extension.engine.impl.GlideApp;
 import com.qingmei2.sample.R;
 
+@SuppressWarnings("CheckResult")
 public class SystemActivity extends AppCompatActivity {
 
     private DefaultImagePicker defaultImagePicker;

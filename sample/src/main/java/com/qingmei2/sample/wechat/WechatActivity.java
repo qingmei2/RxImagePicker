@@ -17,6 +17,7 @@ import com.qingmei2.rximagepicker_extension_wechat.WechatConfigrationBuilder;
 import com.qingmei2.rximagepicker_extension_wechat.ui.WechatImagePickerActivity;
 import com.qingmei2.sample.R;
 
+@SuppressWarnings("CheckResult")
 public class WechatActivity extends AppCompatActivity {
 
     private ImageView ivPickedImage;
