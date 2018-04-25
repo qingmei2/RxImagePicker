@@ -20,6 +20,7 @@ import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -78,10 +79,15 @@ public class AlbumMediaAdapter extends
             });
             return holder;
         } else if (viewType == VIEW_TYPE_MEDIA) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.media_grid_item, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(getItemLayoutRes(), parent, false);
             return new MediaViewHolder(v);
         }
         return null;
+    }
+
+    @LayoutRes
+    protected int getItemLayoutRes() {
+        return R.layout.media_grid_item;
     }
 
     @Override

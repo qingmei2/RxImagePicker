@@ -39,4 +39,5 @@
         android:textSize="15sp"
         android:layout_alignLeft="@id/album_name"
         android:layout_toRightOf="@id/album_cover" />
+
 </RelativeLayout>

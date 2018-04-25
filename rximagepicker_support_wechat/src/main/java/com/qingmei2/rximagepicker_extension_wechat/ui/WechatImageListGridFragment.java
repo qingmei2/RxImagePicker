@@ -36,6 +36,7 @@ import com.qingmei2.rximagepicker_extension.model.SelectedItemCollection;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.MediaGridInset;
 import com.qingmei2.rximagepicker_extension.utils.UIUtils;
+import com.qingmei2.rximagepicker_extension_wechat.ui.adapter.WechatAlbumMediaAdapter;
 
 public class WechatImageListGridFragment extends Fragment implements
         AlbumMediaAdapter.CheckStateListener, AlbumMediaAdapter.OnMediaClickListener,
@@ -91,7 +92,7 @@ public class WechatImageListGridFragment extends Fragment implements
         super.onActivityCreated(savedInstanceState);
         Album album = getArguments().getParcelable(EXTRA_ALBUM);
 
-        mAdapter = new AlbumMediaAdapter(getContext(),
+        mAdapter = new WechatAlbumMediaAdapter(getContext(),
                 mSelectionProvider.provideSelectedItemCollection(), mRecyclerView);
         mAdapter.registerCheckStateListener(this);
         mAdapter.registerOnMediaClickListener(this);

@@ -38,14 +38,14 @@
 
         <TextView
             android:id="@+id/button_apply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:foreground="?selectableItemBackground"
-            android:padding="16dp"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/selector_wechat_toolbar_apply_none"
+            android:gravity="center"
             android:textColor="?attr/bottomToolbar.apply.textColor"
-            android:textSize="16sp"
-            tools:layout_height="50dp"
+            android:textSize="14sp"
             tools:text="@string/button_apply_default"
             tools:textColor="@color/wechat_bottom_toolbar_apply_text" />
 

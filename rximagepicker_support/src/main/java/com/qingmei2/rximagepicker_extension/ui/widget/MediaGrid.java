@@ -31,14 +31,14 @@ import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
 
 public class MediaGrid extends SquareFrameLayout implements View.OnClickListener {
 
-    private ImageView mThumbnail;
-    private CheckView mCheckView;
-    private ImageView mGifTag;
-    private TextView mVideoDuration;
+    protected ImageView mThumbnail;
+    protected CheckView mCheckView;
+    protected ImageView mGifTag;
+    protected TextView mVideoDuration;
 
-    private Item mMedia;
-    private PreBindInfo mPreBindInfo;
-    private OnMediaGridClickListener mListener;
+    protected Item mMedia;
+    protected PreBindInfo mPreBindInfo;
+    protected OnMediaGridClickListener mListener;
 
     public MediaGrid(Context context) {
         super(context);
@@ -50,7 +50,7 @@ public class MediaGrid extends SquareFrameLayout implements View.OnClickListener
         init(context);
     }
 
-    private void init(Context context) {
+    protected void init(Context context) {
         LayoutInflater.from(context).inflate(R.layout.media_grid_content, this, true);
 
         mThumbnail = findViewById(R.id.media_thumbnail);

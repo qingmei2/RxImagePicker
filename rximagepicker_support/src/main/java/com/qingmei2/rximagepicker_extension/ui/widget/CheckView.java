@@ -37,23 +37,23 @@ import com.qingmei2.rximagepicker_extension.R;
 public class CheckView extends View {
 
     public static final int UNCHECKED = Integer.MIN_VALUE;
-    private static final float STROKE_WIDTH = 3.0f; // dp
-    private static final float SHADOW_WIDTH = 6.0f; // dp
-    private static final int SIZE = 48; // dp
-    private static final float STROKE_RADIUS = 11.5f; // dp
-    private static final float BG_RADIUS = 11.0f; // dp
-    private static final int CONTENT_SIZE = 16; // dp
-    private boolean mCountable;
-    private boolean mChecked;
-    private int mCheckedNum;
-    private Paint mStrokePaint;
-    private Paint mBackgroundPaint;
-    private TextPaint mTextPaint;
-    private Paint mShadowPaint;
-    private Drawable mCheckDrawable;
-    private float mDensity;
-    private Rect mCheckRect;
-    private boolean mEnabled = true;
+    protected static final float STROKE_WIDTH = 3.0f; // dp
+    protected static final float SHADOW_WIDTH = 6.0f; // dp
+    protected static final int SIZE = 48; // dp
+    protected static final float STROKE_RADIUS = 11.5f; // dp
+    protected static final float BG_RADIUS = 11.0f; // dp
+    protected static final int CONTENT_SIZE = 16; // dp
+    protected boolean mCountable;
+    protected boolean mChecked;
+    protected int mCheckedNum;
+    protected Paint mStrokePaint;
+    protected Paint mBackgroundPaint;
+    protected TextPaint mTextPaint;
+    protected Paint mShadowPaint;
+    protected Drawable mCheckDrawable;
+    protected float mDensity;
+    protected Rect mCheckRect;
+    protected boolean mEnabled = true;
 
     public CheckView(Context context) {
         super(context);
@@ -77,7 +77,7 @@ public class CheckView extends View {
         super.onMeasure(sizeSpec, sizeSpec);
     }
 
-    private void init(Context context) {
+    protected void init(Context context) {
         mDensity = context.getResources().getDisplayMetrics().density;
 
         mStrokePaint = new Paint();
@@ -167,7 +167,7 @@ public class CheckView extends View {
         setAlpha(mEnabled ? 1.0f : 0.5f);
     }
 
-    private void initShadowPaint() {
+    protected void initShadowPaint() {
         if (mShadowPaint == null) {
             mShadowPaint = new Paint();
             mShadowPaint.setAntiAlias(true);
@@ -190,7 +190,7 @@ public class CheckView extends View {
         }
     }
 
-    private void initBackgroundPaint() {
+    protected void initBackgroundPaint() {
         if (mBackgroundPaint == null) {
             mBackgroundPaint = new Paint();
             mBackgroundPaint.setAntiAlias(true);
@@ -206,7 +206,7 @@ public class CheckView extends View {
         }
     }
 
-    private void initTextPaint() {
+    protected void initTextPaint() {
         if (mTextPaint == null) {
             mTextPaint = new TextPaint();
             mTextPaint.setAntiAlias(true);
@@ -217,7 +217,7 @@ public class CheckView extends View {
     }
 
     // rect for drawing checked number or mark
-    private Rect getCheckRect() {
+    protected Rect getCheckRect() {
         if (mCheckRect == null) {
             int rectPadding = (int) (SIZE * mDensity / 2 - CONTENT_SIZE * mDensity / 2);
             mCheckRect = new Rect(rectPadding, rectPadding,
