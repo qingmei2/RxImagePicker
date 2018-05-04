@@ -244,7 +244,7 @@ public class WechatImagePickerFragment extends Fragment implements
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button_preview) {
-            Intent intent = new Intent(context, SelectedPreviewActivity.class);
+            Intent intent = new Intent(context, WechatSelectedPreviewActivity.class);
             intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.getDataWithBundle());
             startActivityForResult(intent, WechatImagePickerActivity.REQUEST_CODE_PREVIEW);
         } else if (v.getId() == R.id.button_apply) {
