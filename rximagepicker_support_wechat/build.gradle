@@ -42,7 +42,7 @@ repositories {
 publish {
     userOrg = 'mq2553299'
     groupId = 'com.github.qingmei2'
-    artifactId = 'rximagepicker_extension_wechat'
+    artifactId = 'rximagepicker_support_wechat'
     publishVersion = rootProject.ext.android["versionName"]
     desc = 'The library which choosing pictures from camera or gallery in Android.'
     website = 'https://github.com/qingmei2/RxImagePicker'
