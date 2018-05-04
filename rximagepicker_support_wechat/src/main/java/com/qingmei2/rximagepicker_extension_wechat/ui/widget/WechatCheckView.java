@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -14,6 +15,11 @@ public class WechatCheckView extends CheckView {
 
     private static final float WECHAT_STROKE_WIDTH = 1.5f; // dp
     private static final float WECHAT_STROKE_CONNER = 5f; // dp
+
+    private RectF rect;
+    private Rect drawableRect;
+
+    private static final int PROOFREAD_SIZE = 8;
 
     public WechatCheckView(Context context) {
         super(context);
@@ -31,17 +37,19 @@ public class WechatCheckView extends CheckView {
     protected void init(Context context) {
         super.init(context);
         mStrokePaint.setStrokeWidth(WECHAT_STROKE_WIDTH * mDensity);
+
+        // draw white stroke
+        float dx = mDensity * SIZE / 4;
+        float dy = mDensity * SIZE / 4;
+        rect = new RectF(2 * dx - PROOFREAD_SIZE, dy - PROOFREAD_SIZE,
+                3 * dx + PROOFREAD_SIZE, 2 * dy + PROOFREAD_SIZE);
+        drawableRect = new Rect((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         // draw outer and inner shadow
         initShadowPaint();
-
-        // draw white stroke
-        float dx = mDensity * SIZE / 4;
-        float dy = mDensity * SIZE / 4;
-        RectF rect = new RectF(2 * dx - 8, dy - 8, 3 * dx + 8, 2 * dy + 8);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawRoundRectCheckView(canvas, rect, mStrokePaint);
@@ -60,9 +68,9 @@ public class WechatCheckView extends CheckView {
                 }
                 initTextPaint();
                 String text = String.valueOf(mCheckedNum);
-                int baseX = (int) (rect.right - mTextPaint.measureText(text)) / 2;
-                int baseY = (int) (rect.bottom - mTextPaint.descent() - mTextPaint.ascent()) / 2;
-                canvas.drawText(text, baseX, baseY, mTextPaint);
+                int baseX = (int) (rect.width() - mTextPaint.measureText(text)) / 2;
+                int baseY = (int) (rect.height() - mTextPaint.descent() - mTextPaint.ascent()) / 2;
+                canvas.drawText(text, baseX + rect.left, baseY + rect.top, mTextPaint);
             }
         } else {
             if (mChecked) {
@@ -72,7 +80,7 @@ public class WechatCheckView extends CheckView {
                 } else {
                     drawRectCheckView(canvas, rect, mBackgroundPaint);
                 }
-                mCheckDrawable.setBounds(getCheckRect());
+                mCheckDrawable.setBounds(drawableRect);
                 mCheckDrawable.draw(canvas);
             }
         }

@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/button_apply"
             android:layout_width="70dp"
-            android:layout_height="35dp"
+            android:layout_height="30dp"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="12dp"
             android:background="@drawable/selector_wechat_toolbar_apply_none"

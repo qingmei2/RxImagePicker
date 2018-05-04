@@ -18,6 +18,7 @@ package com.qingmei2.rximagepicker_extension.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -59,7 +60,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(SelectionSpec.getInstance().themeId);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_media_preview);
+        setContentView(getLayoutRes());
         if (Platform.hasKitKat()) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
@@ -114,6 +115,11 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
             }
         });
         updateApplyButton();
+    }
+
+    @LayoutRes
+    protected int getLayoutRes() {
+        return R.layout.activity_media_preview;
     }
 
     @Override

@@ -10,7 +10,7 @@
     <color name="wechat_album_empty_view">#4DFFFFFF</color>
 
     <color name="wechat_item_placeholder">#37474F</color>
-    <color name="wechat_item_checkCircle_backgroundColor">#263237</color>
+    <color name="wechat_item_checkCircle_backgroundColor">#319A02</color>
     <color name="wechat_item_checkCircle_borderColor">#FFFFFF</color>
     <color name="wechat_capture">#FFFFFF</color>
 
@@ -26,7 +26,7 @@
     <color name="wechat_preview_bottom_toolbar_apply_text">#03A9F4</color>
     <color name="wechat_preview_bottom_toolbar_apply_text_disable">#4D03A9F4</color>
 
-    <color name="wechat_toolbar_apply_image_none">#19790d</color>
-    <color name="wechat_toolbar_apply_image_pressed">#03af14</color>
-    <color name="wechat_toolbar_apply_image_unpressed">#319a02</color>
+    <color name="wechat_toolbar_apply_image_none">#19790D</color>
+    <color name="wechat_toolbar_apply_image_pressed">#03AF14</color>
+    <color name="wechat_toolbar_apply_image_unpressed">#319A02</color>
 </resources>

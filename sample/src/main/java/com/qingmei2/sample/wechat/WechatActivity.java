@@ -63,6 +63,7 @@ public class WechatActivity extends AppCompatActivity {
                                 .maxSelectable(9)
                                 .countable(true)
                                 .spanCount(4)
+                                .countable(false)
                                 .theme(R.style.Wechat)
                                 .build()
                 )
