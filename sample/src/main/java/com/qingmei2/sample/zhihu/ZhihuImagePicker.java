@@ -6,7 +6,6 @@ import com.qingmei2.rximagepicker.entity.observeras.AsBitmap;
 import com.qingmei2.rximagepicker.entity.observeras.AsFile;
 import com.qingmei2.rximagepicker.entity.sources.Camera;
 import com.qingmei2.rximagepicker.entity.sources.Gallery;
-import com.qingmei2.sample.R;
 
 import java.io.File;
 
@@ -15,16 +14,16 @@ import io.reactivex.Single;
 
 public interface ZhihuImagePicker {
 
-    String KEY_ZHIHU_PICKER_ACTIVITY = "key_zhihu_picker_as_activity";
-    String KEY_ZHIHU_PICKER_FRAGMENT = "key_zhihu_picker_as_fragment";
+    String KEY_ZHIHU_PICKER_NORMAL = "key_zhihu_picker_theme_normal";
+    String KEY_ZHIHU_PICKER_DRACULA = "key_zhihu_picker_theme_dracula";
 
     @AsBitmap
-    @Gallery(viewKey = KEY_ZHIHU_PICKER_ACTIVITY)
-    Observable<Bitmap> openGallery();
+    @Gallery(viewKey = KEY_ZHIHU_PICKER_NORMAL)
+    Observable<Bitmap> openGalleryAsNormal();
 
     @AsBitmap
-    @Gallery(viewKey = KEY_ZHIHU_PICKER_FRAGMENT, containerViewId = R.id.fl_container)
-    Observable<Bitmap> openGalleryWithFragment();
+    @Gallery(viewKey = KEY_ZHIHU_PICKER_DRACULA)
+    Observable<Bitmap> openGalleryAsDracula();
 
     @AsFile
     @Camera

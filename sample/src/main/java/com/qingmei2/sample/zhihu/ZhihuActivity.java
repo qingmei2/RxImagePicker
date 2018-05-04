@@ -15,7 +15,6 @@ import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension_zhihu.ZhihuConfigurationBuilder;
 import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerActivity;
-import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerFragment;
 import com.qingmei2.sample.R;
 
 @SuppressWarnings("CheckResult")
@@ -62,7 +61,7 @@ public class ZhihuActivity extends AppCompatActivity {
         rxImagePicker = new RxImagePicker.Builder()
                 .with(this)
                 .addCustomGallery(
-                        ZhihuImagePicker.KEY_ZHIHU_PICKER_ACTIVITY,
+                        ZhihuImagePicker.KEY_ZHIHU_PICKER_NORMAL,
                         ZhihuImagePickerActivity.class,
                         new ZhihuConfigurationBuilder(MimeType.ofAll(), false)
                                 .maxSelectable(9)
@@ -72,8 +71,8 @@ public class ZhihuActivity extends AppCompatActivity {
                                 .build()
                 )
                 .addCustomGallery(
-                        ZhihuImagePicker.KEY_ZHIHU_PICKER_FRAGMENT,
-                        new ZhihuImagePickerFragment(),
+                        ZhihuImagePicker.KEY_ZHIHU_PICKER_DRACULA,
+                        ZhihuImagePickerActivity.class,
                         new ZhihuConfigurationBuilder(MimeType.ofAll(), false)
                                 .spanCount(3)
                                 .maxSelectable(1)
@@ -97,9 +96,9 @@ public class ZhihuActivity extends AppCompatActivity {
         if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA) {
             openCamera();
         } else if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_ACTIVITY) {
-            openGallery();
+            openGalleryAsNormal();
         } else {
-            openGalleryAsFragment();
+            openGalleryAsDracula();
         }
     }
 
@@ -111,14 +110,20 @@ public class ZhihuActivity extends AppCompatActivity {
                         this::toastError);
     }
 
-    private void openGallery() {
-        rxImagePicker.openGallery()
+    /**
+     * 日间主题的知乎图片选择界面
+     */
+    private void openGalleryAsNormal() {
+        rxImagePicker.openGalleryAsNormal()
                 .subscribe(bitmap -> ivPickedImage.setImageBitmap(bitmap),
                         this::toastError);
     }
 
-    private void openGalleryAsFragment() {
-        rxImagePicker.openGalleryWithFragment()
+    /**
+     * 夜间主题的知乎图片选择界面
+     */
+    private void openGalleryAsDracula() {
+        rxImagePicker.openGalleryAsDracula()
                 .subscribe(bitmap -> ivPickedImage.setImageBitmap(bitmap),
                         this::toastError);
     }
