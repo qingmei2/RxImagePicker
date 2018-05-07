@@ -25,13 +25,22 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 
 除了Android系统默认的图片选择样式，你可以选择使用这些额外的UI支持：
 
+- [x] 系统级别图片选择器
 - [x] 知乎主题图片选择器
 - [x] 微信主题图片选择器
 - [x] 自定义UI图片选择器
 
+### Sample截图
+
 ![screenshot_sysytem](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_sysytem.png)
+![screenshot_sysytem](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_sysytem.png)
+
 ![screenshot_zhihu_dracula](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_zhihu_dracula.png)
 ![screenshot_zhihu_normal](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_zhihu_normal.png)
+
+<div align="left"><img width="300" height="540" src="https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_wechat.png"/></div>
+<div align="left"><img width="300" height="540" src="https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_wechat_expand.png"/></div>
+
 ![screenshot_result](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_result.png)
 
 ## <h2 id="Usage">基本使用</h2>
