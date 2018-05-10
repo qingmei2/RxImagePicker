@@ -106,7 +106,7 @@ public class RxImagePicker {
             if (cameraViews.containsKey(viewKey) ||
                     galleryViews.containsKey(viewKey) ||
                     activityClasses.containsKey(viewKey)) {
-                throw new IllegalArgumentException(String.format("Can't use s% repeatedly as viewKey", viewKey));
+                throw new IllegalArgumentException(String.format("Can't use %s repeatedly as viewKey", viewKey));
             }
             return viewKey;
         }
