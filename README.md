@@ -4,7 +4,7 @@
 
 ### RxImagePicker的设计起源，请参考我的这篇文章：
 
-[RxImagePicker:从零实现灵活且可高度定制的Android图片选择架构](https://blog.csdn.net/mq2553299/article/details/80214981)
+[RxImagePicker:从零实现灵活且可高度定制的Android图片选择架构](https://www.jianshu.com/p/fecf3a13e615)
 
 ## 目录
 
@@ -66,14 +66,14 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 
 ```groovy
 // 最基础的架构，仅提供了系统默认的图片选择器和拍照功能
-compile 'com.github.qingmei2:rximagepicker:0.2.0'
+compile 'com.github.qingmei2:rximagepicker:0.2.2'
 
 // 提供了自定义UI图片选择器的基本组件，自定义UI的需求需要添加该依赖
-compile 'com.github.qingmei2:rximagepicker_support:0.2.0'
+compile 'com.github.qingmei2:rximagepicker_support:0.2.2'
 
 //如果需要额外的UI支持，请选择依赖对应的UI拓展库
-compile 'com.github.qingmei2:rximagepicker_support_zhihu:0.2.0'     // 知乎图片选择器
-compile 'com.github.qingmei2:rximagepicker_support_wechat:0.2.0'    // 微信图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_zhihu:0.2.2'     // 知乎图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_wechat:0.2.2'    // 微信图片选择器
 ```
 ### 2. 接口配置
 
@@ -152,7 +152,7 @@ RxImagePicker提供了 **知乎主题** 和 **微信主题** 的UI支持，其�
 #### 1、添加依赖
 
 ```groovy
-implementation 'com.github.qingmei2:rximagepicker_support_wechat:0.2.0' //微信主题UI的支持
+implementation 'com.github.qingmei2:rximagepicker_support_wechat:0.2.2' //微信主题UI的支持
 ```
 
 #### 2、新建并配置接口
