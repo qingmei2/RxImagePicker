@@ -110,32 +110,32 @@ private void onButtonClick() {
 }
 ```
 
-## 进阶使用(重要！！！)
+## 详细文档(重要！！！)
 
-**[关于RxImagePicker的进阶使用和拓展功能,请参考wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
+**[关于RxImagePicker更详细的使用说明，进阶使用和拓展功能,请参考wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
 
 ## 参考
 
 在 [RxImagePicker](https://github.com/qingmei2/RxImagePicker) 的设计过程中，我参考了很多的三方库，它们源码中优秀的  **设计思想** 或者 **架构设计** ，都给与了我很大的启示，在此深表感谢，感谢诸多开源爱好者前辈们的无私精神：
 
-* [Retrofit:Type-safe HTTP client for Android and Java by Square, Inc. ](https://github.com/square/retrofit)
+* [Retrofit:Type-safe HTTP client for Android and Java by Square, Inc. ](https://github.com/square/retrofit)  
 	Retrofit是聚集了诸多优秀的 **设计思想** 和 **架构设计** 于一身的库，它将复杂多样的 **网络请求** 需求转换成了接口供开发者配置，我认为RxImagePicker也可以这样做。
 
-* [RxJava:a library for composing asynchronous and event-based programs using observable sequences for the Java VM.](https://github.com/ReactiveX/RxJava)
+* [RxJava:a library for composing asynchronous and event-based programs using observable sequences for the Java VM.](https://github.com/ReactiveX/RxJava)  
 	一个在 Java VM 上使用可观测的序列来组成异步的、基于事件的程序的库, 随着程序逻辑变得越来越复杂，它依然能够保持简洁。它是构成RxImagePicker的 **基础组件** 。
 
-* [RxAndroid:RxJava bindings for Android](https://github.com/ReactiveX/RxAndroid)
+* [RxAndroid:RxJava bindings for Android](https://github.com/ReactiveX/RxAndroid)  
 	RxJava的一个扩展库，更好的兼容了Android特性，比如主线程，UI事件等。它是构成RxImagePicker的 **基础组件** 。
 
-* [RxImagePicker:Android. Pick image from camera or gallery using RxJava2](https://github.com/MLSDev/RxImagePicker)
-* [RxPermissions:Android runtime permissions powered by RxJava2](https://github.com/tbruyelle/RxPermissions)
-* [RxLifecycle:Lifecycle handling APIs for Android apps using RxJava](https://github.com/trello/RxLifecycle)
+* [RxImagePicker:Android. Pick image from camera or gallery using RxJava2](https://github.com/MLSDev/RxImagePicker)  
+* [RxPermissions:Android runtime permissions powered by RxJava2](https://github.com/tbruyelle/RxPermissions)  
+* [RxLifecycle:Lifecycle handling APIs for Android apps using RxJava](https://github.com/trello/RxLifecycle)  
 	这三个优秀的RxJava拓展库，在数据的传递方案上，给与了我很大的启示。
-* [RxCache:Reactive caching library for Android and Java](https://github.com/VictorAlbertos/RxCache)
+* [RxCache:Reactive caching library for Android and Java](https://github.com/VictorAlbertos/RxCache)  
 	优秀的RxJava拓展库，用于处理RxJava的数据缓存，库底层通过Dagger完成对配置的处理，我借鉴在了RxImagePicker中。
-* [Dagger2：A fast dependency injector for Android and Java.](https://github.com/google/dagger)
+* [Dagger2：A fast dependency injector for Android and Java.](https://github.com/google/dagger)  
 	Google优秀的依赖注入框架，它是构成RxImagePicker的 **基础组件** 。
-* [Matisse:A well-designed local image and video selector for Android](https://github.com/zhihu/Matisse)
+* [Matisse:A well-designed local image and video selector for Android](https://github.com/zhihu/Matisse)  
 	知乎开源，优秀的Android图片选择库，拥有非常 **Material Design** 的设计。在RxImagePicker中，Matisse被抽出来放入了RxImagePicker_Support，成为了 **UI层的基础组件** 。
 
 ## Contributor
