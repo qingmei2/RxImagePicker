@@ -110,9 +110,9 @@ private void onButtonClick() {
 }
 ```
 
-## 详细使用(重要！！！)
+## 进阶使用(重要！！！)
 
-**[详细使用方法,请参考wiki。](https://github.com/qingmei2/RxImagePicker/wiki)**
+**[关于RxImagePicker的进阶使用和拓展功能,请参考wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
 
 ## 参考
 
