@@ -2,16 +2,7 @@
 
 ![Download](https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg)
 
-### RxImagePicker的设计起源，请参考我的这篇文章：
-
-[RxImagePicker:从零实现灵活且可高度定制的Android图片选择架构](https://www.jianshu.com/p/fecf3a13e615)
-
-## 目录
-
-#### [简介](#overview)  
-#### [示例截图](#sample_screenshots)  
-#### [基本使用](#usage)  
-#### [微信/知乎UI的配置步骤](#wechat_config)  
+RxImagePicker的设计起源，请参考我的[这篇文章](https://www.jianshu.com/p/fecf3a13e615)
 
 <h2 id="overview">简介</h2>
 
@@ -66,7 +57,9 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_wechat_expand.png"/>
 </div>
 
-<h2 id="usage">基本使用</h2>
+想要 **快速实现上图所示效果** 请点击[这里](https://github.com/qingmei2/RxImagePicker/wiki)
+
+<h2 id="usage">快速使用</h2>
 
 ### 1. 添加依赖在Module的build.gradle文件中：
 
@@ -77,7 +70,7 @@ compile 'com.github.qingmei2:rximagepicker:0.2.2'
 // 提供了自定义UI图片选择器的基本组件，自定义UI的需求需要添加该依赖
 compile 'com.github.qingmei2:rximagepicker_support:0.2.2'
 
-//如果需要额外的UI支持，请选择依赖对应的UI拓展库
+// 如果需要额外的UI支持，请选择依赖对应的UI拓展库
 compile 'com.github.qingmei2:rximagepicker_support_zhihu:0.2.2'     // 知乎图片选择器
 compile 'com.github.qingmei2:rximagepicker_support_wechat:0.2.2'    // 微信图片选择器
 ```
@@ -95,24 +88,8 @@ public interface MyImagePicker {
     @Camera    //打开相机拍照
     @AsBitmap  //返回值为Bitmap类型
     Observable<Bitmap> openCamera();
-
 }
 ```
-
-#### @Gallery/@Camera 声明对应的行为：
-
-**@Camera** 打开相机拍照并返回图片  
-**@Gallery** 打开相册选择并返回图片  
-
-请注意，接口的每个方法都需要添加该类型的注解以声明对应的行为，若方法未配置@Gallery或@Camera，RxImagePicker会在运行时无法进行解析，并抛出对应的异常。
-
-#### @AsFile/@AsBitmap/@AsUri 声明数据返回的格式：
-
-**@AsFile** 返回File类型的数据  
-**@AsBitmap**  返回Bitmap类型的数据  
-**@AsUri**  返回Uri类型的数据  
-
-请注意，若方法未配置该类型的注解以声明数据应当返回的格式，则默认会以Uri的格式进行数据的返回。
 
 ### 3. 实例化接口并使用它
 
@@ -124,92 +101,26 @@ private void onButtonClick() {
     new RxImagePicker.Builder()
             .with(this)
             .build()
-            .create(MyImagePicker.class)    //  register your custom imagePicker interface
-            .openGallery()                  // use your own custom method 「take photo」or 「picture selection」
+            .create(MyImagePicker.class)
+            .openGallery()
             .subscribe(new Consumer<File>() {
                 @Override
                 public void accept(File file) throws Exception {
-                    // do what you want to do
+                    // 对图片进行处理，比如加载到ImageView中
                 }
             });
 }
 ```
-上述步骤中，您也可以通过调用create()的无参方法，RxImagePicker会使用默认的DefaultImagePicker接口
 
-```
-public interface DefaultImagePicker {
+## 进阶使用
 
-    @Gallery
-    @AsUri
-    Observable<Uri> openGallery();
+使用文档的结构图如下：
 
-    @Camera
-    @AsUri
-    Observable<Uri> openCamera();
-}
-```
+![image_wiki_struct](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/image_wiki_struct.png)
 
-<h2 id="wechat_config">微信 / 知乎UI的配置步骤</h2>
+**请注意，该使用文档已转移到[wiki](https://github.com/qingmei2/RxImagePicker/wiki)中以方便浏览。**
 
-RxImagePicker提供了 **知乎主题** 和 **微信主题** 的UI支持，其中知乎主题还包括日间和夜间的两种UI模式,详见[上文](#sample_screenshots)。
-
-下面提供了实现 **微信主题UI** 的最基本方式，保证开发者能够在3分钟内成功实现 **仿微信图片选择器** 的UI效果：
-
-#### 1、添加依赖
-
-```groovy
-implementation 'com.github.qingmei2:rximagepicker_support_wechat:0.2.2' //微信主题UI的支持
-```
-
-#### 2、新建并配置接口
-
-```Java
-public interface WechatImagePicker {
-
-    String KEY_WECHAT_PICKER_ACTIVITY = "key_wechat_picker";
-
-    @AsBitmap
-    @Gallery(viewKey = KEY_WECHAT_PICKER_ACTIVITY)
-    Observable<Bitmap> openGallery();
-
-    @AsFile
-    @Camera
-    Single<File> openCamera();
-}
-```
-
-#### 3、在Activity中配置并打开图片选择器：
-
-请注意，在调用下述代码打开图片选择器之前，请确认您是否在manifest文件中已经配置好外部存储卡的权限。
-
-```Java
-new RxImagePicker.Builder()
-      .with(this)
-      .addCustomGallery(
-              WechatImagePicker.KEY_WECHAT_PICKER_ACTIVITY, //key
-              WechatImagePickerActivity.class,              //key对应的ActivityClass
-              new WechatConfigrationBuilder(MimeType.ofAll(), false)
-                      .maxSelectable(9)               //最大可选数量
-                      .spanCount(4)                   //GridLayout每行的Item数量
-                      .countable(false)               //不可计数的
-                      .theme(R.style.Wechat)          //微信主题
-                      .imageEngine(new GlideEngine()) //图片加载引擎
-                      .build()
-      )
-      .build()
-      .create(WechatImagePicker.class)
-      .openGallery()  //打开图片选择器，或者调用openCamera()打开相机拍照
-      .subscribe(new Consumer<Bitmap>() {
-          @Override
-          public void accept(Bitmap bitmap) throws Exception {
-              // do what you want to do
-          }
-      });
-```
-
-通过以上三步，开发者就能实现 **微信图片选择** 的功能。
-
-更详细的配置或者 **知乎主题UI** 使用方式，请参考sample，里面提供了文档中所有代码。
+https://github.com/qingmei2/RxImagePicker/wiki
 
 ## Contributor
 
