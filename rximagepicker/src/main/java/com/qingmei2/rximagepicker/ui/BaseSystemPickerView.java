@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 
 import io.reactivex.Observable;
@@ -16,6 +18,7 @@ import io.reactivex.subjects.PublishSubject;
 
 import static android.app.Activity.RESULT_OK;
 
+@SuppressWarnings("CheckResult")
 public abstract class BaseSystemPickerView extends Fragment {
 
     public static final int GALLERY_REQUEST_CODE = 100;
@@ -70,6 +73,17 @@ public abstract class BaseSystemPickerView extends Fragment {
             publishSubject.onNext(uri);
             publishSubject.onComplete();
         }
+        closure();
+    }
+
+    /**
+     * When the pick image behavior ending, remove this fragment from the activity.
+     */
+    private void closure() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.remove(this);
+        fragmentTransaction.commit();
     }
 
     protected boolean checkPermission() {
