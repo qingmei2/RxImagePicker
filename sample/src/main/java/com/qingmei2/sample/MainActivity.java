@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 
 import com.qingmei2.sample.system.SystemActivity;
@@ -21,13 +22,23 @@ public class MainActivity extends AppCompatActivity {
         Button btnZhihu = findViewById(R.id.btn_zhihu_picker);
         Button btnWechat = findViewById(R.id.btn_wechat_picker);
 
-        btnSystem.setOnClickListener(__ -> jumpActivity(SystemActivity.class));
-        btnZhihu.setOnClickListener(__ -> jumpActivity(ZhihuActivity.class));
-        btnWechat.setOnClickListener(__ -> jumpActivity(WechatActivity.class));
-    }
-
-    private void jumpActivity(Class<? extends AppCompatActivity> activityClazz) {
-        Intent intent = new Intent(this, activityClazz);
-        startActivity(intent);
+        btnSystem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SystemActivity.class));
+            }
+        });
+        btnZhihu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ZhihuActivity.class));
+            }
+        });
+        btnWechat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, WechatActivity.class));
+            }
+        });
     }
 }

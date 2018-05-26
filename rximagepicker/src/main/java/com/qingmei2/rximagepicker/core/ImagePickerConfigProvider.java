@@ -3,7 +3,6 @@ package com.qingmei2.rximagepicker.core;
 import android.app.Activity;
 import android.support.annotation.IdRes;
 
-import com.qingmei2.rximagepicker.entity.observeras.ObserverAs;
 import com.qingmei2.rximagepicker.entity.sources.SourcesFrom;
 import com.qingmei2.rximagepicker.ui.ICustomPickerView;
 
@@ -16,7 +15,6 @@ public final class ImagePickerConfigProvider {
     private final boolean singleActivity;
 
     private final SourcesFrom sourcesFrom;
-    private final ObserverAs observerAs;
 
     private final int containerViewId;
     private final ICustomPickerView pickerView;
@@ -26,13 +24,11 @@ public final class ImagePickerConfigProvider {
     public ImagePickerConfigProvider(boolean singleActivity,
                                      String viewKey,
                                      SourcesFrom sourcesFrom,
-                                     ObserverAs observerAs,
                                      ICustomPickerView pickerView,
                                      @IdRes int containerViewId,
                                      Class<? extends Activity> activityClass
     ) {
         this.sourcesFrom = sourcesFrom;
-        this.observerAs = observerAs;
         this.pickerView = pickerView;
         this.containerViewId = containerViewId;
         this.viewKey = viewKey;
@@ -42,10 +38,6 @@ public final class ImagePickerConfigProvider {
 
     public SourcesFrom getSourcesFrom() {
         return sourcesFrom;
-    }
-
-    public ObserverAs getObserverAs() {
-        return observerAs;
     }
 
     public ICustomPickerView getPickerView() {

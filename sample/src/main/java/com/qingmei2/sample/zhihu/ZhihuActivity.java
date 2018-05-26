@@ -2,11 +2,13 @@ package com.qingmei2.sample.zhihu;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -17,6 +19,9 @@ import com.qingmei2.rximagepicker_extension_zhihu.ZhihuConfigurationBuilder;
 import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerActivity;
 import com.qingmei2.sample.R;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 @SuppressWarnings("CheckResult")
 public class ZhihuActivity extends AppCompatActivity {
 
@@ -24,8 +29,8 @@ public class ZhihuActivity extends AppCompatActivity {
     private ZhihuImagePicker rxImagePicker;
 
     private final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA = 99;
-    private final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_ACTIVITY = 100;
-    private final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_FRAGMENT = 101;
+    private final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_NORMAL = 100;
+    private final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_Dracula = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +39,28 @@ public class ZhihuActivity extends AppCompatActivity {
 
         ivPickedImage = findViewById(R.id.iv_picked_image);
         FloatingActionButton fabCamera = findViewById(R.id.fab_pick_camera);
-        FloatingActionButton fabGalleryActivity = findViewById(R.id.fab_pick_gallery_activity);
-        FloatingActionButton fabGalleryFragment = findViewById(R.id.fab_pick_gallery_fragment);
+        FloatingActionButton fabGalleryNormal = findViewById(R.id.fab_pick_gallery_normal);
+        FloatingActionButton fabGalleryDracula = findViewById(R.id.fab_pick_gallery_dracula);
 
         initRxImagePicker();
-        fabCamera.setOnClickListener(__ ->
-                checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA));
-        fabGalleryActivity.setOnClickListener(__ ->
-                checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_ACTIVITY));
-        fabGalleryFragment.setOnClickListener(__ ->
-                checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_FRAGMENT));
+        fabCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA);
+            }
+        });
+        fabGalleryNormal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_NORMAL);
+            }
+        });
+        fabGalleryDracula.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_Dracula);
+            }
+        });
     }
 
     private void checkPermissionAndRequest(int requestCode) {
@@ -95,41 +112,61 @@ public class ZhihuActivity extends AppCompatActivity {
     private void onPermissionGrant(int requestCode) {
         if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA) {
             openCamera();
-        } else if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_ACTIVITY) {
+        } else if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_NORMAL) {
             openGalleryAsNormal();
         } else {
             openGalleryAsDracula();
         }
     }
 
+    /**
+     * open Camera.
+     */
     private void openCamera() {
         rxImagePicker.openCamera()
-                .subscribe(file -> Glide.with(ZhihuActivity.this)
-                                .load(file)
-                                .into(ivPickedImage),
-                        this::toastError);
+                .subscribe(fetchUriObserver());
     }
 
     /**
-     * 日间主题的知乎图片选择界面
+     * Open Gallery as Zhihu normal theme.
      */
     private void openGalleryAsNormal() {
         rxImagePicker.openGalleryAsNormal()
-                .subscribe(bitmap -> ivPickedImage.setImageBitmap(bitmap),
-                        this::toastError);
+                .subscribe(fetchUriObserver());
     }
 
     /**
-     * 夜间主题的知乎图片选择界面
+     * Open Gallery as Zhihu dracula theme.
      */
     private void openGalleryAsDracula() {
         rxImagePicker.openGalleryAsDracula()
-                .subscribe(bitmap -> ivPickedImage.setImageBitmap(bitmap),
-                        this::toastError);
+                .subscribe(fetchUriObserver());
     }
 
-    private void toastError(Throwable error) {
-        error.printStackTrace();
-        Toast.makeText(this, "Failed: " + error.toString(), Toast.LENGTH_SHORT).show();
+    private Observer<Uri> fetchUriObserver() {
+        return new Observer<Uri>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Uri uri) {
+                Glide.with(ZhihuActivity.this)
+                        .load(uri)
+                        .into(ivPickedImage);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                Toast.makeText(ZhihuActivity.this, "Failed: " + e.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
     }
 }

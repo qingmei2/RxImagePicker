@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker.ui.DefaultImagePicker;
 import com.qingmei2.sample.R;
 import com.qingmei2.sample.imageloader.GlideApp;
+
+import io.reactivex.functions.Consumer;
 
 @SuppressWarnings("CheckResult")
 public class SystemActivity extends AppCompatActivity {
@@ -28,8 +31,18 @@ public class SystemActivity extends AppCompatActivity {
         FloatingActionButton fabGallery = findViewById(R.id.fab_pick_gallery);
 
         initRxImagePicker();
-        fabCamera.setOnClickListener(__ -> pickCamera());
-        fabGallery.setOnClickListener(__ -> pickGallery());
+        fabCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickCamera();
+            }
+        });
+        fabGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickGallery();
+            }
+        });
     }
 
     private void initRxImagePicker() {
@@ -41,12 +54,22 @@ public class SystemActivity extends AppCompatActivity {
 
     private void pickGallery() {
         defaultImagePicker.openGallery()
-                .subscribe(this::onPickUriSuccess);
+                .subscribe(new Consumer<Uri>() {
+                    @Override
+                    public void accept(Uri uri) throws Exception {
+                        onPickUriSuccess(uri);
+                    }
+                });
     }
 
     private void pickCamera() {
         defaultImagePicker.openCamera()
-                .subscribe(this::onPickUriSuccess);
+                .subscribe(new Consumer<Uri>() {
+                    @Override
+                    public void accept(Uri uri) throws Exception {
+                        onPickUriSuccess(uri);
+                    }
+                });
     }
 
     private void onPickUriSuccess(Uri uri) {

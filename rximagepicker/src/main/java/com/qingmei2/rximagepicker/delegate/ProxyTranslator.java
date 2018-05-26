@@ -4,10 +4,6 @@ import android.app.Activity;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.FragmentActivity;
 
-import com.qingmei2.rximagepicker.entity.observeras.AsBitmap;
-import com.qingmei2.rximagepicker.entity.observeras.AsFile;
-import com.qingmei2.rximagepicker.entity.observeras.AsUri;
-import com.qingmei2.rximagepicker.entity.observeras.ObserverAs;
 import com.qingmei2.rximagepicker.entity.sources.Camera;
 import com.qingmei2.rximagepicker.entity.sources.Gallery;
 import com.qingmei2.rximagepicker.entity.sources.SourcesFrom;
@@ -51,7 +47,6 @@ public final class ProxyTranslator {
                 singleActivity,
                 viewKey,
                 this.getStreamSourcesFrom(method),
-                this.getStreamObserverAs(method),
                 this.getPickerView(method, singleActivity),
                 this.getContainerViewId(method, singleActivity),
                 this.getActivityClass(viewKey, singleActivity));
@@ -130,33 +125,6 @@ public final class ProxyTranslator {
             throw new IllegalArgumentException("Did you forget to add the @Galley or the @Camera annotation?");
         } else {
             throw new IllegalArgumentException("You should not add two conflicting annotation to this method: @Galley and @Camera.");
-        }
-    }
-
-    /**
-     * Get the corresponding data type of {@link Observable}/{@link Flowable}/{@link Single}
-     * /{@link Maybe} stream. The type of data stream is specified by the annotation configration:
-     * {@link AsBitmap}/{@link AsFile}/{@link AsUri}.
-     * <p>
-     *
-     * @return By default, it return as {@link ObserverAs#URI} if no annotation was configured above
-     * the method.
-     */
-    @VisibleForTesting
-    public ObserverAs getStreamObserverAs(Method method) {
-        final boolean asBitmap = method.getAnnotation(AsBitmap.class) != null;
-        final boolean asFile = method.getAnnotation(AsFile.class) != null;
-        final boolean asUri = method.getAnnotation(AsUri.class) != null;
-        if (asBitmap && !asFile && !asUri) {
-            return ObserverAs.BITMAP;
-        } else if (asFile && !asBitmap && !asUri) {
-            return ObserverAs.FILE;
-        } else if (asUri && !asBitmap && !asFile) {
-            return ObserverAs.URI;
-        } else if (!asUri && !asBitmap) {
-            return ObserverAs.URI;
-        } else {
-            throw new IllegalArgumentException("You can't add conflicting annotation to this method: @AsBitmap/@AsFile/@AsUri");
         }
     }
 

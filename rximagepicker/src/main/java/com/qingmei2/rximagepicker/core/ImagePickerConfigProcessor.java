@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.support.annotation.VisibleForTesting;
 
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
-import com.qingmei2.rximagepicker.funtions.ObserverAsConverter;
 import com.qingmei2.rximagepicker.ui.ICameraCustomPickerView;
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
 
@@ -45,7 +44,6 @@ public final class ImagePickerConfigProcessor implements
     public Observable<?> process(ImagePickerConfigProvider configProvider) {
         return Observable.just(configProvider)
                 .flatMap(sourceFrom(cameraViews, galleryViews))
-                .flatMap(observerAs(configProvider, context))
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.ui());
     }
@@ -69,12 +67,5 @@ public final class ImagePickerConfigProcessor implements
                 }
             }
         };
-    }
-
-    @VisibleForTesting
-    public Function<Uri, ObservableSource<?>> observerAs(
-            ImagePickerConfigProvider configProvider,
-            Context context) {
-        return new ObserverAsConverter(configProvider.getObserverAs(), context);
     }
 }

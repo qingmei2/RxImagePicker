@@ -35,7 +35,7 @@
             android:src="@android:drawable/ic_menu_camera" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_pick_gallery_activity"
+            android:id="@+id/fab_pick_gallery_normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -43,7 +43,7 @@
             android:src="@android:drawable/ic_menu_gallery" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_pick_gallery_fragment"
+            android:id="@+id/fab_pick_gallery_dracula"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
