@@ -21,7 +21,6 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 - [x] Android Camera拍照
 - [x] Android 图片选择
 - [x] 以响应式数据流的格式返回数据（支持Observable/Flowable/Single/Maybe）
-- [x] 动态配置响应式数据流的数据类型（File,Bitmap,或是Uri）
 
 ### UI的支持
 
@@ -63,14 +62,14 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 
 ```groovy
 // 最基础的架构，仅提供了系统默认的图片选择器和拍照功能
-compile 'com.github.qingmei2:rximagepicker:0.2.3'
+compile 'com.github.qingmei2:rximagepicker:0.3.0'
 
 // 提供了自定义UI图片选择器的基本组件，自定义UI的需求需要添加该依赖
-compile 'com.github.qingmei2:rximagepicker_support:0.2.3'
+compile 'com.github.qingmei2:rximagepicker_support:0.3.0'
 
 // 如果需要额外的UI支持，请选择依赖对应的UI拓展库
-compile 'com.github.qingmei2:rximagepicker_support_zhihu:0.2.3'     // 知乎图片选择器
-compile 'com.github.qingmei2:rximagepicker_support_wechat:0.2.3'    // 微信图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_zhihu:0.3.0'     // 知乎图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_wechat:0.3.0'    // 微信图片选择器
 ```
 ### 2. 接口配置
 
@@ -80,12 +79,10 @@ compile 'com.github.qingmei2:rximagepicker_support_wechat:0.2.3'    // 微信图
 public interface MyImagePicker {
 
     @Gallery    //打开相册选择图片
-    @AsFile     //返回值为File类型
-    Observable<File> openGallery();
+    Observable<Uri> openGallery();
 
     @Camera    //打开相机拍照
-    @AsBitmap  //返回值为Bitmap类型
-    Observable<Bitmap> openCamera();
+    Observable<Uri> openCamera();
 }
 ```
 
@@ -101,9 +98,9 @@ private void onButtonClick() {
             .build()
             .create(MyImagePicker.class)
             .openGallery()
-            .subscribe(new Consumer<File>() {
+            .subscribe(new Consumer<Uri>() {
                 @Override
-                public void accept(File file) throws Exception {
+                public void accept(Uri uri) throws Exception {
                     // 对图片进行处理，比如加载到ImageView中
                 }
             });
