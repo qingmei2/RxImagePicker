@@ -1,38 +1,35 @@
-package com.qingmei2.rximagepicker.core;
+package com.qingmei2.rximagepicker.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 
-import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
-import com.qingmei2.rximagepicker.ui.ICustomPickerView;
-
 import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 
-public final class ActivityPickerProjector implements ICustomPickerView {
+public final class ActivityPickerViewController implements ICustomPickerView {
 
-    private volatile static ActivityPickerProjector INSTANCE;
+    private volatile static ActivityPickerViewController INSTANCE;
 
     private PublishSubject<Uri> publishSubject;
 
     private Class<? extends Activity> activityClass;
 
-    public static ActivityPickerProjector getInstance() {
+    public static ActivityPickerViewController getInstance() {
         if (INSTANCE == null) {
-            synchronized (ActivityPickerProjector.class) {
+            synchronized (ActivityPickerViewController.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new ActivityPickerProjector();
+                    INSTANCE = new ActivityPickerViewController();
                 }
             }
         }
         return INSTANCE;
     }
 
-    private ActivityPickerProjector() {
+    private ActivityPickerViewController() {
 
     }
 

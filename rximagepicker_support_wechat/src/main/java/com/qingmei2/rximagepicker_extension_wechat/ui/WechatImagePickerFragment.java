@@ -23,7 +23,7 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.qingmei2.rximagepicker.core.ActivityPickerProjector;
+import com.qingmei2.rximagepicker.ui.ActivityPickerViewController;
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
 import com.qingmei2.rximagepicker_extension.entity.Album;
@@ -33,7 +33,6 @@ import com.qingmei2.rximagepicker_extension.model.AlbumCollection;
 import com.qingmei2.rximagepicker_extension.model.SelectedItemCollection;
 import com.qingmei2.rximagepicker_extension.ui.AlbumPreviewActivity;
 import com.qingmei2.rximagepicker_extension.ui.BasePreviewActivity;
-import com.qingmei2.rximagepicker_extension.ui.SelectedPreviewActivity;
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter;
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner;
 import com.qingmei2.rximagepicker_extension_wechat.R;
@@ -287,7 +286,7 @@ public class WechatImagePickerFragment extends Fragment implements
                 if (selected != null) {
                     for (Item item : selected) {
                         if (getActivity() instanceof WechatImagePickerActivity) {
-                            ActivityPickerProjector.getInstance().emitUri(item.getContentUri());
+                            ActivityPickerViewController.getInstance().emitUri(item.getContentUri());
                         } else {
                             publishSubject.onNext(item.getContentUri());
                         }

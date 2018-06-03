@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.qingmei2.rximagepicker.core.ActivityPickerProjector;
+import com.qingmei2.rximagepicker.ui.ActivityPickerViewController;
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
 import com.qingmei2.rximagepicker_extension_wechat.R;
 
@@ -36,12 +36,12 @@ public class WechatImagePickerActivity extends AppCompatActivity {
                 .subscribe(new Consumer<Uri>() {
                     @Override
                     public void accept(Uri uri) throws Exception {
-                        ActivityPickerProjector.getInstance().emitUri(uri);
+                        ActivityPickerViewController.getInstance().emitUri(uri);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        ActivityPickerProjector.getInstance().emitError(throwable);
+                        ActivityPickerViewController.getInstance().emitError(throwable);
                     }
                 }, new Action() {
                     @Override
@@ -52,7 +52,7 @@ public class WechatImagePickerActivity extends AppCompatActivity {
     }
 
     public void closure() {
-        ActivityPickerProjector.getInstance().endUriEmitAndReset();
+        ActivityPickerViewController.getInstance().endUriEmitAndReset();
         finish();
     }
 
