@@ -23,7 +23,6 @@ import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension.R;
 import com.qingmei2.rximagepicker_extension.engine.ImageEngine;
-import com.qingmei2.rximagepicker_extension.engine.impl.GlideEngine;
 import com.qingmei2.rximagepicker_extension.filter.Filter;
 
 import java.util.List;
@@ -59,9 +58,23 @@ public final class SelectionSpec implements ICustomPickerConfiguration {
         return InstanceHolder.INSTANCE;
     }
 
-    public static SelectionSpec getNewCleanInstance() {
+    /**
+     * You should init the {@link SelectionSpec} by this method, it will instance default
+     * {@link ImageEngine} for loading image.
+     *
+     * @return SelectionSpec
+     */
+    public static SelectionSpec getNewCleanInstance(ImageEngine imageEngine) {
+        if (imageEngine == null) {
+            throw new IllegalArgumentException("the param imageEngine can't be null.");
+        }
+        setDefaultImageEngine(imageEngine);
         SelectionSpec selectionSpec = new SelectionSpec();
         return selectionSpec;
+    }
+
+    public static void setDefaultImageEngine(ImageEngine imageEngine) {
+        InstanceHolder.imageEngineHolder = imageEngine;
     }
 
     public static void setInstance(SelectionSpec selectionSpec) {
@@ -69,6 +82,11 @@ public final class SelectionSpec implements ICustomPickerConfiguration {
     }
 
     private void reset() {
+        if (InstanceHolder.imageEngineHolder == null) {
+            throw new NullPointerException(
+                    "the default imageEngine can't be null, please init it by the SelectionSpec.getNewCleanInstance(imageEngine)");
+        }
+        this.imageEngine = InstanceHolder.imageEngineHolder;
         mimeTypeSet = MimeType.ofImage();
         mediaTypeExclusive = true;
         showSingleMediaType = false;
@@ -84,7 +102,6 @@ public final class SelectionSpec implements ICustomPickerConfiguration {
         spanCount = 3;
         gridExpectedSize = 0;
         thumbnailScale = 0.5f;
-        imageEngine = new GlideEngine();
     }
 
     public boolean singleSelectionModeEnabled() {
@@ -108,13 +125,31 @@ public final class SelectionSpec implements ICustomPickerConfiguration {
         setInstance(this);
     }
 
+    /**
+     * Try to reset {@link SelectionSpec} every time when the picture selection operation ends.
+     */
     @Override
     public void onFinished() {
         setInstance(new SelectionSpec());
     }
 
     private static final class InstanceHolder {
-        //正在使用的SelectionSpec
-        private static SelectionSpec INSTANCE = new SelectionSpec();
+
+        /**
+         * The SelectionSpec being used.
+         */
+        private static SelectionSpec INSTANCE = null;
+
+        /**
+         * 默认的imageEngineHolder，开发者必须通过调用{@link SelectionSpec#getNewCleanInstance}
+         * 初始化它。
+         * <br/>
+         * 每次重置{@link SelectionSpec}时，都会将默认的图片加载引擎设置为imageEngineHolder的值，
+         * 开发者也可以通过对{@link #setDefaultImageEngine(ImageEngine)}进行设置。
+         * <br/>
+         * 如果只想单次图片选择中修改配置{@link ImageEngine},可以通过SelectionSpec.getInstance().imageEngine
+         * 进行直接赋值。
+         */
+        private static ImageEngine imageEngineHolder = null;
     }
 }

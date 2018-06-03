@@ -12,6 +12,7 @@ import com.qingmei2.rximagepicker_extension.engine.ImageEngine;
 import com.qingmei2.rximagepicker_extension.entity.CaptureStrategy;
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
 import com.qingmei2.rximagepicker_extension.filter.Filter;
+import com.qingmei2.rximagepicker_extension_wechat.engine.impl.GlideEngine;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -68,7 +69,7 @@ public class WechatConfigrationBuilder {
      * @param mimeTypes MIME type set to select.
      */
     public WechatConfigrationBuilder(@NonNull Set<MimeType> mimeTypes, boolean mediaTypeExclusive) {
-        mSelectionSpec = SelectionSpec.getNewCleanInstance();
+        mSelectionSpec = SelectionSpec.getNewCleanInstance(new GlideEngine());
         mSelectionSpec.mimeTypeSet = mimeTypes;
         mSelectionSpec.mediaTypeExclusive = mediaTypeExclusive;
         mSelectionSpec.orientation = SCREEN_ORIENTATION_UNSPECIFIED;
@@ -243,13 +244,14 @@ public class WechatConfigrationBuilder {
     /**
      * Provide an image engine.
      * <p>
-     * 1. {@link com.qingmei2.rximagepicker_extension.engine.impl.GlideEngine}
+     * 1. {@link com.qingmei2.rximagepicker_extension_wechat.engine.impl.GlideEngine}
      * And you can implement your own image engine.
      *
-     * @param imageEngine {@link com.qingmei2.rximagepicker_extension.engine.impl.GlideEngine}
+     * @param imageEngine {@link com.qingmei2.rximagepicker_extension_wechat.engine.impl.GlideEngine}
      * @return {@link WechatConfigrationBuilder} for fluent API.
      */
     public WechatConfigrationBuilder imageEngine(ImageEngine imageEngine) {
+        SelectionSpec.setDefaultImageEngine(imageEngine);
         mSelectionSpec.imageEngine = imageEngine;
         return this;
     }
