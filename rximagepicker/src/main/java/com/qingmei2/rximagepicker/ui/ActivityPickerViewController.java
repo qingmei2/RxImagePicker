@@ -2,8 +2,9 @@ package com.qingmei2.rximagepicker.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
+
+import com.qingmei2.rximagepicker.entity.Result;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public final class ActivityPickerViewController implements ICustomPickerView {
 
     private volatile static ActivityPickerViewController INSTANCE;
 
-    private PublishSubject<Uri> publishSubject;
+    private PublishSubject<Result> publishSubject;
 
     private Class<? extends Activity> activityClass;
 
@@ -51,17 +52,17 @@ public final class ActivityPickerViewController implements ICustomPickerView {
     }
 
     @Override
-    public Observable<Uri> pickImage() {
+    public Observable<Result> pickImage() {
         return publishSubject;
     }
 
-    public void emitUri(Uri uri) {
-        publishSubject.onNext(uri);
+    public void emitResult(Result result) {
+        publishSubject.onNext(result);
     }
 
-    public void emitUris(List<Uri> uris) {
-        for (Uri uri : uris) {
-            emitUri(uri);
+    public void emitResults(List<Result> results) {
+        for (Result result : results) {
+            emitResult(result);
         }
     }
 
@@ -69,7 +70,7 @@ public final class ActivityPickerViewController implements ICustomPickerView {
         publishSubject.onError(e);
     }
 
-    public void endUriEmitAndReset() {
+    public void endResultEmitAndReset() {
         publishSubject.onComplete();
         resetSubject();
     }

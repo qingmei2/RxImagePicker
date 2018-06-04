@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.qingmei2.rximagepicker.core.RxImagePicker;
+import com.qingmei2.rximagepicker.entity.Result;
 import com.qingmei2.rximagepicker.ui.DefaultImagePicker;
 import com.qingmei2.sample.R;
 import com.qingmei2.sample.imageloader.GlideApp;
@@ -54,20 +55,20 @@ public class SystemActivity extends AppCompatActivity {
 
     private void pickGallery() {
         defaultImagePicker.openGallery()
-                .subscribe(new Consumer<Uri>() {
+                .subscribe(new Consumer<Result>() {
                     @Override
-                    public void accept(Uri uri) throws Exception {
-                        onPickUriSuccess(uri);
+                    public void accept(Result result) throws Exception {
+                        onPickUriSuccess(result.getUri());
                     }
                 });
     }
 
     private void pickCamera() {
         defaultImagePicker.openCamera()
-                .subscribe(new Consumer<Uri>() {
+                .subscribe(new Consumer<Result>() {
                     @Override
-                    public void accept(Uri uri) throws Exception {
-                        onPickUriSuccess(uri);
+                    public void accept(Result result) throws Exception {
+                        onPickUriSuccess(result.getUri());
                     }
                 });
     }

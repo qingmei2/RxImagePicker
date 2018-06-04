@@ -23,6 +23,8 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.qingmei2.rximagepicker.entity.Result;
+import com.qingmei2.rximagepicker.function.Functions;
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController;
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
@@ -56,7 +58,7 @@ public class WechatImagePickerFragment extends Fragment implements
     private AlbumsSpinner mAlbumsSpinner;
     private CursorAdapter mAlbumsAdapter;
 
-    private PublishSubject<Uri> publishSubject;
+    private PublishSubject<Result> publishSubject;
 
     private SelectedItemCollection mSelectedCollection;
 
@@ -123,7 +125,7 @@ public class WechatImagePickerFragment extends Fragment implements
     }
 
     @Override
-    public Observable<Uri> pickImage() {
+    public Observable<Result> pickImage() {
         publishSubject = PublishSubject.create();
         return publishSubject;
     }
@@ -256,7 +258,9 @@ public class WechatImagePickerFragment extends Fragment implements
     private void emitSelectUri() {
         ArrayList<Uri> selectedUris = (ArrayList<Uri>) mSelectedCollection.asListOfUri();
         for (Uri uri : selectedUris) {
-            publishSubject.onNext(uri);
+            publishSubject.onNext(
+                    Functions.parseResultNoExtraData(uri)
+            );
         }
         endPickImage();
     }
@@ -286,9 +290,13 @@ public class WechatImagePickerFragment extends Fragment implements
                 if (selected != null) {
                     for (Item item : selected) {
                         if (getActivity() instanceof WechatImagePickerActivity) {
-                            ActivityPickerViewController.getInstance().emitUri(item.getContentUri());
+                            ActivityPickerViewController.getInstance().emitResult(
+                                    Functions.parseResultNoExtraData(item.getContentUri())
+                            );
                         } else {
-                            publishSubject.onNext(item.getContentUri());
+                            publishSubject.onNext(
+                                    Functions.parseResultNoExtraData(item.getContentUri())
+                            );
                         }
                     }
                 }

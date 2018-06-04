@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.qingmei2.rximagepicker.entity.Result;
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView;
 import com.qingmei2.rximagepicker.ui.ICameraCustomPickerView;
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
@@ -42,7 +43,7 @@ public final class SystemCameraPickerView extends BaseSystemPickerView implement
     }
 
     @Override
-    public Observable<Uri> pickImage() {
+    public Observable<Result> pickImage() {
         return getUriObserver();
     }
 

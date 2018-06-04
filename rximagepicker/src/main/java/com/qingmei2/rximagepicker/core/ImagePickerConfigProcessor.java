@@ -2,10 +2,10 @@ package com.qingmei2.rximagepicker.core;
 
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.annotation.VisibleForTesting;
 
 import com.qingmei2.rximagepicker.di.scheduler.IRxImagePickerSchedulers;
+import com.qingmei2.rximagepicker.entity.Result;
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController;
 import com.qingmei2.rximagepicker.ui.ICameraCustomPickerView;
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
@@ -50,12 +50,12 @@ public final class ImagePickerConfigProcessor implements
     }
 
     @VisibleForTesting
-    public Function<ImagePickerConfigProvider, ObservableSource<Uri>> sourceFrom(
+    public Function<ImagePickerConfigProvider, ObservableSource<Result>> sourceFrom(
             Map<String, ICameraCustomPickerView> cameraViews,
             Map<String, IGalleryCustomPickerView> galleryViews) {
-        return new Function<ImagePickerConfigProvider, ObservableSource<Uri>>() {
+        return new Function<ImagePickerConfigProvider, ObservableSource<Result>>() {
             @Override
-            public ObservableSource<Uri> apply(ImagePickerConfigProvider provider) throws Exception {
+            public ObservableSource<Result> apply(ImagePickerConfigProvider provider) throws Exception {
                 if (provider.isSingleActivity()) {
                     return ActivityPickerViewController.getInstance().pickImage();
                 }

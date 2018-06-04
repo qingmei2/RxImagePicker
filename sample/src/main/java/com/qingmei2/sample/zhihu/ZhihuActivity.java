@@ -2,7 +2,6 @@ package com.qingmei2.sample.zhihu;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
+import com.qingmei2.rximagepicker.entity.Result;
 import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension_zhihu.ZhihuConfigurationBuilder;
 import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerActivity;
@@ -143,17 +143,17 @@ public class ZhihuActivity extends AppCompatActivity {
                 .subscribe(fetchUriObserver());
     }
 
-    private Observer<Uri> fetchUriObserver() {
-        return new Observer<Uri>() {
+    private Observer<Result> fetchUriObserver() {
+        return new Observer<Result>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(Uri uri) {
+            public void onNext(Result result) {
                 Glide.with(ZhihuActivity.this)
-                        .load(uri)
+                        .load(result.getUri())
                         .into(ivPickedImage);
             }
 

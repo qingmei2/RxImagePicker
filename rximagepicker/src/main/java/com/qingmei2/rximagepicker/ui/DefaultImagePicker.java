@@ -1,8 +1,7 @@
 package com.qingmei2.rximagepicker.ui;
 
 
-import android.net.Uri;
-
+import com.qingmei2.rximagepicker.entity.Result;
 import com.qingmei2.rximagepicker.entity.sources.Camera;
 import com.qingmei2.rximagepicker.entity.sources.Gallery;
 
@@ -14,8 +13,8 @@ public interface DefaultImagePicker {
     String DEFAULT_PICKER_CAMERA = "com.qingmei2.rximagepicker.pickerview.default.camera";
 
     @Gallery
-    Observable<Uri> openGallery();
+    Observable<Result> openGallery();
 
     @Camera
-    Observable<Uri> openCamera();
+    Observable<Result> openCamera();
 }

@@ -1,12 +1,10 @@
 package com.qingmei2.sample.zhihu;
 
-import android.net.Uri;
-
+import com.qingmei2.rximagepicker.entity.Result;
 import com.qingmei2.rximagepicker.entity.sources.Camera;
 import com.qingmei2.rximagepicker.entity.sources.Gallery;
 
 import io.reactivex.Observable;
-import io.reactivex.Single;
 
 public interface ZhihuImagePicker {
 
@@ -14,11 +12,11 @@ public interface ZhihuImagePicker {
     String KEY_ZHIHU_PICKER_DRACULA = "key_zhihu_picker_theme_dracula";
 
     @Gallery(viewKey = KEY_ZHIHU_PICKER_NORMAL)
-    Observable<Uri> openGalleryAsNormal();
+    Observable<Result> openGalleryAsNormal();
 
     @Gallery(viewKey = KEY_ZHIHU_PICKER_DRACULA)
-    Observable<Uri> openGalleryAsDracula();
+    Observable<Result> openGalleryAsDracula();
 
     @Camera
-    Observable<Uri> openCamera();
+    Observable<Result> openCamera();
 }

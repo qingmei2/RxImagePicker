@@ -12,6 +12,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 
+import com.qingmei2.rximagepicker.entity.Result;
+import com.qingmei2.rximagepicker.function.Functions;
+
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.subjects.PublishSubject;
@@ -26,7 +29,7 @@ public abstract class BaseSystemPickerView extends Fragment {
 
     private PublishSubject<Boolean> attachedSubject = PublishSubject.create();
 
-    private PublishSubject<Uri> publishSubject;
+    private PublishSubject<Result> publishSubject;
 
     private PublishSubject<Integer> canceledSubject;
 
@@ -43,7 +46,7 @@ public abstract class BaseSystemPickerView extends Fragment {
         attachedSubject.onComplete();
     }
 
-    public Observable<Uri> getUriObserver() {
+    public Observable<Result> getUriObserver() {
         publishSubject = PublishSubject.create();
         canceledSubject = PublishSubject.create();
 
@@ -70,7 +73,7 @@ public abstract class BaseSystemPickerView extends Fragment {
 
     private void onImagePicked(Uri uri) {
         if (publishSubject != null) {
-            publishSubject.onNext(uri);
+            publishSubject.onNext(Functions.parseResultNoExtraData(uri));
             publishSubject.onComplete();
         }
         closure();

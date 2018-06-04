@@ -1,10 +1,10 @@
 package com.qingmei2.rximagepicker_extension_zhihu.ui;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.qingmei2.rximagepicker.entity.Result;
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController;
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec;
 import com.qingmei2.rximagepicker_extension_zhihu.R;
@@ -34,10 +34,10 @@ public class ZhihuImagePickerActivity extends AppCompatActivity {
                 .commit();
 
         fragment.pickImage()
-                .subscribe(new Consumer<Uri>() {
+                .subscribe(new Consumer<Result>() {
                     @Override
-                    public void accept(Uri uri) throws Exception {
-                        ActivityPickerViewController.getInstance().emitUri(uri);
+                    public void accept(Result result) throws Exception {
+                        ActivityPickerViewController.getInstance().emitResult(result);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -53,7 +53,7 @@ public class ZhihuImagePickerActivity extends AppCompatActivity {
     }
 
     public void closure() {
-        ActivityPickerViewController.getInstance().endUriEmitAndReset();
+        ActivityPickerViewController.getInstance().endResultEmitAndReset();
         finish();
     }
 

@@ -1,8 +1,9 @@
 package com.qingmei2.rximagepicker.ui;
 
-import android.net.Uri;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentActivity;
+
+import com.qingmei2.rximagepicker.entity.Result;
 
 import io.reactivex.Observable;
 
@@ -32,6 +33,6 @@ public interface ICustomPickerView {
                  String tag,
                  ICustomPickerConfiguration configuration);
 
-    Observable<Uri> pickImage();
+    Observable<Result> pickImage();
 
 }

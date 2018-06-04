@@ -2,7 +2,6 @@ package com.qingmei2.sample.wechat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -14,11 +13,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.qingmei2.rximagepicker.core.RxImagePicker;
+import com.qingmei2.rximagepicker.entity.Result;
 import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension_wechat.WechatConfigrationBuilder;
 import com.qingmei2.rximagepicker_extension_wechat.ui.WechatImagePickerActivity;
 import com.qingmei2.sample.R;
-import com.qingmei2.sample.zhihu.ZhihuActivity;
 
 import io.reactivex.functions.Consumer;
 
@@ -111,12 +110,12 @@ public class WechatActivity extends AppCompatActivity {
                 .subscribe(onNext(), onError());
     }
 
-    private Consumer<Uri> onNext() {
-        return new Consumer<Uri>() {
+    private Consumer<Result> onNext() {
+        return new Consumer<Result>() {
             @Override
-            public void accept(Uri uri) {
+            public void accept(Result result) {
                 Glide.with(WechatActivity.this)
-                        .load(uri)
+                        .load(result.getUri())
                         .into(ivPickedImage);
             }
         };
