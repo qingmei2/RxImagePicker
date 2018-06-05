@@ -81,6 +81,22 @@
             android:layout_height="1dp"
             android:layout_weight="1" />
 
+        <RadioButton
+            android:id="@+id/rb_original"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="4dp"
+            android:text="原图"
+            android:textColor="?attr/album.element.color"
+            android:textSize="17sp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
         <TextView
             android:id="@+id/button_preview"
             android:layout_width="wrap_content"

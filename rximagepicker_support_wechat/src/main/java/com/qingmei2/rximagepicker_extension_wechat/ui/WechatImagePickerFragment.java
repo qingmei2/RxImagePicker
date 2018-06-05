@@ -21,10 +21,10 @@ import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.qingmei2.rximagepicker.entity.Result;
-import com.qingmei2.rximagepicker.function.Functions;
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController;
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView;
@@ -53,6 +53,8 @@ public class WechatImagePickerFragment extends Fragment implements
         View.OnClickListener, WechatImageListGridFragment.SelectionProvider,
         AlbumMediaAdapter.OnMediaClickListener, AlbumMediaAdapter.CheckStateListener {
 
+    public static final String EXTRA_ORIGINAL_IMAGE = "EXTRA_ORIGINAL_IMAGE";
+
     private final AlbumCollection mAlbumCollection = new AlbumCollection();
 
     private AlbumsSpinner mAlbumsSpinner;
@@ -64,10 +66,14 @@ public class WechatImagePickerFragment extends Fragment implements
 
     private TextView mButtonPreview;
     private TextView mButtonApply;
+    private RadioButton mRadioButton;
+
     private View mContainer;
     private View mEmptyView;
 
     private Context context;
+
+    private boolean imageOriginalMode = false;
 
     @Nullable
     @Override
@@ -85,8 +91,11 @@ public class WechatImagePickerFragment extends Fragment implements
 
         mButtonPreview = view.findViewById(R.id.button_preview);
         mButtonApply = view.findViewById(R.id.button_apply);
+        mRadioButton = view.findViewById(R.id.rb_original);
         mButtonPreview.setOnClickListener(this);
         mButtonApply.setOnClickListener(this);
+        mRadioButton.setOnClickListener(this);
+
         mContainer = view.findViewById(R.id.container);
         mEmptyView = view.findViewById(R.id.empty_view);
 
@@ -252,14 +261,22 @@ public class WechatImagePickerFragment extends Fragment implements
             emitSelectUri();
         } else if (v.getId() == R.id.button_back) {
             getActivity().onBackPressed();
+        } else if (v.getId() == R.id.rb_original) {
+            switchImageOriginalMode();
         }
+    }
+
+    private void switchImageOriginalMode() {
+        boolean original = !imageOriginalMode;
+        this.imageOriginalMode = original;
+        this.mRadioButton.setChecked(original);
     }
 
     private void emitSelectUri() {
         ArrayList<Uri> selectedUris = (ArrayList<Uri>) mSelectedCollection.asListOfUri();
         for (Uri uri : selectedUris) {
             publishSubject.onNext(
-                    Functions.parseResultNoExtraData(uri)
+                    instanceResult(uri)
             );
         }
         endPickImage();
@@ -291,11 +308,11 @@ public class WechatImagePickerFragment extends Fragment implements
                     for (Item item : selected) {
                         if (getActivity() instanceof WechatImagePickerActivity) {
                             ActivityPickerViewController.getInstance().emitResult(
-                                    Functions.parseResultNoExtraData(item.getContentUri())
+                                    instanceResult(item.getContentUri())
                             );
                         } else {
                             publishSubject.onNext(
-                                    Functions.parseResultNoExtraData(item.getContentUri())
+                                    instanceResult(item.getContentUri())
                             );
                         }
                     }
@@ -311,5 +328,11 @@ public class WechatImagePickerFragment extends Fragment implements
                 updateBottomToolbar();
             }
         }
+    }
+
+    private Result instanceResult(Uri uri) {
+        return new Result.Builder(uri)
+                .putBooleanExtra(EXTRA_ORIGINAL_IMAGE, imageOriginalMode)
+                .build();
     }
 }

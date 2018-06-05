@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.qingmei2.rximagepicker.entity.Result;
 import com.qingmei2.rximagepicker_extension.MimeType;
 import com.qingmei2.rximagepicker_extension_wechat.WechatConfigrationBuilder;
 import com.qingmei2.rximagepicker_extension_wechat.ui.WechatImagePickerActivity;
+import com.qingmei2.rximagepicker_extension_wechat.ui.WechatImagePickerFragment;
 import com.qingmei2.sample.R;
 
 import io.reactivex.functions.Consumer;
@@ -27,6 +29,7 @@ public class WechatActivity extends AppCompatActivity {
     private ImageView ivPickedImage;
     private WechatImagePicker rxImagePicker;
 
+    private static final String TAG = "WechatActivity";
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA = 99;
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY = 100;
 
@@ -114,6 +117,9 @@ public class WechatActivity extends AppCompatActivity {
         return new Consumer<Result>() {
             @Override
             public void accept(Result result) {
+                boolean originalMode = result.getBooleanExtra(WechatImagePickerFragment.EXTRA_ORIGINAL_IMAGE, false);
+                Log.d(TAG, "select image original:" + originalMode + " , uri path: " + result.getUri().getPath());
+
                 Glide.with(WechatActivity.this)
                         .load(result.getUri())
                         .into(ivPickedImage);
