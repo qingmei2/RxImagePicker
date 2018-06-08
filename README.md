@@ -62,14 +62,14 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 
 ```groovy
 // 最基础的架构，仅提供了系统默认的图片选择器和拍照功能
-compile 'com.github.qingmei2:rximagepicker:0.3.0'
+compile 'com.github.qingmei2:rximagepicker:0.4.0'
 
 // 提供了自定义UI图片选择器的基本组件，自定义UI的需求需要添加该依赖
-compile 'com.github.qingmei2:rximagepicker_support:0.3.0'
+compile 'com.github.qingmei2:rximagepicker_support:0.4.0'
 
 // 如果需要额外的UI支持，请选择依赖对应的UI拓展库
-compile 'com.github.qingmei2:rximagepicker_support_zhihu:0.3.0'     // 知乎图片选择器
-compile 'com.github.qingmei2:rximagepicker_support_wechat:0.3.0'    // 微信图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_zhihu:0.4.0'     // 知乎图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_wechat:0.4.0'    // 微信图片选择器
 ```
 ### 2. 接口配置
 
@@ -79,10 +79,10 @@ compile 'com.github.qingmei2:rximagepicker_support_wechat:0.3.0'    // 微信图
 public interface MyImagePicker {
 
     @Gallery    //打开相册选择图片
-    Observable<Uri> openGallery();
+    Observable<Result> openGallery();
 
     @Camera    //打开相机拍照
-    Observable<Uri> openCamera();
+    Observable<Result> openCamera();
 }
 ```
 
@@ -98,10 +98,14 @@ private void onButtonClick() {
             .build()
             .create(MyImagePicker.class)
             .openGallery()
-            .subscribe(new Consumer<Uri>() {
+            .subscribe(new Consumer<Result>() {
                 @Override
-                public void accept(Uri uri) throws Exception {
+                public void accept(Result result) throws Exception {
+                    Uri uri = result.getUri();
                     // 对图片进行处理，比如加载到ImageView中
+                    GlideApp.with(this)
+                             .load(uri)
+                             .into(ivPickedImage);
                 }
             });
 }

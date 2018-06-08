@@ -32,8 +32,8 @@ dependencies {
     implementation project(':rximagepicker_support_wechat')
     implementation project(':rximagepicker_support_zhihu')
 
-//    implementation 'com.github.qingmei2:rximagepicker_support_zhihu:0.2.3'
-//    implementation 'com.github.qingmei2:rximagepicker_support_wechat:0.2.3'
+//    implementation 'com.github.qingmei2:rximagepicker_support_zhihu:0.4.0'
+//    implementation 'com.github.qingmei2:rximagepicker_support_wechat:0.4.0'
 
     testImplementation rootProject.ext.dependencies["junit"]
 }
