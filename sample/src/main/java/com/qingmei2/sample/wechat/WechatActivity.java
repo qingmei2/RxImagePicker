@@ -74,7 +74,7 @@ public class WechatActivity extends AppCompatActivity {
                 .addCustomGallery(
                         WechatImagePicker.KEY_WECHAT_PICKER_ACTIVITY,
                         WechatImagePickerActivity.class,
-                        new WechatConfigrationBuilder(MimeType.ofAll(), false)
+                        new WechatConfigrationBuilder(MimeType.ofImage(), false)
                                 .maxSelectable(9)
                                 .countable(true)
                                 .spanCount(4)
