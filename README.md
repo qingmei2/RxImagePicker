@@ -4,6 +4,12 @@
 
 RxImagePicker的设计起源，请参考我的[这篇文章](https://www.jianshu.com/p/fecf3a13e615)
 
+## 通知（重要）
+  
+* **[详细文档，包括进阶使用和拓展功能,请点击查看wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
+* **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
+* **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
+
 <h2 id="overview">简介</h2>
 
 RxImagePicker存在的目的是：让开发者能够**简单**并且**灵活**的方式实现Android开发中**图片选择**的需求。
@@ -16,18 +22,12 @@ RxImagePicker存在的目的是：让开发者能够**简单**并且**灵活**�
 
 RxImagePicker是一个用于Android的响应式图片选择器，它将您的图片选择需求转换为一个接口进行配置，并在任何一个Activity或者Fragment中展示任何样式的图片选择UI。
 
-## 通知（重要）
-  
-* **[详细文档](https://github.com/qingmei2/RxImagePicker/wiki)** :包括进阶使用和拓展功能,请点击查看wiki！
-* [常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题) : 提issue之前查看一下，也许能节省您很多的时间！  
-* [更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog) : 升级库之前，请查看新版本关于API有可能出现的变动。
-
 ### 支持的功能
 
 - [x] Android Camera拍照
 - [x] Android 图片选择
 - [x] 以响应式数据流的格式返回数据（支持Observable/Flowable/Single/Maybe）
-- [x] 支持拓展数据，比如微信 **发送原图** 等功能，并且完全由您自定义灵活进行配置！
+- [x] 支持拓展数据，比如用于实现微信 **发送原图** 等功能，完全由您自定义灵活进行配置
 
 ### UI的支持
 
@@ -118,7 +118,7 @@ private void onButtonClick() {
 }
 ```
 
-## 详细文档(重要！！！)
+## 详细文档
 
 **[关于RxImagePicker更详细的使用说明，进阶使用和拓展功能,请参考wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
 
