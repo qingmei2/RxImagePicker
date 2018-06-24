@@ -150,6 +150,10 @@ private void onButtonClick() {
 
 * [13kmsteady](https://github.com/13kmsteady)
 
+## Another author's libraries using RxJava:
+
+[RxSchedulers](https://github.com/qingmei2/RxSchedulers): The schedulers tools for RxJava2 in Android.
+
 License
 -------
 
