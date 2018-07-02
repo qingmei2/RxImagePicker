@@ -1,6 +1,8 @@
 # RxImagePicker
 
-![Download](https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg)
+<div style="width:100%;display: flex;height:30px;">
+    <img style="margin-right:20px;" src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"/>
+</div>
 
 RxImagePicker的设计起源，请参考我的[这篇文章](https://www.jianshu.com/p/fecf3a13e615)
 
@@ -152,7 +154,8 @@ private void onButtonClick() {
 
 ## Another author's libraries using RxJava:
 
-[RxSchedulers](https://github.com/qingmei2/RxSchedulers): The schedulers tools for RxJava2 in Android.
+* **[RxSchedulers](https://github.com/qingmei2/RxSchedulers)**: The schedulers tools for RxJava2 in Android.   
+* **[RxDialog](https://github.com/qingmei2/RxDialog)**:  An easy-to-use Dialog management tool (Building...).
 
 License
 -------
