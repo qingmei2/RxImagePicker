@@ -1,6 +1,6 @@
 def dagger_version = '2.14.1'
 def lombok_version = '1.16.20'
-def kotlin_version = '1.1.60'
+def kotlin_version = '1.2.51'
 def support_version = '27.1.0'
 def espresso_version = '2.2.2'
 def glide_version = '4.5.0'
@@ -27,11 +27,12 @@ project.ext {
             "constraint-layout"          : "com.android.support.constraint:constraint-layout:1.0.2",
 
             //kotlin
-            "kotlin-android"             : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
+            "kotlin-android"             : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
 
             //rx
             "rxJava2"                    : "io.reactivex.rxjava2:rxjava:2.1.8",
             "rxandroid"                  : "io.reactivex.rxjava2:rxandroid:2.0.1",
+            "rxkotlin"                   : "io.reactivex.rxjava2:rxkotlin:2.2.0",
             "rxbinding"                  : "com.jakewharton.rxbinding2:rxbinding:2.0.0",
             "rxschedulers"               : "com.github.qingmei2.rxschedulers:rxschedulers:0.1.1",
 

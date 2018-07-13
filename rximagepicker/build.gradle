@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
@@ -29,12 +30,12 @@ android {
 
 dependencies {
     api rootProject.ext.dependencies["appcompat-v7"]
-    api rootProject.ext.dependencies["rxJava2"]
+    api rootProject.ext.dependencies["rxkotlin"]
     api rootProject.ext.dependencies["rxandroid"]
+    implementation rootProject.ext.dependencies["kotlin-android"]
     compileOnly rootProject.ext.dependencies["dagger"]
-    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+    kapt rootProject.ext.dependencies["dagger-compiler"]
     testImplementation rootProject.ext.dependencies["junit"]
-    testImplementation rootProject.ext.dependencies["kotlin-android"]
     testImplementation rootProject.ext.dependencies["mockito-kotlin"]
     testImplementation rootProject.ext.dependencies["robolectric"]
     testImplementation rootProject.ext.dependencies["robolectric-v4"]

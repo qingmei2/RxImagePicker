@@ -258,7 +258,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
     private void emitSelectUri() {
         ArrayList<Uri> selectedUris = (ArrayList<Uri>) mSelectedCollection.asListOfUri();
         for (Uri uri : selectedUris) {
-            publishSubject.onNext(Functions.parseResultNoExtraData(uri));
+            publishSubject.onNext(Functions.Companion.parseResultNoExtraData(uri));
         }
         endPickImage();
     }
@@ -289,11 +289,11 @@ public class ZhihuImagePickerFragment extends Fragment implements
                     for (Item item : selected) {
                         if (getActivity() instanceof ZhihuImagePickerActivity) {
                             ActivityPickerViewController.getInstance().emitResult(
-                                    Functions.parseResultNoExtraData(item.getContentUri())
+                                    Functions.Companion.parseResultNoExtraData(item.getContentUri())
                             );
                         } else {
                             publishSubject.onNext(
-                                    Functions.parseResultNoExtraData(item.getContentUri())
+                                    Functions.Companion.parseResultNoExtraData(item.getContentUri())
                             );
                         }
                     }
