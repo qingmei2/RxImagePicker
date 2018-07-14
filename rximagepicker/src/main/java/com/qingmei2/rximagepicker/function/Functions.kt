@@ -1,5 +1,3 @@
-@file:JvmName("Functions")
-
 package com.qingmei2.rximagepicker.function
 
 import android.net.Uri

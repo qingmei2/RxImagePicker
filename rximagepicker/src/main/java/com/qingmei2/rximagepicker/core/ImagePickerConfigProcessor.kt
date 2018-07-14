@@ -41,7 +41,7 @@ class ImagePickerConfigProcessor(@field:VisibleForTesting
     ): Function<ImagePickerConfigProvider, ObservableSource<Result>> {
         return Function { provider ->
             if (provider.isSingleActivity) {
-                return@Function ActivityPickerViewController.getInstance().pickImage()
+                return@Function ActivityPickerViewController.instance.pickImage()
             }
             when (provider.sourcesFrom) {
                 SourcesFrom.GALLERY,

@@ -23,6 +23,8 @@ import io.reactivex.Observable
 
 class SystemCameraPickerView : BaseSystemPickerView(), ICameraCustomPickerView {
 
+    private lateinit var cameraPictureUrl: Uri
+
     override fun display(fragmentActivity: FragmentActivity,
                          @IdRes containerViewId: Int,
                          tag: String,
@@ -54,20 +56,15 @@ class SystemCameraPickerView : BaseSystemPickerView(), ICameraCustomPickerView {
         startActivityForResult(pictureChooseIntent, BaseSystemPickerView.CAMERA_REQUEST_CODE)
     }
 
-    override fun getActivityResultUri(data: Intent?): Uri? {
+    override fun getActivityResultUri(data: Intent): Uri {
         return cameraPictureUrl
     }
 
-    private fun createImageUri(): Uri? {
+    private fun createImageUri(): Uri {
         val contentResolver = getActivity()!!.getContentResolver()
         val cv = ContentValues()
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         cv.put(MediaStore.Images.Media.TITLE, timeStamp)
         return contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv)
-    }
-
-    companion object {
-
-        private var cameraPictureUrl: Uri? = null
     }
 }

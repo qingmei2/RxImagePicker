@@ -37,7 +37,7 @@ class RxImagePicker private constructor(@field:VisibleForTesting
 
     class Builder {
 
-        var fragmentActivity: FragmentActivity? = null
+        lateinit var fragmentActivity: FragmentActivity
             private set
 
         private val cameraViews = HashMap<String, ICameraCustomPickerView>()
@@ -53,7 +53,7 @@ class RxImagePicker private constructor(@field:VisibleForTesting
             return with(fragment.activity)
         }
 
-        fun with(activity: FragmentActivity?): Builder {
+        fun with(activity: FragmentActivity): Builder {
             this.fragmentActivity = activity
             return this
         }

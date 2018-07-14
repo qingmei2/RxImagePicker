@@ -16,8 +16,7 @@ interface DefaultImagePicker {
     fun openCamera(): Observable<Result>
 
     companion object {
-
-        val DEFAULT_PICKER_GALLERY = "com.qingmei2.rximagepicker.pickerview.default.gallery"
-        val DEFAULT_PICKER_CAMERA = "com.qingmei2.rximagepicker.pickerview.default.camera"
+        const val DEFAULT_PICKER_GALLERY = "com.qingmei2.rximagepicker.pickerview.default.gallery"
+        const val DEFAULT_PICKER_CAMERA = "com.qingmei2.rximagepicker.pickerview.default.camera"
     }
 }

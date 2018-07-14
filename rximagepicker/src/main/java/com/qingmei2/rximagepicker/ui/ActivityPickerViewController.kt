@@ -31,8 +31,8 @@ class ActivityPickerViewController private constructor() : ICustomPickerView {
         fragmentActivity.startActivity(Intent(fragmentActivity, activityClass))
     }
 
-    override fun pickImage(): Observable<Result>? {
-        return publishSubject
+    override fun pickImage(): Observable<Result> {
+        return publishSubject!!
     }
 
     fun emitResult(result: Result) {
@@ -59,7 +59,7 @@ class ActivityPickerViewController private constructor() : ICustomPickerView {
         @Volatile
         private var INSTANCE: ActivityPickerViewController? = null
 
-        val instance: ActivityPickerViewController?
+        val instance: ActivityPickerViewController
             get() {
                 if (INSTANCE == null) {
                     synchronized(ActivityPickerViewController::class.java) {
@@ -68,7 +68,7 @@ class ActivityPickerViewController private constructor() : ICustomPickerView {
                         }
                     }
                 }
-                return INSTANCE
+                return INSTANCE!!
             }
     }
 }

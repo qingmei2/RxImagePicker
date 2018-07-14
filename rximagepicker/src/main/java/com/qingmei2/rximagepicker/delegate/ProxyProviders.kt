@@ -3,11 +3,9 @@ package com.qingmei2.rximagepicker.delegate
 import android.support.v4.app.FragmentActivity
 
 import com.qingmei2.rximagepicker.core.IImagePickerProcessor
-import com.qingmei2.rximagepicker.core.ImagePickerConfigProvider
+import com.qingmei2.rximagepicker.core.ImagePickerConfigProcessor
 import com.qingmei2.rximagepicker.core.RxImagePicker
-import com.qingmei2.rximagepicker.di.DaggerRxImagePickerComponent
-import com.qingmei2.rximagepicker.di.RxImagePickerComponent
-import com.qingmei2.rximagepicker.di.RxImagePickerModule
+import com.qingmei2.rximagepicker.di.scheduler.RxImagePickerSchedulers
 import com.qingmei2.rximagepicker.entity.CustomPickConfigurations
 
 import java.lang.reflect.InvocationHandler
@@ -30,14 +28,21 @@ class ProxyProviders(builder: RxImagePicker.Builder,
     private val customPickConfigurations: CustomPickConfigurations
 
     init {
-        val component = DaggerRxImagePickerComponent.builder()
-                .rxImagePickerModule(RxImagePickerModule(builder))
-                .build()
-
-        rxImagePickerProcessor = component.rxImagePickerProcessor()
-        fragmentActivity = component.fragmentActivity()
-        proxyTranslator = component.proxyTranslator()
-        customPickConfigurations = component.customPickConfigurations()
+        rxImagePickerProcessor = ImagePickerConfigProcessor(
+                builder.fragmentActivity,
+                builder.getCameraViews(),
+                builder.getGalleryViews(),
+                RxImagePickerSchedulers()
+        )
+        fragmentActivity = builder.fragmentActivity
+        proxyTranslator = ProxyTranslator(
+                builder.getGalleryViews(),
+                builder.getCameraViews(),
+                builder.getActivityClasses()
+        )
+        customPickConfigurations = CustomPickConfigurations(
+                builder.customPickerConfigurations
+        )
     }
 
     override fun invoke(proxy: Any, method: Method, args: Array<Any>): Any {

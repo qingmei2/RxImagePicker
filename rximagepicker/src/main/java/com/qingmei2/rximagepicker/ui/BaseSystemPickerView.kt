@@ -41,7 +41,7 @@ abstract class BaseSystemPickerView : Fragment() {
         setRetainInstance(true)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         attachedSubject.onNext(true)
         attachedSubject.onComplete()
@@ -57,7 +57,7 @@ abstract class BaseSystemPickerView : Fragment() {
 
     abstract fun startRequest()
 
-    abstract fun getActivityResultUri(data: Intent?): Uri
+    abstract fun getActivityResultUri(data: Intent): Uri
 
     private fun onImagePicked(uri: Uri) {
         if (publishSubject != null) {
@@ -94,7 +94,7 @@ abstract class BaseSystemPickerView : Fragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         if (resultCode == RESULT_OK) {
             when (requestCode) {
                 GALLERY_REQUEST_CODE, CAMERA_REQUEST_CODE -> onImagePicked(getActivityResultUri(data))
