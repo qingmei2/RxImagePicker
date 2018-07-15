@@ -71,7 +71,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), SelectionSpec.getInstance().themeId);
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), SelectionSpec.Companion.getInstance().getThemeId());
         LayoutInflater localInflater = inflater
                 .cloneInContext(contextThemeWrapper);
         return localInflater.inflate(R.layout.fragment_picker_zhihu, container, false);
@@ -139,7 +139,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
             fragmentTransaction.remove(this);
             fragmentTransaction.commit();
         }
-        SelectionSpec.getInstance().onFinished();
+        SelectionSpec.Companion.getInstance().onFinished();
     }
 
     @Override
@@ -154,7 +154,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
                 cursor.moveToPosition(mAlbumCollection.getCurrentSelection());
                 mAlbumsSpinner.setSelection(context,
                         mAlbumCollection.getCurrentSelection());
-                Album album = Album.valueOf(cursor);
+                Album album = Album.Companion.valueOf(cursor);
                 if (album.isAll()) {
                     album.addCaptureCount();
                 }
@@ -172,7 +172,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mAlbumCollection.setStateCurrentSelection(position);
         mAlbumsAdapter.getCursor().moveToPosition(position);
-        Album album = Album.valueOf(mAlbumsAdapter.getCursor());
+        Album album = Album.Companion.valueOf(mAlbumsAdapter.getCursor());
         if (album.isAll()) {
             album.addCaptureCount();
         }
@@ -190,7 +190,7 @@ public class ZhihuImagePickerFragment extends Fragment implements
             mButtonPreview.setEnabled(false);
             mButtonApply.setEnabled(false);
             mButtonApply.setText(getString(R.string.button_apply_default));
-        } else if (selectedCount == 1 && SelectionSpec.getInstance().singleSelectionModeEnabled()) {
+        } else if (selectedCount == 1 && SelectionSpec.Companion.getInstance().singleSelectionModeEnabled()) {
             mButtonPreview.setEnabled(true);
             mButtonApply.setText(R.string.button_apply_default);
             mButtonApply.setEnabled(true);
@@ -281,9 +281,9 @@ public class ZhihuImagePickerFragment extends Fragment implements
 
         if (requestCode == ZhihuImagePickerActivity.REQUEST_CODE_PREVIEW) {
             Bundle resultBundle = data.getBundleExtra(BasePreviewActivity.EXTRA_RESULT_BUNDLE);
-            ArrayList<Item> selected = resultBundle.getParcelableArrayList(SelectedItemCollection.STATE_SELECTION);
-            int collectionType = resultBundle.getInt(SelectedItemCollection.STATE_COLLECTION_TYPE,
-                    SelectedItemCollection.COLLECTION_UNDEFINED);
+            ArrayList<Item> selected = resultBundle.getParcelableArrayList(SelectedItemCollection.Companion.getSTATE_SELECTION());
+            int collectionType = resultBundle.getInt(SelectedItemCollection.Companion.getSTATE_COLLECTION_TYPE(),
+                    SelectedItemCollection.Companion.getCOLLECTION_UNDEFINED());
             if (data.getBooleanExtra(BasePreviewActivity.EXTRA_RESULT_APPLY, false)) {  // apply event
                 if (selected != null) {
                     for (Item item : selected) {

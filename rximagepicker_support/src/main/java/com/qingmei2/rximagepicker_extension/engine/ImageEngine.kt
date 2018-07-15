@@ -13,18 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qingmei2.rximagepicker_extension.engine;
+package com.qingmei2.rximagepicker_extension.engine
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.widget.ImageView;
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.widget.ImageView
 
 /**
  * Image loader interface.
  */
-@SuppressWarnings("unused")
-public interface ImageEngine {
+interface ImageEngine {
 
     /**
      * Load thumbnail of a static image resource.
@@ -35,7 +34,7 @@ public interface ImageEngine {
      * @param imageView   ImageView widget
      * @param uri         Uri of the loaded image
      */
-    void loadThumbnail(Context context, int resize, Drawable placeholder, ImageView imageView, Uri uri);
+    fun loadThumbnail(context: Context, resize: Int, placeholder: Drawable, imageView: ImageView, uri: Uri)
 
     /**
      * Load thumbnail of a gif image resource. You don't have to load an animated gif when it's only
@@ -47,7 +46,7 @@ public interface ImageEngine {
      * @param imageView   ImageView widget
      * @param uri         Uri of the loaded image
      */
-    void loadGifThumbnail(Context context, int resize, Drawable placeholder, ImageView imageView, Uri uri);
+    fun loadGifThumbnail(context: Context, resize: Int, placeholder: Drawable, imageView: ImageView, uri: Uri)
 
     /**
      * Load a static image resource.
@@ -58,7 +57,7 @@ public interface ImageEngine {
      * @param imageView ImageView widget
      * @param uri       Uri of the loaded image
      */
-    void loadImage(Context context, int resizeX, int resizeY, ImageView imageView, Uri uri);
+    fun loadImage(context: Context, resizeX: Int, resizeY: Int, imageView: ImageView, uri: Uri)
 
     /**
      * Load a gif image resource.
@@ -69,7 +68,7 @@ public interface ImageEngine {
      * @param imageView ImageView widget
      * @param uri       Uri of the loaded image
      */
-    void loadGifImage(Context context, int resizeX, int resizeY, ImageView imageView, Uri uri);
+    fun loadGifImage(context: Context, resizeX: Int, resizeY: Int, imageView: ImageView, uri: Uri)
 
     /**
      * Whether this implementation supports animated gif.
@@ -77,5 +76,5 @@ public interface ImageEngine {
      *
      * @return true support animated gif, false do not support animated gif.
      */
-    boolean supportAnimatedGif();
+    fun supportAnimatedGif(): Boolean
 }

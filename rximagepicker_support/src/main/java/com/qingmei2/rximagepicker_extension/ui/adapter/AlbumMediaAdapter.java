@@ -54,7 +54,7 @@ public class AlbumMediaAdapter extends
 
     public AlbumMediaAdapter(Context context, SelectedItemCollection selectedCollection, RecyclerView recyclerView) {
         super(null);
-        mSelectionSpec = SelectionSpec.getInstance();
+        mSelectionSpec = SelectionSpec.Companion.getInstance();
         mSelectedCollection = selectedCollection;
 
         TypedArray ta = context.getTheme().obtainStyledAttributes(new int[]{R.attr.item_placeholder});
@@ -118,11 +118,11 @@ public class AlbumMediaAdapter extends
         } else if (holder instanceof MediaViewHolder) {
             MediaViewHolder mediaViewHolder = (MediaViewHolder) holder;
 
-            final Item item = Item.valueOf(cursor);
+            final Item item = Item.Companion.valueOf(cursor);
             mediaViewHolder.mMediaGrid.preBindMedia(new MediaGrid.PreBindInfo(
                     getImageResize(mediaViewHolder.mMediaGrid.getContext()),
                     mPlaceholder,
-                    mSelectionSpec.countable,
+                    mSelectionSpec.getCountable(),
                     holder
             ));
             mediaViewHolder.mMediaGrid.bindMedia(item);
@@ -132,7 +132,7 @@ public class AlbumMediaAdapter extends
     }
 
     private void setCheckStatus(Item item, MediaGrid mediaGrid) {
-        if (mSelectionSpec.countable) {
+        if (mSelectionSpec.getCountable()) {
             int checkedNum = mSelectedCollection.checkedNumOf(item);
             if (checkedNum > 0) {
                 mediaGrid.setCheckEnabled(true);
@@ -172,7 +172,7 @@ public class AlbumMediaAdapter extends
 
     @Override
     public void onCheckViewClicked(CheckView checkView, Item item, RecyclerView.ViewHolder holder) {
-        if (mSelectionSpec.countable) {
+        if (mSelectionSpec.getCountable()) {
             int checkedNum = mSelectedCollection.checkedNumOf(item);
             if (checkedNum == CheckView.UNCHECKED) {
                 if (assertAddSelection(holder.itemView.getContext(), item)) {
@@ -205,12 +205,12 @@ public class AlbumMediaAdapter extends
 
     @Override
     public int getItemViewType(int position, Cursor cursor) {
-        return Item.valueOf(cursor).isCapture() ? VIEW_TYPE_CAPTURE : VIEW_TYPE_MEDIA;
+        return Item.Companion.valueOf(cursor).isCapture() ? VIEW_TYPE_CAPTURE : VIEW_TYPE_MEDIA;
     }
 
     private boolean assertAddSelection(Context context, Item item) {
         IncapableCause cause = mSelectedCollection.isAcceptable(item);
-        IncapableCause.handleCause(context, cause);
+        IncapableCause.Companion.handleCause(context, cause);
         return cause == null;
     }
 
@@ -242,7 +242,7 @@ public class AlbumMediaAdapter extends
             RecyclerView.ViewHolder holder = mRecyclerView.findViewHolderForAdapterPosition(first);
             if (holder instanceof MediaViewHolder) {
                 if (cursor.moveToPosition(i)) {
-                    setCheckStatus(Item.valueOf(cursor), ((MediaViewHolder) holder).mMediaGrid);
+                    setCheckStatus(Item.Companion.valueOf(cursor), ((MediaViewHolder) holder).mMediaGrid);
                 }
             }
         }
@@ -256,7 +256,7 @@ public class AlbumMediaAdapter extends
             int availableWidth = screenWidth - context.getResources().getDimensionPixelSize(
                     R.dimen.media_grid_spacing) * (spanCount - 1);
             mImageResize = availableWidth / spanCount;
-            mImageResize = (int) (mImageResize * mSelectionSpec.thumbnailScale);
+            mImageResize = (int) (mImageResize * mSelectionSpec.getThumbnailScale());
         }
         return mImageResize;
     }

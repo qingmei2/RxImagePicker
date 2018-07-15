@@ -111,10 +111,10 @@ public class MediaGrid extends SquareFrameLayout implements View.OnClickListener
 
     private void setImage() {
         if (mMedia.isGif()) {
-            SelectionSpec.getInstance().imageEngine.loadGifThumbnail(getContext(), mPreBindInfo.mResize,
+            SelectionSpec.Companion.getInstance().getImageEngine().loadGifThumbnail(getContext(), mPreBindInfo.mResize,
                     mPreBindInfo.mPlaceholder, mThumbnail, mMedia.getContentUri());
         } else {
-            SelectionSpec.getInstance().imageEngine.loadThumbnail(getContext(), mPreBindInfo.mResize,
+            SelectionSpec.Companion.getInstance().getImageEngine().loadThumbnail(getContext(), mPreBindInfo.mResize,
                     mPreBindInfo.mPlaceholder, mThumbnail, mMedia.getContentUri());
         }
     }
@@ -122,7 +122,7 @@ public class MediaGrid extends SquareFrameLayout implements View.OnClickListener
     private void setVideoDuration() {
         if (mMedia.isVideo()) {
             mVideoDuration.setVisibility(VISIBLE);
-            mVideoDuration.setText(DateUtils.formatElapsedTime(mMedia.duration / 1000));
+            mVideoDuration.setText(DateUtils.formatElapsedTime(mMedia.getDuration() / 1000));
         } else {
             mVideoDuration.setVisibility(GONE);
         }

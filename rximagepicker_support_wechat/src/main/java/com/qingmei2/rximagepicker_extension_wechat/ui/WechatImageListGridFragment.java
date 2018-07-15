@@ -75,7 +75,7 @@ public class WechatImageListGridFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), SelectionSpec.getInstance().themeId);
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), SelectionSpec.Companion.getInstance().getThemeId());
         LayoutInflater localInflater = inflater
                 .cloneInContext(contextThemeWrapper);
         return localInflater.inflate(R.layout.fragment_media_selection, container, false);
@@ -99,11 +99,11 @@ public class WechatImageListGridFragment extends Fragment implements
         mRecyclerView.setHasFixedSize(true);
 
         int spanCount;
-        SelectionSpec selectionSpec = SelectionSpec.getInstance();
-        if (selectionSpec.gridExpectedSize > 0) {
-            spanCount = UIUtils.spanCount(getContext(), selectionSpec.gridExpectedSize);
+        SelectionSpec selectionSpec = SelectionSpec.Companion.getInstance();
+        if (selectionSpec.getGridExpectedSize() > 0) {
+            spanCount = UIUtils.spanCount(getContext(), selectionSpec.getGridExpectedSize());
         } else {
-            spanCount = selectionSpec.spanCount;
+            spanCount = selectionSpec.getSpanCount();
         }
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), spanCount));
 
@@ -111,7 +111,7 @@ public class WechatImageListGridFragment extends Fragment implements
         mRecyclerView.addItemDecoration(new MediaGridInset(spanCount, spacing, false));
         mRecyclerView.setAdapter(mAdapter);
         mAlbumMediaCollection.onCreate(getActivity(), this);
-        mAlbumMediaCollection.load(album, selectionSpec.capture);
+        mAlbumMediaCollection.load(album, selectionSpec.getCapture());
     }
 
     @Override

@@ -42,7 +42,7 @@ public class WechatAlbumsAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        final Context contextThemeWrapper = new ContextThemeWrapper(context, SelectionSpec.getInstance().themeId);
+        final Context contextThemeWrapper = new ContextThemeWrapper(context, SelectionSpec.Companion.getInstance().getThemeId());
         return LayoutInflater.from(context)
                 .cloneInContext(contextThemeWrapper)
                 .inflate(R.layout.wechat_album_list_item, parent, false);
@@ -50,11 +50,11 @@ public class WechatAlbumsAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        Album album = Album.valueOf(cursor);
+        Album album = Album.Companion.valueOf(cursor);
         ((TextView) view.findViewById(R.id.album_name)).setText(album.getDisplayName(context));
         ((TextView) view.findViewById(R.id.album_media_count)).setText(String.valueOf(album.getCount()));
 
-        SelectionSpec.getInstance().imageEngine.loadThumbnail(context,
+        SelectionSpec.Companion.getInstance().getImageEngine().loadThumbnail(context,
                 context.getResources().getDimensionPixelSize(R.dimen.wechat_media_grid_size),
                 mPlaceholder,
                 view.findViewById(R.id.album_cover),

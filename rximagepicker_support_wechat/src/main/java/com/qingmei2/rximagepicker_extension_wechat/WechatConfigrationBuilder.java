@@ -69,10 +69,10 @@ public class WechatConfigrationBuilder {
      * @param mimeTypes MIME type set to select.
      */
     public WechatConfigrationBuilder(@NonNull Set<MimeType> mimeTypes, boolean mediaTypeExclusive) {
-        mSelectionSpec = SelectionSpec.getNewCleanInstance(new WechatGlideEngine());
-        mSelectionSpec.mimeTypeSet = mimeTypes;
-        mSelectionSpec.mediaTypeExclusive = mediaTypeExclusive;
-        mSelectionSpec.orientation = SCREEN_ORIENTATION_UNSPECIFIED;
+        mSelectionSpec = SelectionSpec.Companion.getNewCleanInstance(new WechatGlideEngine());
+        mSelectionSpec.setMimeTypeSet(mimeTypes);
+        mSelectionSpec.setMediaTypeExclusive(mediaTypeExclusive);
+        mSelectionSpec.setOrientation(SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     /**
@@ -84,7 +84,7 @@ public class WechatConfigrationBuilder {
      * @see SelectionSpec#onlyShowVideos()
      */
     public WechatConfigrationBuilder showSingleMediaType(boolean showSingleMediaType) {
-        mSelectionSpec.showSingleMediaType = showSingleMediaType;
+        mSelectionSpec.setShowSingleMediaType(showSingleMediaType);
         return this;
     }
 
@@ -99,7 +99,7 @@ public class WechatConfigrationBuilder {
      * @return {@link WechatConfigrationBuilder} for fluent API.
      */
     public WechatConfigrationBuilder theme(@StyleRes int themeId) {
-        mSelectionSpec.themeId = themeId;
+        mSelectionSpec.setThemeId(themeId);
         return this;
     }
 
@@ -111,7 +111,7 @@ public class WechatConfigrationBuilder {
      * @return {@link WechatConfigrationBuilder} for fluent API.
      */
     public WechatConfigrationBuilder countable(boolean countable) {
-        mSelectionSpec.countable = countable;
+        mSelectionSpec.setCountable(countable);
         return this;
     }
 
@@ -124,9 +124,9 @@ public class WechatConfigrationBuilder {
     public WechatConfigrationBuilder maxSelectable(int maxSelectable) {
         if (maxSelectable < 1)
             throw new IllegalArgumentException("maxSelectable must be greater than or equal to one");
-        if (mSelectionSpec.maxImageSelectable > 0 || mSelectionSpec.maxVideoSelectable > 0)
+        if (mSelectionSpec.getMaxImageSelectable() > 0 || mSelectionSpec.getMaxVideoSelectable() > 0)
             throw new IllegalStateException("already set maxImageSelectable and maxVideoSelectable");
-        mSelectionSpec.maxSelectable = maxSelectable;
+        mSelectionSpec.setMaxSelectable(maxSelectable);
         return this;
     }
 
@@ -141,9 +141,9 @@ public class WechatConfigrationBuilder {
     public WechatConfigrationBuilder maxSelectablePerMediaType(int maxImageSelectable, int maxVideoSelectable) {
         if (maxImageSelectable < 1 || maxVideoSelectable < 1)
             throw new IllegalArgumentException(("max selectable must be greater than or equal to one"));
-        mSelectionSpec.maxSelectable = -1;
-        mSelectionSpec.maxImageSelectable = maxImageSelectable;
-        mSelectionSpec.maxVideoSelectable = maxVideoSelectable;
+        mSelectionSpec.setMaxSelectable(-1);
+        mSelectionSpec.setMaxImageSelectable(maxImageSelectable);
+        mSelectionSpec.setMaxVideoSelectable(maxVideoSelectable);
         return this;
     }
 
@@ -154,11 +154,11 @@ public class WechatConfigrationBuilder {
      * @return {@link WechatConfigrationBuilder} for fluent API.
      */
     public WechatConfigrationBuilder addFilter(@NonNull Filter filter) {
-        if (mSelectionSpec.filters == null) {
-            mSelectionSpec.filters = new ArrayList<>();
+        if (mSelectionSpec.getFilters() == null) {
+            mSelectionSpec.setFilters(new ArrayList<>());
         }
         if (filter == null) throw new IllegalArgumentException("filter cannot be null");
-        mSelectionSpec.filters.add(filter);
+        mSelectionSpec.getFilters().add(filter);
         return this;
     }
 
@@ -171,7 +171,7 @@ public class WechatConfigrationBuilder {
      * @return {@link WechatConfigrationBuilder} for fluent API.
      */
     public WechatConfigrationBuilder capture(boolean enable) {
-        mSelectionSpec.capture = enable;
+        mSelectionSpec.setCapture(enable);
         return this;
     }
 
@@ -183,7 +183,7 @@ public class WechatConfigrationBuilder {
      * @return {@link WechatConfigrationBuilder} for fluent API.
      */
     public WechatConfigrationBuilder captureStrategy(CaptureStrategy captureStrategy) {
-        mSelectionSpec.captureStrategy = captureStrategy;
+        mSelectionSpec.setCaptureStrategy(captureStrategy);
         return this;
     }
 
@@ -196,7 +196,7 @@ public class WechatConfigrationBuilder {
      * @see Activity#setRequestedOrientation(int)
      */
     public WechatConfigrationBuilder restrictOrientation(@ScreenOrientation int orientation) {
-        mSelectionSpec.orientation = orientation;
+        mSelectionSpec.setOrientation(orientation);
         return this;
     }
 
@@ -210,7 +210,7 @@ public class WechatConfigrationBuilder {
      */
     public WechatConfigrationBuilder spanCount(int spanCount) {
         if (spanCount < 1) throw new IllegalArgumentException("spanCount cannot be less than 1");
-        mSelectionSpec.spanCount = spanCount;
+        mSelectionSpec.setSpanCount(spanCount);
         return this;
     }
 
@@ -223,7 +223,7 @@ public class WechatConfigrationBuilder {
      * @return {@link WechatConfigrationBuilder} for fluent API.
      */
     public WechatConfigrationBuilder gridExpectedSize(int size) {
-        mSelectionSpec.gridExpectedSize = size;
+        mSelectionSpec.setGridExpectedSize(size);
         return this;
     }
 
@@ -237,7 +237,7 @@ public class WechatConfigrationBuilder {
     public WechatConfigrationBuilder thumbnailScale(float scale) {
         if (scale <= 0f || scale > 1f)
             throw new IllegalArgumentException("Thumbnail scale must be between (0.0, 1.0]");
-        mSelectionSpec.thumbnailScale = scale;
+        mSelectionSpec.setThumbnailScale(scale);
         return this;
     }
 
@@ -251,14 +251,14 @@ public class WechatConfigrationBuilder {
      * @return {@link WechatConfigrationBuilder} for fluent API.
      */
     public WechatConfigrationBuilder imageEngine(ImageEngine imageEngine) {
-        SelectionSpec.setDefaultImageEngine(imageEngine);
-        mSelectionSpec.imageEngine = imageEngine;
+        SelectionSpec.Companion.setDefaultImageEngine(imageEngine);
+        mSelectionSpec.setImageEngine(imageEngine);
         return this;
     }
 
     public SelectionSpec build() {
-        if (mSelectionSpec.themeId == com.qingmei2.rximagepicker_extension.R.style.Theme_AppCompat_Light)
-            mSelectionSpec.themeId = R.style.Wechat;
+        if (mSelectionSpec.getThemeId() == com.qingmei2.rximagepicker_extension.R.style.Theme_AppCompat_Light)
+            mSelectionSpec.setThemeId(R.style.Wechat);
 
 
         return mSelectionSpec;

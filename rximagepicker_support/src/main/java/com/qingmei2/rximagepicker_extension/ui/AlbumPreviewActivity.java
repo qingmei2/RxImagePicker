@@ -47,7 +47,7 @@ public class AlbumPreviewActivity extends BasePreviewActivity implements
         mCollection.load(album);
 
         Item item = getIntent().getParcelableExtra(EXTRA_ITEM);
-        if (mSpec.countable) {
+        if (mSpec.getCountable()) {
             mCheckView.setCheckedNum(mSelectedCollection.checkedNumOf(item));
         } else {
             mCheckView.setChecked(mSelectedCollection.isSelected(item));
@@ -65,7 +65,7 @@ public class AlbumPreviewActivity extends BasePreviewActivity implements
     public void onAlbumMediaLoad(Cursor cursor) {
         List<Item> items = new ArrayList<>();
         while (cursor.moveToNext()) {
-            items.add(Item.valueOf(cursor));
+            items.add(Item.Companion.valueOf(cursor));
         }
         PreviewPagerAdapter adapter = (PreviewPagerAdapter) mPager.getAdapter();
         adapter.addAll(items);

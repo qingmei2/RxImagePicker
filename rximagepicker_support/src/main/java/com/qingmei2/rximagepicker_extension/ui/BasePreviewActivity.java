@@ -58,16 +58,16 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        setTheme(SelectionSpec.getInstance().themeId);
+        setTheme(SelectionSpec.Companion.getInstance().getThemeId());
         super.onCreate(savedInstanceState);
         setContentView(getLayoutRes());
         if (Platform.hasKitKat()) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
 
-        mSpec = SelectionSpec.getInstance();
+        mSpec = SelectionSpec.Companion.getInstance();
         if (mSpec.needOrientationRestriction()) {
-            setRequestedOrientation(mSpec.orientation);
+            setRequestedOrientation(mSpec.getOrientation());
         }
 
         if (savedInstanceState == null) {
@@ -87,7 +87,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
         mAdapter = new PreviewPagerAdapter(getSupportFragmentManager(), null);
         mPager.setAdapter(mAdapter);
         mCheckView = findViewById(R.id.check_view);
-        mCheckView.setCountable(mSpec.countable);
+        mCheckView.setCountable(mSpec.getCountable());
 
         mCheckView.setOnClickListener(new View.OnClickListener() {
 
@@ -96,7 +96,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
                 Item item = mAdapter.getMediaItem(mPager.getCurrentItem());
                 if (mSelectedCollection.isSelected(item)) {
                     mSelectedCollection.remove(item);
-                    if (mSpec.countable) {
+                    if (mSpec.getCountable()) {
                         mCheckView.setCheckedNum(CheckView.UNCHECKED);
                     } else {
                         mCheckView.setChecked(false);
@@ -104,7 +104,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
                 } else {
                     if (assertAddSelection(item)) {
                         mSelectedCollection.add(item);
-                        if (mSpec.countable) {
+                        if (mSpec.getCountable()) {
                             mCheckView.setCheckedNum(mSelectedCollection.checkedNumOf(item));
                         } else {
                             mCheckView.setChecked(true);
@@ -156,7 +156,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
             ((PreviewItemFragment) adapter.instantiateItem(mPager, mPreviousPos)).resetView();
 
             Item item = adapter.getMediaItem(position);
-            if (mSpec.countable) {
+            if (mSpec.getCountable()) {
                 int checkedNum = mSelectedCollection.checkedNumOf(item);
                 mCheckView.setCheckedNum(checkedNum);
                 if (checkedNum > 0) {
@@ -200,7 +200,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
     protected void updateSize(Item item) {
         if (item.isGif()) {
             mSize.setVisibility(View.VISIBLE);
-            mSize.setText(PhotoMetadataUtils.getSizeInMB(item.size) + "M");
+            mSize.setText(PhotoMetadataUtils.getSizeInMB(item.getSize()) + "M");
         } else {
             mSize.setVisibility(View.GONE);
         }
@@ -215,7 +215,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
 
     private boolean assertAddSelection(Item item) {
         IncapableCause cause = mSelectedCollection.isAcceptable(item);
-        IncapableCause.handleCause(this, cause);
+        IncapableCause.Companion.handleCause(this, cause);
         return cause == null;
     }
 }

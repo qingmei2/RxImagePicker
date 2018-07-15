@@ -84,7 +84,7 @@ public class MediaStoreCompat {
             if (photoFile != null) {
                 mCurrentPhotoPath = photoFile.getAbsolutePath();
                 mCurrentPhotoUri = FileProvider.getUriForFile(mContext.get(),
-                        mCaptureStrategy.authority, photoFile);
+                        mCaptureStrategy.getAuthority(), photoFile);
                 captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCurrentPhotoUri);
                 captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -111,7 +111,7 @@ public class MediaStoreCompat {
                 new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = String.format("JPEG_%s.jpg", timeStamp);
         File storageDir;
-        if (mCaptureStrategy.isPublic) {
+        if (mCaptureStrategy.getIsPublic()) {
             storageDir = Environment.getExternalStoragePublicDirectory(
                     Environment.DIRECTORY_PICTURES);
         } else {

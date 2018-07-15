@@ -80,7 +80,7 @@ public class ZhihuActivity extends AppCompatActivity {
                 .addCustomGallery(
                         ZhihuImagePicker.KEY_ZHIHU_PICKER_NORMAL,
                         ZhihuImagePickerActivity.class,
-                        new ZhihuConfigurationBuilder(MimeType.ofImage(), false)
+                        new ZhihuConfigurationBuilder(MimeType.Companion.ofImage(), false)
                                 .maxSelectable(9)
                                 .countable(true)
                                 .spanCount(4)
@@ -90,7 +90,7 @@ public class ZhihuActivity extends AppCompatActivity {
                 .addCustomGallery(
                         ZhihuImagePicker.KEY_ZHIHU_PICKER_DRACULA,
                         ZhihuImagePickerActivity.class,
-                        new ZhihuConfigurationBuilder(MimeType.ofImage(), false)
+                        new ZhihuConfigurationBuilder(MimeType.Companion.ofImage(), false)
                                 .spanCount(3)
                                 .maxSelectable(1)
                                 .theme(R.style.Zhihu_Dracula)

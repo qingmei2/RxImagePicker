@@ -19,7 +19,7 @@ public class WechatImagePickerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        setTheme(SelectionSpec.getInstance().themeId);
+        setTheme(SelectionSpec.Companion.getInstance().getThemeId());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picker_wechat);
         displayPickerView();

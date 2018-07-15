@@ -127,8 +127,8 @@ public final class PhotoMetadataUtils {
             return new IncapableCause(context.getString(R.string.error_file_type));
         }
 
-        if (SelectionSpec.getInstance().filters != null) {
-            for (Filter filter : SelectionSpec.getInstance().filters) {
+        if (SelectionSpec.Companion.getInstance().getFilters() != null) {
+            for (Filter filter : SelectionSpec.Companion.getInstance().getFilters()) {
                 IncapableCause incapableCause = filter.filter(context, item);
                 if (incapableCause != null) {
                     return incapableCause;
@@ -144,7 +144,7 @@ public final class PhotoMetadataUtils {
         }
 
         ContentResolver resolver = context.getContentResolver();
-        for (MimeType type : SelectionSpec.getInstance().mimeTypeSet) {
+        for (MimeType type : SelectionSpec.Companion.getInstance().getMimeTypeSet()) {
             if (type.checkType(resolver, item.getContentUri())) {
                 return true;
             }
