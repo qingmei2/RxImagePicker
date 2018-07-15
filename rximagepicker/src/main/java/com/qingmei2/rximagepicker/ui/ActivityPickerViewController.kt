@@ -25,7 +25,7 @@ class ActivityPickerViewController private constructor() : ICustomPickerView {
 
     override fun display(fragmentActivity: FragmentActivity,
                          viewContainer: Int,
-                         viewKey: String,
+                         tag: String,
                          configuration: ICustomPickerConfiguration) {
         resetSubject()
         fragmentActivity.startActivity(Intent(fragmentActivity, activityClass))

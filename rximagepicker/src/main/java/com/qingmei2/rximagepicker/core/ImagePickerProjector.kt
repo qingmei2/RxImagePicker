@@ -27,7 +27,7 @@ class ImagePickerProjector(private val singleActivity: Boolean,
     }
 
     private fun displayPickerViewAsActivity(configuration: ICustomPickerConfiguration) {
-        val activityHolder = ActivityPickerViewController.getInstance()
+        val activityHolder = ActivityPickerViewController.instance
         activityHolder.setActivityClass(activityClass)
         activityHolder.display(fragmentActivity, containerViewId, viewKey, configuration)
     }

@@ -23,22 +23,19 @@ abstract class BaseSystemPickerView : Fragment() {
 
     private val attachedSubject = PublishSubject.create<Boolean>()
 
-    private var publishSubject: PublishSubject<Result>? = null
+    private val publishSubject: PublishSubject<Result> = PublishSubject.create<Result>()
 
-    private var canceledSubject: PublishSubject<Int>? = null
+    private val canceledSubject: PublishSubject<Int> = PublishSubject.create<Int>()
 
     val uriObserver: Observable<Result>
         get() {
-            publishSubject = PublishSubject.create()
-            canceledSubject = PublishSubject.create()
-
             requestPickImage()
-            return publishSubject!!.takeUntil(canceledSubject!!)
+            return publishSubject.takeUntil(canceledSubject)
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setRetainInstance(true)
+        retainInstance = true
     }
 
     override fun onAttach(context: Context) {
@@ -48,8 +45,8 @@ abstract class BaseSystemPickerView : Fragment() {
     }
 
     private fun requestPickImage() {
-        if (!isAdded()) {
-            attachedSubject.subscribe( { startRequest() })
+        if (!isAdded) {
+            attachedSubject.subscribe { startRequest() }
         } else {
             startRequest()
         }
@@ -60,10 +57,8 @@ abstract class BaseSystemPickerView : Fragment() {
     abstract fun getActivityResultUri(data: Intent): Uri
 
     private fun onImagePicked(uri: Uri) {
-        if (publishSubject != null) {
-            publishSubject!!.onNext(parseResultNoExtraData(uri))
-            publishSubject!!.onComplete()
-        }
+        publishSubject.onNext(parseResultNoExtraData(uri))
+        publishSubject.onComplete()
         closure()
     }
 
@@ -71,25 +66,24 @@ abstract class BaseSystemPickerView : Fragment() {
      * When the pick image behavior ending, remove this fragment from the activity.
      */
     private fun closure() {
-        val fragmentManager = getFragmentManager()
         val fragmentTransaction = fragmentManager!!.beginTransaction()
         fragmentTransaction.remove(this)
         fragmentTransaction.commit()
     }
 
     protected fun checkPermission(): Boolean {
-        if (ContextCompat.checkSelfPermission(getActivity()!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        return if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
             }
-            return false
+            false
         } else {
-            return true
+            true
         }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             startRequest()
         }
     }
@@ -100,13 +94,13 @@ abstract class BaseSystemPickerView : Fragment() {
                 GALLERY_REQUEST_CODE, CAMERA_REQUEST_CODE -> onImagePicked(getActivityResultUri(data))
             }
         } else {
-            canceledSubject!!.onNext(requestCode)
+            canceledSubject.onNext(requestCode)
         }
     }
 
     companion object {
 
-        val GALLERY_REQUEST_CODE = 100
-        val CAMERA_REQUEST_CODE = 101
+        const val GALLERY_REQUEST_CODE = 100
+        const val CAMERA_REQUEST_CODE = 101
     }
 }

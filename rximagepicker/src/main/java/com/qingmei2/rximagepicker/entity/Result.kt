@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.qingmei2.rximagepicker.entity
 
 import android.net.Uri

@@ -4,29 +4,26 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.support.annotation.IdRes
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView
-
 import io.reactivex.Observable
 
 class SystemGalleryPickerView : BaseSystemPickerView(), IGalleryCustomPickerView {
 
     override fun display(fragmentActivity: FragmentActivity,
-                         @IdRes containerViewId: Int,
+                         @IdRes viewContainer: Int,
                          tag: String,
                          configuration: ICustomPickerConfiguration) {
-        val fragmentManager = fragmentActivity.getSupportFragmentManager()
-        val fragment = fragmentManager.findFragmentByTag(tag) as SystemGalleryPickerView
+        val fragmentManager = fragmentActivity.supportFragmentManager
+        val fragment: Fragment? = fragmentManager.findFragmentByTag(tag) as SystemGalleryPickerView
         if (fragment == null) {
             val transaction = fragmentManager.beginTransaction()
-            if (containerViewId != 0) {
-                transaction.add(containerViewId, this, tag).commit()
+            if (viewContainer != 0) {
+                transaction.add(viewContainer, this, tag).commit()
             } else {
                 transaction.add(this, tag).commit()
             }
@@ -51,12 +48,12 @@ class SystemGalleryPickerView : BaseSystemPickerView(), IGalleryCustomPickerView
         }
         pictureChooseIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
         pictureChooseIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        pictureChooseIntent.setType("image/*")
+        pictureChooseIntent.type = "image/*"
 
         startActivityForResult(pictureChooseIntent, BaseSystemPickerView.GALLERY_REQUEST_CODE)
     }
 
     override fun getActivityResultUri(data: Intent): Uri {
-        return data.getData()
+        return data.data
     }
 }

@@ -1,12 +1,13 @@
 package com.qingmei2.rximagepicker.core
 
 import android.app.Activity
-import android.support.annotation.VisibleForTesting
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 
 import com.qingmei2.rximagepicker.delegate.ProxyProviders
 import com.qingmei2.rximagepicker.ui.DefaultImagePicker
+import com.qingmei2.rximagepicker.ui.DefaultImagePicker.Companion.DEFAULT_PICKER_CAMERA
+import com.qingmei2.rximagepicker.ui.DefaultImagePicker.Companion.DEFAULT_PICKER_GALLERY
 import com.qingmei2.rximagepicker.ui.ICameraCustomPickerView
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView
@@ -16,11 +17,7 @@ import com.qingmei2.rximagepicker.ui.gallery.SystemGalleryPickerView
 import java.lang.reflect.Proxy
 import java.util.HashMap
 
-import com.qingmei2.rximagepicker.ui.DefaultImagePicker.DEFAULT_PICKER_CAMERA
-import com.qingmei2.rximagepicker.ui.DefaultImagePicker.DEFAULT_PICKER_GALLERY
-
-class RxImagePicker private constructor(@field:VisibleForTesting
-                                        var builder: Builder) {
+class RxImagePicker private constructor(var builder: Builder) {
 
     fun create(): DefaultImagePicker {
         return create(DefaultImagePicker::class.java)
@@ -50,7 +47,9 @@ class RxImagePicker private constructor(@field:VisibleForTesting
             get() = customPickerConfigurationMap
 
         fun with(fragment: Fragment): Builder {
-            return with(fragment.activity)
+            val activity = fragment.activity
+                    ?: throw NullPointerException("You should instance the FragmentActivity or v4.app.Fragment by RxImagePicker.Builder().with().")
+            return with(activity)
         }
 
         fun with(activity: FragmentActivity): Builder {
@@ -82,10 +81,6 @@ class RxImagePicker private constructor(@field:VisibleForTesting
         }
 
         fun build(): RxImagePicker {
-            if (fragmentActivity == null) {
-                throw NullPointerException("You should instance the FragmentActivity or v4.app.Fragment by RxImagePicker.Builder().with().")
-            }
-
             this.cameraViews[DEFAULT_PICKER_CAMERA] = SystemCameraPickerView()
             this.galleryViews[DEFAULT_PICKER_GALLERY] = SystemGalleryPickerView()
 

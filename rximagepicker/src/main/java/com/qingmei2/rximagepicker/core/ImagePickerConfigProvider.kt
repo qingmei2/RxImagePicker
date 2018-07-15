@@ -7,7 +7,7 @@ import com.qingmei2.rximagepicker.entity.sources.SourcesFrom
 import com.qingmei2.rximagepicker.ui.ICustomPickerView
 
 /**
- * Entity class for user config.
+ * Entity class for user's configration.
  */
 data class ImagePickerConfigProvider(val isSingleActivity: Boolean,
                                      val viewKey: String,

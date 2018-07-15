@@ -4,10 +4,4 @@ import org.junit.Before
 
 class ProxyProvidersTest {
 
-    @Before
-    fun setUp() {
-
-    }
-
-
 }

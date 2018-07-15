@@ -29,7 +29,6 @@ class ProxyProviders(builder: RxImagePicker.Builder,
 
     init {
         rxImagePickerProcessor = ImagePickerConfigProcessor(
-                builder.fragmentActivity,
                 builder.getCameraViews(),
                 builder.getGalleryViews(),
                 RxImagePickerSchedulers()

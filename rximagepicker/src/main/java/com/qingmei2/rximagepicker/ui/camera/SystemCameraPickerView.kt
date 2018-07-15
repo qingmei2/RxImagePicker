@@ -1,14 +1,12 @@
 package com.qingmei2.rximagepicker.ui.camera
 
-import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
 import android.support.annotation.IdRes
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView
@@ -26,15 +24,15 @@ class SystemCameraPickerView : BaseSystemPickerView(), ICameraCustomPickerView {
     private lateinit var cameraPictureUrl: Uri
 
     override fun display(fragmentActivity: FragmentActivity,
-                         @IdRes containerViewId: Int,
+                         @IdRes viewContainer: Int,
                          tag: String,
                          configuration: ICustomPickerConfiguration) {
-        val fragmentManager = fragmentActivity.getSupportFragmentManager()
-        val fragment = fragmentManager.findFragmentByTag(tag) as SystemCameraPickerView
+        val fragmentManager = fragmentActivity.supportFragmentManager
+        val fragment: Fragment? = fragmentManager.findFragmentByTag(tag) as SystemCameraPickerView
         if (fragment == null) {
             val transaction = fragmentManager.beginTransaction()
-            if (containerViewId != 0) {
-                transaction.add(containerViewId, this, tag).commit()
+            if (viewContainer != 0) {
+                transaction.add(viewContainer, this, tag).commit()
             } else {
                 transaction.add(this, tag).commit()
             }
@@ -61,7 +59,7 @@ class SystemCameraPickerView : BaseSystemPickerView(), ICameraCustomPickerView {
     }
 
     private fun createImageUri(): Uri {
-        val contentResolver = getActivity()!!.getContentResolver()
+        val contentResolver = activity!!.contentResolver
         val cv = ContentValues()
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         cv.put(MediaStore.Images.Media.TITLE, timeStamp)
