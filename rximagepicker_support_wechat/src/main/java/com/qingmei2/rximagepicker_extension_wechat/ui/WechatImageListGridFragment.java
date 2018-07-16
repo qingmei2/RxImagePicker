@@ -101,7 +101,7 @@ public class WechatImageListGridFragment extends Fragment implements
         int spanCount;
         SelectionSpec selectionSpec = SelectionSpec.Companion.getInstance();
         if (selectionSpec.getGridExpectedSize() > 0) {
-            spanCount = UIUtils.spanCount(getContext(), selectionSpec.getGridExpectedSize());
+            spanCount = UIUtils.INSTANCE.spanCount(getContext(), selectionSpec.getGridExpectedSize());
         } else {
             spanCount = selectionSpec.getSpanCount();
         }

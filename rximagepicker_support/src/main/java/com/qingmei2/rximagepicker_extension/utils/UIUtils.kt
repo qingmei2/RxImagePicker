@@ -13,24 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qingmei2.rximagepicker_extension.ui.widget;
+package com.qingmei2.rximagepicker_extension.utils
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.widget.FrameLayout;
+import android.content.Context
 
-public class SquareFrameLayout extends FrameLayout {
+object UIUtils {
 
-    public SquareFrameLayout(Context context) {
-        super(context);
-    }
-
-    public SquareFrameLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+    fun spanCount(context: Context, gridExpectedSize: Int): Int {
+        val screenWidth = context.resources.displayMetrics.widthPixels
+        val expected = screenWidth.toFloat() / gridExpectedSize.toFloat()
+        var spanCount = Math.round(expected)
+        if (spanCount == 0) {
+            spanCount = 1
+        }
+        return spanCount
     }
 }

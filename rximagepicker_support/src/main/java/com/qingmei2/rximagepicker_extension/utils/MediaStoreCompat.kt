@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qingmei2.rximagepicker_extension.utils;
+package com.qingmei2.rximagepicker_extension.utils
 
-import android.content.Context;
+import android.content.Context
+import android.content.pm.PackageManager
 
-public class UIUtils {
+object MediaStoreCompat {
 
-    public static int spanCount(Context context, int gridExpectedSize) {
-        int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-        float expected = (float) screenWidth / (float) gridExpectedSize;
-        int spanCount = Math.round(expected);
-        if (spanCount == 0) {
-            spanCount = 1;
-        }
-        return spanCount;
+    fun hasCameraFeature(context: Context): Boolean {
+        val pm = context.applicationContext.packageManager
+        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
     }
-
 }

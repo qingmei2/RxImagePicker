@@ -235,9 +235,9 @@ public class WechatImagePickerFragment extends Fragment implements
     @Override
     public void onMediaClick(Album album, Item item, int adapterPosition) {
         Intent intent = new Intent(context, WechatAlbumPreviewActivity.class);
-        intent.putExtra(AlbumPreviewActivity.EXTRA_ALBUM, album);
-        intent.putExtra(AlbumPreviewActivity.EXTRA_ITEM, item);
-        intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.getDataWithBundle());
+        intent.putExtra(AlbumPreviewActivity.Companion.getEXTRA_ALBUM(), album);
+        intent.putExtra(AlbumPreviewActivity.Companion.getEXTRA_ITEM(), item);
+        intent.putExtra(BasePreviewActivity.Companion.getEXTRA_DEFAULT_BUNDLE(), mSelectedCollection.getDataWithBundle());
         startActivityForResult(intent, WechatImagePickerActivity.REQUEST_CODE_PREVIEW);
     }
 
@@ -255,7 +255,7 @@ public class WechatImagePickerFragment extends Fragment implements
     public void onClick(View v) {
         if (v.getId() == R.id.button_preview) {
             Intent intent = new Intent(context, WechatSelectedPreviewActivity.class);
-            intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.getDataWithBundle());
+            intent.putExtra(BasePreviewActivity.Companion.getEXTRA_DEFAULT_BUNDLE(), mSelectedCollection.getDataWithBundle());
             startActivityForResult(intent, WechatImagePickerActivity.REQUEST_CODE_PREVIEW);
         } else if (v.getId() == R.id.button_apply) {
             emitSelectUri();
@@ -299,11 +299,11 @@ public class WechatImagePickerFragment extends Fragment implements
             return;
 
         if (requestCode == WechatImagePickerActivity.REQUEST_CODE_PREVIEW) {
-            Bundle resultBundle = data.getBundleExtra(BasePreviewActivity.EXTRA_RESULT_BUNDLE);
+            Bundle resultBundle = data.getBundleExtra(BasePreviewActivity.Companion.getEXTRA_RESULT_BUNDLE());
             ArrayList<Item> selected = resultBundle.getParcelableArrayList(SelectedItemCollection.Companion.getSTATE_SELECTION());
             int collectionType = resultBundle.getInt(SelectedItemCollection.Companion.getSTATE_COLLECTION_TYPE(),
                     SelectedItemCollection.Companion.getCOLLECTION_UNDEFINED());
-            if (data.getBooleanExtra(BasePreviewActivity.EXTRA_RESULT_APPLY, false)) {  // apply event
+            if (data.getBooleanExtra(BasePreviewActivity.Companion.getEXTRA_RESULT_APPLY(), false)) {  // apply event
                 if (selected != null) {
                     for (Item item : selected) {
                         if (getActivity() instanceof WechatImagePickerActivity) {

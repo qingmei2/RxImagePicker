@@ -36,11 +36,11 @@ public class WechatCheckView extends CheckView {
     @Override
     protected void init(Context context) {
         super.init(context);
-        mStrokePaint.setStrokeWidth(WECHAT_STROKE_WIDTH * mDensity);
+        getMStrokePaint().setStrokeWidth(WECHAT_STROKE_WIDTH * getMDensity());
 
         // draw white stroke
-        float dx = mDensity * SIZE / 4;
-        float dy = mDensity * SIZE / 4;
+        float dx = getMDensity() * Companion.getSIZE() / 4;
+        float dy = getMDensity() * Companion.getSIZE() / 4;
         rect = new RectF(2 * dx - PROOFREAD_SIZE, dy - PROOFREAD_SIZE,
                 3 * dx + PROOFREAD_SIZE, 2 * dy + PROOFREAD_SIZE);
         drawableRect = new Rect((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom);
@@ -52,41 +52,41 @@ public class WechatCheckView extends CheckView {
         initShadowPaint();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            drawRoundRectCheckView(canvas, rect, mStrokePaint);
+            drawRoundRectCheckView(canvas, rect, getMStrokePaint());
         } else {
-            drawRectCheckView(canvas, rect, mStrokePaint);
+            drawRectCheckView(canvas, rect, getMStrokePaint());
         }
 
         // draw content
-        if (mCountable) {
-            if (mCheckedNum != UNCHECKED) {
+        if (getMCountable()) {
+            if (getMCheckedNum() != Companion.getUNCHECKED()) {
                 initBackgroundPaint();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    drawRoundRectCheckView(canvas, rect, mBackgroundPaint);
+                    drawRoundRectCheckView(canvas, rect, getMBackgroundPaint());
                 } else {
-                    drawRectCheckView(canvas, rect, mBackgroundPaint);
+                    drawRectCheckView(canvas, rect, getMBackgroundPaint());
                 }
                 initTextPaint();
-                String text = String.valueOf(mCheckedNum);
-                int baseX = (int) (rect.width() - mTextPaint.measureText(text)) / 2;
-                int baseY = (int) (rect.height() - mTextPaint.descent() - mTextPaint.ascent()) / 2;
-                canvas.drawText(text, baseX + rect.left, baseY + rect.top, mTextPaint);
+                String text = String.valueOf(getMCheckedNum());
+                int baseX = (int) (rect.width() - getMTextPaint().measureText(text)) / 2;
+                int baseY = (int) (rect.height() - getMTextPaint().descent() - getMTextPaint().ascent()) / 2;
+                canvas.drawText(text, baseX + rect.left, baseY + rect.top, getMTextPaint());
             }
         } else {
-            if (mChecked) {
+            if (getMChecked()) {
                 initBackgroundPaint();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    drawRoundRectCheckView(canvas, rect, mBackgroundPaint);
+                    drawRoundRectCheckView(canvas, rect, getMBackgroundPaint());
                 } else {
-                    drawRectCheckView(canvas, rect, mBackgroundPaint);
+                    drawRectCheckView(canvas, rect, getMBackgroundPaint());
                 }
-                mCheckDrawable.setBounds(drawableRect);
-                mCheckDrawable.draw(canvas);
+                getMCheckDrawable().setBounds(drawableRect);
+                getMCheckDrawable().draw(canvas);
             }
         }
 
         // enable hint
-        setAlpha(mEnabled ? 1.0f : 0.5f);
+        setAlpha(getMEnabled() ? 1.0f : 0.5f);
     }
 
     private void drawRectCheckView(Canvas canvas, RectF rect, Paint paint) {

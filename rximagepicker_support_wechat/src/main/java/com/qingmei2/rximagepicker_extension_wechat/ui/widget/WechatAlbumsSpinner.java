@@ -11,17 +11,17 @@ import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner;
 public class WechatAlbumsSpinner extends AlbumsSpinner {
 
     public WechatAlbumsSpinner(@NonNull Context context) {
-        mListPopupWindow = new ListPopupWindow(context);
-        mListPopupWindow.setModal(true);
+        setMListPopupWindow(new ListPopupWindow(context));
+        getMListPopupWindow().setModal(true);
 
-        mListPopupWindow.setContentWidth(context.getResources().getDisplayMetrics().widthPixels);
-        mListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        getMListPopupWindow().setContentWidth(context.getResources().getDisplayMetrics().widthPixels);
+        getMListPopupWindow().setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 WechatAlbumsSpinner.this.onItemSelected(parent.getContext(), position);
-                if (mOnItemSelectedListener != null) {
-                    mOnItemSelectedListener.onItemSelected(parent, view, position, id);
+                if (getMOnItemSelectedListener() != null) {
+                    getMOnItemSelectedListener().onItemSelected(parent, view, position, id);
                 }
             }
         });

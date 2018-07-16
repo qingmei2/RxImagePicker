@@ -21,12 +21,12 @@ public class WechatMediaGrid extends MediaGrid {
     protected void init(Context context) {
         LayoutInflater.from(context).inflate(R.layout.wechat_media_grid_content, this, true);
 
-        mThumbnail = findViewById(R.id.media_thumbnail);
-        mCheckView = findViewById(R.id.check_view);
-        mGifTag = findViewById(R.id.gif);
-        mVideoDuration = findViewById(R.id.video_duration);
+        setMThumbnail(findViewById(R.id.media_thumbnail));
+        setMCheckView(findViewById(R.id.check_view));
+        setMGifTag(findViewById(R.id.gif));
+        setMVideoDuration(findViewById(R.id.video_duration));
 
-        mThumbnail.setOnClickListener(this);
-        mCheckView.setOnClickListener(this);
+        getMThumbnail().setOnClickListener(this);
+        getMCheckView().setOnClickListener(this);
     }
 }

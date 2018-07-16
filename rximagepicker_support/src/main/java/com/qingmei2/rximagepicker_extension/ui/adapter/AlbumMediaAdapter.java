@@ -140,7 +140,7 @@ public class AlbumMediaAdapter extends
             } else {
                 if (mSelectedCollection.maxSelectableReached()) {
                     mediaGrid.setCheckEnabled(false);
-                    mediaGrid.setCheckedNum(CheckView.UNCHECKED);
+                    mediaGrid.setCheckedNum(CheckView.Companion.getUNCHECKED());
                 } else {
                     mediaGrid.setCheckEnabled(true);
                     mediaGrid.setCheckedNum(checkedNum);
@@ -174,7 +174,7 @@ public class AlbumMediaAdapter extends
     public void onCheckViewClicked(CheckView checkView, Item item, RecyclerView.ViewHolder holder) {
         if (mSelectionSpec.getCountable()) {
             int checkedNum = mSelectedCollection.checkedNumOf(item);
-            if (checkedNum == CheckView.UNCHECKED) {
+            if (checkedNum == CheckView.Companion.getUNCHECKED()) {
                 if (assertAddSelection(holder.itemView.getContext(), item)) {
                     mSelectedCollection.add(item);
                     notifyCheckStateChanged();
