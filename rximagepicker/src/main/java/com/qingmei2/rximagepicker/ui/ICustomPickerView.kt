@@ -37,7 +37,7 @@ interface ICustomPickerView {
     fun display(fragmentActivity: FragmentActivity,
                 @IdRes viewContainer: Int,
                 tag: String,
-                configuration: ICustomPickerConfiguration)
+                configuration: ICustomPickerConfiguration?)
 
     fun pickImage(): Observable<Result>
 

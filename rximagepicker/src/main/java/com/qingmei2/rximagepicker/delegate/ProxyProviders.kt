@@ -44,7 +44,7 @@ class ProxyProviders(builder: RxImagePicker.Builder,
         )
     }
 
-    override fun invoke(proxy: Any, method: Method, args: Array<Any>): Any {
+    override fun invoke(proxy: Any, method: Method, args: Array<Any>?): Any {
 
         return Observable.defer(Callable<ObservableSource<*>> {
             val configProvider = proxyTranslator.processMethod(method, args)

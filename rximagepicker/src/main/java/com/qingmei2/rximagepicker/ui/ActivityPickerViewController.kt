@@ -15,7 +15,7 @@ class ActivityPickerViewController private constructor() : ICustomPickerView {
 
     private var activityClass: Class<out Activity>? = null
 
-    fun setActivityClass(clazz: Class<out Activity>) {
+    fun setActivityClass(clazz: Class<out Activity>?) {
         activityClass = clazz
     }
 
@@ -26,7 +26,7 @@ class ActivityPickerViewController private constructor() : ICustomPickerView {
     override fun display(fragmentActivity: FragmentActivity,
                          viewContainer: Int,
                          tag: String,
-                         configuration: ICustomPickerConfiguration) {
+                         configuration: ICustomPickerConfiguration?) {
         resetSubject()
         fragmentActivity.startActivity(Intent(fragmentActivity, activityClass))
     }

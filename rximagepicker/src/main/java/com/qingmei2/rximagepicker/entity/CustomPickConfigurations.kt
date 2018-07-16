@@ -8,7 +8,7 @@ class CustomPickConfigurations(private var configurations: Map<String, ICustomPi
         this.configurations = configurations
     }
 
-    fun findConfigurationByKey(viewKey: String): ICustomPickerConfiguration {
-        return configurations[viewKey]!!
+    fun findConfigurationByKey(viewKey: String): ICustomPickerConfiguration? {
+        return configurations[viewKey]
     }
 }

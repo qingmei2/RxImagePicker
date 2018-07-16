@@ -11,28 +11,29 @@ import com.qingmei2.rximagepicker.ui.ICustomPickerView
 
 class ImagePickerProjector(private val singleActivity: Boolean,
                            private val viewKey: String,
-                           private val pickerView: ICustomPickerView,
+                           private val pickerView: ICustomPickerView?,
                            private val fragmentActivity: FragmentActivity,
                            @param:IdRes private val containerViewId: Int,
-                           private val activityClass: Class<out Activity>) {
+                           private val activityClass: Class<out Activity>?) {
 
     fun display(customPickConfigurations: CustomPickConfigurations) {
-        customPickConfigurations.findConfigurationByKey(viewKey).apply {
+        val configuration = customPickConfigurations.findConfigurationByKey(viewKey)?.apply {
             onDisplay()
-            if (singleActivity)
-                displayPickerViewAsActivity(this)
-            else
-                displayPickerViewAsFragment(this)
         }
+        if (singleActivity)
+            displayPickerViewAsActivity(configuration)
+        else
+            displayPickerViewAsFragment(configuration)
+
     }
 
-    private fun displayPickerViewAsActivity(configuration: ICustomPickerConfiguration) {
+    private fun displayPickerViewAsActivity(configuration: ICustomPickerConfiguration?) {
         val activityHolder = ActivityPickerViewController.instance
         activityHolder.setActivityClass(activityClass)
         activityHolder.display(fragmentActivity, containerViewId, viewKey, configuration)
     }
 
-    private fun displayPickerViewAsFragment(configuration: ICustomPickerConfiguration) {
-        pickerView.display(fragmentActivity, containerViewId, viewKey, configuration)
+    private fun displayPickerViewAsFragment(configuration: ICustomPickerConfiguration?) {
+        pickerView!!.display(fragmentActivity, containerViewId, viewKey, configuration)
     }
 }

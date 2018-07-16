@@ -29,16 +29,16 @@ class ProxyTranslator(private val galleryViews: Map<String, IGalleryCustomPicker
                       private val cameraViews: Map<String, ICameraCustomPickerView>,
                       private val activityClasses: Map<String, Class<out Activity>>) {
 
-    fun processMethod(method: Method, objectsMethod: Array<Any>): ImagePickerConfigProvider {
+    fun processMethod(method: Method, objectsMethod: Array<Any>?): ImagePickerConfigProvider {
         val singleActivity = singleActivity(method)
         val viewKey = getViewKey(method)
         return ImagePickerConfigProvider(
                 singleActivity,
                 viewKey,
                 this.getStreamSourcesFrom(method),
-                this.getPickerView(method, singleActivity)!!,
+                this.getPickerView(method, singleActivity),
                 this.getContainerViewId(method, singleActivity),
-                this.getActivityClass(viewKey, singleActivity)!!)
+                this.getActivityClass(viewKey, singleActivity))
     }
 
     fun instanceProjector(provider: ImagePickerConfigProvider,

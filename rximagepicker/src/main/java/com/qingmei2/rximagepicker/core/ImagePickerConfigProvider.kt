@@ -12,6 +12,6 @@ import com.qingmei2.rximagepicker.ui.ICustomPickerView
 data class ImagePickerConfigProvider(val isSingleActivity: Boolean,
                                      val viewKey: String,
                                      val sourcesFrom: SourcesFrom,
-                                     val pickerView: ICustomPickerView,
+                                     val pickerView: ICustomPickerView?,
                                      @param:IdRes val containerViewId: Int,
-                                     val activityClass: Class<out Activity>)
+                                     val activityClass: Class<out Activity>?)

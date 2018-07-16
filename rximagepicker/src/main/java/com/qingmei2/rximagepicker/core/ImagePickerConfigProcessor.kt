@@ -26,16 +26,13 @@ class ImagePickerConfigProcessor(private val cameraViews: Map<String, ICameraCus
     }
 
     private fun sourceFrom(): Function<ImagePickerConfigProvider, ObservableSource<Result>> {
-        return object : Function<ImagePickerConfigProvider, ObservableSource<Result>> {
-
-            override fun apply(provider: ImagePickerConfigProvider): ObservableSource<Result> {
-                if (provider.isSingleActivity) {
-                    return ActivityPickerViewController.instance.pickImage()
-                }
-                when (provider.sourcesFrom) {
-                    SourcesFrom.GALLERY,
-                    SourcesFrom.CAMERA -> return provider.pickerView.pickImage()
-                }
+        return Function { provider ->
+            if (provider.isSingleActivity) {
+                return@Function ActivityPickerViewController.instance.pickImage()
+            }
+            when (provider.sourcesFrom) {
+                SourcesFrom.GALLERY,
+                SourcesFrom.CAMERA -> provider.pickerView!!.pickImage()
             }
         }
     }

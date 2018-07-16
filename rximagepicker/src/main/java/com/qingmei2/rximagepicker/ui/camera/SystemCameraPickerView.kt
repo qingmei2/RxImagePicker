@@ -26,9 +26,9 @@ class SystemCameraPickerView : BaseSystemPickerView(), ICameraCustomPickerView {
     override fun display(fragmentActivity: FragmentActivity,
                          @IdRes viewContainer: Int,
                          tag: String,
-                         configuration: ICustomPickerConfiguration) {
+                         configuration: ICustomPickerConfiguration?) {
         val fragmentManager = fragmentActivity.supportFragmentManager
-        val fragment: Fragment? = fragmentManager.findFragmentByTag(tag) as SystemCameraPickerView
+        val fragment: Fragment? = fragmentManager.findFragmentByTag(tag)
         if (fragment == null) {
             val transaction = fragmentManager.beginTransaction()
             if (viewContainer != 0) {
