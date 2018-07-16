@@ -39,7 +39,7 @@ class SelectionSpec private constructor() : ICustomPickerConfiguration {
     var maxSelectable: Int = 0
     var maxImageSelectable: Int = 0
     var maxVideoSelectable: Int = 0
-    var filters: List<Filter>? = null
+    var filters: ArrayList<Filter>? = null
     var capture: Boolean = false
     var captureStrategy: CaptureStrategy? = null
     var spanCount: Int = 0

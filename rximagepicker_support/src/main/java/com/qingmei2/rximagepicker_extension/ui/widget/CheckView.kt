@@ -218,8 +218,9 @@ open class CheckView : View {
         const val UNCHECKED = Integer.MIN_VALUE
         protected const val STROKE_WIDTH = 3.0f // dp
         protected const val SHADOW_WIDTH = 6.0f // dp
-        protected const val SIZE = 48 // dp
-        protected const val STROKE_RADIUS = 11.5f // dp
+        @JvmStatic
+        protected val SIZE = 48 // dp
+        protected val STROKE_RADIUS = 11.5f // dp
         protected const val BG_RADIUS = 11.0f // dp
         protected const val CONTENT_SIZE = 16 // dp
     }

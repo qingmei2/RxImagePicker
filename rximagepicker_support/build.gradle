@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
@@ -28,6 +30,7 @@ android {
 
 dependencies {
     implementation project(':rximagepicker')
+    implementation rootProject.ext.dependencies["kotlin-android"]
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["recyclerview-v7"]
     implementation rootProject.ext.dependencies["constraint-layout"]

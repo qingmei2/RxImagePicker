@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
@@ -29,14 +30,16 @@ android {
 }
 
 dependencies {
+    implementation project(':rximagepicker')
     implementation project(':rximagepicker_support')
 
+    implementation rootProject.ext.dependencies["kotlin-android"]
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["recyclerview-v7"]
     implementation rootProject.ext.dependencies["constraint-layout"]
 
     implementation rootProject.ext.dependencies["glide"]
-    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    kapt rootProject.ext.dependencies["glide-compiler"]
     testImplementation rootProject.ext.dependencies["junit"]
 }
 repositories {

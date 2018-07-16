@@ -50,7 +50,7 @@ abstract class BasePreviewActivity : AppCompatActivity(), View.OnClickListener, 
 
     protected var mPreviousPos = -1
 
-    protected val layoutRes: Int
+    open protected val layoutRes: Int
         @LayoutRes
         get() = R.layout.activity_media_preview
 
