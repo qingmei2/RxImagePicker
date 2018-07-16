@@ -119,7 +119,7 @@ class WechatImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateList
         }
     }
 
-    override fun onMediaClick(album: Album, item: Item, adapterPosition: Int) {
+    override fun onMediaClick(album: Album?, item: Item, adapterPosition: Int) {
         if (mOnMediaClickListener != null) {
             mOnMediaClickListener!!.onMediaClick(arguments!!.getParcelable(EXTRA_ALBUM),
                     item, adapterPosition)

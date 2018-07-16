@@ -75,7 +75,7 @@ class ZhihuImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateListe
         val album = arguments!!.getParcelable<Album>(EXTRA_ALBUM)
 
         mAdapter = AlbumMediaAdapter(context!!,
-                mSelectionProvider!!.provideSelectedItemCollection(), mRecyclerView)
+                mSelectionProvider!!.provideSelectedItemCollection(), mRecyclerView!!)
         mAdapter!!.registerCheckStateListener(this)
         mAdapter!!.registerOnMediaClickListener(this)
         mRecyclerView!!.setHasFixedSize(true)
@@ -116,7 +116,7 @@ class ZhihuImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateListe
         }
     }
 
-    override fun onMediaClick(album: Album, item: Item, adapterPosition: Int) {
+    override fun onMediaClick(album: Album?, item: Item, adapterPosition: Int) {
         if (mOnMediaClickListener != null) {
             mOnMediaClickListener!!.onMediaClick(arguments!!.getParcelable(EXTRA_ALBUM),
                     item, adapterPosition)

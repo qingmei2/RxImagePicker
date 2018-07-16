@@ -68,7 +68,6 @@ object PathUtils {
         } else if ("file".equals(uri.scheme, ignoreCase = true)) { // File
             return uri.path
         }
-
         return null
     }
 

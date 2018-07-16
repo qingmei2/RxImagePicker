@@ -72,7 +72,7 @@ class IncapableCause {
                 NONE -> {
                 }
                 DIALOG -> {
-                    val incapableDialog = IncapableDialog.newInstance(cause.mTitle, cause.mMessage)
+                    val incapableDialog = IncapableDialog.newInstance(cause.mTitle!!, cause.mMessage!!)
                     incapableDialog.show((context as FragmentActivity).supportFragmentManager,
                             IncapableDialog::class.java.name)
                 }

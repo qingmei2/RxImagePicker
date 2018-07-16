@@ -13,7 +13,7 @@ import io.reactivex.functions.Consumer
 
 class ZhihuImagePickerActivity : AppCompatActivity() {
 
-    private var fragment: ZhihuImagePickerFragment? = null
+    private val fragment: ZhihuImagePickerFragment = ZhihuImagePickerFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(SelectionSpec.instance!!.themeId)
@@ -23,33 +23,23 @@ class ZhihuImagePickerActivity : AppCompatActivity() {
     }
 
     private fun displayPickerView() {
-        fragment = ZhihuImagePickerFragment()
         supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fl_container, fragment)
                 .commit()
 
-        fragment!!.pickImage()
-                .subscribe(object : Consumer<Result>() {
-                    @Throws(Exception::class)
-                    fun accept(result: Result) {
-                        ActivityPickerViewController.getInstance().emitResult(result)
-                    }
-                }, object : Consumer<Throwable>() {
-                    @Throws(Exception::class)
-                    fun accept(throwable: Throwable) {
-                        ActivityPickerViewController.getInstance().emitError(throwable)
-                    }
-                }, object : Action() {
-                    @Throws(Exception::class)
-                    fun run() {
-                        closure()
-                    }
+        fragment.pickImage()
+                .subscribe({ result ->
+                    ActivityPickerViewController.instance.emitResult(result)
+                }, { error ->
+                    ActivityPickerViewController.instance.emitError(error)
+                }, {
+                    closure()
                 })
     }
 
     fun closure() {
-        ActivityPickerViewController.getInstance().endResultEmitAndReset()
+        ActivityPickerViewController.instance.endResultEmitAndReset()
         finish()
     }
 
@@ -59,7 +49,7 @@ class ZhihuImagePickerActivity : AppCompatActivity() {
 
     companion object {
 
-        val REQUEST_CODE_PREVIEW = 23
+        const val REQUEST_CODE_PREVIEW = 23
     }
 
 }

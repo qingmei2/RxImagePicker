@@ -117,7 +117,7 @@ public class WechatActivity extends AppCompatActivity {
         return new Consumer<Result>() {
             @Override
             public void accept(Result result) {
-                boolean originalMode = result.getBooleanExtra(WechatImagePickerFragment.Companion.getEXTRA_ORIGINAL_IMAGE(), false);
+                boolean originalMode = result.getBooleanExtra(WechatImagePickerFragment.EXTRA_ORIGINAL_IMAGE, false);
                 Log.d(TAG, "select image original:" + originalMode + " , uri path: " + result.getUri().getPath());
 
                 Glide.with(WechatActivity.this)

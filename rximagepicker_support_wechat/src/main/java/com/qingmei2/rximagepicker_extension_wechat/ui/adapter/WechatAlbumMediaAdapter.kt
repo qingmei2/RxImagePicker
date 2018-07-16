@@ -12,7 +12,6 @@ class WechatAlbumMediaAdapter(context: Context,
                               recyclerView: RecyclerView)
     : AlbumMediaAdapter(context, selectedCollection, recyclerView) {
 
-    override fun getItemLayoutRes(): Int {
-        return R.layout.wechat_media_grid_item
-    }
+    override val itemLayoutRes: Int
+        get() = R.layout.wechat_media_grid_item
 }

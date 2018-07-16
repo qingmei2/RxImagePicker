@@ -128,14 +128,6 @@ class SelectedItemCollection(private val mContext: Context) {
         return uris
     }
 
-    fun asListOfString(): List<String> {
-        val paths = ArrayList<String>()
-        for (item in mItems!!) {
-            paths.add(PathUtils.getPath(mContext, item.contentUri))
-        }
-        return paths
-    }
-
     fun isSelected(item: Item): Boolean {
         return mItems!!.contains(item)
     }

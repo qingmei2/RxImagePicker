@@ -85,11 +85,11 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
         mSelectedCollection!!.onCreate(savedInstanceState)
         updateBottomToolbar()
 
-        mAlbumsAdapter = WechatAlbumsAdapter(context!!, null!!, false)
+        mAlbumsAdapter = WechatAlbumsAdapter(context!!, null, false)
         mAlbumsSpinner = WechatAlbumsSpinner(context!!)
         mAlbumsSpinner!!.setOnItemSelectedListener(this)
-        mAlbumsSpinner!!.setSelectedTextView(view.findViewById<TextView>(R.id.selected_album))
-        mAlbumsSpinner!!.setPopupAnchorView(view.findViewById<View>(R.id.bottom_toolbar))
+        mAlbumsSpinner!!.setSelectedTextView(view.findViewById(R.id.selected_album))
+        mAlbumsSpinner!!.setPopupAnchorView(view.findViewById(R.id.bottom_toolbar))
         mAlbumsSpinner!!.setAdapter(mAlbumsAdapter!!)
         mAlbumCollection.onCreate(activity!!, this)
         mAlbumCollection.onRestoreInstanceState(savedInstanceState)
@@ -201,7 +201,7 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
         mAlbumCollection.onDestroy()
     }
 
-    override fun onMediaClick(album: Album, item: Item, adapterPosition: Int) {
+    override fun onMediaClick(album: Album?, item: Item, adapterPosition: Int) {
         val intent = Intent(context, WechatAlbumPreviewActivity::class.java)
         intent.putExtra(AlbumPreviewActivity.EXTRA_ALBUM, album)
         intent.putExtra(AlbumPreviewActivity.EXTRA_ITEM, item)

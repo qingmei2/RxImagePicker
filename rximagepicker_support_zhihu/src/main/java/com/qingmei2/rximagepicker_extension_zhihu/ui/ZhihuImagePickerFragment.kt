@@ -1,6 +1,6 @@
 package com.qingmei2.rximagepicker_extension_zhihu.ui
 
-import android.content.Context
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
@@ -9,18 +9,15 @@ import android.os.Handler
 import android.os.Looper
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
-
 import com.qingmei2.rximagepicker.entity.Result
+import com.qingmei2.rximagepicker.function.parseResultNoExtraData
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView
@@ -36,16 +33,15 @@ import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumsAdapter
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner
 import com.qingmei2.rximagepicker_extension_zhihu.R
-
-import java.util.ArrayList
-
 import io.reactivex.Observable
+import io.reactivex.annotations.Nullable
 import io.reactivex.subjects.PublishSubject
+import java.util.*
 
-import android.app.Activity.RESULT_OK
-import com.qingmei2.rximagepicker.function.parseResultNoExtraData
-
-class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener, View.OnClickListener, ZhihuImageListGridFragment.SelectionProvider, AlbumMediaAdapter.OnMediaClickListener, AlbumMediaAdapter.CheckStateListener {
+class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumCollection.AlbumCallbacks,
+        AdapterView.OnItemSelectedListener, View.OnClickListener,
+        ZhihuImageListGridFragment.SelectionProvider, AlbumMediaAdapter.OnMediaClickListener,
+        AlbumMediaAdapter.CheckStateListener {
 
     private val mAlbumCollection = AlbumCollection()
 
@@ -56,10 +52,10 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
 
     private var mSelectedCollection: SelectedItemCollection? = null
 
-    private var mButtonPreview: TextView? = null
-    private var mButtonApply: TextView? = null
-    private var mContainer: View? = null
-    private var mEmptyView: View? = null
+    private lateinit var mButtonPreview: TextView
+    private lateinit var mButtonApply: TextView
+    private lateinit var mContainer: View
+    private lateinit var mEmptyView: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val contextThemeWrapper = ContextThemeWrapper(activity, SelectionSpec.instance!!.themeId)
@@ -74,8 +70,8 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
 
         mButtonPreview = view.findViewById(R.id.button_preview)
         mButtonApply = view.findViewById(R.id.button_apply)
-        mButtonPreview!!.setOnClickListener(this)
-        mButtonApply!!.setOnClickListener(this)
+        mButtonPreview.setOnClickListener(this)
+        mButtonApply.setOnClickListener(this)
         mContainer = view.findViewById(R.id.container)
         mEmptyView = view.findViewById(R.id.empty_view)
 
@@ -85,7 +81,7 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
         mSelectedCollection!!.onCreate(savedInstanceState)
         updateBottomToolbar()
 
-        mAlbumsAdapter = AlbumsAdapter(context, null, false)
+        mAlbumsAdapter = AlbumsAdapter(context!!, null, false)
         mAlbumsSpinner = AlbumsSpinner(context!!)
         mAlbumsSpinner!!.setOnItemSelectedListener(this)
         mAlbumsSpinner!!.setSelectedTextView(view.findViewById(R.id.selected_album))
@@ -166,27 +162,27 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
     private fun updateBottomToolbar() {
         val selectedCount = mSelectedCollection!!.count()
         if (selectedCount == 0) {
-            mButtonPreview!!.isEnabled = false
-            mButtonApply!!.isEnabled = false
-            mButtonApply!!.text = getString(R.string.button_apply_default)
+            mButtonPreview.isEnabled = false
+            mButtonApply.isEnabled = false
+            mButtonApply.text = getString(R.string.button_apply_default)
         } else if (selectedCount == 1 && SelectionSpec.instance!!.singleSelectionModeEnabled()) {
-            mButtonPreview!!.isEnabled = true
-            mButtonApply!!.setText(R.string.button_apply_default)
-            mButtonApply!!.isEnabled = true
+            mButtonPreview.isEnabled = true
+            mButtonApply.setText(R.string.button_apply_default)
+            mButtonApply.isEnabled = true
         } else {
-            mButtonPreview!!.isEnabled = true
-            mButtonApply!!.isEnabled = true
-            mButtonApply!!.text = getString(R.string.button_apply, selectedCount)
+            mButtonPreview.isEnabled = true
+            mButtonApply.isEnabled = true
+            mButtonApply.text = getString(R.string.button_apply, selectedCount)
         }
     }
 
     private fun onAlbumSelected(album: Album) {
         if (album.isAll && album.isEmpty) {
-            mContainer!!.visibility = View.GONE
-            mEmptyView!!.visibility = View.VISIBLE
+            mContainer.visibility = View.GONE
+            mEmptyView.visibility = View.VISIBLE
         } else {
-            mContainer!!.visibility = View.VISIBLE
-            mEmptyView!!.visibility = View.GONE
+            mContainer.visibility = View.VISIBLE
+            mEmptyView.visibility = View.GONE
             val fragment = ZhihuImageListGridFragment.instance(album)
             fragment.injectDependencies(this, this, this)
             childFragmentManager
@@ -201,7 +197,7 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
         mAlbumCollection.onDestroy()
     }
 
-    override fun onMediaClick(album: Album, item: Item, adapterPosition: Int) {
+    override fun onMediaClick(album: Album?, item: Item, adapterPosition: Int) {
         val intent = Intent(context, AlbumPreviewActivity::class.java)
         intent.putExtra(AlbumPreviewActivity.EXTRA_ALBUM, album)
         intent.putExtra(AlbumPreviewActivity.EXTRA_ITEM, item)
