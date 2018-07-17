@@ -76,7 +76,7 @@ class Album : Parcelable {
 
     companion object {
 
-        val CREATOR: Parcelable.Creator<Album> = object : Parcelable.Creator<Album> {
+        @JvmField val CREATOR: Parcelable.Creator<Album> = object : Parcelable.Creator<Album> {
             override fun createFromParcel(source: Parcel): Album? {
                 return Album(source)
             }

@@ -119,7 +119,7 @@ class Item : Parcelable {
     }
 
     companion object {
-        val CREATOR: Parcelable.Creator<Item> = object : Parcelable.Creator<Item> {
+        @JvmField val CREATOR: Parcelable.Creator<Item> = object : Parcelable.Creator<Item> {
             override fun createFromParcel(source: Parcel): Item? {
                 return Item(source)
             }
