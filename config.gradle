@@ -12,8 +12,8 @@ project.ext {
 
             minSdkVersion       : 14,
             targetSdkVersion    : 27,
-            versionCode         : 14,
-            versionName         : "0.4.0"
+            versionCode         : 15,
+            versionName         : "2.0.0"
     ]
 
     dependencies = [

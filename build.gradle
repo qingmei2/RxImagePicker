@@ -33,3 +33,8 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+tasks.getByPath(":rximagepicker:releaseAndroidJavadocs").enabled = false
+tasks.getByPath(":rximagepicker_support:releaseAndroidJavadocs").enabled = false
+tasks.getByPath(":rximagepicker_support_wechat:releaseAndroidJavadocs").enabled = false
+tasks.getByPath(":rximagepicker_support_zhihu:releaseAndroidJavadocs").enabled = false

@@ -53,7 +53,7 @@ class SystemGalleryPickerView : BaseSystemPickerView(), IGalleryCustomPickerView
         startActivityForResult(pictureChooseIntent, BaseSystemPickerView.GALLERY_REQUEST_CODE)
     }
 
-    override fun getActivityResultUri(data: Intent): Uri {
-        return data.data
+    override fun getActivityResultUri(data: Intent?): Uri? {
+        return data?.data
     }
 }

@@ -54,10 +54,12 @@ abstract class BaseSystemPickerView : Fragment() {
 
     abstract fun startRequest()
 
-    abstract fun getActivityResultUri(data: Intent): Uri
+    abstract fun getActivityResultUri(data: Intent?): Uri?
 
-    private fun onImagePicked(uri: Uri) {
-        publishSubject.onNext(parseResultNoExtraData(uri))
+    private fun onImagePicked(uri: Uri?) {
+        if (uri != null) {
+            publishSubject.onNext(parseResultNoExtraData(uri))
+        }
         publishSubject.onComplete()
         closure()
     }
@@ -88,10 +90,13 @@ abstract class BaseSystemPickerView : Fragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
             when (requestCode) {
-                GALLERY_REQUEST_CODE, CAMERA_REQUEST_CODE -> onImagePicked(getActivityResultUri(data))
+                GALLERY_REQUEST_CODE, CAMERA_REQUEST_CODE ->
+                    onImagePicked(
+                            getActivityResultUri(data)
+                    )
             }
         } else {
             canceledSubject.onNext(requestCode)

@@ -71,9 +71,11 @@ open class AlbumMediaAdapter(context: Context,
                 }
             }
             holder
-        } else {
+        } else if (viewType == VIEW_TYPE_MEDIA) {
             val v = LayoutInflater.from(parent.context).inflate(itemLayoutRes, parent, false)
             MediaViewHolder(v)
+        } else {
+             null!!
         }
     }
 
