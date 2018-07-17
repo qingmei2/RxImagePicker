@@ -10,7 +10,7 @@ RxImagePicker的设计起源，请参考我的[这篇文章](https://www.jianshu
   
 * **[详细文档，包括进阶使用和拓展功能,请点击查看wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
 * **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
-* **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
+* **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动,**最新版本v2.1.1**。
 
 <h2 id="overview">简介</h2>
 
@@ -71,15 +71,16 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 
 ```groovy
 // 最基础的架构，仅提供了系统默认的图片选择器和拍照功能
-compile 'com.github.qingmei2:rximagepicker:0.4.0'
+compile 'com.github.qingmei2:rximagepicker:2.1.1'
 
 // 提供了自定义UI图片选择器的基本组件，自定义UI的需求需要添加该依赖
-compile 'com.github.qingmei2:rximagepicker_support:0.4.0'
+compile 'com.github.qingmei2:rximagepicker_support:2.1.1'
 
 // 如果需要额外的UI支持，请选择依赖对应的UI拓展库
-compile 'com.github.qingmei2:rximagepicker_support_zhihu:0.4.0'     // 知乎图片选择器
-compile 'com.github.qingmei2:rximagepicker_support_wechat:0.4.0'    // 微信图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_zhihu:2.1.1'     // 知乎图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_wechat:2.1.1'    // 微信图片选择器
 ```
+
 ### 2. 接口配置
 
 声明一个接口，并进行基础的配置：
@@ -144,7 +145,7 @@ private void onButtonClick() {
 * [RxCache:Reactive caching library for Android and Java](https://github.com/VictorAlbertos/RxCache)  
 	优秀的RxJava拓展库，用于处理RxJava的数据缓存，库底层通过Dagger完成对配置的处理，我借鉴在了RxImagePicker中。
 * [Dagger2：A fast dependency injector for Android and Java.](https://github.com/google/dagger)  
-	Google优秀的依赖注入框架，它是构成RxImagePicker的 **基础组件** 。
+	Google优秀的依赖注入框架，0.4.0版本之前，它是构成RxImagePicker的 **基础组件** 。
 * [Matisse:A well-designed local image and video selector for Android](https://github.com/zhihu/Matisse)  
 	知乎开源，优秀的Android图片选择库，拥有非常 **Material Design** 的设计。在RxImagePicker中，Matisse被抽出来放入了RxImagePicker_Support，成为了 **UI层的基础组件** 。
 

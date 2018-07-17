@@ -48,8 +48,12 @@ open class MediaGrid : SquareFrameLayout, View.OnClickListener {
         init(context)
     }
 
-    protected open fun init(context: Context) {
-        LayoutInflater.from(context).inflate(R.layout.media_grid_content, this, true)
+    open fun getLayoutRes(): Int {
+        return R.layout.media_grid_content
+    }
+
+    fun init(context: Context) {
+        LayoutInflater.from(context).inflate(getLayoutRes(), this, true)
 
         mThumbnail = findViewById(R.id.media_thumbnail)
         mCheckView = findViewById(R.id.check_view)

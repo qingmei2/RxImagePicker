@@ -49,9 +49,7 @@ open class AlbumMediaAdapter(context: Context,
     private var mOnMediaClickListener: OnMediaClickListener? = null
     private var mImageResize: Int = 0
 
-    open val itemLayoutRes: Int
-        @LayoutRes
-        get() = R.layout.media_grid_item
+    open val itemLayoutRes: Int = R.layout.media_grid_item
 
     init {
         mSelectionSpec = SelectionSpec.instance

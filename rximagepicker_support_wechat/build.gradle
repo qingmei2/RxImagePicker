@@ -28,6 +28,7 @@ android {
         }
     }
 }
+
 dependencies {
     implementation project(':rximagepicker')
     implementation project(':rximagepicker_support')

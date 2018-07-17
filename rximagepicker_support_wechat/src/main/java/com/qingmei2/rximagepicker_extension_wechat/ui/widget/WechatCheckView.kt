@@ -11,7 +11,7 @@ import android.util.AttributeSet
 
 import com.qingmei2.rximagepicker_extension.ui.widget.CheckView
 
-class WechatCheckView : CheckView {
+open class WechatCheckView : CheckView {
 
     private var rect: RectF? = null
     private var drawableRect: Rect? = null
@@ -27,8 +27,8 @@ class WechatCheckView : CheckView {
         mStrokePaint.strokeWidth = WECHAT_STROKE_WIDTH * mDensity
 
         // draw white stroke
-        val dx = mDensity * CheckView.SIZE / 4
-        val dy = mDensity * CheckView.SIZE / 4
+        val dx = mDensity * SIZE / 4
+        val dy = mDensity * SIZE / 4
         rect = RectF(2 * dx - PROOFREAD_SIZE, dy - PROOFREAD_SIZE,
                 3 * dx + PROOFREAD_SIZE, 2 * dy + PROOFREAD_SIZE)
         drawableRect = Rect(rect!!.left.toInt(), rect!!.top.toInt(), rect!!.right.toInt(), rect!!.bottom.toInt())
@@ -89,6 +89,7 @@ class WechatCheckView : CheckView {
 
         private const val WECHAT_STROKE_WIDTH = 1.5f // dp
         private const val WECHAT_STROKE_CONNER = 5f // dp
+        private const val SIZE = 48 // dp
 
         private const val PROOFREAD_SIZE = 8
     }
