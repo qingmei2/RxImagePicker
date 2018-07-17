@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -23,9 +25,10 @@ android {
 }
 
 dependencies {
+    implementation rootProject.ext.dependencies["kotlin-android"]
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["design"]
-    api rootProject.ext.dependencies["glide"]
+    implementation rootProject.ext.dependencies["glide"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     implementation project(':rximagepicker')
     implementation project(':rximagepicker_support')
