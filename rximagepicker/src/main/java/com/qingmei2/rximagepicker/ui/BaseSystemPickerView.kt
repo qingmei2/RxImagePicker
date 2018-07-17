@@ -23,7 +23,7 @@ abstract class BaseSystemPickerView : Fragment() {
 
     private val attachedSubject = PublishSubject.create<Boolean>()
 
-    private val publishSubject: PublishSubject<Result> = PublishSubject.create<Result>()
+    protected var publishSubject: PublishSubject<Result> = PublishSubject.create<Result>()
 
     private val canceledSubject: PublishSubject<Int> = PublishSubject.create<Int>()
 

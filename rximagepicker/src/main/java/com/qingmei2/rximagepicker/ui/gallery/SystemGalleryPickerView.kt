@@ -11,6 +11,7 @@ import com.qingmei2.rximagepicker.ui.BaseSystemPickerView
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView
 import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 class SystemGalleryPickerView : BaseSystemPickerView(), IGalleryCustomPickerView {
 
@@ -31,6 +32,7 @@ class SystemGalleryPickerView : BaseSystemPickerView(), IGalleryCustomPickerView
     }
 
     override fun pickImage(): Observable<Result> {
+        publishSubject = PublishSubject.create<Result>()
         return uriObserver
     }
 

@@ -18,6 +18,7 @@ import java.util.Date
 import java.util.Locale
 
 import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 class SystemCameraPickerView : BaseSystemPickerView(), ICameraCustomPickerView {
 
@@ -40,6 +41,7 @@ class SystemCameraPickerView : BaseSystemPickerView(), ICameraCustomPickerView {
     }
 
     override fun pickImage(): Observable<Result> {
+        publishSubject = PublishSubject.create<Result>()
         return uriObserver
     }
 
