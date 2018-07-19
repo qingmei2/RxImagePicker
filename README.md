@@ -11,7 +11,6 @@ RxImagePicker的设计起源，请参考我的[这篇文章](https://www.jianshu
 * **[详细文档，包括进阶使用和拓展功能,请点击查看wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
 * **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
 * **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动,**最新版本v2.1.1**。
-* 更多疑问，欢迎加入QQ交流群**391638630**一起探讨。
 
 <h2 id="overview">简介</h2>
 
@@ -128,9 +127,7 @@ private void onButtonClick() {
 
 ## 更多疑问
 
-如果对于RxImagePicker的使用有疑问或者建议，请提issue，或者加QQ群**391638630**共同探讨：
-
-![](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/qrcode_qq_group.png)
+如果对于RxImagePicker的使用有疑问或者建议，**请提issue**，或者加QQ群**391638630**共同探讨.
 
 ## 参考
 
