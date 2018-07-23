@@ -33,10 +33,11 @@ class SystemCameraPickerView : BaseSystemPickerView(), ICameraCustomPickerView {
         if (fragment == null) {
             val transaction = fragmentManager.beginTransaction()
             if (viewContainer != 0) {
-                transaction.add(viewContainer, this, tag).commit()
+                transaction.add(viewContainer, this, tag)
             } else {
-                transaction.add(this, tag).commit()
+                transaction.add(this, tag)
             }
+            transaction.commitAllowingStateLoss()
         }
     }
 
