@@ -43,14 +43,13 @@ class MainActivityTest {
 
     @Test
     fun testJump2WeChatActivity() {
-
         checkScreenJumpEvent({ R.id.btn_wechat_picker },
                 { ".wechat.WechatActivity" })
     }
 
-    fun checkScreenJumpEvent(buttonId: Supplier<Int>,
-                             shortName: Supplier<String>,
-                             packageName: Supplier<String> = { TEST_PACKAGE_NAME }) {
+    private fun checkScreenJumpEvent(buttonId: () -> Int,
+                             shortName: () -> String,
+                             packageName: () -> String = { TEST_PACKAGE_NAME }) {
 
         onView(withId(buttonId())).perform(click()).check(doesNotExist())
 
@@ -62,5 +61,3 @@ class MainActivityTest {
         onView(withId(buttonId())).check(matches(isDisplayed()))
     }
 }
-
-typealias Supplier<T> = () -> T
