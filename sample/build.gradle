@@ -17,6 +17,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -24,21 +28,32 @@ android {
     }
 }
 
+def testJcenter = false
+
 dependencies {
     implementation rootProject.ext.dependencies["kotlin-android"]
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["design"]
     implementation rootProject.ext.dependencies["glide"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
-//    implementation project(':rximagepicker')
-//    implementation project(':rximagepicker_support')
-//    implementation project(':rximagepicker_support_wechat')
-//    implementation project(':rximagepicker_support_zhihu')
 
-    implementation "com.github.qingmei2:rximagepicker:2.1.1"
-    implementation "com.github.qingmei2:rximagepicker_support:2.1.1"
-    implementation "com.github.qingmei2:rximagepicker_support_zhihu:2.1.1"
-    implementation "com.github.qingmei2:rximagepicker_support_wechat:2.1.1"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:3.0.2"
+    androidTestImplementation "com.android.support.test.espresso:espresso-idling-resource:3.0.2"
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+
+    if (testJcenter) {
+        implementation "com.github.qingmei2:rximagepicker:$rootProject.ext.android.versionName"
+        implementation "com.github.qingmei2:rximagepicker_support:$rootProject.ext.android.versionName"
+        implementation "com.github.qingmei2:rximagepicker_support_zhihu:$rootProject.ext.android.versionName"
+        implementation "com.github.qingmei2:rximagepicker_support_wechat:$rootProject.ext.android.versionName"
+    } else {
+        implementation project(':rximagepicker')
+        implementation project(':rximagepicker_support')
+        implementation project(':rximagepicker_support_wechat')
+        implementation project(':rximagepicker_support_zhihu')
+    }
 
     testImplementation rootProject.ext.dependencies["junit"]
 }

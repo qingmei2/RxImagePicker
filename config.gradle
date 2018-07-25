@@ -1,7 +1,7 @@
 def dagger_version = '2.14.1'
 def lombok_version = '1.16.20'
 def kotlin_version = '1.2.51'
-def support_version = '27.1.0'
+def support_version = '27.1.1'
 def espresso_version = '2.2.2'
 def glide_version = '4.5.0'
 
