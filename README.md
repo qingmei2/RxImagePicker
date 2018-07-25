@@ -20,7 +20,7 @@ RxImagePicker存在的目的是：让开发者能够**简单**并且**灵活**�
 
 一旦和目前项目的需求有了冲突（修改或者添加），开发者考虑的不应该是【这个库实现不了，干脆换一个库吧】或者【不管这个库，我去再单独实现一个】，而是，**基于同一个图片选择框架，修改或者添加对应配置的接口**。
 
-![screenshot_qq](https://github.com/qingmei2/RxImagePicker/tree/2.x/screenshot/screenshot_qq.png)
+![screenshot_qq](https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_qq.png)
 
 RxImagePicker是一个用于Android的响应式图片选择器，它将您的图片选择需求转换为一个接口进行配置，并在任何一个Activity或者Fragment中展示任何样式的图片选择UI。
 
@@ -45,22 +45,22 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 #### 系统图片选择和结果展示
 
 <div align:left;display:inline;>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/tree/2.x/screenshot/screenshot_sysytem.png"/>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/tree/2.x/screenshot/screenshot_result.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_sysytem.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_result.png"/>
 </div>
 
 #### 知乎主题
 
 <div align:left;display:inline;>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/tree/2.x/screenshot/screenshot_zhihu_dracula.png"/>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/tree/2.x/screenshot/screenshot_zhihu_normal.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_zhihu_dracula.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_zhihu_normal.png"/>
 </div>
 
 
 #### 微信主题
 <div align:left;display:inline;>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/tree/2.x/screenshot/screenshot_wechat.png"/>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/tree/2.x/screenshot/screenshot_wechat_expand.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_wechat.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_wechat_expand.png"/>
 </div>
 
 想要 **快速实现上图所示效果** 请点击[这里](https://github.com/qingmei2/RxImagePicker/wiki)查看wiki中的详细文档。
