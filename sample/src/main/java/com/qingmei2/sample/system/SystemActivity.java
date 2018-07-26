@@ -27,9 +27,9 @@ public class SystemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system);
 
-        ivPickedImage = findViewById(R.id.iv_picked_image);
-        FloatingActionButton fabCamera = findViewById(R.id.fab_pick_camera);
-        FloatingActionButton fabGallery = findViewById(R.id.fab_pick_gallery);
+        ivPickedImage = findViewById(R.id.imageView);
+        FloatingActionButton fabCamera = findViewById(R.id.fabPickCamera);
+        FloatingActionButton fabGallery = findViewById(R.id.fabGallery);
 
         initRxImagePicker();
         fabCamera.setOnClickListener(new View.OnClickListener() {

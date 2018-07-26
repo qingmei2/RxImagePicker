@@ -45,18 +45,18 @@ class SystemPickerTest {
 
         intending(hasAction(MediaStore.ACTION_IMAGE_CAPTURE)).respondWith(successActivityResult)
 
-        onView(withId(R.id.fab_pick_camera)).perform(click())
+        onView(withId(R.id.fabPickCamera)).perform(click())
 
-        onView(withId(R.id.iv_picked_image)).check(matches(isDisplayed()))
+        onView(withId(R.id.imageView)).check(matches(isDisplayed()))
     }
 
     @Test
     fun testPickGallery() {
         intending(hasAction(Intent.ACTION_PICK)).respondWith(successActivityResult)
 
-        onView(withId(R.id.fab_pick_gallery)).perform(click())
+        onView(withId(R.id.fabGallery)).perform(click())
 
-        onView(withId(R.id.iv_picked_image)).check(matches(isDisplayed()))
+        onView(withId(R.id.imageView)).check(matches(isDisplayed()))
     }
 
     companion object Mock {

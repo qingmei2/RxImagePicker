@@ -9,7 +9,6 @@ import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.intent.Intents.intending
-import android.support.test.espresso.intent.matcher.IntentMatchers
 import android.support.test.espresso.intent.matcher.IntentMatchers.*
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -48,9 +47,9 @@ class WechatPickerTest {
 
         intending(hasAction(MediaStore.ACTION_IMAGE_CAPTURE)).respondWith(successActivityResult)
 
-        onView(withId(R.id.fab_pick_camera)).perform(click())
+        onView(withId(R.id.fabPickCamera)).perform(click())
 
-        onView(withId(R.id.iv_picked_image)).check(matches(isDisplayed()))
+        onView(withId(R.id.imageView)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -60,11 +59,11 @@ class WechatPickerTest {
                 hasComponent(".ui.WechatImagePickerActivity")
         )).respondWith(successActivityResult)
 
-        onView(withId(R.id.iv_picked_image)).check(matches(isDisplayed()))
+        onView(withId(R.id.imageView)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.fab_pick_gallery)).perform(click())
+        onView(withId(R.id.fabGallery)).perform(click())
 
-        onView(withId(R.id.iv_picked_image)).check(ViewAssertions.doesNotExist())
+        onView(withId(R.id.imageView)).check(ViewAssertions.doesNotExist())
     }
 
     companion object Mock {

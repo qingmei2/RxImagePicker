@@ -17,7 +17,7 @@
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <ImageView
-        android:id="@+id/iv_picked_image"
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -28,14 +28,14 @@
         android:orientation="vertical">
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_pick_camera"
+            android:id="@+id/fabPickCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:src="@android:drawable/ic_menu_camera" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_pick_gallery_normal"
+            android:id="@+id/fabPickGalleryNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -43,7 +43,7 @@
             android:src="@android:drawable/ic_menu_gallery" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_pick_gallery_dracula"
+            android:id="@+id/fabPickGalleryDracula"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

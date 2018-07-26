@@ -3,13 +3,9 @@ package com.qingmei2.sample.zhihu
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
-
 import com.bumptech.glide.Glide
 import com.qingmei2.rximagepicker.core.RxImagePicker
 import com.qingmei2.rximagepicker.entity.Result
@@ -17,28 +13,22 @@ import com.qingmei2.rximagepicker_extension.MimeType
 import com.qingmei2.rximagepicker_extension_zhihu.ZhihuConfigurationBuilder
 import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerActivity
 import com.qingmei2.sample.R
-
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.activity_zhihu.*
 
 class ZhihuActivity : AppCompatActivity() {
 
-    private var ivPickedImage: ImageView? = null
-    private var rxImagePicker: ZhihuImagePicker? = null
+    private lateinit var rxImagePicker: ZhihuImagePicker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_zhihu)
 
-        ivPickedImage = findViewById(R.id.iv_picked_image)
-        val fabCamera = findViewById<FloatingActionButton>(R.id.fab_pick_camera)
-        val fabGalleryNormal = findViewById<FloatingActionButton>(R.id.fab_pick_gallery_normal)
-        val fabGalleryDracula = findViewById<FloatingActionButton>(R.id.fab_pick_gallery_dracula)
-
         initRxImagePicker()
-        fabCamera.setOnClickListener { checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA) }
-        fabGalleryNormal.setOnClickListener { checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_NORMAL) }
-        fabGalleryDracula.setOnClickListener { checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_Dracula) }
+        fabPickCamera.setOnClickListener { checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA) }
+        fabPickGalleryNormal.setOnClickListener { checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_NORMAL) }
+        fabPickGalleryDracula.setOnClickListener { checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY_Dracula) }
     }
 
     private fun checkPermissionAndRequest(requestCode: Int) {
@@ -97,46 +87,45 @@ class ZhihuActivity : AppCompatActivity() {
      * open Camera.
      */
     private fun openCamera() {
-        rxImagePicker?.openCamera()
-                ?.subscribe(fetchUriObserver())
+        rxImagePicker.openCamera()
+                .subscribe(fetchUriObserver())
     }
 
     /**
      * Open Gallery as Zhihu normal theme.
      */
     private fun openGalleryAsNormal() {
-        rxImagePicker?.openGalleryAsNormal()
-                ?.subscribe(fetchUriObserver())
+        rxImagePicker.openGalleryAsNormal()
+                .subscribe(fetchUriObserver())
     }
 
     /**
      * Open Gallery as Zhihu dracula theme.
      */
     private fun openGalleryAsDracula() {
-        rxImagePicker?.openGalleryAsDracula()
-                ?.subscribe(fetchUriObserver())
+        rxImagePicker.openGalleryAsDracula()
+                .subscribe(fetchUriObserver())
     }
 
-    private fun fetchUriObserver(): Observer<Result> {
-        return object : Observer<Result> {
-            override fun onSubscribe(d: Disposable) {
+    private fun fetchUriObserver(): Observer<Result> = object : Observer<Result> {
 
-            }
+        override fun onSubscribe(d: Disposable) {
 
-            override fun onNext(result: Result) {
-                Glide.with(this@ZhihuActivity)
-                        .load(result.uri)
-                        .into(ivPickedImage!!)
-            }
+        }
 
-            override fun onError(e: Throwable) {
-                e.printStackTrace()
-                Toast.makeText(this@ZhihuActivity, "Failed: " + e.toString(), Toast.LENGTH_SHORT).show()
-            }
+        override fun onNext(result: Result) {
+            Glide.with(this@ZhihuActivity)
+                    .load(result.uri)
+                    .into(imageView)
+        }
 
-            override fun onComplete() {
+        override fun onError(e: Throwable) {
+            e.printStackTrace()
+            Toast.makeText(this@ZhihuActivity, "Failed: " + e.toString(), Toast.LENGTH_SHORT).show()
+        }
 
-            }
+        override fun onComplete() {
+
         }
     }
 

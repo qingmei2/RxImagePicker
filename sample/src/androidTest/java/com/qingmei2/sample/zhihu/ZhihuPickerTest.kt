@@ -9,7 +9,6 @@ import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.intent.Intents.intending
-import android.support.test.espresso.intent.matcher.IntentMatchers
 import android.support.test.espresso.intent.matcher.IntentMatchers.*
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -20,7 +19,6 @@ import android.support.test.runner.AndroidJUnit4
 import com.qingmei2.rximagepicker_extension.ui.BasePreviewActivity
 import com.qingmei2.sample.R
 import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -49,9 +47,9 @@ class ZhihuPickerTest {
 
         intending(hasAction(MediaStore.ACTION_IMAGE_CAPTURE)).respondWith(successActivityResult)
 
-        onView(withId(R.id.fab_pick_camera)).perform(click())
+        onView(withId(R.id.fabPickCamera)).perform(click())
 
-        onView(withId(R.id.iv_picked_image)).check(matches(isDisplayed()))
+        onView(withId(R.id.imageView)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -63,11 +61,11 @@ class ZhihuPickerTest {
 
         )).respondWith(successActivityResult)
 
-        onView(withId(R.id.iv_picked_image)).check(matches(isDisplayed()))
+        onView(withId(R.id.imageView)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.fab_pick_gallery_normal)).perform(click())
+        onView(withId(R.id.fabPickGalleryNormal)).perform(click())
 
-        onView(withId(R.id.iv_picked_image)).check(doesNotExist())
+        onView(withId(R.id.imageView)).check(doesNotExist())
 
     }
 
@@ -80,11 +78,11 @@ class ZhihuPickerTest {
 
         )).respondWith(successActivityResult)
 
-        onView(withId(R.id.iv_picked_image)).check(matches(isDisplayed()))
+        onView(withId(R.id.imageView)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.fab_pick_gallery_dracula)).perform(click())
+        onView(withId(R.id.fabPickGalleryDracula)).perform(click())
 
-        onView(withId(R.id.iv_picked_image)).check(doesNotExist())
+        onView(withId(R.id.imageView)).check(doesNotExist())
     }
 
     companion object Mock {
