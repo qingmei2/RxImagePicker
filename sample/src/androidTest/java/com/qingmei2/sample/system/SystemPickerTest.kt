@@ -1,12 +1,10 @@
-package com.qingmei2.sample
+package com.qingmei2.sample.system
 
 import android.app.Activity
 import android.app.Instrumentation
 import android.content.Intent
-import android.graphics.ColorSpace.match
 import android.provider.MediaStore
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.intent.Intents.intending
@@ -18,7 +16,7 @@ import android.support.test.filters.LargeTest
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.qingmei2.rximagepicker_extension.ui.BasePreviewActivity
-import com.qingmei2.sample.system.SystemActivity
+import com.qingmei2.sample.R
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
