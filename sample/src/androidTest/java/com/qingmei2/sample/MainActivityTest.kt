@@ -6,6 +6,7 @@ import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.intent.Intents.intended
+import android.support.test.espresso.intent.Intents.intending
 import android.support.test.espresso.intent.matcher.ComponentNameMatchers.hasShortClassName
 import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import android.support.test.espresso.intent.matcher.IntentMatchers.toPackage
@@ -53,9 +54,10 @@ class MainActivityTest {
 
         onView(withId(buttonId())).perform(click()).check(doesNotExist())
 
-        intended(allOf(
+        intending(allOf(
                 toPackage(packageName()),
-                hasComponent(hasShortClassName(shortName()))))
+                hasComponent(hasShortClassName(shortName()))
+        ))
 
         pressBack()
         onView(withId(buttonId())).check(matches(isDisplayed()))

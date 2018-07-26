@@ -6,7 +6,7 @@ import android.content.Intent
 import android.provider.MediaStore
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.assertion.ViewAssertions
+import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.intent.Intents.intending
 import android.support.test.espresso.intent.matcher.IntentMatchers.*
@@ -63,7 +63,7 @@ class WechatActivityTest {
 
         onView(withId(R.id.fabGallery)).perform(click())
 
-        onView(withId(R.id.imageView)).check(ViewAssertions.doesNotExist())
+        onView(withId(R.id.imageView)).check(doesNotExist())
     }
 
     companion object Mock {
