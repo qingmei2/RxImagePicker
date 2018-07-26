@@ -1,4 +1,4 @@
-package com.qingmei2.sample.wechat
+package com.qingmei2.sample.zhihu
 
 import android.app.Activity
 import android.app.Instrumentation
@@ -6,7 +6,7 @@ import android.content.Intent
 import android.provider.MediaStore
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.assertion.ViewAssertions
+import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.intent.Intents.intending
 import android.support.test.espresso.intent.matcher.IntentMatchers.*
@@ -24,8 +24,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-@LargeTest
-class WechatPickerTest {
+class ZhihuActivityTest {
 
     private val successActivityResult: Instrumentation.ActivityResult =
             with(Intent()) {
@@ -37,7 +36,7 @@ class WechatPickerTest {
 
     @Rule
     @JvmField
-    var systemActivityTestRule = IntentsTestRule<WechatActivity>(WechatActivity::class.java)
+    var systemActivityTestRule = IntentsTestRule<ZhihuActivity>(ZhihuActivity::class.java)
     @Rule
     @JvmField
     var grantPermissionRule = GrantPermissionRule.grant(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -53,17 +52,35 @@ class WechatPickerTest {
     }
 
     @Test
-    fun testPickGallery() {
+    fun testPickGalleryNormal() {
         intending(allOf(
-                toPackage("com.qingmei2.rximagepicker_extension_wechat"),
-                hasComponent(".ui.WechatImagePickerActivity")
+
+                toPackage("com.qingmei2.rximagepicker_extension_zhihu"),
+                hasComponent(".ui.ZhihuImagePickerActivity")
+
         )).respondWith(successActivityResult)
 
         onView(withId(R.id.imageView)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.fabGallery)).perform(click())
+        onView(withId(R.id.fabPickGalleryNormal)).perform(click())
 
-        onView(withId(R.id.imageView)).check(ViewAssertions.doesNotExist())
+        onView(withId(R.id.imageView)).check(doesNotExist())
+    }
+
+    @Test
+    fun testPickGalleryDracula() {
+        intending(allOf(
+
+                toPackage("com.qingmei2.rximagepicker_extension_zhihu"),
+                hasComponent(".ui.ZhihuImagePickerActivity")
+
+        )).respondWith(successActivityResult)
+
+        onView(withId(R.id.imageView)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.fabPickGalleryDracula)).perform(click())
+
+        onView(withId(R.id.imageView)).check(doesNotExist())
     }
 
     companion object Mock {

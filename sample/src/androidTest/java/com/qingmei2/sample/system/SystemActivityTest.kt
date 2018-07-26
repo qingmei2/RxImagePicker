@@ -23,7 +23,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class SystemPickerTest {
+class SystemActivityTest {
 
     private val successActivityResult: Instrumentation.ActivityResult =
             with(Intent()) {

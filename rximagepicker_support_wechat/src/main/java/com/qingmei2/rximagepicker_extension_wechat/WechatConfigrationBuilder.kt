@@ -72,15 +72,16 @@ class WechatConfigrationBuilder
     /**
      * Theme for media selecting Activity.
      *
-     *
      * There is built-in themes:
      * com.qingmei2.rximagepicker_extension_wechat.R.style.Wechat
      * you can define a custom theme derived from the above ones or other themes.
      *
+     * @note After V2.1.2, theme() API change to private.
+     *
      * @param themeId theme resource id. Default value is com.qingmei2.rximagepicker_extension_wechat.R.style.Wechat
      * @return [WechatConfigrationBuilder] for fluent API.
      */
-    fun theme(@StyleRes themeId: Int): WechatConfigrationBuilder {
+    private fun theme(@StyleRes themeId: Int): WechatConfigrationBuilder {
         mSelectionSpec.themeId = themeId
         return this
     }

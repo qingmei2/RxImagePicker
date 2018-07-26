@@ -122,7 +122,7 @@ enum class MimeType private constructor(private val mMimeTypeName: String,
         return false
     }
 
-    companion object {
+    companion object INSTANCE {
 
         fun ofAll(): Set<MimeType> {
             return EnumSet.allOf(MimeType::class.java)

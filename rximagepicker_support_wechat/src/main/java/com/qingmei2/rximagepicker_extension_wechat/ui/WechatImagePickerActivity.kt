@@ -1,6 +1,9 @@
 package com.qingmei2.rximagepicker_extension_wechat.ui
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
@@ -12,7 +15,25 @@ class WechatImagePickerActivity : AppCompatActivity() {
         setTheme(SelectionSpec.instance!!.themeId)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picker_wechat)
-        displayPickerView()
+
+        requestPermissionAndDisplayGallery()
+    }
+
+    private fun requestPermissionAndDisplayGallery() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 99)
+        } else {
+            displayPickerView()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            displayPickerView()
+        } else {
+            closure()
+        }
     }
 
     private fun displayPickerView() {
