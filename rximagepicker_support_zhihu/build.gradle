@@ -40,7 +40,15 @@ dependencies {
 
     implementation rootProject.ext.dependencies["glide"]
     kapt rootProject.ext.dependencies["glide-compiler"]
+
     testImplementation rootProject.ext.dependencies["junit"]
+
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:3.0.2"
+    androidTestImplementation "com.android.support.test.espresso:espresso-idling-resource:3.0.2"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.2"
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
 }
 repositories {
     mavenCentral()

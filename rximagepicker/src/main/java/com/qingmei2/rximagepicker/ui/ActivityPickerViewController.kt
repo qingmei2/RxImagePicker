@@ -11,7 +11,7 @@ import io.reactivex.subjects.PublishSubject
 
 class ActivityPickerViewController private constructor() : ICustomPickerView {
 
-    private var publishSubject: PublishSubject<Result>? = null
+    private var publishSubject: PublishSubject<Result> = PublishSubject.create()
 
     private var activityClass: Class<out Activity>? = null
 
@@ -32,11 +32,11 @@ class ActivityPickerViewController private constructor() : ICustomPickerView {
     }
 
     override fun pickImage(): Observable<Result> {
-        return publishSubject!!
+        return publishSubject
     }
 
     fun emitResult(result: Result) {
-        publishSubject!!.onNext(result)
+        publishSubject.onNext(result)
     }
 
     fun emitResults(results: List<Result>) {
@@ -46,11 +46,11 @@ class ActivityPickerViewController private constructor() : ICustomPickerView {
     }
 
     fun emitError(e: Throwable) {
-        publishSubject!!.onError(e)
+        publishSubject.onError(e)
     }
 
     fun endResultEmitAndReset() {
-        publishSubject!!.onComplete()
+        publishSubject.onComplete()
         resetSubject()
     }
 

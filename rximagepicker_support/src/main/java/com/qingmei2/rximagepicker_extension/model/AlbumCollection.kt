@@ -28,24 +28,22 @@ import com.qingmei2.rximagepicker_extension.loader.AlbumLoader
 import java.lang.ref.WeakReference
 
 class AlbumCollection : LoaderManager.LoaderCallbacks<Cursor> {
-    private var mContext: WeakReference<Context>? = null
-    private var mLoaderManager: LoaderManager? = null
+    private lateinit var mContext: WeakReference<Context>
+    private lateinit var mLoaderManager: LoaderManager
     private var mCallbacks: AlbumCallbacks? = null
     var currentSelection: Int = 0
         private set
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-        return AlbumLoader.newInstance(mContext?.get())
+        return AlbumLoader.newInstance(mContext.get())
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
-        mCallbacks!!.onAlbumLoad(data)
+        mCallbacks?.onAlbumLoad(data)
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        val context = mContext!!.get() ?: return
-
-        mCallbacks!!.onAlbumReset()
+        mCallbacks?.onAlbumReset()
     }
 
     fun onCreate(activity: FragmentActivity, callbacks: AlbumCallbacks) {
@@ -67,12 +65,12 @@ class AlbumCollection : LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     fun onDestroy() {
-        mLoaderManager!!.destroyLoader(LOADER_ID)
+        mLoaderManager.destroyLoader(LOADER_ID)
         mCallbacks = null
     }
 
     fun loadAlbums() {
-        mLoaderManager!!.initLoader(LOADER_ID, null, this)
+        mLoaderManager.initLoader(LOADER_ID, null, this)
     }
 
     fun setStateCurrentSelection(currentSelection: Int) {
