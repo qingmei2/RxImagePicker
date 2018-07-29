@@ -1,4 +1,4 @@
-package com.qingmei2.sample.zhihu.library
+package com.qingmei2.sample.librarys
 
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.filters.LargeTest

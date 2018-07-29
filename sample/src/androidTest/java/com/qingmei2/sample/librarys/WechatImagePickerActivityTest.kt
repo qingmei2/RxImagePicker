@@ -1,13 +1,15 @@
-package com.qingmei2.sample.wechat.library
+package com.qingmei2.sample.librarys
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
+import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import android.support.test.espresso.intent.Intents.*
-import android.support.test.espresso.intent.matcher.ComponentNameMatchers
+import android.support.test.espresso.intent.matcher.ComponentNameMatchers.hasShortClassName
 import android.support.test.espresso.intent.matcher.IntentMatchers.*
 import android.support.test.espresso.intent.rule.IntentsTestRule
+import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.filters.LargeTest
 import android.support.test.rule.GrantPermissionRule
@@ -29,7 +31,8 @@ class WechatImagePickerActivityTest {
 
     @Rule
     @JvmField
-    val grantPermissionRule = GrantPermissionRule.grant(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    val grantPermissionRule =
+            GrantPermissionRule.grant(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
     @Rule
     @JvmField
     val tasksActivityTestRule =
@@ -50,12 +53,60 @@ class WechatImagePickerActivityTest {
     @Test
     fun testSingleTapAndJumpPreviewActivity() {
 
+        checkRecyclerViewExist()
+
         onView(withId(R.id.recyclerview))
                 .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(1, click()))
 
+        checkIntendingPreviewActivity()
+    }
+
+    @Test
+    fun testSingleCheckAndJumpPreviewActivity() {
+
+        onView(withId(R.id.recyclerview))
+                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                        1, clickRecyclerChildWithId(R.id.check_view)
+                ))
+
+        checkRecyclerViewExist()
+
+        onView(withId(R.id.button_preview))
+                .perform(click())
+
+        checkIntendingPreviewActivity()
+    }
+
+    @Test
+    fun testMultiCheckAndJumpPreviewActivity() {
+
+        onView(withId(R.id.recyclerview))
+                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                        0, clickRecyclerChildWithId(R.id.check_view)
+                ), actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                        1, clickRecyclerChildWithId(R.id.check_view)
+                ), actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                        2, clickRecyclerChildWithId(R.id.check_view)
+                ))
+
+        checkRecyclerViewExist()
+
+        onView(withId(R.id.button_preview))
+                .perform(click())
+
+        checkIntendingPreviewActivity()
+    }
+
+    private fun checkRecyclerViewExist() {
+
+        onView(withId(R.id.recyclerview)).check(matches(isDisplayed()))
+    }
+
+    private fun checkIntendingPreviewActivity() {
+
         intending(allOf(
                 toPackage(PACKAGE_NAME_PREVIEW_ACTIVITY),
-                hasComponent(ComponentNameMatchers.hasShortClassName(SHORT_NAME_PREVIEW_ACTIVITY))
+                hasComponent(hasShortClassName(SHORT_NAME_PREVIEW_ACTIVITY))
         ))
 
         onView(withId(R.id.recyclerview)).check(doesNotExist())
