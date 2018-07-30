@@ -4,7 +4,13 @@
     <img style="margin-right:20px;" src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"/>
 </div>
 
-RxImagePicker的设计起源，请参考我的[这篇文章](https://www.jianshu.com/p/fecf3a13e615)
+RxImagePicker的设计起源，请参考：
+
+> [RxImagePicker:从零实现灵活且可高度定制的Android图片选择架构](https://www.jianshu.com/p/fecf3a13e615)
+
+RxImagePicker的UI自动化测试，请参考：
+
+> [全副武装！AndroidUI自动化测试在RxImagePicker中的实践历程](https://www.jianshu.com/p/6b78f6f93430)
 
 ## 通知（重要）
   
@@ -30,6 +36,7 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 - [x] Android 图片选择
 - [x] 以响应式数据流的格式返回数据（支持Observable/Flowable/Single/Maybe）
 - [x] 支持拓展数据，比如用于实现微信 **发送原图** 等功能，完全由您自定义灵活进行配置
+- [x] 覆盖全面的**UI自动化测试**，详见下方示例截图。
 
 ### UI的支持
 
@@ -42,14 +49,14 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 
 <h3 id="sample_screenshots">示例截图</h2>
 
-#### 系统图片选择和结果展示
+### 系统图片选择和结果展示
 
 <div align:left;display:inline;>
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_sysytem.png"/>
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_result.png"/>
 </div>
 
-#### 知乎主题
+### 知乎主题
 
 <div align:left;display:inline;>
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_zhihu_dracula.png"/>
@@ -57,13 +64,25 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 </div>
 
 
-#### 微信主题
+### 微信主题
 <div align:left;display:inline;>
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_wechat.png"/>
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_wechat_expand.png"/>
 </div>
 
 想要 **快速实现上图所示效果** 请点击[这里](https://github.com/qingmei2/RxImagePicker/wiki)查看wiki中的详细文档。
+
+### UI自动化测试
+
+<div align:left;display:inline;>
+<img width="235" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/rximagepicker_test.gif"/>
+</div>
+
+<div align:left;display:inline;>
+<img width="608" height="175" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/test_result.png"/>
+</div>
+
+测试代码的覆盖，保证了每个新版本的稳定性，以及程序的健壮性。
 
 <h2 id="usage">基础使用</h2>
 

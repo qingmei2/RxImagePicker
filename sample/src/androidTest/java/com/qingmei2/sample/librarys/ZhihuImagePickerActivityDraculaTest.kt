@@ -1,13 +1,22 @@
 package com.qingmei2.sample.librarys
 
 import android.support.test.espresso.Espresso
+import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions
+import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.contrib.RecyclerViewActions
+import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import android.support.test.espresso.intent.Intents
+import android.support.test.espresso.intent.Intents.intending
 import android.support.test.espresso.intent.matcher.ComponentNameMatchers
+import android.support.test.espresso.intent.matcher.ComponentNameMatchers.hasShortClassName
 import android.support.test.espresso.intent.matcher.IntentMatchers
+import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
+import android.support.test.espresso.intent.matcher.IntentMatchers.toPackage
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.ViewMatchers
+import android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed
+import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.filters.LargeTest
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +28,7 @@ import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerActivity
 import com.qingmei2.sample.R
 import com.qingmei2.sample.ext.*
 import org.hamcrest.CoreMatchers
+import org.hamcrest.Matchers.allOf
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -54,8 +64,8 @@ class ZhihuImagePickerActivityDraculaTest {
 
         checkRecyclerViewExist()
 
-        Espresso.onView(ViewMatchers.withId(R.id.recyclerview))
-                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, ViewActions.click()))
+        onView(withId(R.id.recyclerview))
+                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(1, click()))
 
         checkIntendingToPreviewActivity()
     }
@@ -63,17 +73,17 @@ class ZhihuImagePickerActivityDraculaTest {
     @Test
     fun testSingleCheckAndJumpPreviewActivity() {
 
-        Espresso.onView(ViewMatchers.withId(R.id.recyclerview))
+        onView(ViewMatchers.withId(R.id.recyclerview))
                 .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                         1, clickRecyclerChildWithId(R.id.check_view)
                 ))
 
-        ViewMatchers.isCompletelyDisplayed()
+        isCompletelyDisplayed()
 
         checkRecyclerViewExist()
 
-        Espresso.onView(ViewMatchers.withId(R.id.button_preview))
-                .perform(ViewActions.click())
+        onView(withId(R.id.button_preview))
+                .perform(click())
 
         checkIntendingToPreviewActivity()
     }
@@ -81,19 +91,19 @@ class ZhihuImagePickerActivityDraculaTest {
     @Test
     fun testMultiCheckAndJumpPreviewActivity() {
 
-        Espresso.onView(ViewMatchers.withId(R.id.recyclerview))
-                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+        onView(withId(R.id.recyclerview))
+                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(
                         0, clickRecyclerChildWithId(R.id.check_view)
-                ), RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                ), actionOnItemAtPosition<RecyclerView.ViewHolder>(
                         1, clickRecyclerChildWithId(R.id.check_view)
-                ), RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                ), actionOnItemAtPosition<RecyclerView.ViewHolder>(
                         2, clickRecyclerChildWithId(R.id.check_view)
                 ))
 
         checkRecyclerViewExist()
 
-        Espresso.onView(ViewMatchers.withId(R.id.button_preview))
-                .perform(ViewActions.click())
+        onView(withId(R.id.button_preview))
+                .perform(click())
 
         checkIntendingToPreviewActivity()
     }
@@ -103,8 +113,8 @@ class ZhihuImagePickerActivityDraculaTest {
 
         checkRecyclerViewExist()
 
-        Espresso.onView(ViewMatchers.withId(R.id.button_apply))
-                .perform(ViewActions.click())
+        onView(withId(R.id.button_apply))
+                .perform(click())
 
         checkRecyclerViewExist()
     }
@@ -115,21 +125,19 @@ class ZhihuImagePickerActivityDraculaTest {
         checkRecyclerViewExist()
 
         // select image
-        Espresso.onView(ViewMatchers.withId(R.id.recyclerview))
-                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+        onView(withId(R.id.recyclerview))
+                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(
                         1, clickRecyclerChildWithId(R.id.check_view)
                 ))
-
-//        Thread.sleep(1000)
 
         // cancel select
-        Espresso.onView(ViewMatchers.withId(R.id.recyclerview))
-                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+        onView(withId(R.id.recyclerview))
+                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(
                         1, clickRecyclerChildWithId(R.id.check_view)
                 ))
 
-        Espresso.onView(ViewMatchers.withId(R.id.button_apply))
-                .perform(ViewActions.click())
+        onView(withId(R.id.button_apply))
+                .perform(click())
 
         checkRecyclerViewExist()
     }
@@ -140,10 +148,10 @@ class ZhihuImagePickerActivityDraculaTest {
         checkRecyclerViewExist()
 
         // select image
-        Espresso.onView(ViewMatchers.withId(R.id.recyclerview))
+        onView(withId(R.id.recyclerview))
                 .clickRecyclerChildWithId(1, R.id.check_view)
 
-        Espresso.onView(ViewMatchers.withId(R.id.button_apply))
+        onView(withId(R.id.button_apply))
                 .perform(ViewActions.click())
 
         Assert.assertTrue(tasksActivityTestRule.isFinished())
@@ -155,7 +163,7 @@ class ZhihuImagePickerActivityDraculaTest {
         checkRecyclerViewExist()
 
         // select image
-        Espresso.onView(ViewMatchers.withId(R.id.recyclerview))
+        onView(withId(R.id.recyclerview))
                 .clickRecyclerChildWithId(0, R.id.check_view)
                 .clickRecyclerChildWithId(1, R.id.check_view)
                 .clickRecyclerChildWithId(2, R.id.check_view)
@@ -164,7 +172,7 @@ class ZhihuImagePickerActivityDraculaTest {
                 .clickRecyclerChildWithId(5, R.id.check_view)
                 .clickRecyclerChildWithId(6, R.id.check_view)
 
-        Espresso.onView(ViewMatchers.withId(R.id.button_apply))
+        onView(withId(R.id.button_apply))
                 .perform(ViewActions.click())
 
         Assert.assertTrue(tasksActivityTestRule.isFinished())
@@ -180,9 +188,9 @@ class ZhihuImagePickerActivityDraculaTest {
 
     private fun checkIntendingToPreviewActivity() {
 
-        Intents.intending(CoreMatchers.allOf(
-                IntentMatchers.toPackage(PACKAGE_NAME_PREVIEW_ACTIVITY),
-                IntentMatchers.hasComponent(ComponentNameMatchers.hasShortClassName(SHORT_NAME_PREVIEW_ACTIVITY))
+        intending(allOf(
+                toPackage(PACKAGE_NAME_PREVIEW_ACTIVITY),
+                hasComponent(hasShortClassName(SHORT_NAME_PREVIEW_ACTIVITY))
         ))
 
         checkRecyclerViewNotExist()
