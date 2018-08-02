@@ -43,8 +43,8 @@ open class AlbumMediaAdapter(context: Context,
                              private val mRecyclerView: RecyclerView) :
         RecyclerViewCursorAdapter<RecyclerView.ViewHolder>(null), MediaGrid.OnMediaGridClickListener {
 
-    private val mPlaceholder: Drawable?
-    private val mSelectionSpec: SelectionSpec?
+    private var mPlaceholder: Drawable
+    private var mSelectionSpec: SelectionSpec
     private var mCheckStateListener: CheckStateListener? = null
     private var mOnMediaClickListener: OnMediaClickListener? = null
     private var mImageResize: Int = 0
@@ -73,7 +73,7 @@ open class AlbumMediaAdapter(context: Context,
             val v = LayoutInflater.from(parent.context).inflate(itemLayoutRes, parent, false)
             MediaViewHolder(v)
         } else {
-             null!!
+            null!!
         }
     }
 
@@ -102,8 +102,8 @@ open class AlbumMediaAdapter(context: Context,
             val item = Item.valueOf(cursor!!)
             holder.mMediaGrid.preBindMedia(MediaGrid.PreBindInfo(
                     getImageResize(holder.mMediaGrid.context),
-                    mPlaceholder!!,
-                    mSelectionSpec!!.countable,
+                    mPlaceholder,
+                    mSelectionSpec.countable,
                     holder
             ))
             holder.mMediaGrid.bindMedia(item)
@@ -113,7 +113,7 @@ open class AlbumMediaAdapter(context: Context,
     }
 
     private fun setCheckStatus(item: Item, mediaGrid: MediaGrid) {
-        if (mSelectionSpec!!.countable) {
+        if (mSelectionSpec.countable) {
             val checkedNum = mSelectedCollection.checkedNumOf(item)
             if (checkedNum > 0) {
                 mediaGrid.setCheckEnabled(true)
@@ -145,13 +145,11 @@ open class AlbumMediaAdapter(context: Context,
     }
 
     override fun onThumbnailClicked(thumbnail: ImageView, item: Item, holder: RecyclerView.ViewHolder) {
-        if (mOnMediaClickListener != null) {
-            mOnMediaClickListener!!.onMediaClick(null, item, holder.adapterPosition)
-        }
+        mOnMediaClickListener?.onMediaClick(null, item, holder.adapterPosition)
     }
 
     override fun onCheckViewClicked(checkView: CheckView, item: Item, holder: RecyclerView.ViewHolder) {
-        if (mSelectionSpec!!.countable) {
+        if (mSelectionSpec.countable) {
             val checkedNum = mSelectedCollection.checkedNumOf(item)
             if (checkedNum == CheckView.UNCHECKED) {
                 if (assertAddSelection(holder.itemView.context, item)) {
@@ -177,9 +175,7 @@ open class AlbumMediaAdapter(context: Context,
 
     private fun notifyCheckStateChanged() {
         notifyDataSetChanged()
-        if (mCheckStateListener != null) {
-            mCheckStateListener!!.onUpdate()
-        }
+        mCheckStateListener?.onUpdate()
     }
 
     public override fun getItemViewType(position: Int, cursor: Cursor?): Int {
@@ -238,7 +234,7 @@ open class AlbumMediaAdapter(context: Context,
             val availableWidth = screenWidth - context.resources.getDimensionPixelSize(
                     R.dimen.media_grid_spacing) * (spanCount - 1)
             mImageResize = availableWidth / spanCount
-            mImageResize = (mImageResize * mSelectionSpec!!.thumbnailScale).toInt()
+            mImageResize = (mImageResize * mSelectionSpec.thumbnailScale).toInt()
         }
         return mImageResize
     }

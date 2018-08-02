@@ -36,12 +36,12 @@ abstract class RecyclerViewCursorAdapter<VH : RecyclerView.ViewHolder> internal 
         if (!isDataValid(cursor)) {
             throw IllegalStateException("Cannot bind view holder when cursor is in invalid state.")
         }
-        if (!cursor!!.moveToPosition(position)) {
+        if (!(cursor?.moveToPosition(position) ?: false)) {
             throw IllegalStateException("Could not move cursor to position " + position
                     + " when trying to bind view holder")
         }
 
-        onBindViewHolder(holder, cursor)
+        onBindViewHolder(holder, cursor!!)
     }
 
     override fun getItemViewType(position: Int): Int {

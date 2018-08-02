@@ -28,12 +28,10 @@ import android.provider.MediaStore
 import android.util.DisplayMetrics
 import android.util.Log
 
-import com.qingmei2.rximagepicker_extension.MimeType
 import com.qingmei2.rximagepicker_extension.R
 import com.qingmei2.rximagepicker_extension.entity.IncapableCause
 import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
-import com.qingmei2.rximagepicker_extension.filter.Filter
 
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -78,21 +76,21 @@ class PhotoMetadataUtils private constructor() {
         }
 
         private fun getBitmapBound(resolver: ContentResolver, uri: Uri): Point {
-            var `is`: InputStream? = null
+            var inputStream: InputStream? = null
             try {
                 val options = BitmapFactory.Options()
                 options.inJustDecodeBounds = true
-                `is` = resolver.openInputStream(uri)
-                BitmapFactory.decodeStream(`is`, null, options)
+                inputStream = resolver.openInputStream(uri)
+                BitmapFactory.decodeStream(inputStream, null, options)
                 val width = options.outWidth
                 val height = options.outHeight
                 return Point(width, height)
             } catch (e: FileNotFoundException) {
                 return Point(0, 0)
             } finally {
-                if (`is` != null) {
+                if (inputStream != null) {
                     try {
-                        `is`.close()
+                        inputStream.close()
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
@@ -125,8 +123,8 @@ class PhotoMetadataUtils private constructor() {
                 return IncapableCause(context.getString(R.string.error_file_type))
             }
 
-            if (SelectionSpec.instance!!.filters != null) {
-                for (filter in SelectionSpec.instance!!.filters!!) {
+            if (SelectionSpec.instance.filters != null) {
+                for (filter in SelectionSpec.instance.filters!!) {
                     val incapableCause = filter.filter(context, item)
                     if (incapableCause != null) {
                         return incapableCause

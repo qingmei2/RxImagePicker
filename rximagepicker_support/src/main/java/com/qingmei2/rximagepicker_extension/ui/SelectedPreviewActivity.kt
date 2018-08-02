@@ -29,7 +29,7 @@ open class SelectedPreviewActivity : BasePreviewActivity() {
         val selected = bundle.getParcelableArrayList<Item>(SelectedItemCollection.STATE_SELECTION)
         mAdapter.addAll(selected)
         mAdapter.notifyDataSetChanged()
-        if (mSpec!!.countable) {
+        if (mSpec.countable) {
             mCheckView.setCheckedNum(1)
         } else {
             mCheckView.setChecked(true)
