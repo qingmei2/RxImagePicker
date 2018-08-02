@@ -45,12 +45,12 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
 
     private val mAlbumCollection = AlbumCollection()
 
-    private var mAlbumsSpinner: AlbumsSpinner? = null
-    private var mAlbumsAdapter: AlbumsAdapter? = null
+    private lateinit var mAlbumsSpinner: AlbumsSpinner
+    private lateinit var mAlbumsAdapter: AlbumsAdapter
 
-    private var publishSubject: PublishSubject<Result>? = null
+    private var publishSubject: PublishSubject<Result> = PublishSubject.create()
 
-    private var mSelectedCollection: SelectedItemCollection? = null
+    private lateinit var mSelectedCollection: SelectedItemCollection
 
     private lateinit var mButtonPreview: TextView
     private lateinit var mButtonApply: TextView
@@ -78,15 +78,15 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
         val mButtonBack = view.findViewById<ImageView>(R.id.button_back)
         mButtonBack.setOnClickListener(this)
 
-        mSelectedCollection!!.onCreate(savedInstanceState)
+        mSelectedCollection.onCreate(savedInstanceState)
         updateBottomToolbar()
 
         mAlbumsAdapter = AlbumsAdapter(context!!, null, false)
         mAlbumsSpinner = AlbumsSpinner(context!!)
-        mAlbumsSpinner!!.setOnItemSelectedListener(this)
-        mAlbumsSpinner!!.setSelectedTextView(view.findViewById(R.id.selected_album))
-        mAlbumsSpinner!!.setPopupAnchorView(view.findViewById(R.id.toolbar))
-        mAlbumsSpinner!!.setAdapter(mAlbumsAdapter!!)
+        mAlbumsSpinner.setOnItemSelectedListener(this)
+        mAlbumsSpinner.setSelectedTextView(view.findViewById(R.id.selected_album))
+        mAlbumsSpinner.setPopupAnchorView(view.findViewById(R.id.toolbar))
+        mAlbumsSpinner.setAdapter(mAlbumsAdapter)
         mAlbumCollection.onCreate(activity!!, this)
         mAlbumCollection.onRestoreInstanceState(savedInstanceState)
         mAlbumCollection.loadAlbums()
@@ -110,7 +110,7 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
 
     override fun pickImage(): Observable<Result> {
         publishSubject = PublishSubject.create()
-        return publishSubject!!
+        return publishSubject
     }
 
     private fun closure() {
@@ -122,16 +122,16 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
             fragmentTransaction.remove(this)
             fragmentTransaction.commit()
         }
-        SelectionSpec.instance!!.onFinished()
+        SelectionSpec.instance.onFinished()
     }
 
     override fun onAlbumLoad(cursor: Cursor) {
-        mAlbumsAdapter!!.swapCursor(cursor)
+        mAlbumsAdapter.swapCursor(cursor)
         // select default album.
         val handler = Handler(Looper.getMainLooper())
         handler.post {
             cursor.moveToPosition(mAlbumCollection.currentSelection)
-            mAlbumsSpinner!!.setSelection(context!!,
+            mAlbumsSpinner.setSelection(context!!,
                     mAlbumCollection.currentSelection)
             val album = Album.valueOf(cursor)
             if (album.isAll) {
@@ -142,13 +142,13 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
     }
 
     override fun onAlbumReset() {
-        mAlbumsAdapter!!.swapCursor(null)
+        mAlbumsAdapter.swapCursor(null)
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         mAlbumCollection.setStateCurrentSelection(position)
-        mAlbumsAdapter!!.cursor.moveToPosition(position)
-        val album = Album.valueOf(mAlbumsAdapter!!.cursor)
+        mAlbumsAdapter.cursor.moveToPosition(position)
+        val album = Album.valueOf(mAlbumsAdapter.cursor)
         if (album.isAll) {
             album.addCaptureCount()
         }
@@ -160,12 +160,12 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
     }
 
     private fun updateBottomToolbar() {
-        val selectedCount = mSelectedCollection!!.count()
+        val selectedCount = mSelectedCollection.count()
         if (selectedCount == 0) {
             mButtonPreview.isEnabled = false
             mButtonApply.isEnabled = false
             mButtonApply.text = getString(R.string.button_apply_default)
-        } else if (selectedCount == 1 && SelectionSpec.instance!!.singleSelectionModeEnabled()) {
+        } else if (selectedCount == 1 && SelectionSpec.instance.singleSelectionModeEnabled()) {
             mButtonPreview.isEnabled = true
             mButtonApply.setText(R.string.button_apply_default)
             mButtonApply.isEnabled = true
@@ -201,7 +201,7 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
         val intent = Intent(context, AlbumPreviewActivity::class.java)
         intent.putExtra(AlbumPreviewActivity.EXTRA_ALBUM, album)
         intent.putExtra(AlbumPreviewActivity.EXTRA_ITEM, item)
-        intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection!!.dataWithBundle)
+        intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.dataWithBundle)
         startActivityForResult(intent, ZhihuImagePickerActivity.REQUEST_CODE_PREVIEW)
     }
 
@@ -210,14 +210,14 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
     }
 
     override fun provideSelectedItemCollection(): SelectedItemCollection {
-        return mSelectedCollection!!
+        return mSelectedCollection
     }
 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.button_preview -> {
                 val intent = Intent(context, SelectedPreviewActivity::class.java)
-                intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection!!.dataWithBundle)
+                intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedCollection.dataWithBundle)
                 startActivityForResult(intent, ZhihuImagePickerActivity.REQUEST_CODE_PREVIEW)
             }
             R.id.button_apply -> emitSelectUri()
@@ -226,15 +226,15 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
     }
 
     private fun emitSelectUri() {
-        val selectedUris = mSelectedCollection!!.asListOfUri() as ArrayList<Uri>
+        val selectedUris = mSelectedCollection.asListOfUri() as ArrayList<Uri>
         for (uri in selectedUris) {
-            publishSubject!!.onNext(parseResultNoExtraData(uri))
+            publishSubject.onNext(parseResultNoExtraData(uri))
         }
         endPickImage()
     }
 
     private fun endPickImage() {
-        publishSubject!!.onComplete()
+        publishSubject.onComplete()
         closure()
     }
 
@@ -256,7 +256,7 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
                                     parseResultNoExtraData(item.contentUri!!)
                             )
                         } else {
-                            publishSubject!!.onNext(
+                            publishSubject.onNext(
                                     parseResultNoExtraData(item.contentUri!!)
                             )
                         }
@@ -264,7 +264,7 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
                 }
                 closure()
             } else {         // back event
-                mSelectedCollection!!.overwrite(selected!!, collectionType)
+                mSelectedCollection.overwrite(selected!!, collectionType)
                 val weChatListFragment = childFragmentManager.findFragmentByTag(
                         ZhihuImageListGridFragment::class.java.simpleName)
                 if (weChatListFragment is ZhihuImageListGridFragment) {

@@ -15,7 +15,7 @@ class ZhihuImagePickerActivity : AppCompatActivity() {
     private val fragment: ZhihuImagePickerFragment = ZhihuImagePickerFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(SelectionSpec.instance!!.themeId)
+        setTheme(SelectionSpec.instance.themeId)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picker_zhihu)
 
@@ -46,10 +46,10 @@ class ZhihuImagePickerActivity : AppCompatActivity() {
                 .commitAllowingStateLoss()
 
         fragment.pickImage()
-                .subscribe({ result ->
-                    ActivityPickerViewController.instance.emitResult(result)
-                }, { error ->
-                    ActivityPickerViewController.instance.emitError(error)
+                .subscribe({
+                    ActivityPickerViewController.instance.emitResult(it)
+                }, {
+                    ActivityPickerViewController.instance.emitError(it)
                 }, {
                     closure()
                 })

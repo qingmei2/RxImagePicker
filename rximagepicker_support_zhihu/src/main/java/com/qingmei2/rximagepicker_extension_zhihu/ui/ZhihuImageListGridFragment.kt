@@ -15,7 +15,6 @@
  */
 package com.qingmei2.rximagepicker_extension_zhihu.ui
 
-import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -25,7 +24,6 @@ import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.qingmei2.rximagepicker_extension.R
 import com.qingmei2.rximagepicker_extension.entity.Album
 import com.qingmei2.rximagepicker_extension.entity.Item
@@ -39,8 +37,8 @@ import com.qingmei2.rximagepicker_extension.utils.UIUtils
 class ZhihuImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateListener, AlbumMediaAdapter.OnMediaClickListener, AlbumMediaCollection.AlbumMediaCallbacks {
 
     private val mAlbumMediaCollection = AlbumMediaCollection()
-    private var mRecyclerView: RecyclerView? = null
-    private var mAdapter: AlbumMediaAdapter? = null
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mAdapter: AlbumMediaAdapter
     private var mSelectionProvider: SelectionProvider? = null
     private var mCheckStateListener: AlbumMediaAdapter.CheckStateListener? = null
     private var mOnMediaClickListener: AlbumMediaAdapter.OnMediaClickListener? = null
@@ -59,7 +57,7 @@ class ZhihuImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateListe
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val contextThemeWrapper = ContextThemeWrapper(activity, SelectionSpec.instance!!.themeId)
+        val contextThemeWrapper = ContextThemeWrapper(activity, SelectionSpec.instance.themeId)
         val localInflater = inflater
                 .cloneInContext(contextThemeWrapper)
         return localInflater.inflate(R.layout.fragment_media_selection, container, false)
@@ -74,24 +72,33 @@ class ZhihuImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateListe
         super.onActivityCreated(savedInstanceState)
         val album = arguments!!.getParcelable<Album>(EXTRA_ALBUM)
 
-        mAdapter = AlbumMediaAdapter(context!!,
-                mSelectionProvider!!.provideSelectedItemCollection(), mRecyclerView!!)
-        mAdapter!!.registerCheckStateListener(this)
-        mAdapter!!.registerOnMediaClickListener(this)
-        mRecyclerView!!.setHasFixedSize(true)
+        mAdapter = AlbumMediaAdapter(
+                context!!,
+                mSelectionProvider!!.provideSelectedItemCollection(),
+                mRecyclerView
+        ).apply {
+            registerCheckStateListener(this@ZhihuImageListGridFragment)
+            registerOnMediaClickListener(this@ZhihuImageListGridFragment)
+        }
+        mRecyclerView.setHasFixedSize(true)
 
         val spanCount: Int
         val selectionSpec = SelectionSpec.instance
-        spanCount = if (selectionSpec!!.gridExpectedSize > 0) {
+        spanCount = if (selectionSpec.gridExpectedSize > 0) {
             UIUtils.spanCount(context!!, selectionSpec.gridExpectedSize)
         } else {
             selectionSpec.spanCount
         }
-        mRecyclerView!!.layoutManager = GridLayoutManager(context, spanCount)
+        mRecyclerView.layoutManager = GridLayoutManager(context, spanCount)
 
-        val spacing = resources.getDimensionPixelSize(R.dimen.media_grid_spacing)
-        mRecyclerView!!.addItemDecoration(MediaGridInset(spanCount, spacing, false))
-        mRecyclerView!!.adapter = mAdapter
+        mRecyclerView.addItemDecoration(
+                MediaGridInset(spanCount,
+                        resources.getDimensionPixelSize(R.dimen.media_grid_spacing),
+                        false
+                )
+        )
+        mRecyclerView.adapter = mAdapter
+
         mAlbumMediaCollection.onCreate(activity!!, this)
         mAlbumMediaCollection.load(album, selectionSpec.capture)
     }
@@ -102,33 +109,29 @@ class ZhihuImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateListe
     }
 
     fun refreshMediaGrid() {
-        mAdapter!!.notifyDataSetChanged()
+        mAdapter.notifyDataSetChanged()
     }
 
     fun refreshSelection() {
-        mAdapter!!.refreshSelection()
+        mAdapter.refreshSelection()
     }
 
     override fun onUpdate() {
         // notify outer Activity that check state changed
-        if (mCheckStateListener != null) {
-            mCheckStateListener!!.onUpdate()
-        }
+        mCheckStateListener?.onUpdate()
     }
 
     override fun onMediaClick(album: Album?, item: Item, adapterPosition: Int) {
-        if (mOnMediaClickListener != null) {
-            mOnMediaClickListener!!.onMediaClick(arguments!!.getParcelable(EXTRA_ALBUM),
-                    item, adapterPosition)
-        }
+        mOnMediaClickListener?.onMediaClick(arguments!!.getParcelable(EXTRA_ALBUM),
+                item, adapterPosition)
     }
 
     override fun onAlbumMediaLoad(cursor: Cursor) {
-        mAdapter!!.swapCursor(cursor)
+        mAdapter.swapCursor(cursor)
     }
 
     override fun onAlbumMediaReset() {
-        mAdapter!!.swapCursor(null)
+        mAdapter.swapCursor(null)
     }
 
     interface SelectionProvider {
