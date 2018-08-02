@@ -26,13 +26,13 @@ class ImagePickerConfigProcessor(private val cameraViews: Map<String, ICameraCus
     }
 
     private fun sourceFrom(): Function<ImagePickerConfigProvider, ObservableSource<Result>> {
-        return Function { provider ->
-            if (provider.isSingleActivity) {
+        return Function { configProvider ->
+            if (configProvider.isSingleActivity) {
                 return@Function ActivityPickerViewController.instance.pickImage()
             }
-            when (provider.sourcesFrom) {
+            when (configProvider.sourcesFrom) {
                 SourcesFrom.GALLERY,
-                SourcesFrom.CAMERA -> provider.pickerView!!.pickImage()
+                SourcesFrom.CAMERA -> configProvider.pickerView!!.pickImage()
             }
         }
     }

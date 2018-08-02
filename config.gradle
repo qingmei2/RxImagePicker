@@ -1,8 +1,7 @@
 def dagger_version = '2.14.1'
-def lombok_version = '1.16.20'
 def kotlin_version = '1.2.51'
 def support_version = '27.1.1'
-def espresso_version = '2.2.2'
+def espresso_version = '3.0.2'
 def glide_version = '4.7.1'
 
 project.ext {
@@ -30,8 +29,8 @@ project.ext {
             "kotlin-android"             : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
 
             //rx
-            "rxJava2"                    : "io.reactivex.rxjava2:rxjava:2.1.8",
-            "rxandroid"                  : "io.reactivex.rxjava2:rxandroid:2.0.1",
+            "rxJava2"                    : "io.reactivex.rxjava2:rxjava:2.2.0",
+            "rxandroid"                  : "io.reactivex.rxjava2:rxandroid:2.0.2",
             "rxkotlin"                   : "io.reactivex.rxjava2:rxkotlin:2.2.0",
             "rxbinding"                  : "com.jakewharton.rxbinding2:rxbinding:2.0.0",
             "rxschedulers"               : "com.github.qingmei2.rxschedulers:rxschedulers:0.1.1",
@@ -39,9 +38,6 @@ project.ext {
             //dagger
             "dagger"                     : "com.google.dagger:dagger:${dagger_version}",
             "dagger-compiler"            : "com.google.dagger:dagger-compiler:${dagger_version}",
-
-            //lombok
-            "lombok"                     : "org.projectlombok:lombok:${lombok_version}",
 
             //glide
             "glide"                      : "com.github.bumptech.glide:glide:${glide_version}",

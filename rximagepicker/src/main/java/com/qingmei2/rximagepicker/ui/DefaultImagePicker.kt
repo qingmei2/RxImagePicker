@@ -1,6 +1,5 @@
 package com.qingmei2.rximagepicker.ui
 
-
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.entity.sources.Camera
 import com.qingmei2.rximagepicker.entity.sources.Gallery

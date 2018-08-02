@@ -19,6 +19,7 @@ import java.util.Locale
 
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import java.io.File
 
 class SystemCameraPickerView : BaseSystemPickerView(), ICameraCustomPickerView {
 
