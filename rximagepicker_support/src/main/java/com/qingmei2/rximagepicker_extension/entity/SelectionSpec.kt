@@ -45,7 +45,7 @@ class SelectionSpec private constructor() : ICustomPickerConfiguration {
     var spanCount: Int = 0
     var gridExpectedSize: Int = 0
     var thumbnailScale: Float = 0.toFloat()
-    var imageEngine: ImageEngine? = null
+    lateinit var imageEngine: ImageEngine
 
     init {
         reset()
@@ -56,7 +56,7 @@ class SelectionSpec private constructor() : ICustomPickerConfiguration {
             throw NullPointerException(
                     "the default imageEngine can't be null, please init it by the SelectionSpec.getNewCleanInstance(imageEngine)")
         }
-        this.imageEngine = InstanceHolder.imageEngineHolder
+        this.imageEngine = InstanceHolder.imageEngineHolder!!
         mimeTypeSet = MimeType.ofImage()
         mediaTypeExclusive = true
         showSingleMediaType = false
@@ -123,8 +123,8 @@ class SelectionSpec private constructor() : ICustomPickerConfiguration {
 
     companion object {
 
-        var instance: SelectionSpec?
-            get() = InstanceHolder.INSTANCE
+        var instance: SelectionSpec
+            get() = InstanceHolder.INSTANCE!!
             set(selectionSpec) {
                 InstanceHolder.INSTANCE = selectionSpec
             }

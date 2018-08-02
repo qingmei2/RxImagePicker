@@ -17,19 +17,16 @@ package com.qingmei2.rximagepicker_extension.ui
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.graphics.Point
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
 import com.qingmei2.rximagepicker_extension.R
 import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
 import com.qingmei2.rximagepicker_extension.utils.PhotoMetadataUtils
-
 import it.sephiroth.android.library.imagezoom.ImageViewTouch
 import it.sephiroth.android.library.imagezoom.ImageViewTouchBase
 
@@ -64,10 +61,10 @@ class PreviewItemFragment : Fragment() {
 
         val size = PhotoMetadataUtils.getBitmapSize(item.contentUri!!, activity!!)
         if (item.isGif) {
-            SelectionSpec.instance!!.imageEngine!!.loadGifImage(context!!, size.x, size.y, image,
+            SelectionSpec.instance.imageEngine.loadGifImage(context!!, size.x, size.y, image,
                     item.contentUri)
         } else {
-            SelectionSpec.instance!!.imageEngine!!.loadImage(context!!, size.x, size.y, image,
+            SelectionSpec.instance.imageEngine.loadImage(context!!, size.x, size.y, image,
                     item.contentUri)
         }
     }

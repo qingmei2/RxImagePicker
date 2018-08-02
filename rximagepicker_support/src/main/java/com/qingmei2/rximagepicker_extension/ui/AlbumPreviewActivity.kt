@@ -40,7 +40,7 @@ open class AlbumPreviewActivity : BasePreviewActivity(), AlbumMediaCollection.Al
         mCollection.load(album)
 
         val item = intent.getParcelableExtra<Item>(EXTRA_ITEM)
-        if (mSpec?.countable ?: false) {
+        if (mSpec.countable) {
             mCheckView.setCheckedNum(mSelectedCollection.checkedNumOf(item))
         } else {
             mCheckView.setChecked(mSelectedCollection.isSelected(item))
@@ -58,8 +58,8 @@ open class AlbumPreviewActivity : BasePreviewActivity(), AlbumMediaCollection.Al
         while (cursor.moveToNext()) {
             items.add(Item.valueOf(cursor))
         }
-        val adapter = mPager.adapter as PreviewPagerAdapter?
-        adapter!!.addAll(items)
+        val adapter = mPager.adapter as PreviewPagerAdapter
+        adapter.addAll(items)
         adapter.notifyDataSetChanged()
         if (!mIsAlreadySetPosition) {
             //onAlbumMediaLoad is called many times..

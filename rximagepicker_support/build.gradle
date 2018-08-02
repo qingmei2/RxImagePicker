@@ -35,7 +35,7 @@ dependencies {
     implementation rootProject.ext.dependencies["recyclerview-v7"]
     implementation rootProject.ext.dependencies["constraint-layout"]
     testImplementation rootProject.ext.dependencies["junit"]
-    implementation 'it.sephiroth.android.library.imagezoom:library:1.0.4'
+    implementation 'it.sephiroth.android.library.imagezoom:imagezoom:2.3.0'
 }
 repositories {
     mavenCentral()
