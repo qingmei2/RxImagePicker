@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.qingmei2.rximagepicker.core.RxImagePicker;
 import com.qingmei2.rximagepicker.entity.Result;
-import com.qingmei2.rximagepicker.ui.DefaultImagePicker;
+import com.qingmei2.rximagepicker.ui.SystemImagePicker;
 import com.qingmei2.sample.R;
 import com.qingmei2.sample.imageloader.GlideApp;
 
@@ -19,7 +19,7 @@ import io.reactivex.functions.Consumer;
 @SuppressWarnings("CheckResult")
 public class SystemActivity extends AppCompatActivity {
 
-    private DefaultImagePicker defaultImagePicker;
+    private SystemImagePicker defaultImagePicker;
     private ImageView ivPickedImage;
 
     @Override

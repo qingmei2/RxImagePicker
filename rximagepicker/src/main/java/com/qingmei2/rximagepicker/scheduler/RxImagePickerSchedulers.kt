@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker.di.scheduler
+package com.qingmei2.rximagepicker.scheduler
 
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers

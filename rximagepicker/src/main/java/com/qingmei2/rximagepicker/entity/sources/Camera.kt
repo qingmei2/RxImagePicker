@@ -1,17 +1,32 @@
 package com.qingmei2.rximagepicker.entity.sources
 
 import android.support.annotation.IdRes
-
-import com.qingmei2.rximagepicker.ui.DefaultImagePicker
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
+import com.qingmei2.rximagepicker.ui.camera.SystemCameraPickerView
+import kotlin.reflect.KClass
 
 /**
  * This annotation will be marked open Gallery，it will conflict with [Gallery]
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
+@Retention
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY_GETTER,
+        AnnotationTarget.PROPERTY_SETTER
+)
 annotation class Camera(
-        val viewKey: String = DefaultImagePicker.DEFAULT_PICKER_CAMERA,
+
+        /**
+         * the UI component that will be displayed.
+         */
+        val componentClazz: KClass<*> = SystemCameraPickerView::class,
+
+        /**
+         * the UI component type, as [Fragment] or [Activity].
+         */
+        val openAsFragment: Boolean = false,
+
+        /**
+         * the [Fragment] container
+         */
         @IdRes val containerViewId: Int = 0
 )

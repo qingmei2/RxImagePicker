@@ -1,12 +1,9 @@
 package com.qingmei2.rximagepicker.delegate
 
-import android.support.v4.app.FragmentActivity
-
 import com.qingmei2.rximagepicker.core.IImagePickerProcessor
 import com.qingmei2.rximagepicker.core.ImagePickerConfigProcessor
-import com.qingmei2.rximagepicker.core.RxImagePicker
-import com.qingmei2.rximagepicker.di.scheduler.RxImagePickerSchedulers
-import com.qingmei2.rximagepicker.entity.CustomPickConfigurations
+import com.qingmei2.rximagepicker.core.ImagePickerProjector
+import com.qingmei2.rximagepicker.scheduler.RxImagePickerSchedulers
 
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
@@ -19,40 +16,27 @@ import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.Single
 
-class ProxyProviders(builder: RxImagePicker.Builder,
-                     providersClass: Class<*>) : InvocationHandler {
+class ProxyProviders(providersClass: Class<*>) : InvocationHandler {
 
     private val rxImagePickerProcessor: IImagePickerProcessor
     private val proxyTranslator: ProxyTranslator
-    private val fragmentActivity: FragmentActivity
-    private val customPickConfigurations: CustomPickConfigurations
 
     init {
         rxImagePickerProcessor = ImagePickerConfigProcessor(
-                builder.getCameraViews(),
-                builder.getGalleryViews(),
                 RxImagePickerSchedulers()
         )
-        fragmentActivity = builder.fragmentActivity
-        proxyTranslator = ProxyTranslator(
-                builder.getGalleryViews(),
-                builder.getCameraViews(),
-                builder.getActivityClasses()
-        )
-        customPickConfigurations = CustomPickConfigurations(
-                builder.customPickerConfigurations
-        )
+        proxyTranslator = ProxyTranslator()
     }
 
     override fun invoke(proxy: Any, method: Method, args: Array<Any>?): Any {
 
         return Observable.defer(Callable<ObservableSource<*>> {
-            val configProvider = proxyTranslator.processMethod(method, args)
+            val configProvider = proxyTranslator.processMethodForStaticConfig(method)
+            val runtimeProvider = proxyTranslator.processMethodForRuntimeParams(method, args)
 
-            proxyTranslator.instanceProjector(configProvider, fragmentActivity)
-                    .display(customPickConfigurations)
+            ImagePickerProjector(configProvider, runtimeProvider).display()
 
-            val observable = rxImagePickerProcessor.process(configProvider)
+            val observable = rxImagePickerProcessor.process(configProvider, runtimeProvider)
 
             val methodType = method.returnType
 

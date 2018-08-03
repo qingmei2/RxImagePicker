@@ -1,88 +1,72 @@
 package com.qingmei2.rximagepicker.delegate
 
-import android.app.Activity
-import android.support.annotation.VisibleForTesting
+import android.content.Context
 import android.support.v4.app.FragmentActivity
 
 import com.qingmei2.rximagepicker.entity.sources.Camera
 import com.qingmei2.rximagepicker.entity.sources.Gallery
 import com.qingmei2.rximagepicker.entity.sources.SourcesFrom
-import com.qingmei2.rximagepicker.core.ImagePickerConfigProvider
+import com.qingmei2.rximagepicker.providers.ConfigProvider
 import com.qingmei2.rximagepicker.core.ImagePickerProjector
-import com.qingmei2.rximagepicker.ui.ICameraCustomPickerView
+import com.qingmei2.rximagepicker.providers.RuntimeProvider
+import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import com.qingmei2.rximagepicker.ui.ICustomPickerView
-import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView
+import java.lang.NullPointerException
 
 import java.lang.reflect.Method
-
-import io.reactivex.Flowable
-import io.reactivex.Maybe
-import io.reactivex.Observable
-import io.reactivex.Single
+import kotlin.reflect.KClass
 
 /**
  * [ProxyTranslator] is used to handle the annotation configuration above the method in the user's
  * custom interface, after completed parsing configuration, the configrations will be stored in an object
- * [ImagePickerConfigProvider].
+ * [ConfigProvider].
  */
-class ProxyTranslator(private val galleryViews: Map<String, IGalleryCustomPickerView>,
-                      private val cameraViews: Map<String, ICameraCustomPickerView>,
-                      private val activityClasses: Map<String, Class<out Activity>>) {
+class ProxyTranslator {
 
-    fun processMethod(method: Method, objectsMethod: Array<Any>?): ImagePickerConfigProvider {
-        val singleActivity = singleActivity(method)
-        val viewKey = getViewKey(method)
-        return ImagePickerConfigProvider(
-                singleActivity,
-                viewKey,
-                this.getStreamSourcesFrom(method),
-                this.getPickerView(method, singleActivity),
-                this.getContainerViewId(method, singleActivity),
-                this.getActivityClass(viewKey, singleActivity))
+    fun processMethodForStaticConfig(method: Method): ConfigProvider {
+        val sourcesFrom = streamSourcesFrom(method)
+        val asFragment = asFragment(method, sourcesFrom)
+        return ConfigProvider(
+                getComponentClass(method, sourcesFrom),
+                asFragment,
+                sourcesFrom,
+                if (asFragment) containerViewId(method, sourcesFrom) else -1)
     }
 
-    fun instanceProjector(provider: ImagePickerConfigProvider,
-                          fragmentActivity: FragmentActivity): ImagePickerProjector {
-        return ImagePickerProjector(
-                provider.isSingleActivity,
-                provider.viewKey,
-                provider.pickerView,
-                fragmentActivity,
-                provider.containerViewId,
-                provider.activityClass
-        )
-    }
-
-    private fun singleActivity(method: Method): Boolean {
-        val gallery = method.getAnnotation(Gallery::class.java)
-        return gallery != null && activityClasses.containsKey(gallery.viewKey)
-    }
-
-    private fun getPickerView(method: Method, singleActivity: Boolean): ICustomPickerView? {
-        if (singleActivity) {
-            return null
+    fun processMethodForRuntimeParams(method: Method, args: Array<Any>?): RuntimeProvider {
+        val fragmentActivity = getObjectFromMethodParam(method, Context::class.java, args).let {
+            transformContextToFragmentActivity(it)
         }
-        val camera = method.getAnnotation(Camera::class.java)
-        val gallery = method.getAnnotation(Gallery::class.java)
-        return if (camera != null) {
-            checkPickerViewNotNull(cameraViews[camera.viewKey])
-        } else {
-            checkPickerViewNotNull(galleryViews[gallery.viewKey])
+        val runtimeConfiguration = getObjectFromMethodParam(method, ICustomPickerConfiguration::class.java, args)
+
+        val sourcesFrom = streamSourcesFrom(method)
+        val componentClass = getComponentClass(method, sourcesFrom)
+        if (componentClass is ICustomPickerView)
+            return RuntimeProvider(fragmentActivity, componentClass.java.newInstance() as ICustomPickerView, runtimeConfiguration)
+        else
+            throw IllegalArgumentException("The Class is not ICustomPickerView")
+    }
+
+    private fun asFragment(method: Method, sourcesFrom: SourcesFrom): Boolean {
+        return when (sourcesFrom) {
+            SourcesFrom.CAMERA -> {
+                method.getAnnotation(Camera::class.java).openAsFragment
+            }
+            SourcesFrom.GALLERY -> {
+                method.getAnnotation(Gallery::class.java).openAsFragment
+            }
         }
     }
 
-    private fun getViewKey(method: Method): String {
-        val camera = method.getAnnotation(Camera::class.java)
-        val gallery = method.getAnnotation(Gallery::class.java)
-        return camera?.viewKey ?: gallery.viewKey
-    }
-
-    private fun getActivityClass(tag: String, singleActivity: Boolean): Class<out Activity>? {
-        return if (!singleActivity) {
-            null
-        } else activityClasses[tag]
-                ?: throw NullPointerException("please set the ActivityClass by RxImagePicker.addCustomGallery(String viewKey, Class<Activity> gallery)")
-
+    private fun getComponentClass(method: Method, sourcesFrom: SourcesFrom): KClass<*> {
+        return when (sourcesFrom) {
+            SourcesFrom.CAMERA -> {
+                method.getAnnotation(Camera::class.java).componentClazz
+            }
+            SourcesFrom.GALLERY -> {
+                method.getAnnotation(Gallery::class.java).componentClazz
+            }
+        }
     }
 
     /**
@@ -94,7 +78,7 @@ class ProxyTranslator(private val galleryViews: Map<String, IGalleryCustomPicker
      *
      * @return [SourcesFrom.CAMERA] or [SourcesFrom.GALLERY]
      */
-    private fun getStreamSourcesFrom(method: Method): SourcesFrom {
+    private fun streamSourcesFrom(method: Method): SourcesFrom {
         val camera = method.getAnnotation(Camera::class.java) != null
         val gallery = method.getAnnotation(Gallery::class.java) != null
         return if (camera && !gallery) {
@@ -108,16 +92,45 @@ class ProxyTranslator(private val galleryViews: Map<String, IGalleryCustomPicker
         }
     }
 
-    private fun getContainerViewId(method: Method, singleActivity: Boolean): Int {
-        if (singleActivity) {
-            return -1
+    private fun containerViewId(method: Method, sourcesFrom: SourcesFrom): Int {
+        return when (sourcesFrom) {
+            SourcesFrom.CAMERA -> {
+                method.getAnnotation(Camera::class.java).containerViewId
+            }
+            SourcesFrom.GALLERY -> {
+                method.getAnnotation(Gallery::class.java).containerViewId
+            }
         }
-        val camera = method.getAnnotation(Camera::class.java)
-        val gallery = method.getAnnotation(Gallery::class.java)
-        return camera?.containerViewId ?: gallery.containerViewId
     }
 
-    private fun checkPickerViewNotNull(pickerView: ICustomPickerView?): ICustomPickerView {
-        return pickerView ?: throw NullPointerException("Can't find Custom PickerView.")
+    @Suppress("UNCHECKED_CAST")
+    private fun <T> getObjectFromMethodParam(method: Method,
+                                             expectedClass: Class<T>,
+                                             objectsMethod: Array<Any>?): T {
+        var countSameObjectsType = 0
+        var expectedObject: T? = null
+
+        if (objectsMethod == null)
+            throw NullPointerException(method.name
+                    + " requires the Context as argument at least.")
+
+        for (objectParam in objectsMethod) {
+            if (expectedClass.isAssignableFrom(objectParam.javaClass)) {
+                expectedObject = objectParam as T
+                countSameObjectsType++
+            }
+        }
+
+        if (countSameObjectsType > 1) {
+            throw IllegalArgumentException(method.name
+                    + " requires just one instance of type: ${expectedClass.simpleName}, but $countSameObjectsType.")
+        }
+        return expectedObject ?: throw NullPointerException(method.name
+                + " requires just one instance of type: ${expectedClass.simpleName}, but none.")
+    }
+
+    private fun transformContextToFragmentActivity(context: Context): FragmentActivity {
+        return context as? FragmentActivity
+                ?: throw IllegalArgumentException("the context should be FragmentActivity")
     }
 }

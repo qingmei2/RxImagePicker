@@ -6,7 +6,7 @@ class RxImagePickerTest {
 //    private val mockActivity: FragmentActivity = mock()
 //    private val mockFragmentManager: FragmentManager = mock()
 //
-//    private val mockPicker: DefaultImagePicker = mock()
+//    private val mockPicker: SystemImagePicker = mock()
 //
 //    @Before
 //    fun setUp() {
@@ -46,13 +46,13 @@ class RxImagePickerTest {
 //    fun createTestWithNoParamSuccess() {
 //        val spy = instanceWithActivityBuilder()
 //                .let { spy(it) }
-//        doReturn(mockPicker).whenever(spy).create(DefaultImagePicker::class.java)
+//        doReturn(mockPicker).whenever(spy).create(SystemImagePicker::class.java)
 //
 //        val defaultImagePicker = spy.create()
 //
 //        argumentCaptor<Class<Any>>().apply {
 //            verify(spy, Times(1)).create(capture())
-//            assertEquals(firstValue, DefaultImagePicker::class.java)
+//            assertEquals(firstValue, SystemImagePicker::class.java)
 //        }
 //        assertEquals(defaultImagePicker, mockPicker)
 //    }

@@ -94,7 +94,6 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
 
     override fun display(fragmentActivity: FragmentActivity,
                          viewContainer: Int,
-                         tag: String,
                          configuration: ICustomPickerConfiguration?) {
         val fragmentManager = fragmentActivity.supportFragmentManager
         val fragment = fragmentManager.findFragmentByTag(tag)

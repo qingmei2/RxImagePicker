@@ -114,11 +114,11 @@ class ImagePickerConfigProcessorTest {
 //
 //    private fun instanceProvider(sourcesFrom: SourcesFrom = SourcesFrom.CAMERA,
 //                                 observerAs: ObserverAs = ObserverAs.URI)
-//            : ImagePickerConfigProvider {
-//        return ImagePickerConfigProvider(false, "", sourcesFrom, observerAs, mock(), 0, mock())
+//            : ConfigProvider {
+//        return ConfigProvider(false, "", sourcesFrom, observerAs, mock(), 0, mock())
 //    }
 //
-//    private fun testSourceFrom(): Function<ImagePickerConfigProvider, ObservableSource<Uri>> {
+//    private fun testSourceFrom(): Function<ConfigProvider, ObservableSource<Uri>> {
 //        return Function { provider -> Observable.just(mockUri) }
 //    }
 //
