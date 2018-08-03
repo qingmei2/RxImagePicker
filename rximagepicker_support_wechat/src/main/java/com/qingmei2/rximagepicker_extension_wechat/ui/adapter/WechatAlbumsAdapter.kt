@@ -51,7 +51,7 @@ class WechatAlbumsAdapter : CursorAdapter {
         (view.findViewById<View>(R.id.album_name) as TextView).text = album.getDisplayName(context)
         (view.findViewById<View>(R.id.album_media_count) as TextView).text = album.count.toString()
 
-        SelectionSpec.instance!!.imageEngine!!.loadThumbnail(context,
+        SelectionSpec.instance.imageEngine.loadThumbnail(context,
                 context.resources.getDimensionPixelSize(R.dimen.wechat_media_grid_size),
                 mPlaceholder!!,
                 view.findViewById(R.id.album_cover),

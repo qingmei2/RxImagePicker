@@ -60,7 +60,8 @@ class WechatImagePickerActivityTest {
         checkRecyclerViewExist()
 
         onView(withId(R.id.recyclerview))
-                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(1, click()))
+                .clickRecyclerChildWithId(1, R.id.media_thumbnail)
+
 
         checkIntendingToPreviewActivity()
     }
@@ -69,9 +70,7 @@ class WechatImagePickerActivityTest {
     fun testSingleCheckAndJumpPreviewActivity() {
 
         onView(withId(R.id.recyclerview))
-                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                        1, clickRecyclerChildWithId(R.id.check_view)
-                ))
+                .clickRecyclerChildWithId(1, R.id.check_view)
 
         isCompletelyDisplayed()
 
@@ -87,13 +86,9 @@ class WechatImagePickerActivityTest {
     fun testMultiCheckAndJumpPreviewActivity() {
 
         onView(withId(R.id.recyclerview))
-                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                        0, clickRecyclerChildWithId(R.id.check_view)
-                ), actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                        1, clickRecyclerChildWithId(R.id.check_view)
-                ), actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                        2, clickRecyclerChildWithId(R.id.check_view)
-                ))
+                .clickRecyclerChildWithId(0, R.id.check_view)
+                .clickRecyclerChildWithId(1, R.id.check_view)
+                .clickRecyclerChildWithId(2, R.id.check_view)
 
         checkRecyclerViewExist()
 
@@ -124,8 +119,6 @@ class WechatImagePickerActivityTest {
                 .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(
                         1, clickRecyclerChildWithId(R.id.check_view)
                 ))
-
-//        Thread.sleep(1000)
 
         // cancel select
         onView(withId(R.id.recyclerview))

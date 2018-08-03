@@ -16,9 +16,7 @@ class WechatAlbumsSpinner(context: Context) : AlbumsSpinner() {
         mListPopupWindow.setContentWidth(context.resources.displayMetrics.widthPixels)
         mListPopupWindow.setOnItemClickListener { parent, view, position, id ->
             this@WechatAlbumsSpinner.onItemSelected(parent.context, position)
-            if (mOnItemSelectedListener != null) {
-                mOnItemSelectedListener!!.onItemSelected(parent, view, position, id)
-            }
+            mOnItemSelectedListener?.onItemSelected(parent, view, position, id)
         }
     }
 }

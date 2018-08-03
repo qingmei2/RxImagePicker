@@ -12,7 +12,7 @@ import com.qingmei2.rximagepicker_extension_wechat.R
 class WechatImagePickerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(SelectionSpec.instance!!.themeId)
+        setTheme(SelectionSpec.instance.themeId)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picker_wechat)
 

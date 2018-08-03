@@ -65,7 +65,7 @@ class ZhihuImagePickerActivityDraculaTest {
         checkRecyclerViewExist()
 
         onView(withId(R.id.recyclerview))
-                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(1, click()))
+                .clickRecyclerChildWithId(1, R.id.media_thumbnail)
 
         checkIntendingToPreviewActivity()
     }
@@ -74,9 +74,7 @@ class ZhihuImagePickerActivityDraculaTest {
     fun testSingleCheckAndJumpPreviewActivity() {
 
         onView(ViewMatchers.withId(R.id.recyclerview))
-                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                        1, clickRecyclerChildWithId(R.id.check_view)
-                ))
+                .clickRecyclerChildWithId(1, R.id.check_view)
 
         isCompletelyDisplayed()
 
@@ -92,13 +90,9 @@ class ZhihuImagePickerActivityDraculaTest {
     fun testMultiCheckAndJumpPreviewActivity() {
 
         onView(withId(R.id.recyclerview))
-                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                        0, clickRecyclerChildWithId(R.id.check_view)
-                ), actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                        1, clickRecyclerChildWithId(R.id.check_view)
-                ), actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                        2, clickRecyclerChildWithId(R.id.check_view)
-                ))
+                .clickRecyclerChildWithId(0, R.id.check_view)
+                .clickRecyclerChildWithId(1, R.id.check_view)
+                .clickRecyclerChildWithId(2, R.id.check_view)
 
         checkRecyclerViewExist()
 

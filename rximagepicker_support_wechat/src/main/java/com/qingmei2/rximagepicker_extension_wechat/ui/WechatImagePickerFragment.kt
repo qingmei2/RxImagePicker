@@ -43,19 +43,19 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
 
     private val mAlbumCollection = AlbumCollection()
 
-    private var mAlbumsSpinner: AlbumsSpinner? = null
-    private var mAlbumsAdapter: CursorAdapter? = null
+    private lateinit var mAlbumsSpinner: AlbumsSpinner
+    private lateinit var mAlbumsAdapter: CursorAdapter
 
-    private var publishSubject: PublishSubject<Result>? = null
+    private var publishSubject: PublishSubject<Result> = PublishSubject.create()
 
     private var mSelectedCollection: SelectedItemCollection? = null
 
-    private var mButtonPreview: TextView? = null
-    private var mButtonApply: TextView? = null
-    private var mRadioButton: RadioButton? = null
+    private lateinit var mButtonPreview: TextView
+    private lateinit var mButtonApply: TextView
+    private lateinit var mRadioButton: RadioButton
 
-    private var mContainer: View? = null
-    private var mEmptyView: View? = null
+    private lateinit var mContainer: View
+    private lateinit var mEmptyView: View
 
     private var imageOriginalMode = false
 
@@ -72,9 +72,9 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
         mButtonPreview = view.findViewById(R.id.button_preview)
         mButtonApply = view.findViewById(R.id.button_apply)
         mRadioButton = view.findViewById(R.id.rb_original)
-        mButtonPreview!!.setOnClickListener(this)
-        mButtonApply!!.setOnClickListener(this)
-        mRadioButton!!.setOnClickListener(this)
+        mButtonPreview.setOnClickListener(this)
+        mButtonApply.setOnClickListener(this)
+        mRadioButton.setOnClickListener(this)
 
         mContainer = view.findViewById(R.id.container)
         mEmptyView = view.findViewById(R.id.empty_view)
@@ -87,10 +87,10 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
 
         mAlbumsAdapter = WechatAlbumsAdapter(context!!, null, false)
         mAlbumsSpinner = WechatAlbumsSpinner(context!!)
-        mAlbumsSpinner!!.setOnItemSelectedListener(this)
-        mAlbumsSpinner!!.setSelectedTextView(view.findViewById(R.id.selected_album))
-        mAlbumsSpinner!!.setPopupAnchorView(view.findViewById(R.id.bottom_toolbar))
-        mAlbumsSpinner!!.setAdapter(mAlbumsAdapter!!)
+        mAlbumsSpinner.setOnItemSelectedListener(this)
+        mAlbumsSpinner.setSelectedTextView(view.findViewById(R.id.selected_album))
+        mAlbumsSpinner.setPopupAnchorView(view.findViewById(R.id.bottom_toolbar))
+        mAlbumsSpinner.setAdapter(mAlbumsAdapter)
         mAlbumCollection.onCreate(activity!!, this)
         mAlbumCollection.onRestoreInstanceState(savedInstanceState)
         mAlbumCollection.loadAlbums()
@@ -114,7 +114,7 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
 
     override fun pickImage(): Observable<Result> {
         publishSubject = PublishSubject.create()
-        return publishSubject!!
+        return publishSubject
     }
 
     fun closure() {
@@ -126,16 +126,16 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
             fragmentTransaction.remove(this)
             fragmentTransaction.commit()
         }
-        SelectionSpec.instance!!.onFinished()
+        SelectionSpec.instance.onFinished()
     }
 
     override fun onAlbumLoad(cursor: Cursor) {
-        mAlbumsAdapter!!.swapCursor(cursor)
+        mAlbumsAdapter.swapCursor(cursor)
         // select default album.
         val handler = Handler(Looper.getMainLooper())
         handler.post {
             cursor.moveToPosition(mAlbumCollection.currentSelection)
-            mAlbumsSpinner!!.setSelection(context!!,
+            mAlbumsSpinner.setSelection(context!!,
                     mAlbumCollection.currentSelection)
             val album = Album.valueOf(cursor)
             if (album.isAll) {
@@ -146,13 +146,13 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
     }
 
     override fun onAlbumReset() {
-        mAlbumsAdapter!!.swapCursor(null)
+        mAlbumsAdapter.swapCursor(null)
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         mAlbumCollection.setStateCurrentSelection(position)
-        mAlbumsAdapter!!.cursor.moveToPosition(position)
-        val album = Album.valueOf(mAlbumsAdapter!!.cursor)
+        mAlbumsAdapter.cursor.moveToPosition(position)
+        val album = Album.valueOf(mAlbumsAdapter.cursor)
         if (album.isAll) {
             album.addCaptureCount()
         }
@@ -166,27 +166,27 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
     private fun updateBottomToolbar() {
         val selectedCount = mSelectedCollection!!.count()
         if (selectedCount == 0) {
-            mButtonPreview!!.isEnabled = false
-            mButtonApply!!.isEnabled = false
-            mButtonApply!!.text = getString(R.string.button_apply_default)
-        } else if (selectedCount == 1 && SelectionSpec.instance!!.singleSelectionModeEnabled()) {
-            mButtonPreview!!.isEnabled = true
-            mButtonApply!!.setText(R.string.button_apply_default)
-            mButtonApply!!.isEnabled = true
+            mButtonPreview.isEnabled = false
+            mButtonApply.isEnabled = false
+            mButtonApply.text = getString(R.string.button_apply_default)
+        } else if (selectedCount == 1 && SelectionSpec.instance.singleSelectionModeEnabled()) {
+            mButtonPreview.isEnabled = true
+            mButtonApply.setText(R.string.button_apply_default)
+            mButtonApply.isEnabled = true
         } else {
-            mButtonPreview!!.isEnabled = true
-            mButtonApply!!.isEnabled = true
-            mButtonApply!!.text = getString(R.string.button_apply, selectedCount)
+            mButtonPreview.isEnabled = true
+            mButtonApply.isEnabled = true
+            mButtonApply.text = getString(R.string.button_apply, selectedCount)
         }
     }
 
     private fun onAlbumSelected(album: Album) {
         if (album.isAll && album.isEmpty) {
-            mContainer!!.visibility = View.GONE
-            mEmptyView!!.visibility = View.VISIBLE
+            mContainer.visibility = View.GONE
+            mEmptyView.visibility = View.VISIBLE
         } else {
-            mContainer!!.visibility = View.VISIBLE
-            mEmptyView!!.visibility = View.GONE
+            mContainer.visibility = View.VISIBLE
+            mEmptyView.visibility = View.GONE
             val fragment = WechatImageListGridFragment.instance(album)
             fragment.injectDependencies(this, this, this)
             childFragmentManager
@@ -233,13 +233,13 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
     private fun switchImageOriginalMode() {
         val original = !imageOriginalMode
         this.imageOriginalMode = original
-        this.mRadioButton!!.isChecked = original
+        this.mRadioButton.isChecked = original
     }
 
     private fun emitSelectUri() {
         val selectedUris = mSelectedCollection!!.asListOfUri() as ArrayList<Uri>
         for (uri in selectedUris) {
-            publishSubject!!.onNext(
+            publishSubject.onNext(
                     instanceResult(uri)
             )
         }
@@ -247,7 +247,7 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
     }
 
     private fun endPickImage() {
-        publishSubject!!.onComplete()
+        publishSubject.onComplete()
         closure()
     }
 
@@ -269,7 +269,7 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
                                     instanceResult(item.contentUri)
                             )
                         } else {
-                            publishSubject!!.onNext(
+                            publishSubject.onNext(
                                     instanceResult(item.contentUri)
                             )
                         }

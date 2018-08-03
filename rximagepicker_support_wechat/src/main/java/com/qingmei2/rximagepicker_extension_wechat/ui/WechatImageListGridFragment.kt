@@ -42,8 +42,8 @@ class WechatImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateList
         AlbumMediaCollection.AlbumMediaCallbacks {
 
     private val mAlbumMediaCollection = AlbumMediaCollection()
-    private var mRecyclerView: RecyclerView? = null
-    private var mAdapter: AlbumMediaAdapter? = null
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mAdapter: AlbumMediaAdapter
     private var mSelectionProvider: SelectionProvider? = null
     private var mCheckStateListener: AlbumMediaAdapter.CheckStateListener? = null
     private var mOnMediaClickListener: AlbumMediaAdapter.OnMediaClickListener? = null
@@ -62,7 +62,7 @@ class WechatImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateList
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val contextThemeWrapper = ContextThemeWrapper(activity, SelectionSpec.instance!!.themeId)
+        val contextThemeWrapper = ContextThemeWrapper(activity, SelectionSpec.instance.themeId)
         val localInflater = inflater
                 .cloneInContext(contextThemeWrapper)
         return localInflater.inflate(R.layout.fragment_media_selection, container, false)
@@ -78,23 +78,23 @@ class WechatImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateList
         val album = arguments!!.getParcelable<Album>(EXTRA_ALBUM)
 
         mAdapter = WechatAlbumMediaAdapter(context!!,
-                mSelectionProvider!!.provideSelectedItemCollection(), mRecyclerView!!)
-        mAdapter!!.registerCheckStateListener(this)
-        mAdapter!!.registerOnMediaClickListener(this)
-        mRecyclerView!!.setHasFixedSize(true)
+                mSelectionProvider!!.provideSelectedItemCollection(), mRecyclerView)
+        mAdapter.registerCheckStateListener(this)
+        mAdapter.registerOnMediaClickListener(this)
+        mRecyclerView.setHasFixedSize(true)
 
         val spanCount: Int
         val selectionSpec = SelectionSpec.instance
-        spanCount = if (selectionSpec!!.gridExpectedSize > 0) {
+        spanCount = if (selectionSpec.gridExpectedSize > 0) {
             UIUtils.spanCount(context!!, selectionSpec.gridExpectedSize)
         } else {
             selectionSpec.spanCount
         }
-        mRecyclerView!!.layoutManager = GridLayoutManager(context, spanCount)
+        mRecyclerView.layoutManager = GridLayoutManager(context, spanCount)
 
         val spacing = resources.getDimensionPixelSize(R.dimen.media_grid_spacing)
-        mRecyclerView!!.addItemDecoration(MediaGridInset(spanCount, spacing, false))
-        mRecyclerView!!.adapter = mAdapter
+        mRecyclerView.addItemDecoration(MediaGridInset(spanCount, spacing, false))
+        mRecyclerView.adapter = mAdapter
         mAlbumMediaCollection.onCreate(activity!!, this)
         mAlbumMediaCollection.load(album, selectionSpec.capture)
     }
@@ -105,33 +105,29 @@ class WechatImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateList
     }
 
     fun refreshMediaGrid() {
-        mAdapter!!.notifyDataSetChanged()
+        mAdapter.notifyDataSetChanged()
     }
 
     fun refreshSelection() {
-        mAdapter!!.refreshSelection()
+        mAdapter.refreshSelection()
     }
 
     override fun onUpdate() {
         // notify outer Activity that check state changed
-        if (mCheckStateListener != null) {
-            mCheckStateListener!!.onUpdate()
-        }
+        mCheckStateListener?.onUpdate()
     }
 
     override fun onMediaClick(album: Album?, item: Item, adapterPosition: Int) {
-        if (mOnMediaClickListener != null) {
-            mOnMediaClickListener!!.onMediaClick(arguments!!.getParcelable(EXTRA_ALBUM),
-                    item, adapterPosition)
-        }
+        mOnMediaClickListener?.onMediaClick(arguments!!.getParcelable(EXTRA_ALBUM),
+                item, adapterPosition)
     }
 
     override fun onAlbumMediaLoad(cursor: Cursor) {
-        mAdapter!!.swapCursor(cursor)
+        mAdapter.swapCursor(cursor)
     }
 
     override fun onAlbumMediaReset() {
-        mAdapter!!.swapCursor(null)
+        mAdapter.swapCursor(null)
     }
 
     interface SelectionProvider {

@@ -13,8 +13,8 @@ import com.qingmei2.rximagepicker_extension.ui.widget.CheckView
 
 open class WechatCheckView : CheckView {
 
-    private var rect: RectF? = null
-    private var drawableRect: Rect? = null
+    private lateinit var rect: RectF
+    private lateinit var drawableRect: Rect
 
     constructor(context: Context) : super(context)
 
@@ -31,7 +31,7 @@ open class WechatCheckView : CheckView {
         val dy = mDensity * SIZE / 4
         rect = RectF(2 * dx - PROOFREAD_SIZE, dy - PROOFREAD_SIZE,
                 3 * dx + PROOFREAD_SIZE, 2 * dy + PROOFREAD_SIZE)
-        drawableRect = Rect(rect!!.left.toInt(), rect!!.top.toInt(), rect!!.right.toInt(), rect!!.bottom.toInt())
+        drawableRect = Rect(rect.left.toInt(), rect.top.toInt(), rect.right.toInt(), rect.bottom.toInt())
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -55,9 +55,9 @@ open class WechatCheckView : CheckView {
                 }
                 initTextPaint()
                 val text = mCheckedNum.toString()
-                val baseX = (rect!!.width() - mTextPaint!!.measureText(text)).toInt() / 2
-                val baseY = (rect!!.height() - mTextPaint!!.descent() - mTextPaint!!.ascent()).toInt() / 2
-                canvas.drawText(text, baseX + rect!!.left, baseY + rect!!.top, mTextPaint!!)
+                val baseX = (rect.width() - mTextPaint!!.measureText(text)).toInt() / 2
+                val baseY = (rect.height() - mTextPaint!!.descent() - mTextPaint!!.ascent()).toInt() / 2
+                canvas.drawText(text, baseX + rect.left, baseY + rect.top, mTextPaint!!)
             }
         } else {
             if (mChecked) {
@@ -67,7 +67,7 @@ open class WechatCheckView : CheckView {
                 } else {
                     drawRectCheckView(canvas, rect, mBackgroundPaint)
                 }
-                mCheckDrawable!!.bounds = drawableRect!!
+                mCheckDrawable!!.bounds = drawableRect
                 mCheckDrawable!!.draw(canvas)
             }
         }
