@@ -15,11 +15,11 @@ class ImagePickerConfigProcessorTest {
 //    private val mockUri2: Uri = mock()
 //    private val mockBitmap: Bitmap = mock()
 //
-//    lateinit var processor: ImagePickerConfigProcessor
+//    lateinit var processor: ConfigProcessor
 //
 //    @Before
 //    fun setUp() {
-//        processor = ImagePickerConfigProcessor(mockContext,
+//        processor = ConfigProcessor(mockContext,
 //                mockCameraPickerViews,
 //                mockGalleryPickerViews,
 //                schedulers)

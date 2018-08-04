@@ -1,20 +1,17 @@
 package com.qingmei2.rximagepicker.core
 
-import com.qingmei2.rximagepicker.providers.ConfigProvider
+import com.qingmei2.rximagepicker.entity.ConfigProvider
 import com.qingmei2.rximagepicker.scheduler.IRxImagePickerSchedulers
 import com.qingmei2.rximagepicker.entity.sources.SourcesFrom
-import com.qingmei2.rximagepicker.providers.RuntimeProvider
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
 import io.reactivex.Observable
 
 /**
- * [ImagePickerConfigProcessor] is the class that processing reactive data stream.
+ * [ConfigProcessor] is the class that processing reactive data stream.
  */
-class ImagePickerConfigProcessor(private val schedulers: IRxImagePickerSchedulers)
-    : IImagePickerProcessor {
+class ConfigProcessor(private val schedulers: IRxImagePickerSchedulers) {
 
-    override fun process(configProvider: ConfigProvider,
-                         runtimeProvider: RuntimeProvider): Observable<*> {
+    fun process(configProvider: ConfigProvider): Observable<*> {
         return Observable.just(0)
                 .flatMap {
                     if (!configProvider.asFragment) {
@@ -22,7 +19,7 @@ class ImagePickerConfigProcessor(private val schedulers: IRxImagePickerScheduler
                     }
                     when (configProvider.sourcesFrom) {
                         SourcesFrom.GALLERY,
-                        SourcesFrom.CAMERA -> runtimeProvider.pickerView.pickImage()
+                        SourcesFrom.CAMERA -> configProvider.pickerView.pickImage()
                     }
                 }
                 .subscribeOn(schedulers.io())

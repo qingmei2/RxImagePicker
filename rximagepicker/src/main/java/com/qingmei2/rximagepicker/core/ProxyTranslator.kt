@@ -1,4 +1,4 @@
-package com.qingmei2.rximagepicker.delegate
+package com.qingmei2.rximagepicker.core
 
 import android.app.Activity
 import android.content.Context
@@ -6,8 +6,7 @@ import android.support.v4.app.FragmentActivity
 import com.qingmei2.rximagepicker.entity.sources.Camera
 import com.qingmei2.rximagepicker.entity.sources.Gallery
 import com.qingmei2.rximagepicker.entity.sources.SourcesFrom
-import com.qingmei2.rximagepicker.providers.ConfigProvider
-import com.qingmei2.rximagepicker.providers.RuntimeProvider
+import com.qingmei2.rximagepicker.entity.ConfigProvider
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import com.qingmei2.rximagepicker.ui.ICustomPickerView
@@ -22,39 +21,35 @@ import kotlin.reflect.KClass
  */
 class ProxyTranslator {
 
-    fun processMethodForStaticConfig(method: Method): ConfigProvider {
+    fun processMethod(method: Method, args: Array<Any>?): ConfigProvider {
         val sourcesFrom = streamSourcesFrom(method)
         val asFragment = asFragment(method, sourcesFrom)
-        return ConfigProvider(
-                getComponentClass(method, sourcesFrom),
-                asFragment,
-                sourcesFrom,
-                if (asFragment) containerViewId(method, sourcesFrom) else -1)
-    }
-
-    fun processMethodForRuntimeParams(method: Method, args: Array<Any>?): RuntimeProvider {
+        val componentClass = getComponentClass(method, sourcesFrom)
 
         val context = getObjectFromMethodParam(method, Context::class.java, args)
                 ?: throw NullPointerException(method.name
                         + " requires just one instance of type: Context, but none.")
-
         val fragmentActivity = transformContextToFragmentActivity(context)
-
         val runtimeConfiguration = getObjectFromMethodParam(method, ICustomPickerConfiguration::class.java, args)
 
-        val sourcesFrom = streamSourcesFrom(method)
-        val componentClass = getComponentClass(method, sourcesFrom)
-        val asFragment = asFragment(method, sourcesFrom)
-
-        return if (asFragment &&
+        val pickerView: ICustomPickerView = if (asFragment &&
                 ICustomPickerView::class.java.isAssignableFrom(componentClass.java)) {
-            RuntimeProvider(fragmentActivity, componentClass.java.newInstance() as ICustomPickerView, runtimeConfiguration)
+            componentClass.java.newInstance() as ICustomPickerView
         } else if (!asFragment &&
                 Activity::class.java.isAssignableFrom(componentClass.java)) {
-            RuntimeProvider(fragmentActivity, ActivityPickerViewController.instance, runtimeConfiguration)
+            ActivityPickerViewController.instance
         } else
             throw IllegalArgumentException("Configration Conflict! The ui component as Activity: ${!asFragment}," +
                     " the Class type is: ${componentClass.simpleName}")
+
+        return ConfigProvider(
+                componentClass,
+                asFragment,
+                sourcesFrom,
+                if (asFragment) containerViewId(method, sourcesFrom) else -1,
+                fragmentActivity,
+                pickerView,
+                runtimeConfiguration)
     }
 
     private fun asFragment(method: Method, sourcesFrom: SourcesFrom): Boolean {
@@ -140,6 +135,6 @@ class ProxyTranslator {
 
     private fun transformContextToFragmentActivity(context: Context): FragmentActivity {
         return context as? FragmentActivity
-                ?: throw IllegalArgumentException("the context should be FragmentActivity")
+                ?: throw IllegalArgumentException("the context should be FragmentActivity.")
     }
 }
