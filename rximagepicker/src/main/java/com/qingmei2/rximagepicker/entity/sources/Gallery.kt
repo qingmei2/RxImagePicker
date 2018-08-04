@@ -22,8 +22,10 @@ annotation class Gallery(
 
         /**
          * the UI component type, as [Fragment] or [Activity].
+         *
+         * If you use custom UI component by [Activity], then set this value false.
          */
-        val openAsFragment: Boolean = false,
+        val openAsFragment: Boolean = true,
 
         /**
          * the [Fragment] container

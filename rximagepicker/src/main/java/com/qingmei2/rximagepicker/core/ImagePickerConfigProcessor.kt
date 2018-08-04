@@ -17,7 +17,7 @@ class ImagePickerConfigProcessor(private val schedulers: IRxImagePickerScheduler
                          runtimeProvider: RuntimeProvider): Observable<*> {
         return Observable.just(0)
                 .flatMap {
-                    if (configProvider.asFragment) {
+                    if (!configProvider.asFragment) {
                         return@flatMap ActivityPickerViewController.instance.pickImage()
                     }
                     when (configProvider.sourcesFrom) {

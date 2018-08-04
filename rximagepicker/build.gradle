@@ -32,6 +32,7 @@ dependencies {
     api rootProject.ext.dependencies["rxkotlin"]
     api rootProject.ext.dependencies["rxandroid"]
     implementation rootProject.ext.dependencies["kotlin-android"]
+    implementation rootProject.ext.dependencies["kotlin-reflect"]
     testImplementation rootProject.ext.dependencies["junit"]
     testImplementation rootProject.ext.dependencies["mockito-kotlin"]
     testImplementation rootProject.ext.dependencies["robolectric"]

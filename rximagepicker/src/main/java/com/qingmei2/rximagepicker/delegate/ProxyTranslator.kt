@@ -3,18 +3,15 @@ package com.qingmei2.rximagepicker.delegate
 import android.app.Activity
 import android.content.Context
 import android.support.v4.app.FragmentActivity
-
 import com.qingmei2.rximagepicker.entity.sources.Camera
 import com.qingmei2.rximagepicker.entity.sources.Gallery
 import com.qingmei2.rximagepicker.entity.sources.SourcesFrom
 import com.qingmei2.rximagepicker.providers.ConfigProvider
-import com.qingmei2.rximagepicker.core.ImagePickerProjector
 import com.qingmei2.rximagepicker.providers.RuntimeProvider
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import com.qingmei2.rximagepicker.ui.ICustomPickerView
 import java.lang.NullPointerException
-
 import java.lang.reflect.Method
 import kotlin.reflect.KClass
 
@@ -36,9 +33,13 @@ class ProxyTranslator {
     }
 
     fun processMethodForRuntimeParams(method: Method, args: Array<Any>?): RuntimeProvider {
-        val fragmentActivity = getObjectFromMethodParam(method, Context::class.java, args).let {
-            transformContextToFragmentActivity(it)
-        }
+
+        val context = getObjectFromMethodParam(method, Context::class.java, args)
+                ?: throw NullPointerException(method.name
+                        + " requires just one instance of type: Context, but none.")
+
+        val fragmentActivity = transformContextToFragmentActivity(context)
+
         val runtimeConfiguration = getObjectFromMethodParam(method, ICustomPickerConfiguration::class.java, args)
 
         val sourcesFrom = streamSourcesFrom(method)
@@ -115,7 +116,7 @@ class ProxyTranslator {
     @Suppress("UNCHECKED_CAST")
     private fun <T> getObjectFromMethodParam(method: Method,
                                              expectedClass: Class<T>,
-                                             objectsMethod: Array<Any>?): T {
+                                             objectsMethod: Array<Any>?): T? {
         var countSameObjectsType = 0
         var expectedObject: T? = null
 
@@ -134,8 +135,7 @@ class ProxyTranslator {
             throw IllegalArgumentException(method.name
                     + " requires just one instance of type: ${expectedClass.simpleName}, but $countSameObjectsType.")
         }
-        return expectedObject ?: throw NullPointerException(method.name
-                + " requires just one instance of type: ${expectedClass.simpleName}, but none.")
+        return expectedObject
     }
 
     private fun transformContextToFragmentActivity(context: Context): FragmentActivity {

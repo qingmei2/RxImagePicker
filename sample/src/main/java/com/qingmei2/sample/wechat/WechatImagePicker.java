@@ -12,7 +12,8 @@ import io.reactivex.Observable;
 
 public interface WechatImagePicker {
 
-    @Gallery(componentClazz = WechatImagePickerActivity.class)
+    @Gallery(componentClazz = WechatImagePickerActivity.class,
+            openAsFragment = false)
     Observable<Result> openGallery(Context context, ICustomPickerConfiguration config);
 
     @Camera

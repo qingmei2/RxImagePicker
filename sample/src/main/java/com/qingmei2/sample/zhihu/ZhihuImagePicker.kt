@@ -11,11 +11,13 @@ import io.reactivex.Observable
 
 interface ZhihuImagePicker {
 
-    @Gallery(componentClazz = ZhihuImagePickerActivity::class)
+    @Gallery(componentClazz = ZhihuImagePickerActivity::class,
+            openAsFragment = false)
     fun openGalleryAsNormal(context: Context,
                             config: ICustomPickerConfiguration): Observable<Result>
 
-    @Gallery(componentClazz = ZhihuImagePickerActivity::class)
+    @Gallery(componentClazz = ZhihuImagePickerActivity::class,
+            openAsFragment = false)
     fun openGalleryAsDracula(context: Context,
                              config: ICustomPickerConfiguration): Observable<Result>
 

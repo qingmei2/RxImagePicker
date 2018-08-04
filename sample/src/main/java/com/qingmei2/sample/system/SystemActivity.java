@@ -51,7 +51,7 @@ public class SystemActivity extends AppCompatActivity {
     }
 
     private void pickGallery() {
-        defaultImagePicker.openGallery()
+        defaultImagePicker.openGallery(this)
                 .subscribe(new Consumer<Result>() {
                     @Override
                     public void accept(Result result) throws Exception {
@@ -61,7 +61,7 @@ public class SystemActivity extends AppCompatActivity {
     }
 
     private void pickCamera() {
-        defaultImagePicker.openCamera()
+        defaultImagePicker.openCamera(this)
                 .subscribe(new Consumer<Result>() {
                     @Override
                     public void accept(Result result) throws Exception {
