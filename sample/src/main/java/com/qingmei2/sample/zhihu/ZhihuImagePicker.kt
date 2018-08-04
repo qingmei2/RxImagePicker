@@ -1,25 +1,24 @@
 package com.qingmei2.sample.zhihu
 
+import android.content.Context
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.entity.sources.Camera
 import com.qingmei2.rximagepicker.entity.sources.Gallery
+import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
+import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerActivity
 
 import io.reactivex.Observable
 
 interface ZhihuImagePicker {
 
-    @Gallery(viewKey = KEY_ZHIHU_PICKER_NORMAL)
-    fun openGalleryAsNormal(): Observable<Result>
+    @Gallery(componentClazz = ZhihuImagePickerActivity::class)
+    fun openGalleryAsNormal(context: Context,
+                            config: ICustomPickerConfiguration): Observable<Result>
 
-    @Gallery(viewKey = KEY_ZHIHU_PICKER_DRACULA)
-    fun openGalleryAsDracula(): Observable<Result>
+    @Gallery(componentClazz = ZhihuImagePickerActivity::class)
+    fun openGalleryAsDracula(context: Context,
+                             config: ICustomPickerConfiguration): Observable<Result>
 
     @Camera
-    fun openCamera(): Observable<Result>
-
-    companion object {
-
-        const val KEY_ZHIHU_PICKER_NORMAL = "key_zhihu_picker_theme_normal"
-        const val KEY_ZHIHU_PICKER_DRACULA = "key_zhihu_picker_theme_dracula"
-    }
+    fun openCamera(context: Context): Observable<Result>
 }

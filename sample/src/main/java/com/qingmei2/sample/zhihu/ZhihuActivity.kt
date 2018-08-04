@@ -42,28 +42,7 @@ class ZhihuActivity : AppCompatActivity() {
     }
 
     private fun initRxImagePicker() {
-        rxImagePicker = RxImagePicker.Builder()
-                .with(this)
-                .addCustomGallery(
-                        ZhihuImagePicker.KEY_ZHIHU_PICKER_NORMAL,
-                        ZhihuImagePickerActivity::class.java,
-                        ZhihuConfigurationBuilder(MimeType.ofImage(), false)
-                                .maxSelectable(9)
-                                .countable(true)
-                                .spanCount(4)
-                                .theme(R.style.Zhihu_Normal)
-                                .build()
-                )
-                .addCustomGallery(
-                        ZhihuImagePicker.KEY_ZHIHU_PICKER_DRACULA,
-                        ZhihuImagePickerActivity::class.java,
-                        ZhihuConfigurationBuilder(MimeType.ofImage(), false)
-                                .spanCount(3)
-                                .maxSelectable(1)
-                                .theme(R.style.Zhihu_Dracula)
-                                .build()
-                )
-                .build()
+        rxImagePicker = RxImagePicker
                 .create(ZhihuImagePicker::class.java)
     }
 
@@ -87,7 +66,7 @@ class ZhihuActivity : AppCompatActivity() {
      * open Camera.
      */
     private fun openCamera() {
-        rxImagePicker.openCamera()
+        rxImagePicker.openCamera(this)
                 .subscribe(fetchUriObserver())
     }
 
@@ -95,7 +74,13 @@ class ZhihuActivity : AppCompatActivity() {
      * Open Gallery as Zhihu normal theme.
      */
     private fun openGalleryAsNormal() {
-        rxImagePicker.openGalleryAsNormal()
+        rxImagePicker.openGalleryAsNormal(this,
+                ZhihuConfigurationBuilder(MimeType.ofImage(), false)
+                        .maxSelectable(9)
+                        .countable(true)
+                        .spanCount(4)
+                        .theme(R.style.Zhihu_Normal)
+                        .build())
                 .subscribe(fetchUriObserver())
     }
 
@@ -103,7 +88,12 @@ class ZhihuActivity : AppCompatActivity() {
      * Open Gallery as Zhihu dracula theme.
      */
     private fun openGalleryAsDracula() {
-        rxImagePicker.openGalleryAsDracula()
+        rxImagePicker.openGalleryAsDracula(this,
+                ZhihuConfigurationBuilder(MimeType.ofImage(), false)
+                        .spanCount(3)
+                        .maxSelectable(1)
+                        .theme(R.style.Zhihu_Dracula)
+                        .build())
                 .subscribe(fetchUriObserver())
     }
 

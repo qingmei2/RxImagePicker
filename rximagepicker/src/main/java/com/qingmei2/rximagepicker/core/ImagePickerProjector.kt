@@ -1,15 +1,10 @@
 package com.qingmei2.rximagepicker.core
 
 import android.app.Activity
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import com.qingmei2.rximagepicker.providers.ConfigProvider
 import com.qingmei2.rximagepicker.providers.RuntimeProvider
-
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
-import com.qingmei2.rximagepicker.ui.ICustomPickerView
 
 class ImagePickerProjector(private val configProvider: ConfigProvider,
                            private val runtimeProvider: RuntimeProvider) {

@@ -1,5 +1,6 @@
 package com.qingmei2.rximagepicker.delegate
 
+import android.app.Activity
 import android.content.Context
 import android.support.v4.app.FragmentActivity
 
@@ -9,6 +10,7 @@ import com.qingmei2.rximagepicker.entity.sources.SourcesFrom
 import com.qingmei2.rximagepicker.providers.ConfigProvider
 import com.qingmei2.rximagepicker.core.ImagePickerProjector
 import com.qingmei2.rximagepicker.providers.RuntimeProvider
+import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import com.qingmei2.rximagepicker.ui.ICustomPickerView
 import java.lang.NullPointerException
@@ -41,10 +43,17 @@ class ProxyTranslator {
 
         val sourcesFrom = streamSourcesFrom(method)
         val componentClass = getComponentClass(method, sourcesFrom)
-        if (componentClass is ICustomPickerView)
-            return RuntimeProvider(fragmentActivity, componentClass.java.newInstance() as ICustomPickerView, runtimeConfiguration)
-        else
-            throw IllegalArgumentException("The Class is not ICustomPickerView")
+        val asFragment = asFragment(method, sourcesFrom)
+
+        return if (asFragment &&
+                ICustomPickerView::class.java.isAssignableFrom(componentClass.java)) {
+            RuntimeProvider(fragmentActivity, componentClass.java.newInstance() as ICustomPickerView, runtimeConfiguration)
+        } else if (!asFragment &&
+                Activity::class.java.isAssignableFrom(componentClass.java)) {
+            RuntimeProvider(fragmentActivity, ActivityPickerViewController.instance, runtimeConfiguration)
+        } else
+            throw IllegalArgumentException("Configration Conflict! The ui component as Activity: ${!asFragment}," +
+                    " the Class type is: ${componentClass.simpleName}")
     }
 
     private fun asFragment(method: Method, sourcesFrom: SourcesFrom): Boolean {

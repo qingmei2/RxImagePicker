@@ -47,10 +47,7 @@ public class SystemActivity extends AppCompatActivity {
     }
 
     private void initRxImagePicker() {
-        defaultImagePicker = new RxImagePicker.Builder()
-                .with(this)
-                .build()
-                .create();
+        defaultImagePicker = RxImagePicker.INSTANCE.create();
     }
 
     private void pickGallery() {

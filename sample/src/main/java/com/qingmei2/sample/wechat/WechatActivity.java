@@ -69,19 +69,8 @@ public class WechatActivity extends AppCompatActivity {
     }
 
     private void initRxImagePicker() {
-        rxImagePicker = new RxImagePicker.Builder()
-                .with(this)
-                .addCustomGallery(
-                        WechatImagePicker.KEY_WECHAT_PICKER_ACTIVITY,
-                        WechatImagePickerActivity.class,
-                        new WechatConfigrationBuilder(MimeType.INSTANCE.ofImage(), false)
-                                .maxSelectable(9)
-                                .countable(true)
-                                .spanCount(4)
-                                .countable(false)
-                                .build()
-                )
-                .build()
+        rxImagePicker = RxImagePicker
+                .INSTANCE
                 .create(WechatImagePicker.class);
     }
 
@@ -103,12 +92,18 @@ public class WechatActivity extends AppCompatActivity {
     }
 
     private void openCamera() {
-        rxImagePicker.openCamera()
+        rxImagePicker.openCamera(this)
                 .subscribe(onNext(), onError());
     }
 
     private void openGallery() {
-        rxImagePicker.openGallery()
+        rxImagePicker.openGallery(this,
+                new WechatConfigrationBuilder(MimeType.INSTANCE.ofImage(), false)
+                        .maxSelectable(9)
+                        .countable(true)
+                        .spanCount(4)
+                        .countable(false)
+                        .build())
                 .subscribe(onNext(), onError());
     }
 
