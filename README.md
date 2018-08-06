@@ -128,7 +128,7 @@ public interface MyImagePicker {
 private void onButtonClick() {
     RxImagePicker.INSTANCE
             .create(MyImagePicker.class)
-            .openGallery()
+            .openGallery(this)
             .subscribe(new Consumer<Result>() {
                 @Override
                 public void accept(Result result) throws Exception {
