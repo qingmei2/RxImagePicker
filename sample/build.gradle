@@ -34,7 +34,7 @@ android {
     }
 }
 
-def testJcenter = false
+def testJcenter = true
 
 dependencies {
     implementation rootProject.ext.dependencies["kotlin-android"]

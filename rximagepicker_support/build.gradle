@@ -29,11 +29,13 @@ android {
 }
 
 dependencies {
-    implementation project(':rximagepicker')
-    implementation rootProject.ext.dependencies["kotlin-android"]
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["recyclerview-v7"]
+
+    implementation project(':rximagepicker')
+    implementation rootProject.ext.dependencies["kotlin-android"]
     implementation rootProject.ext.dependencies["constraint-layout"]
+
     testImplementation rootProject.ext.dependencies["junit"]
     implementation 'it.sephiroth.android.library.imagezoom:imagezoom:2.3.0'
 }

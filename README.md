@@ -18,7 +18,9 @@ RxImagePicker的UI自动化测试，请参考：
   
 * **[详细文档，包括进阶使用和拓展功能,请点击查看wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
 * **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
-* **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动,**最新版本v2.1.2**。
+* **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
+
+> **最新版本为2.2.0-alpha**，将RxImagePicker底层进行了重构！相比上一个版本2.1.2,**所占用的体积减少了33%（之前为58k，现在38k）**，此外，新版本将Context和相关配置的依赖放到了**方法调用时**进行注入，更有效节省了运行时的内存！
 
 <h2 id="overview">简介</h2>
 

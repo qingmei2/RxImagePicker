@@ -38,7 +38,7 @@ dependencies {
     implementation rootProject.ext.dependencies["recyclerview-v7"]
     implementation rootProject.ext.dependencies["constraint-layout"]
 
-    implementation rootProject.ext.dependencies["glide"]
+    compileOnly rootProject.ext.dependencies["glide"]
     kapt rootProject.ext.dependencies["glide-compiler"]
 
     testImplementation rootProject.ext.dependencies["junit"]

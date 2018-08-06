@@ -1,38 +1,18 @@
 package com.qingmei2.rximagepicker_extension_wechat
 
 import android.app.Activity
+import android.content.pm.ActivityInfo.*
 import android.os.Build
 import android.support.annotation.IntDef
 import android.support.annotation.RequiresApi
 import android.support.annotation.StyleRes
-
 import com.qingmei2.rximagepicker_extension.MimeType
 import com.qingmei2.rximagepicker_extension.engine.ImageEngine
 import com.qingmei2.rximagepicker_extension.entity.CaptureStrategy
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
 import com.qingmei2.rximagepicker_extension.filter.Filter
 import com.qingmei2.rximagepicker_extension_wechat.engine.impl.WechatGlideEngine
-
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
-import java.util.ArrayList
-
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_BEHIND
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_FULL_USER
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LOCKED
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_NOSENSOR
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+import java.util.*
 
 class WechatConfigrationBuilder
 /**

@@ -15,7 +15,6 @@
  */
 package com.qingmei2.rximagepicker_extension_wechat.ui
 
-import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -25,7 +24,6 @@ import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.qingmei2.rximagepicker_extension.R
 import com.qingmei2.rximagepicker_extension.entity.Album
 import com.qingmei2.rximagepicker_extension.entity.Item

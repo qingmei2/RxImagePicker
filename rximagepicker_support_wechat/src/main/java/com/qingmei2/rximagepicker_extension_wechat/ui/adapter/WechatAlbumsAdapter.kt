@@ -1,7 +1,6 @@
 package com.qingmei2.rximagepicker_extension_wechat.ui.adapter
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.database.Cursor
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -10,13 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CursorAdapter
-import android.widget.ImageView
 import android.widget.TextView
-
 import com.qingmei2.rximagepicker_extension.entity.Album
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
 import com.qingmei2.rximagepicker_extension_wechat.R
-
 import java.io.File
 
 class WechatAlbumsAdapter : CursorAdapter {

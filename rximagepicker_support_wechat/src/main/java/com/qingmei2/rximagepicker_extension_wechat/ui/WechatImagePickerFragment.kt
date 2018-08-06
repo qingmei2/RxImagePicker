@@ -1,7 +1,6 @@
 package com.qingmei2.rximagepicker_extension_wechat.ui
 
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
@@ -14,7 +13,6 @@ import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.widget.*
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
