@@ -15,12 +15,12 @@ RxImagePicker的UI自动化测试，请参考：
 > [全副武装！AndroidUI自动化测试在RxImagePicker中的实践历程](https://www.jianshu.com/p/6b78f6f93430)
 
 ## 通知（重要）
-  
+
 * **[详细文档，包括进阶使用和拓展功能,请点击查看wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
 * **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
 * **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
 
-> **最新版本为2.2.0-alpha**，将RxImagePicker底层进行了重构！相比上一个版本2.1.2,**所占用的体积减少了33%（之前为58k，现在38k）**，此外，新版本将Context和相关配置的依赖放到了**方法调用时**进行注入，更有效节省了运行时的内存！
+> **最新版本为2.2.0-alpha**，将RxImagePicker底层进行了重构！相比上一个版本2.1.2,**所占用的体积减少了33%（之前为58k，现在38k）**，此外，新版本将Context和相关配置的依赖放到了**方法调用时**进行注入，**更有效节省了内存！**
 
 <h2 id="overview">简介</h2>
 
@@ -94,14 +94,14 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 
 ```groovy
 // 最基础的架构，仅提供了系统默认的图片选择器和拍照功能
-compile 'com.github.qingmei2:rximagepicker:2.1.2'
+compile 'com.github.qingmei2:rximagepicker:2.2.0-alpha'
 
 // 提供了自定义UI图片选择器的基本组件，自定义UI的需求需要添加该依赖
-compile 'com.github.qingmei2:rximagepicker_support:2.1.2'
+compile 'com.github.qingmei2:rximagepicker_support:2.2.0-alpha'
 
 // 如果需要额外的UI支持，请选择依赖对应的UI拓展库
-compile 'com.github.qingmei2:rximagepicker_support_zhihu:2.1.2'     // 知乎图片选择器
-compile 'com.github.qingmei2:rximagepicker_support_wechat:2.1.2'    // 微信图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0-alpha'     // 知乎图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0-alpha'    // 微信图片选择器
 ```
 
 ### 2. 接口配置
@@ -112,10 +112,10 @@ compile 'com.github.qingmei2:rximagepicker_support_wechat:2.1.2'    // 微信图
 public interface MyImagePicker {
 
     @Gallery    //打开相册选择图片
-    Observable<Result> openGallery();
+    Observable<Result> openGallery(Context context);
 
     @Camera    //打开相机拍照
-    Observable<Result> openCamera();
+    Observable<Result> openCamera(Context context);
 }
 ```
 
@@ -126,9 +126,7 @@ public interface MyImagePicker {
 ```java
 //打开系统默认的图片选择器
 private void onButtonClick() {
-    new RxImagePicker.Builder()
-            .with(this)
-            .build()
+    RxImagePicker.INSTANCE
             .create(MyImagePicker.class)
             .openGallery()
             .subscribe(new Consumer<Result>() {
