@@ -1,6 +1,6 @@
 # RxImagePicker
 
-#### English Document | [中文文档](https://github.com/qingmei2/RxImagePicker/blob/2.x/README_ZH.md)
+#### English Documentation | [中文文档](https://github.com/qingmei2/RxImagePicker/blob/2.x/README_ZH.md)
 
 <p/>
 

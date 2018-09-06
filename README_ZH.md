@@ -1,6 +1,6 @@
 # RxImagePicker
 
-#### [English Document](https://github.com/qingmei2/RxImagePicker) | 中文文档
+#### [English Documentation](https://github.com/qingmei2/RxImagePicker) | 中文文档
 
 <p/>
 
