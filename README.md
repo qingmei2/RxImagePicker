@@ -1,82 +1,63 @@
 # RxImagePicker
 
+#### English Document | [中文文档](https://github.com/qingmei2/RxImagePicker/blob/2.x/README_ZH.md)
+
+<p/>
+
 <a target="_blank" href="https://bintray.com/mq2553299/maven/rximagepicker"><img
         src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"></a>
 <a target="_blank"><img src="https://img.shields.io/badge/API-16+-green.svg"></a>
 <a target="_blank" href="https://github.com/qingmei2/RxImagePicker/blob/2.x/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 
 
-RxImagePicker的设计起源，请参考：
+Support for `RxJava2`. Flexible picture selector of Android, provides the support for theme of Zhihu and WeChat.
 
-> [RxImagePicker:从零实现灵活且可高度定制的Android图片选择架构](https://www.jianshu.com/p/fecf3a13e615)
+> `Zhihu`: Famous Online Q&A Community APP in China.  
+> `WeChat`: Most Used Instant Messaging Social Networking App in China.
 
-RxImagePicker的UI自动化测试，请参考：
+## Introduction
 
-> [全副武装！AndroidUI自动化测试在RxImagePicker中的实践历程](https://www.jianshu.com/p/6b78f6f93430)
+**Purpose** of RxImagePicker: Let developers realize the demand of selecting picture in the development of Android in a simple and flexible way.
 
-## 通知（重要）
+RxImagePicker is a **reactive** picture selector for Android, which converts your selection requirements of picture into an interface for configuration and displays any UI theme in `Activity` or `Fragment`.
 
-* **[详细文档，包括进阶使用和拓展功能,请点击查看wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
-* **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
-* **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
+## Support
 
-> **最新版本为2.2.0-alpha**，将RxImagePicker底层进行了重构！相比上一个版本2.1.2,**所占用的体积减少了33%（之前为58k，现在38k）**，此外，新版本将Context和相关配置的依赖放到了**方法调用时**进行注入，**更有效节省了内存！**
+- [x] Android Camera  Photograph
+- [x] Android photo album picture selection
+- [x] Returns data in the format of reactive data stream ( such as `Observable/Flowable/Single/Maybe` )
 
-<h2 id="overview">简介</h2>
+## Support of UI
 
-RxImagePicker存在的目的是：让开发者能够**简单**并且**灵活**的方式实现Android开发中**图片选择**的需求。
+- [x] System Picture Selector
+- [x] [Optional] Theme Picture Selector of Zhihu
+- [x] [Optional] Theme Picture Selector of WeChat ()
+- [x] [Optional] Custom UI Picture Selector
 
-它与传统的其他三方的图片选择库不同的是，后者通过跳转到固定的Activity进行图片选择，并不能满足所有应用的需求；以QQ聊天会话界面的图片选择功能为例，这种特殊的UI需求很难依靠图片选择库实现，开发者只能去自己实现。
+## Screenshots
 
-一旦和目前项目的需求有了冲突（修改或者添加），开发者考虑的不应该是【这个库实现不了，干脆换一个库吧】或者【不管这个库，我去再单独实现一个】，而是，**基于同一个图片选择框架，修改或者添加对应配置的接口**。
-
-![screenshot_qq](https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_qq.png)
-
-RxImagePicker是一个用于Android的响应式图片选择器，它将您的图片选择需求转换为一个接口进行配置，并在任何一个Activity或者Fragment中展示任何样式的图片选择UI。
-
-### 支持的功能
-
-- [x] Android Camera拍照
-- [x] Android 图片选择
-- [x] 以响应式数据流的格式返回数据（支持Observable/Flowable/Single/Maybe）
-- [x] 支持拓展数据，比如用于实现微信 **发送原图** 等功能，完全由您自定义灵活进行配置
-- [x] 覆盖全面的**UI自动化测试**，详见下方示例截图。
-
-### UI的支持
-
-除了Android系统默认的图片选择样式，你可以选择使用这些额外的UI支持：
-
-- [x] 系统级别图片选择器
-- [x] 知乎主题图片选择器
-- [x] 微信主题图片选择器
-- [x] 自定义UI图片选择器
-
-<h3 id="sample_screenshots">示例截图</h2>
-
-### 系统图片选择和结果展示
+### Selection and result display of system picture:
 
 <div align:left;display:inline;>
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_sysytem.png"/>
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_result.png"/>
 </div>
 
-### 知乎主题
+### Theme of Zhihu
 
 <div align:left;display:inline;>
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_zhihu_dracula.png"/>
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_zhihu_normal.png"/>
 </div>
 
+### Theme of WeChat
 
-### 微信主题
 <div align:left;display:inline;>
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_wechat.png"/>
 <img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_wechat_expand.png"/>
 </div>
 
-想要 **快速实现上图所示效果** 请点击[这里](https://github.com/qingmei2/RxImagePicker/wiki)查看wiki中的详细文档。
-
-### UI自动化测试
+### UI Test
 
 <div align:left;display:inline;>
 <img width="235" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/rximagepicker_test.gif"/>
@@ -86,101 +67,234 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 <img width="608" height="175" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/test_result.png"/>
 </div>
 
-测试代码的覆盖，保证了每个新版本的稳定性，以及程序的健壮性。
+## Basic Usage
 
-<h2 id="usage">基础使用</h2>
+The following code will show you how to use photo album or camera at the Android system-level :
 
-### 1. 添加依赖在Module的build.gradle文件中：
+### 1.Add the following depending on the file of build.gradle:
 
 ```groovy
-// 最基础的架构，仅提供了系统默认的图片选择器和拍照功能
-compile 'com.github.qingmei2:rximagepicker:2.2.0-alpha'
+// The most basic architecture, only provides the default
+// picture selector and photographing function of system.
 
-// 提供了自定义UI图片选择器的基本组件，自定义UI的需求需要添加该依赖
-compile 'com.github.qingmei2:rximagepicker_support:2.2.0-alpha'
+implementation 'com.github.qingmei2:rximagepicker:2.2.0-alpha'
 
-// 如果需要额外的UI支持，请选择依赖对应的UI拓展库
-compile 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0-alpha'     // 知乎图片选择器
-compile 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0-alpha'    // 微信图片选择器
+// Provide the basic components of custom UI picture selector
+// and this dependency needs to be added to the requirements of the custom UI
+implementation 'com.github.qingmei2:rximagepicker_support:2.2.0-alpha'
+
+
+// If you need additional UI support, choose to rely on the corresponding UI extension library
+
+// Zhihu picture selector
+implementation 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0-alpha'     
+
+// WeChat picture selector
+implementation 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0-alpha'    
 ```
 
-### 2. 接口配置
+### 2.Interface Configuration
 
-声明一个接口，并进行基础的配置：
+Declare an interface and carry out the following configuration:
 
 ```java
 public interface MyImagePicker {
 
-    @Gallery    //打开相册选择图片
+    @Gallery    // open gallery
     Observable<Result> openGallery(Context context);
 
-    @Camera    //打开相机拍照
+    @Camera    // take photos
     Observable<Result> openCamera(Context context);
 }
 ```
 
-### 3. 实例化接口并使用它
+### 3.Instantiate and use it
 
-在您的Activity或者Fragment中实例化该接口，以打开系统默认的相册/相机界面：
+Instantiate the interface in your `Activity` or `Fragment` to open the default album and camera screen of system:
 
-```java
-//打开系统默认的图片选择器
-private void onButtonClick() {
-    RxImagePicker.INSTANCE
-            .create(MyImagePicker.class)
-            .openGallery(this)
-            .subscribe(new Consumer<Result>() {
-                @Override
-                public void accept(Result result) throws Exception {
-                    Uri uri = result.getUri();
-                    // 对图片进行处理，比如加载到ImageView中
-                    GlideApp.with(this)
-                             .load(uri)
-                             .into(ivPickedImage);
-                }
-            });
+```Java
+RxImagePicker.INSTANCE
+        .create(MyImagePicker.class)
+        .openGallery(this)
+        .subscribe(new Consumer<Result>() {
+            @Override
+            public void accept(Result result) throws Exception {
+              // do something, ex:
+                Uri uri = result.getUri();
+                GlideApp.with(this)
+                         .load(uri)
+                         .into(ivPickedImage);
+            }
+        });
+```
+
+## Support UI theme Usage
+
+### 1.Add the following depending on the file of build.gradle:
+
+```groovy
+// Zhihu picture selector
+implementation 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0-alpha'
+```
+
+### 2.Interface Configuration
+
+Declare an interface and carry out the following configuration:
+
+```kotlin
+interface ZhihuImagePicker {
+
+    // normal style
+    @Gallery(componentClazz = ZhihuImagePickerActivity::class,
+            openAsFragment = false)
+    fun openGalleryAsNormal(context: Context,
+                            config: ICustomPickerConfiguration): Observable<Result>
+
+    // dracula style                        
+    @Gallery(componentClazz = ZhihuImagePickerActivity::class,
+            openAsFragment = false)
+    fun openGalleryAsDracula(context: Context,
+                             config: ICustomPickerConfiguration): Observable<Result>
+
+    // take photo                         
+    @Camera
+    fun openCamera(context: Context): Observable<Result>
 }
 ```
 
-## 详细文档
+### 3.Instantiate and use it
 
-**[关于RxImagePicker更详细的使用说明，进阶使用和拓展功能,请参考wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
+```Kotlin
+ZhihuImagePicker rxImagePicker = RxImagePicker
+                .create(ZhihuImagePicker::class.java)
 
-## 更多疑问
+rxImagePicker.openGalleryAsNormal(this,
+                ZhihuConfigurationBuilder(MimeType.ofImage(), false)
+                        .maxSelectable(9)
+                        .countable(true)
+                        .spanCount(4)
+                        .theme(R.style.Zhihu_Normal)
+                        .build())
+               .subscribe {
+                    Glide.with(this@ZhihuActivity)
+                            .load(it.uri)
+                            .into(imageView)
+                }
+```
 
-如果对于RxImagePicker的使用有疑问或者建议，**请提issue**，或者加QQ群**391638630**共同探讨.
+see [sample](https://github.com/qingmei2/RxImagePicker/blob/2.x/sample/src/main/java/com/qingmei2/sample/zhihu/ZhihuActivity.kt) for more informations.
 
-## 参考
+## Advanced Usage
 
-在 [RxImagePicker](https://github.com/qingmei2/RxImagePicker) 的设计过程中，我参考了很多的三方库，它们源码中优秀的  **设计思想** 或者 **架构设计** ，都给与了我很大的启示，在此深表感谢，感谢诸多开源爱好者前辈们的无私精神：
+### 1. Action Annotation
 
-* [Retrofit:Type-safe HTTP client for Android and Java by Square, Inc. ](https://github.com/square/retrofit)  
-	Retrofit是聚集了诸多优秀的 **设计思想** 和 **架构设计** 于一身的库，它将复杂多样的 **网络请求** 需求转换成了接口供开发者配置，我认为RxImagePicker也可以这样做。
+RxImagePicker provides two action annovation, respectively `@Gallery` and `@Camera`.
 
-* [RxJava:a library for composing asynchronous and event-based programs using observable sequences for the Java VM.](https://github.com/ReactiveX/RxJava)  
-	一个在 Java VM 上使用可观测的序列来组成异步的、基于事件的程序的库, 随着程序逻辑变得越来越复杂，它依然能够保持简洁。它是构成RxImagePicker的 **基础组件** 。
+`@Camera` will declare the way annovated by the annovation  Open the camera to take a photo.
 
-* [RxAndroid:RxJava bindings for Android](https://github.com/ReactiveX/RxAndroid)  
-	RxJava的一个扩展库，更好的兼容了Android特性，比如主线程，UI事件等。它是构成RxImagePicker的 **基础组件** 。
+Please note, each method of the interface must add an action annotation to declare the corresponding action. If the method is not configured with `@Gallery` or `@Camera`, RxImagePicker will throw an `Exception` at runtime.
 
-* [RxImagePicker:Android. Pick image from camera or gallery using RxJava2](https://github.com/MLSDev/RxImagePicker)  
-* [RxPermissions:Android runtime permissions powered by RxJava2](https://github.com/tbruyelle/RxPermissions)  
-* [RxLifecycle:Lifecycle handling APIs for Android apps using RxJava](https://github.com/trello/RxLifecycle)  
-	这三个优秀的RxJava拓展库，在数据的传递方案上，给与了我很大的启示。
-* [RxCache:Reactive caching library for Android and Java](https://github.com/VictorAlbertos/RxCache)  
-	优秀的RxJava拓展库，用于处理RxJava的数据缓存，库底层通过Dagger完成对配置的处理，我借鉴在了RxImagePicker中。
-* [Dagger2：A fast dependency injector for Android and Java.](https://github.com/google/dagger)  
-	Google优秀的依赖注入框架，0.4.0版本之前，它是构成RxImagePicker的 **基础组件** 。
-* [Matisse:A well-designed local image and video selector for Android](https://github.com/zhihu/Matisse)  
-	知乎开源，优秀的Android图片选择库，拥有非常 **Material Design** 的设计。在RxImagePicker中，Matisse被抽出来放入了RxImagePicker_Support，成为了 **UI层的基础组件** 。
+#### @Gallery
 
-## Contributor
+`@Gallery` will open the photo album to choose picture.
 
-* [13kmsteady](https://github.com/13kmsteady)
+It has three parameters:
 
-License
--------
+* `componentClazz：KClass<*>` The class object of UI component, opens `SystemGalleryPickerView::class`—— the system Gallery by default.
 
+* `openAsFragment：Boolean` Whether UI component is displayed as `Fragment` in some parts of `Activity` is true by default.
+
+* `containerViewId: Int`  If UI needs to be displayed as `Fragment` in ViewGroup, the id corresponding to the ViewGroup needs to be assigned to it.
+
+At present UI component only supports two kinds: `FragmentActivity` or `Fragment`(support-v4).
+
+**Taking turning on the system camera for example**, its principle is to instantiate an invisible `Fragment` in the current `Activity`, and `Fragment` opens the system photo album through `Intent` and processes the returned data through the method of `onActivityResult()`. The code is as the following:
+
+```kotlin
+interface SystemImagePicker {
+
+    @Gallery   // by default,componentClazz：KClass = SystemGalleryPickerView::class，openAsFragment：Boolean=true
+    fun openGallery(context: Context): Observable<Result>
+}
+```
+
+When need to **custom UI**, taking Zhihu theme as an example, we will configure `ZhihuImagePickerActivity::class` to `componentClazz` and set the value of `openAsFragment` to `false`:
+
+```kotlin
+interface ZhihuImagePicker {
+
+    @Gallery(componentClazz = ZhihuImagePickerActivity::class,
+            openAsFragment = false)
+    fun openGalleryAsNormal(context: Context,
+                            config: ICustomPickerConfiguration): Observable<Result>
+
+    @Gallery(componentClazz = ZhihuImagePickerActivity::class,
+            openAsFragment = false)
+    fun openGalleryAsDracula(context: Context,
+                             config: ICustomPickerConfiguration): Observable<Result>
+
+    @Camera
+    fun openCamera(context: Context): Observable<Result>
+}
+```
+
+For more information, please refer to the [ZhihuActivity](https://github.com/qingmei2/RxImagePicker/blob/2.x/sample/src/main/java/com/qingmei2/sample/zhihu/ZhihuActivity.kt) in sample.
+
+At the same time, when UI needs to be displayed as `Fragment`, `RxImagePicker` needs to be informed of the `id` of the `ViewGroup` control so that `RxImagePicker` can be correctly displayed in the corresponding `ViewGroup`.
+
+#### @Camera
+
+`@Camera` will declare the way annotated by the annotation open the camera to take photo.
+
+Please note, `@Camera` only provides the function of calling the system camera to take a photo at present. Although this annotation provides the same API as `@Gallery`, there is no sense to configure them at present.
+
+### 2.ICustomPickerView
+
+`ICustomPickerView` is an underneath interface, it is used for:
+
+* 1. Show the picture selector interface
+* 2. Obtain selection results of users
+
+```kotlin
+interface ICustomPickerView {
+
+    fun display(fragmentActivity: FragmentActivity,
+                @IdRes viewContainer: Int,
+                configuration: ICustomPickerConfiguration?)
+
+    fun pickImage(): Observable<Result>
+}
+```
+
+It has several classic implementation classes, for example, [ImagePickerDisplayer](https://github.com/qingmei2/RxImagePicker/blob/2.x/rximagepicker/src/main/java/com/qingmei2/rximagepicker/core/ImagePickerDisplayer.kt) when open the corresponding activity through configuration;
+
+### 3.Context: necessary parameters.
+
+Each interface method of RxImagePicker must be configured with a `Context` as parameters. If the method does not have any parameters, it will throw out `NullPointerException`:
+
+> ${method.name} requires just one instance of type: Context, but none.
+
+This is understandable. Starting the UI component of a picture selector must depend on the instance of `Context`.
+
+Note, This `Context` must be a `FragmentActivity`, not `Application` or others, or else throw out the abnormity of `IllegalArgumentException`!
+
+### 4.ICustomPickerConfiguration: optional parameters
+
+`ICustomPickerConfiguration` interface, similar to a tag. RxImagePicker will treat it as the configuration class.
+
+As for opening the system photo album or system camera, it makes no sense to configure, but **it must be configured for custom UI** ( such as `WeChat` theme and `Zhihu` theme ).
+
+The basic components of RxImagePicker do not provide the implementation class, please refer to [SelectionSpec](https://github.com/qingmei2/RxImagePicker/blob/2.x/rximagepicker_support/src/main/java/com/qingmei2/rximagepicker_extension/entity/SelectionSpec.kt) if any questions.
+
+### 2.5 Complete full custom UI
+
+Though RxImagePicker provides the UI style of `WeChat` picture selector and `Zhihu` picture selector, two sets of models are still not enough to cover more and more sophisticated UI demands of APP.
+
+RxImagePicker provides enough degree of freedom interface to provide private customized UI for developers. Whether a new `Activity` is created or displayed in a `ViewGroup` container at present, it is enough.
+
+The above WeChat theme and Zhihu theme are based on its to implement. Please refer to the source code for detailed implementation.
+
+## License
     The RxImagePicker：MIT License
 
     Copyright (c) 2018 qingmei2
