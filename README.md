@@ -1,4 +1,4 @@
-# RxImagePicker
+![icon](https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/icon_bg.jpg)
 
 #### English Documentation | [中文文档](https://github.com/qingmei2/RxImagePicker/blob/2.x/README_ZH.md)
 
