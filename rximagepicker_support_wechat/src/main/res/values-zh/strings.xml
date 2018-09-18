@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">rximagepicker_extension_wechat</string>
+    <string name="album_name_all">图片和视频</string>
+    <string name="send_original">原图</string>
+</resources>

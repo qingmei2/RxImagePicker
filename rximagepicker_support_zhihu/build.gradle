@@ -61,3 +61,6 @@ publish {
     desc = 'The library which choosing pictures from camera or gallery in Android.'
     website = 'https://github.com/qingmei2/RxImagePicker'
 }
+kapt {
+    generateStubs = true
+}

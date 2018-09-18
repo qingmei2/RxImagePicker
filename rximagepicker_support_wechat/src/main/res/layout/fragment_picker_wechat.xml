@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="图片和视频"
+            android:text="@string/album_name_all"
             android:textColor="@color/wechat_bottom_toolbar_preview_text"
             android:textSize="17sp" />
 
@@ -72,7 +72,7 @@
             android:textColor="?attr/album.element.color"
             android:textSize="20sp"
             tools:layout_height="50dp"
-            tools:text="选择图片"
+            tools:text="@string/album_name_all"
             tools:textColor="@color/wechat_album_dropdown_title_text" />
 
         <Space
@@ -87,7 +87,7 @@
             android:gravity="center"
             android:paddingLeft="8dp"
             android:paddingRight="4dp"
-            android:text="原图"
+            android:text="@string/send_original"
             android:textColor="?attr/album.element.color"
             android:textSize="17sp" />
 

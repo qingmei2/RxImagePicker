@@ -77,20 +77,20 @@ The following code will show you how to use photo album or camera at the Android
 // The most basic architecture, only provides the default
 // picture selector and photographing function of system.
 
-implementation 'com.github.qingmei2:rximagepicker:2.2.0-alpha'
+implementation 'com.github.qingmei2:rximagepicker:2.2.0'
 
 // Provide the basic components of custom UI picture selector
 // and this dependency needs to be added to the requirements of the custom UI
-implementation 'com.github.qingmei2:rximagepicker_support:2.2.0-alpha'
+implementation 'com.github.qingmei2:rximagepicker_support:2.2.0'
 
 
 // If you need additional UI support, choose to rely on the corresponding UI extension library
 
 // Zhihu picture selector
-implementation 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0-alpha'     
+implementation 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0'
 
 // WeChat picture selector
-implementation 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0-alpha'    
+implementation 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0'
 ```
 
 ### 2.Interface Configuration
@@ -134,7 +134,7 @@ RxImagePicker.INSTANCE
 
 ```groovy
 // Zhihu picture selector
-implementation 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0-alpha'
+implementation 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0'
 ```
 
 ### 2.Interface Configuration
