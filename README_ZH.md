@@ -156,7 +156,7 @@ private void onButtonClick() {
 
 ## 其他RxJava项目
 
-* [RxImagePicker: Support for RxJava2. Flexible picture selector of Android, provides the support for theme of Zhihu and WeChat.](https://github.com/qingmei2/RxImagePicker)
+* [RxWeaver: A lightweight and flexible error handler tools of RxJava2.](https://github.com/qingmei2/RxWeaver)
 
 * [MVVM-Rhine: The MVVM using RxJava and Android databinding.](https://github.com/qingmei2/MVVM-Rhine)
 
