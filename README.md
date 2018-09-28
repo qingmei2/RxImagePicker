@@ -294,6 +294,12 @@ RxImagePicker provides enough degree of freedom interface to provide private cus
 
 The above WeChat theme and Zhihu theme are based on its to implement. Please refer to the source code for detailed implementation.
 
+## Another author's libraries using RxJava:
+
+* [RxImagePicker: Support for RxJava2. Flexible picture selector of Android, provides the support for theme of Zhihu and WeChat.](https://github.com/qingmei2/RxImagePicker)
+
+* [MVVM-Rhine: The MVVM using RxJava and Android databinding.](https://github.com/qingmei2/MVVM-Rhine)
+
 ## License
     The RxImagePicker：MIT License
 

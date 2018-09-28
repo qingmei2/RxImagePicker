@@ -154,6 +154,12 @@ private void onButtonClick() {
 
 如果对于RxImagePicker的使用有疑问或者建议，**请提issue**.
 
+## 其他RxJava项目
+
+* [RxImagePicker: Support for RxJava2. Flexible picture selector of Android, provides the support for theme of Zhihu and WeChat.](https://github.com/qingmei2/RxImagePicker)
+
+* [MVVM-Rhine: The MVVM using RxJava and Android databinding.](https://github.com/qingmei2/MVVM-Rhine)
+
 ## 参考
 
 在 [RxImagePicker](https://github.com/qingmei2/RxImagePicker) 的设计过程中，我参考了很多的三方库，它们源码中优秀的  **设计思想** 或者 **架构设计** ，都给与了我很大的启示，在此深表感谢，感谢诸多开源爱好者前辈们的无私精神：
