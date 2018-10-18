@@ -39,7 +39,9 @@ def testJcenter = false
 dependencies {
     implementation rootProject.ext.dependencies["kotlin-android"]
     implementation rootProject.ext.dependencies["appcompat"]
-    implementation rootProject.ext.dependencies["design"]
+    implementation(rootProject.ext.dependencies["design"]) {
+        exclude group: 'androidx.recyclerview'
+    }
     implementation rootProject.ext.dependencies["glide"]
     kapt rootProject.ext.dependencies["glide-compiler"]
 

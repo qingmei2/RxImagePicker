@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -52,14 +52,14 @@ dependencies {
 repositories {
     mavenCentral()
 }
-//publish {
-//    userOrg = 'mq2553299'
-//    groupId = 'com.github.qingmei2'
-//    artifactId = 'rximagepicker_support_zhihu'
-//    publishVersion = rootProject.ext.android["versionName"]
-//    desc = 'The library which choosing pictures from camera or gallery in Android.'
-//    website = 'https://github.com/qingmei2/RxImagePicker'
-//}
+publish {
+    userOrg = 'mq2553299'
+    groupId = 'com.github.qingmei2'
+    artifactId = 'rximagepicker_support_zhihu'
+    publishVersion = rootProject.ext.android["versionName"]
+    desc = 'The library which choosing pictures from camera or gallery in Android.'
+    website = 'https://github.com/qingmei2/RxImagePicker'
+}
 kapt {
     generateStubs = true
 }

@@ -11,7 +11,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-//        classpath 'com.novoda:bintray-release:0.8.1'
+        classpath 'com.novoda:bintray-release:0.8.1'
     }
 }
 
@@ -32,7 +32,7 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-//tasks.getByPath(":rximagepicker:releaseAndroidJavadocs").enabled = false
-//tasks.getByPath(":rximagepicker_support:releaseAndroidJavadocs").enabled = false
-//tasks.getByPath(":rximagepicker_support_wechat:releaseAndroidJavadocs").enabled = false
-//tasks.getByPath(":rximagepicker_support_zhihu:releaseAndroidJavadocs").enabled = false
+tasks.getByPath(":rximagepicker:releaseAndroidJavadocs").enabled = false
+tasks.getByPath(":rximagepicker_support:releaseAndroidJavadocs").enabled = false
+tasks.getByPath(":rximagepicker_support_wechat:releaseAndroidJavadocs").enabled = false
+tasks.getByPath(":rximagepicker_support_zhihu:releaseAndroidJavadocs").enabled = false
