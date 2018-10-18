@@ -16,8 +16,8 @@
 package com.qingmei2.rximagepicker_extension.entity
 
 import android.content.Context
-import android.support.annotation.IntDef
-import android.support.v4.app.FragmentActivity
+import androidx.annotation.IntDef
+import androidx.fragment.app.FragmentActivity
 import android.widget.Toast
 
 import com.qingmei2.rximagepicker_extension.ui.widget.IncapableDialog
@@ -73,7 +73,7 @@ class IncapableCause {
                 }
                 DIALOG -> {
                     val incapableDialog = IncapableDialog.newInstance(cause.mTitle!!, cause.mMessage!!)
-                    incapableDialog.show((context as FragmentActivity).supportFragmentManager,
+                    incapableDialog.show((context as androidx.fragment.app.FragmentActivity).supportFragmentManager,
                             IncapableDialog::class.java.name)
                 }
                 TOAST -> Toast.makeText(context, cause.mMessage, Toast.LENGTH_SHORT).show()

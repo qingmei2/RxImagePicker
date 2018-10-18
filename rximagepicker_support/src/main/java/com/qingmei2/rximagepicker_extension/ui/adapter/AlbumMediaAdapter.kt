@@ -20,9 +20,9 @@ import android.content.res.TypedArray
 import android.database.Cursor
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
-import android.support.annotation.LayoutRes
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,8 +40,8 @@ import com.qingmei2.rximagepicker_extension.ui.widget.MediaGrid
 
 open class AlbumMediaAdapter(context: Context,
                              private val mSelectedCollection: SelectedItemCollection,
-                             private val mRecyclerView: RecyclerView) :
-        RecyclerViewCursorAdapter<RecyclerView.ViewHolder>(null), MediaGrid.OnMediaGridClickListener {
+                             private val mRecyclerView: androidx.recyclerview.widget.RecyclerView) :
+        RecyclerViewCursorAdapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>(null), MediaGrid.OnMediaGridClickListener {
 
     private var mPlaceholder: Drawable
     private var mSelectionSpec: SelectionSpec
@@ -59,7 +59,7 @@ open class AlbumMediaAdapter(context: Context,
         ta.recycle()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         return if (viewType == VIEW_TYPE_CAPTURE) {
             val v = LayoutInflater.from(parent.context).inflate(R.layout.photo_capture_item, parent, false)
             val holder = CaptureViewHolder(v)
@@ -77,7 +77,7 @@ open class AlbumMediaAdapter(context: Context,
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, cursor: Cursor?) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, cursor: Cursor?) {
         if (holder is CaptureViewHolder) {
             val drawables = holder.mHint.compoundDrawables
             val ta = holder.itemView.context.theme.obtainStyledAttributes(
@@ -144,11 +144,11 @@ open class AlbumMediaAdapter(context: Context,
         }
     }
 
-    override fun onThumbnailClicked(thumbnail: ImageView, item: Item, holder: RecyclerView.ViewHolder) {
+    override fun onThumbnailClicked(thumbnail: ImageView, item: Item, holder: androidx.recyclerview.widget.RecyclerView.ViewHolder) {
         mOnMediaClickListener?.onMediaClick(null, item, holder.adapterPosition)
     }
 
-    override fun onCheckViewClicked(checkView: CheckView, item: Item, holder: RecyclerView.ViewHolder) {
+    override fun onCheckViewClicked(checkView: CheckView, item: Item, holder: androidx.recyclerview.widget.RecyclerView.ViewHolder) {
         if (mSelectionSpec.countable) {
             val checkedNum = mSelectedCollection.checkedNumOf(item)
             if (checkedNum == CheckView.UNCHECKED) {
@@ -209,7 +209,7 @@ open class AlbumMediaAdapter(context: Context,
     }
 
     fun refreshSelection() {
-        val layoutManager = mRecyclerView.layoutManager as GridLayoutManager
+        val layoutManager = mRecyclerView.layoutManager as androidx.recyclerview.widget.GridLayoutManager
         val first = layoutManager.findFirstVisibleItemPosition()
         val last = layoutManager.findLastVisibleItemPosition()
         if (first == -1 || last == -1) {
@@ -229,7 +229,7 @@ open class AlbumMediaAdapter(context: Context,
     private fun getImageResize(context: Context): Int {
         if (mImageResize == 0) {
             val lm = mRecyclerView.layoutManager
-            val spanCount = (lm as GridLayoutManager).spanCount
+            val spanCount = (lm as androidx.recyclerview.widget.GridLayoutManager).spanCount
             val screenWidth = context.resources.displayMetrics.widthPixels
             val availableWidth = screenWidth - context.resources.getDimensionPixelSize(
                     R.dimen.media_grid_spacing) * (spanCount - 1)
@@ -251,13 +251,13 @@ open class AlbumMediaAdapter(context: Context,
         fun capture()
     }
 
-    private class MediaViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private class MediaViewHolder internal constructor(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         val mMediaGrid: MediaGrid = itemView as MediaGrid
 
     }
 
-    private class CaptureViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private class CaptureViewHolder internal constructor(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         val mHint: TextView = itemView.findViewById(R.id.hint)
 

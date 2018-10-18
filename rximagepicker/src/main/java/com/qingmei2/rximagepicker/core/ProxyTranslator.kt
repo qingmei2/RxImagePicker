@@ -2,7 +2,7 @@ package com.qingmei2.rximagepicker.core
 
 import android.app.Activity
 import android.content.Context
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import com.qingmei2.rximagepicker.entity.sources.Camera
 import com.qingmei2.rximagepicker.entity.sources.Gallery
 import com.qingmei2.rximagepicker.entity.sources.SourcesFrom
@@ -133,8 +133,8 @@ class ProxyTranslator {
         return expectedObject
     }
 
-    private fun transformContextToFragmentActivity(context: Context): FragmentActivity {
-        return context as? FragmentActivity
+    private fun transformContextToFragmentActivity(context: Context): androidx.fragment.app.FragmentActivity {
+        return context as? androidx.fragment.app.FragmentActivity
                 ?: throw IllegalArgumentException("the context should be FragmentActivity.")
     }
 }

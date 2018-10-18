@@ -7,8 +7,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.function.*
@@ -19,7 +19,7 @@ import io.reactivex.subjects.PublishSubject
 
 import android.app.Activity.RESULT_OK
 
-abstract class BaseSystemPickerView : Fragment() {
+abstract class BaseSystemPickerView : androidx.fragment.app.Fragment() {
 
     private val attachedSubject = PublishSubject.create<Boolean>()
 

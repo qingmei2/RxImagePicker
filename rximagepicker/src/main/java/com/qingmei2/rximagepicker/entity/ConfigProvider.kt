@@ -1,7 +1,7 @@
 package com.qingmei2.rximagepicker.entity
 
-import android.support.annotation.IdRes
-import android.support.v4.app.FragmentActivity
+import androidx.annotation.IdRes
+import androidx.fragment.app.FragmentActivity
 import com.qingmei2.rximagepicker.entity.sources.SourcesFrom
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import com.qingmei2.rximagepicker.ui.ICustomPickerView
@@ -15,6 +15,6 @@ data class ConfigProvider(val componentClazz: KClass<*>,
                           val sourcesFrom: SourcesFrom,
                           @param:IdRes val containerViewId: Int,
                           /** runtime injection **/
-                          val fragmentActivity: FragmentActivity,
+                          val fragmentActivity: androidx.fragment.app.FragmentActivity,
                           val pickerView: ICustomPickerView,
                           val config: ICustomPickerConfiguration?)

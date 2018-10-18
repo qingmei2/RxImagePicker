@@ -19,21 +19,21 @@ package com.qingmei2.rximagepicker_extension.model
 import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.Loader
+import androidx.fragment.app.FragmentActivity
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.Loader
 
 import com.qingmei2.rximagepicker_extension.entity.Album
 import com.qingmei2.rximagepicker_extension.loader.AlbumMediaLoader
 
 import java.lang.ref.WeakReference
 
-class AlbumMediaCollection : LoaderManager.LoaderCallbacks<Cursor> {
+class AlbumMediaCollection : androidx.loader.app.LoaderManager.LoaderCallbacks<Cursor> {
     private var mContext: WeakReference<Context>? = null
-    private var mLoaderManager: LoaderManager? = null
+    private var mLoaderManager: androidx.loader.app.LoaderManager? = null
     private var mCallbacks: AlbumMediaCallbacks? = null
 
-    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
+    override fun onCreateLoader(id: Int, args: Bundle?): androidx.loader.content.Loader<Cursor> {
         val context = mContext!!.get()
         val album = args!!.getParcelable<Album>(ARGS_ALBUM)
 
@@ -41,19 +41,19 @@ class AlbumMediaCollection : LoaderManager.LoaderCallbacks<Cursor> {
                 album.isAll && args.getBoolean(ARGS_ENABLE_CAPTURE, false))
     }
 
-    override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
+    override fun onLoadFinished(loader: androidx.loader.content.Loader<Cursor>, data: Cursor) {
         mContext?.get() ?: return
 
         mCallbacks!!.onAlbumMediaLoad(data)
     }
 
-    override fun onLoaderReset(loader: Loader<Cursor>) {
+    override fun onLoaderReset(loader: androidx.loader.content.Loader<Cursor>) {
         mContext?.get() ?: return
 
         mCallbacks!!.onAlbumMediaReset()
     }
 
-    fun onCreate(context: FragmentActivity, callbacks: AlbumMediaCallbacks) {
+    fun onCreate(context: androidx.fragment.app.FragmentActivity, callbacks: AlbumMediaCallbacks) {
         mContext = WeakReference(context)
         mLoaderManager = context.supportLoaderManager
         mCallbacks = callbacks

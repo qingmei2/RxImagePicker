@@ -2,7 +2,7 @@ package com.qingmei2.rximagepicker.ui
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 
 import com.qingmei2.rximagepicker.entity.Result
 
@@ -23,7 +23,7 @@ class ActivityPickerViewController private constructor() : ICustomPickerView {
         publishSubject = PublishSubject.create()
     }
 
-    override fun display(fragmentActivity: FragmentActivity,
+    override fun display(fragmentActivity: androidx.fragment.app.FragmentActivity,
                          viewContainer: Int,
                          configuration: ICustomPickerConfiguration?) {
         resetSubject()

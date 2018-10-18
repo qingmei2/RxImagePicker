@@ -22,7 +22,7 @@ import android.database.MatrixCursor
 import android.database.MergeCursor
 import android.net.Uri
 import android.provider.MediaStore
-import android.support.v4.content.CursorLoader
+import androidx.loader.content.CursorLoader
 
 import com.qingmei2.rximagepicker_extension.entity.Album
 import com.qingmei2.rximagepicker_extension.entity.Item
@@ -32,7 +32,7 @@ import com.qingmei2.rximagepicker_extension.utils.MediaStoreCompat
 /**
  * Load images and videos into a single cursor.
  */
-class AlbumMediaLoader private constructor(context: Context, selection: String, selectionArgs: Array<String>, private val mEnableCapture: Boolean) : CursorLoader(context, QUERY_URI, PROJECTION, selection, selectionArgs, ORDER_BY) {
+class AlbumMediaLoader private constructor(context: Context, selection: String, selectionArgs: Array<String>, private val mEnableCapture: Boolean) : androidx.loader.content.CursorLoader(context, QUERY_URI, PROJECTION, selection, selectionArgs, ORDER_BY) {
 
     override fun loadInBackground(): Cursor? {
         val result = super.loadInBackground()
@@ -99,7 +99,7 @@ class AlbumMediaLoader private constructor(context: Context, selection: String, 
 
         private const val ORDER_BY = MediaStore.Images.Media.DATE_TAKEN + " DESC"
 
-        fun newInstance(context: Context?, album: Album, capture: Boolean): CursorLoader {
+        fun newInstance(context: Context?, album: Album, capture: Boolean): androidx.loader.content.CursorLoader {
             context?:NullPointerException("Context can't be null!")
 
             val selection: String

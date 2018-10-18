@@ -17,7 +17,7 @@
 package com.qingmei2.rximagepicker_extension.entity
 
 import android.content.pm.ActivityInfo
-import android.support.annotation.StyleRes
+import androidx.annotation.StyleRes
 
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import com.qingmei2.rximagepicker_extension.MimeType

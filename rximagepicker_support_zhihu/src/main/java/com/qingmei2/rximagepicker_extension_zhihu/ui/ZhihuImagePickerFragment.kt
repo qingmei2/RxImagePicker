@@ -7,8 +7,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
@@ -38,7 +38,7 @@ import io.reactivex.annotations.Nullable
 import io.reactivex.subjects.PublishSubject
 import java.util.*
 
-class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumCollection.AlbumCallbacks,
+class ZhihuImagePickerFragment : androidx.fragment.app.Fragment(), IGalleryCustomPickerView, AlbumCollection.AlbumCallbacks,
         AdapterView.OnItemSelectedListener, View.OnClickListener,
         ZhihuImageListGridFragment.SelectionProvider, AlbumMediaAdapter.OnMediaClickListener,
         AlbumMediaAdapter.CheckStateListener {
@@ -92,7 +92,7 @@ class ZhihuImagePickerFragment : Fragment(), IGalleryCustomPickerView, AlbumColl
         mAlbumCollection.loadAlbums()
     }
 
-    override fun display(fragmentActivity: FragmentActivity,
+    override fun display(fragmentActivity: androidx.fragment.app.FragmentActivity,
                          viewContainer: Int,
                          configuration: ICustomPickerConfiguration?) {
         val fragmentManager = fragmentActivity.supportFragmentManager

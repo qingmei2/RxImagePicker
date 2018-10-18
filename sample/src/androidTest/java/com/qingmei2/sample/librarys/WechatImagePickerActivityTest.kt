@@ -1,21 +1,21 @@
 package com.qingmei2.sample.librarys
 
 import android.app.Activity
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.ViewAction
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
-import android.support.test.espresso.intent.Intents.*
-import android.support.test.espresso.intent.matcher.ComponentNameMatchers.hasShortClassName
-import android.support.test.espresso.intent.matcher.IntentMatchers.*
-import android.support.test.espresso.intent.rule.IntentsTestRule
-import android.support.test.espresso.matcher.ViewMatchers.*
-import android.support.test.filters.LargeTest
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v7.widget.RecyclerView
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
+import androidx.test.espresso.intent.Intents.*
+import androidx.test.espresso.intent.matcher.ComponentNameMatchers.hasShortClassName
+import androidx.test.espresso.intent.matcher.IntentMatchers.*
+import androidx.test.espresso.intent.rule.IntentsTestRule
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.filters.LargeTest
+import androidx.test.rule.GrantPermissionRule
+import androidx.test.runner.AndroidJUnit4
+import androidx.recyclerview.widget.RecyclerView
 import com.qingmei2.rximagepicker_extension.MimeType
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
 import com.qingmei2.rximagepicker_extension_wechat.WechatConfigrationBuilder
@@ -116,13 +116,13 @@ class WechatImagePickerActivityTest {
 
         // select image
         onView(withId(R.id.recyclerview))
-                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                .perform(actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(
                         1, clickRecyclerChildWithId(R.id.check_view)
                 ))
 
         // cancel select
         onView(withId(R.id.recyclerview))
-                .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                .perform(actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(
                         1, clickRecyclerChildWithId(R.id.check_view)
                 ))
 

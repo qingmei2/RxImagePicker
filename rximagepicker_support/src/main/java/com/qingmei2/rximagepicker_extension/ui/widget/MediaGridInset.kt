@@ -16,16 +16,16 @@
 package com.qingmei2.rximagepicker_extension.ui.widget
 
 import android.graphics.Rect
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 
 class MediaGridInset(private val mSpanCount: Int,
                      private val mSpacing: Int,
                      private val mIncludeEdge: Boolean)
-    : RecyclerView.ItemDecoration() {
+    : androidx.recyclerview.widget.RecyclerView.ItemDecoration() {
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView,
-                                state: RecyclerView.State?) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView,
+                                state: androidx.recyclerview.widget.RecyclerView.State?) {
         val position = parent.getChildAdapterPosition(view) // item position
         val column = position % mSpanCount // item column
 

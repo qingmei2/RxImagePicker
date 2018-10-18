@@ -19,34 +19,34 @@ package com.qingmei2.rximagepicker_extension.model
 import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.Loader
+import androidx.fragment.app.FragmentActivity
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.Loader
 
 import com.qingmei2.rximagepicker_extension.loader.AlbumLoader
 
 import java.lang.ref.WeakReference
 
-class AlbumCollection : LoaderManager.LoaderCallbacks<Cursor> {
+class AlbumCollection : androidx.loader.app.LoaderManager.LoaderCallbacks<Cursor> {
     private lateinit var mContext: WeakReference<Context>
-    private lateinit var mLoaderManager: LoaderManager
+    private lateinit var mLoaderManager: androidx.loader.app.LoaderManager
     private var mCallbacks: AlbumCallbacks? = null
     var currentSelection: Int = 0
         private set
 
-    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
+    override fun onCreateLoader(id: Int, args: Bundle?): androidx.loader.content.Loader<Cursor> {
         return AlbumLoader.newInstance(mContext.get())
     }
 
-    override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
+    override fun onLoadFinished(loader: androidx.loader.content.Loader<Cursor>, data: Cursor) {
         mCallbacks?.onAlbumLoad(data)
     }
 
-    override fun onLoaderReset(loader: Loader<Cursor>) {
+    override fun onLoaderReset(loader: androidx.loader.content.Loader<Cursor>) {
         mCallbacks?.onAlbumReset()
     }
 
-    fun onCreate(activity: FragmentActivity, callbacks: AlbumCallbacks) {
+    fun onCreate(activity: androidx.fragment.app.FragmentActivity, callbacks: AlbumCallbacks) {
         mContext = WeakReference(activity)
         mLoaderManager = activity.supportLoaderManager
         mCallbacks = callbacks

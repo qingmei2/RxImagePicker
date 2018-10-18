@@ -15,21 +15,21 @@
  */
 package com.qingmei2.rximagepicker_extension.ui.adapter
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import android.view.ViewGroup
 import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension.ui.PreviewItemFragment
 import java.util.*
 
-class PreviewPagerAdapter internal constructor(manager: FragmentManager,
+class PreviewPagerAdapter internal constructor(manager: androidx.fragment.app.FragmentManager,
                                                private val mListener: OnPrimaryItemSetListener?)
-    : FragmentPagerAdapter(manager) {
+    : androidx.fragment.app.FragmentPagerAdapter(manager) {
 
     private val mItems = ArrayList<Item>()
 
-    override fun getItem(position: Int): Fragment {
+    override fun getItem(position: Int): androidx.fragment.app.Fragment {
         return PreviewItemFragment.newInstance(mItems[position])
     }
 

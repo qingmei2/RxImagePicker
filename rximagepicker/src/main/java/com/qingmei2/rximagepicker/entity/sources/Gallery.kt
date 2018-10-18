@@ -1,6 +1,6 @@
 package com.qingmei2.rximagepicker.entity.sources
 
-import android.support.annotation.IdRes
+import androidx.annotation.IdRes
 import com.qingmei2.rximagepicker.ui.gallery.SystemGalleryPickerView
 import kotlin.reflect.KClass
 

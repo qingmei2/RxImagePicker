@@ -17,7 +17,7 @@ package com.qingmei2.rximagepicker_extension.ui.widget
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.text.format.DateUtils
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -135,12 +135,12 @@ open class MediaGrid : SquareFrameLayout, View.OnClickListener {
 
     interface OnMediaGridClickListener {
 
-        fun onThumbnailClicked(thumbnail: ImageView, item: Item, holder: RecyclerView.ViewHolder)
+        fun onThumbnailClicked(thumbnail: ImageView, item: Item, holder: androidx.recyclerview.widget.RecyclerView.ViewHolder)
 
-        fun onCheckViewClicked(checkView: CheckView, item: Item, holder: RecyclerView.ViewHolder)
+        fun onCheckViewClicked(checkView: CheckView, item: Item, holder: androidx.recyclerview.widget.RecyclerView.ViewHolder)
     }
 
     class PreBindInfo(internal var mResize: Int, internal var mPlaceholder: Drawable, internal var mCheckViewCountable: Boolean,
-                      internal var mViewHolder: RecyclerView.ViewHolder)
+                      internal var mViewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder)
 
 }

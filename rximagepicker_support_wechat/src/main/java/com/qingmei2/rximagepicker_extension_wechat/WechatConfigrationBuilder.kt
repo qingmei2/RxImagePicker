@@ -3,9 +3,9 @@ package com.qingmei2.rximagepicker_extension_wechat
 import android.app.Activity
 import android.content.pm.ActivityInfo.*
 import android.os.Build
-import android.support.annotation.IntDef
-import android.support.annotation.RequiresApi
-import android.support.annotation.StyleRes
+import androidx.annotation.IntDef
+import androidx.annotation.RequiresApi
+import androidx.annotation.StyleRes
 import com.qingmei2.rximagepicker_extension.MimeType
 import com.qingmei2.rximagepicker_extension.engine.ImageEngine
 import com.qingmei2.rximagepicker_extension.entity.CaptureStrategy

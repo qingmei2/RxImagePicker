@@ -19,9 +19,9 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.LayoutRes
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
@@ -36,11 +36,11 @@ import com.qingmei2.rximagepicker_extension.ui.widget.CheckView
 import com.qingmei2.rximagepicker_extension.utils.PhotoMetadataUtils
 import com.qingmei2.rximagepicker_extension.utils.Platform
 
-abstract class BasePreviewActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
+abstract class BasePreviewActivity : AppCompatActivity(), androidx.viewpager.widget.ViewPager.OnPageChangeListener {
 
     protected val mSelectedCollection = SelectedItemCollection(this)
     protected lateinit var mSpec: SelectionSpec
-    protected lateinit var mPager: ViewPager
+    protected lateinit var mPager: androidx.viewpager.widget.ViewPager
 
     protected lateinit var mAdapter: PreviewPagerAdapter
 

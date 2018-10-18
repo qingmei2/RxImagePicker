@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -12,7 +12,7 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -33,8 +33,8 @@ dependencies {
     implementation project(':rximagepicker')
     implementation project(':rximagepicker_support')
 
-    implementation rootProject.ext.dependencies["appcompat-v7"]
-    implementation rootProject.ext.dependencies["recyclerview-v7"]
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["recyclerview"]
     implementation rootProject.ext.dependencies["constraint-layout"]
     implementation rootProject.ext.dependencies["kotlin-android"]
 
@@ -42,24 +42,23 @@ dependencies {
     kapt rootProject.ext.dependencies["glide-compiler"]
     testImplementation rootProject.ext.dependencies["junit"]
 
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
-    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:3.0.2"
-    androidTestImplementation "com.android.support.test.espresso:espresso-idling-resource:3.0.2"
-    androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.2"
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation rootProject.ext.dependencies["espresso-core"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-contrib"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-intent"]
+    androidTestImplementation rootProject.ext.dependencies["test-runner"]
+    androidTestImplementation rootProject.ext.dependencies["test-rules"]
 }
 repositories {
     mavenCentral()
 }
-publish {
-    userOrg = 'mq2553299'
-    groupId = 'com.github.qingmei2'
-    artifactId = 'rximagepicker_support_wechat'
-    publishVersion = rootProject.ext.android["versionName"]
-    desc = 'The library which choosing pictures from camera or gallery in Android.'
-    website = 'https://github.com/qingmei2/RxImagePicker'
-}
+//publish {
+//    userOrg = 'mq2553299'
+//    groupId = 'com.github.qingmei2'
+//    artifactId = 'rximagepicker_support_wechat'
+//    publishVersion = rootProject.ext.android["versionName"]
+//    desc = 'The library which choosing pictures from camera or gallery in Android.'
+//    website = 'https://github.com/qingmei2/RxImagePicker'
+//}
 kapt {
     generateStubs = true
 }

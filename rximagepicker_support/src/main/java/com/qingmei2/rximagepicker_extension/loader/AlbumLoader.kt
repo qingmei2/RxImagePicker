@@ -22,14 +22,14 @@ import android.database.MatrixCursor
 import android.database.MergeCursor
 import android.net.Uri
 import android.provider.MediaStore
-import android.support.v4.content.CursorLoader
+import androidx.loader.content.CursorLoader
 
 import com.qingmei2.rximagepicker_extension.entity.Album
 
 /**
  * Load all albums (grouped by bucket_id) into a single cursor.
  */
-class AlbumLoader private constructor(context: Context, selection: String, selectionArgs: Array<String>) : CursorLoader(context, QUERY_URI, PROJECTION, selection, selectionArgs, BUCKET_ORDER_BY) {
+class AlbumLoader private constructor(context: Context, selection: String, selectionArgs: Array<String>) : androidx.loader.content.CursorLoader(context, QUERY_URI, PROJECTION, selection, selectionArgs, BUCKET_ORDER_BY) {
 
     override fun loadInBackground(): Cursor? {
         val albums = super.loadInBackground()
@@ -71,7 +71,7 @@ class AlbumLoader private constructor(context: Context, selection: String, selec
 
         private val BUCKET_ORDER_BY = "datetaken DESC"
 
-        fun newInstance(context: Context?): CursorLoader {
+        fun newInstance(context: Context?): androidx.loader.content.CursorLoader {
             context ?: NullPointerException("context can't be null!")
 
             val selection: String

@@ -1,10 +1,10 @@
 package com.qingmei2.sample.ext
 
-import android.support.test.espresso.UiController
-import android.support.test.espresso.ViewAction
-import android.support.test.espresso.ViewInteraction
-import android.support.test.espresso.contrib.RecyclerViewActions
-import android.support.v7.widget.RecyclerView
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import org.hamcrest.Matcher
 
@@ -25,7 +25,7 @@ fun clickRecyclerChildWithId(id: Int): ViewAction =
 
 fun ViewInteraction.clickRecyclerChildWithId(itemPosition: Int,
                                              viewId: Int) =
-        perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+        perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(
                 itemPosition, clickRecyclerChildWithId(viewId)
         ))
 

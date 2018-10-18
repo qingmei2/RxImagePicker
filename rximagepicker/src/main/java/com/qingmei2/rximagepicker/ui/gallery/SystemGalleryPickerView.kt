@@ -3,9 +3,9 @@ package com.qingmei2.rximagepicker.ui.gallery
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerView
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
@@ -15,11 +15,11 @@ import io.reactivex.subjects.PublishSubject
 
 class SystemGalleryPickerView : BaseSystemPickerView(), IGalleryCustomPickerView {
 
-    override fun display(fragmentActivity: FragmentActivity,
+    override fun display(fragmentActivity: androidx.fragment.app.FragmentActivity,
                          @IdRes viewContainer: Int,
                          configuration: ICustomPickerConfiguration?) {
         val fragmentManager = fragmentActivity.supportFragmentManager
-        val fragment: Fragment? = fragmentManager.findFragmentByTag(tag)
+        val fragment: androidx.fragment.app.Fragment? = fragmentManager.findFragmentByTag(tag)
         if (fragment == null) {
             val transaction = fragmentManager.beginTransaction()
             if (viewContainer != 0) {
