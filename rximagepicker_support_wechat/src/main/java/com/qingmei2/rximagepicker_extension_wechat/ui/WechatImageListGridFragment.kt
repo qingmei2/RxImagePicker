@@ -17,13 +17,12 @@ package com.qingmei2.rximagepicker_extension_wechat.ui
 
 import android.database.Cursor
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.qingmei2.rximagepicker_extension.R
 import com.qingmei2.rximagepicker_extension.entity.Album
 import com.qingmei2.rximagepicker_extension.entity.Item
@@ -40,7 +39,7 @@ class WechatImageListGridFragment : androidx.fragment.app.Fragment(), AlbumMedia
         AlbumMediaCollection.AlbumMediaCallbacks {
 
     private val mAlbumMediaCollection = AlbumMediaCollection()
-    private lateinit var mRecyclerView: androidx.recyclerview.widget.RecyclerView
+    private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: AlbumMediaAdapter
     private var mSelectionProvider: SelectionProvider? = null
     private var mCheckStateListener: AlbumMediaAdapter.CheckStateListener? = null
@@ -88,7 +87,7 @@ class WechatImageListGridFragment : androidx.fragment.app.Fragment(), AlbumMedia
         } else {
             selectionSpec.spanCount
         }
-        mRecyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, spanCount)
+        mRecyclerView.layoutManager = GridLayoutManager(context, spanCount)
 
         val spacing = resources.getDimensionPixelSize(R.dimen.media_grid_spacing)
         mRecyclerView.addItemDecoration(MediaGridInset(spanCount, spacing, false))

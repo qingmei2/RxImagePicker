@@ -19,7 +19,7 @@ import android.database.Cursor
 import android.provider.MediaStore
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class RecyclerViewCursorAdapter<VH : androidx.recyclerview.widget.RecyclerView.ViewHolder> internal constructor(c: Cursor?) : androidx.recyclerview.widget.RecyclerView.Adapter<VH>() {
+abstract class RecyclerViewCursorAdapter<VH : RecyclerView.ViewHolder> internal constructor(c: Cursor?) : RecyclerView.Adapter<VH>() {
 
     var cursor: Cursor? = null
         private set
@@ -36,7 +36,7 @@ abstract class RecyclerViewCursorAdapter<VH : androidx.recyclerview.widget.Recyc
         if (!isDataValid(cursor)) {
             throw IllegalStateException("Cannot bind view holder when cursor is in invalid state.")
         }
-        if (!(cursor?.moveToPosition(position) ?: false)) {
+        if (cursor?.moveToPosition(position) != true) {
             throw IllegalStateException("Could not move cursor to position " + position
                     + " when trying to bind view holder")
         }

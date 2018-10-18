@@ -9,7 +9,7 @@ import com.qingmei2.rximagepicker_extension_wechat.R
 
 class WechatAlbumMediaAdapter(context: Context,
                               selectedCollection: SelectedItemCollection,
-                              recyclerView: androidx.recyclerview.widget.RecyclerView)
+                              recyclerView: RecyclerView)
     : AlbumMediaAdapter(context, selectedCollection, recyclerView) {
 
     override val itemLayoutRes: Int

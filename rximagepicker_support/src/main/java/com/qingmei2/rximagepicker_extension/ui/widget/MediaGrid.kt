@@ -17,14 +17,13 @@ package com.qingmei2.rximagepicker_extension.ui.widget
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import androidx.recyclerview.widget.RecyclerView
 import android.text.format.DateUtils
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-
+import androidx.recyclerview.widget.RecyclerView
 import com.qingmei2.rximagepicker_extension.R
 import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
@@ -108,10 +107,10 @@ open class MediaGrid : SquareFrameLayout, View.OnClickListener {
 
     private fun setImage() {
         if (media.isGif) {
-            SelectionSpec.instance!!.imageEngine!!.loadGifThumbnail(context, mPreBindInfo.mResize,
+            SelectionSpec.instance.imageEngine.loadGifThumbnail(context, mPreBindInfo.mResize,
                     mPreBindInfo.mPlaceholder, mThumbnail, media.contentUri!!)
         } else {
-            SelectionSpec.instance!!.imageEngine!!.loadThumbnail(context, mPreBindInfo.mResize,
+            SelectionSpec.instance.imageEngine.loadThumbnail(context, mPreBindInfo.mResize,
                     mPreBindInfo.mPlaceholder, mThumbnail, media.contentUri!!)
         }
     }
@@ -135,12 +134,12 @@ open class MediaGrid : SquareFrameLayout, View.OnClickListener {
 
     interface OnMediaGridClickListener {
 
-        fun onThumbnailClicked(thumbnail: ImageView, item: Item, holder: androidx.recyclerview.widget.RecyclerView.ViewHolder)
+        fun onThumbnailClicked(thumbnail: ImageView, item: Item, holder: RecyclerView.ViewHolder)
 
-        fun onCheckViewClicked(checkView: CheckView, item: Item, holder: androidx.recyclerview.widget.RecyclerView.ViewHolder)
+        fun onCheckViewClicked(checkView: CheckView, item: Item, holder: RecyclerView.ViewHolder)
     }
 
     class PreBindInfo(internal var mResize: Int, internal var mPlaceholder: Drawable, internal var mCheckViewCountable: Boolean,
-                      internal var mViewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder)
+                      internal var mViewHolder: RecyclerView.ViewHolder)
 
 }
