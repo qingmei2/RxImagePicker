@@ -27,6 +27,8 @@ RxImagePicker is a **reactive** picture selector for Android, which converts you
 - [x] Android photo album picture selection
 - [x] Returns data in the format of reactive data stream ( such as `Observable/Flowable/Single/Maybe` )
 
+- [x] [AndroidX](https://developer.android.com/jetpack/androidx/) support ( after v2.3.0 )
+
 ## Support of UI
 
 - [x] System Picture Selector
@@ -92,6 +94,8 @@ implementation 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0'
 // WeChat picture selector
 implementation 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0'
 ```
+
+> **If your project use `androidx`, please use version `2.3.0-alpha01`**.
 
 ### 2.Interface Configuration
 
