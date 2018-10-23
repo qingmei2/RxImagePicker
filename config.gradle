@@ -10,7 +10,13 @@ project.ext {
             minSdkVersion    : 16,
             targetSdkVersion : 28,
             versionCode      : 21,
-            versionName      : "2.3.0-alpha"
+            versionName      : "2.3.0-alpha01"
+    ]
+
+    constants = [
+            siteUrl: "https://github.com/qingmei2/RxImagePicker",
+            gitUrl : "https://github.com/qingmei2/RxImagePicker.git",
+            group  : "com.github.qingmei2"
     ]
 
     dependencies = [

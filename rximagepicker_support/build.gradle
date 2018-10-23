@@ -1,7 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.novoda.bintray-release'
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -43,11 +45,78 @@ repositories {
     mavenCentral()
 }
 
-publish {
-    userOrg = 'mq2553299'
-    groupId = 'com.github.qingmei2'
-    artifactId = 'rximagepicker_support'
-    publishVersion = rootProject.ext.android["versionName"]
-    desc = 'The library which choosing pictures from camera or gallery in Android.'
-    website = 'https://github.com/qingmei2/RxImagePicker'
+version = rootProject.ext.android["versionName"]
+group = rootProject.ext.constants["group"]
+def siteUrl = rootProject.ext.constants["siteUrl"]
+def gitUrl = rootProject.ext.constants["gitUrl"]
+def libName = "rximagepicker_support"
+def projectName = "RxImagePicker"
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                name projectName
+                url siteUrl
+                licenses {
+                    license {
+                        name 'MIT license'
+                        url 'https://github.com/qingmei2/RxImagePicker/blob/2.x/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'qingmei2'
+                        name 'qingmei2'
+                        email 'mq2553299@qq.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    failOnError false
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = libName
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["MIT"]
+        publish = true
+    }
 }

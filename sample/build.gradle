@@ -34,7 +34,7 @@ android {
     }
 }
 
-def testJcenter = false
+def dependRemote = true
 
 dependencies {
     implementation rootProject.ext.dependencies["kotlin-android"]
@@ -51,7 +51,7 @@ dependencies {
     androidTestImplementation rootProject.ext.dependencies["test-runner"]
     androidTestImplementation rootProject.ext.dependencies["test-rules"]
 
-    if (testJcenter) {
+    if (dependRemote) {
         implementation "com.github.qingmei2:rximagepicker:$rootProject.ext.android.versionName"
         implementation "com.github.qingmei2:rximagepicker_support:$rootProject.ext.android.versionName"
         implementation "com.github.qingmei2:rximagepicker_support_zhihu:$rootProject.ext.android.versionName"

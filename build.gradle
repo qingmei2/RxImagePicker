@@ -11,7 +11,10 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.novoda:bintray-release:0.8.1'
+
+        // plugin for jcenter
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 
@@ -31,8 +34,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-tasks.getByPath(":rximagepicker:releaseAndroidJavadocs").enabled = false
-tasks.getByPath(":rximagepicker_support:releaseAndroidJavadocs").enabled = false
-tasks.getByPath(":rximagepicker_support_wechat:releaseAndroidJavadocs").enabled = false
-tasks.getByPath(":rximagepicker_support_zhihu:releaseAndroidJavadocs").enabled = false
