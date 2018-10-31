@@ -169,7 +169,7 @@ interface ZhihuImagePicker {
 ### 3.Instantiate and use it
 
 ```Kotlin
-ZhihuImagePicker rxImagePicker = RxImagePicker
+val rxImagePicker: ZhihuImagePicker = RxImagePicker
                 .create(ZhihuImagePicker::class.java)
 
 rxImagePicker.openGalleryAsNormal(this,
