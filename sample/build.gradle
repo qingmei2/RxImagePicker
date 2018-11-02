@@ -66,7 +66,3 @@ dependencies {
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["junit"]
 }
-
-kapt {
-    generateStubs = true
-}

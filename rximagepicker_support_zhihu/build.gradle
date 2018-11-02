@@ -54,9 +54,6 @@ dependencies {
 repositories {
     mavenCentral()
 }
-kapt {
-    generateStubs = true
-}
 
 version = rootProject.ext.android["versionName"]
 group = rootProject.ext.constants["group"]

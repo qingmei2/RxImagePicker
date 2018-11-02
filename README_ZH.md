@@ -117,10 +117,10 @@ compile 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0'    // 微信图
 如果您的项目已经迁移了`AndroidX`,请使用最新版本:
 
 ```groovy
-compile 'com.github.qingmei2:rximagepicker:2.3.0-alpha01'
-compile 'com.github.qingmei2:rximagepicker_support:2.3.0-alpha01'
-compile 'com.github.qingmei2:rximagepicker_support_zhihu:2.3.0-alpha01'
-compile 'com.github.qingmei2:rximagepicker_support_wechat:2.3.0-alpha01'
+compile 'com.github.qingmei2:rximagepicker:2.3.0-alpha03'
+compile 'com.github.qingmei2:rximagepicker_support:2.3.0-alpha03'
+compile 'com.github.qingmei2:rximagepicker_support_zhihu:2.3.0-alpha03'
+compile 'com.github.qingmei2:rximagepicker_support_wechat:2.3.0-alpha03'
 ```
 
 ### 2. 接口配置
