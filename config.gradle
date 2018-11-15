@@ -1,6 +1,5 @@
-def dagger_version = '2.14.1'
 def kotlin_version = '1.2.71'
-def espresso_version = '3.1.0-alpha3'
+def espresso_version = '3.1.0'
 def glide_version = '4.8.0'
 
 project.ext {
@@ -26,7 +25,7 @@ project.ext {
             "recyclerview"            : "androidx.recyclerview:recyclerview:1.0.0",
             "cardview"                : "androidx.cardview:cardview:1.0.0",
             "constraint-layout"       : "androidx.constraintlayout:constraintlayout:1.1.3",
-            "design"                  : "com.google.android.material:material:1.0.0-rc01",
+            "design"                  : "com.google.android.material:material:1.0.0",
 
             //kotlin
             "kotlin-android"          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -34,14 +33,9 @@ project.ext {
 
             //rx
             "rxJava2"                 : "io.reactivex.rxjava2:rxjava:2.2.0",
-            "rxandroid"               : "io.reactivex.rxjava2:rxandroid:2.0.2",
+            "rxandroid"               : "io.reactivex.rxjava2:rxandroid:2.1.0",
             "rxkotlin"                : "io.reactivex.rxjava2:rxkotlin:2.2.0",
             "rxbinding"               : "com.jakewharton.rxbinding2:rxbinding:2.0.0",
-            "rxschedulers"            : "com.github.qingmei2.rxschedulers:rxschedulers:0.1.1",
-
-            //dagger
-            "dagger"                  : "com.google.dagger:dagger:${dagger_version}",
-            "dagger-compiler"         : "com.google.dagger:dagger-compiler:${dagger_version}",
 
             //glide
             "glide"                   : "com.github.bumptech.glide:glide:${glide_version}",

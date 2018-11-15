@@ -1,4 +1,4 @@
-![icon](https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/icon_bg.jpg)
+# RxImagePicker
 
 #### [English Documentation](https://github.com/qingmei2/RxImagePicker) | 中文文档
 
@@ -8,7 +8,6 @@
         src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"></a>
 <a target="_blank"><img src="https://img.shields.io/badge/API-16+-green.svg"></a>
 <a target="_blank" href="https://github.com/qingmei2/RxImagePicker/blob/2.x/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
-
 
 RxImagePicker的设计起源，请参考：
 
@@ -24,7 +23,7 @@ RxImagePicker的UI自动化测试，请参考：
 * **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
 * **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
 
-> **最新版本为`2.3.0-alpha01`，该版本提供了对官方`AndroidX`的支持**，详情请参考Android官方文档[AndroidX Overview](https://developer.android.com/jetpack/androidx/).
+> **最新版本为`2.3.0-alpha03(preview版本)`，该版本提供了对官方`AndroidX`的支持**，详情请参考Android官方文档[AndroidX Overview](https://developer.android.com/jetpack/androidx/).
 
 > 如果您的项目没有迁移`AndroidX`(即v7包的包名是`com.android.support`而非`androidx.appcompat`),请继续使用`2.2.0`的版本，否则包名不同会导致编译错误！
 

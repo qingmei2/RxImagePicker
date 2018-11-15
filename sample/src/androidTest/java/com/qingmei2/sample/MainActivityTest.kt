@@ -5,7 +5,6 @@ import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.Intents.intending
 import androidx.test.espresso.intent.matcher.ComponentNameMatchers.hasShortClassName
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
@@ -23,8 +22,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class MainActivityTest {
-
-    val TEST_PACKAGE_NAME = "com.qingmei2.sample"
 
     @Rule
     @JvmField
@@ -49,8 +46,8 @@ class MainActivityTest {
     }
 
     private fun checkScreenJumpEvent(buttonId: () -> Int,
-                             shortName: () -> String,
-                             packageName: () -> String = { TEST_PACKAGE_NAME }) {
+                                     shortName: () -> String,
+                                     packageName: () -> String = { TEST_PACKAGE_NAME }) {
 
         onView(withId(buttonId())).perform(click()).check(doesNotExist())
 
@@ -61,5 +58,11 @@ class MainActivityTest {
 
         pressBack()
         onView(withId(buttonId())).check(matches(isDisplayed()))
+    }
+
+    companion object {
+
+       private const val TEST_PACKAGE_NAME = "com.qingmei2.sample"
+
     }
 }

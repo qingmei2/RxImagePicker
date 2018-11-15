@@ -13,7 +13,7 @@ import androidx.test.espresso.intent.matcher.IntentMatchers.*
 import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.filters.LargeTest
+import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
 import com.qingmei2.rximagepicker_extension.ui.BasePreviewActivity
@@ -36,7 +36,7 @@ class ZhihuActivityTest {
 
     @Rule
     @JvmField
-    var systemActivityTestRule = IntentsTestRule<ZhihuActivity>(ZhihuActivity::class.java)
+    var systemActivityTestRule = IntentsTestRule(ZhihuActivity::class.java)
     @Rule
     @JvmField
     var grantPermissionRule = GrantPermissionRule.grant(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -83,7 +83,7 @@ class ZhihuActivityTest {
         onView(withId(R.id.imageView)).check(doesNotExist())
     }
 
-    companion object Mock {
+    companion object {
         private const val EXTRA_BUNDLE = "123"
         private const val EXTRA_RESULT_APPLY = "456"
     }
