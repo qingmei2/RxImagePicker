@@ -198,9 +198,9 @@ private void onButtonClick() {
 * [Matisse:A well-designed local image and video selector for Android](https://github.com/zhihu/Matisse)  
 	知乎开源，优秀的Android图片选择库，拥有非常 **Material Design** 的设计。在RxImagePicker中，Matisse被抽出来放入了RxImagePicker_Support，成为了 **UI层的基础组件** 。
 
-## Contributor
+## 混淆
 
-* [13kmsteady](https://github.com/13kmsteady)
+> -keep class com.qingmei2.rximagepicker.**{*;}
 
 License
 -------
