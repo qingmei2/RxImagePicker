@@ -1,7 +1,6 @@
 package com.qingmei2.rximagepicker.ui
 
 import androidx.annotation.IdRes
-import androidx.fragment.app.FragmentActivity
 
 import com.qingmei2.rximagepicker.entity.Result
 
@@ -30,7 +29,7 @@ import io.reactivex.Observable
  *
  * @see ActivityPickerViewController
  *
- * @see BaseSystemPickerView
+ * @see BaseSystemPickerFragment
  */
 interface ICustomPickerView {
 

@@ -1,25 +1,21 @@
 package com.qingmei2.rximagepicker.ui
 
 import android.Manifest
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
-
+import androidx.fragment.app.Fragment
 import com.qingmei2.rximagepicker.entity.Result
-import com.qingmei2.rximagepicker.function.*
-
+import com.qingmei2.rximagepicker.function.parseResultNoExtraData
 import io.reactivex.Observable
-import io.reactivex.functions.Consumer
 import io.reactivex.subjects.PublishSubject
 
-import android.app.Activity.RESULT_OK
-
-abstract class BaseSystemPickerView : androidx.fragment.app.Fragment() {
+abstract class BaseSystemPickerFragment : Fragment() {
 
     private val attachedSubject = PublishSubject.create<Boolean>()
 

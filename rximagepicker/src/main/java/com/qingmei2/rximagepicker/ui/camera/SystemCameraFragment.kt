@@ -1,25 +1,29 @@
-package com.qingmei2.rximagepicker.ui.gallery
+package com.qingmei2.rximagepicker.ui.camera
 
+import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
+import android.provider.MediaStore
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.qingmei2.rximagepicker.entity.Result
-import com.qingmei2.rximagepicker.ui.BaseSystemPickerView
+import com.qingmei2.rximagepicker.ui.BaseSystemPickerFragment
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
-import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import java.text.SimpleDateFormat
+import java.util.*
 
-class SystemGalleryPickerView : BaseSystemPickerView(), IGalleryCustomPickerView {
+class SystemCameraFragment : BaseSystemPickerFragment(), ICameraCustomPickerView {
 
-    override fun display(fragmentActivity: androidx.fragment.app.FragmentActivity,
+    private var cameraPictureUrl: Uri? = null
+
+    override fun display(fragmentActivity: FragmentActivity,
                          @IdRes viewContainer: Int,
                          configuration: ICustomPickerConfiguration?) {
         val fragmentManager = fragmentActivity.supportFragmentManager
-        val fragment: androidx.fragment.app.Fragment? = fragmentManager.findFragmentByTag(tag)
+        val fragment: Fragment? = fragmentManager.findFragmentByTag(tag)
         if (fragment == null) {
             val transaction = fragmentManager.beginTransaction()
             if (viewContainer != 0) {
@@ -40,22 +44,22 @@ class SystemGalleryPickerView : BaseSystemPickerView(), IGalleryCustomPickerView
         if (!checkPermission()) {
             return
         }
+        cameraPictureUrl = createImageUri()
+        val pictureChooseIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        pictureChooseIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraPictureUrl)
 
-        val pictureChooseIntent: Intent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            pictureChooseIntent = Intent(Intent.ACTION_PICK)
-            pictureChooseIntent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
-        } else {
-            pictureChooseIntent = Intent(Intent.ACTION_GET_CONTENT)
-        }
-        pictureChooseIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-        pictureChooseIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        pictureChooseIntent.type = "image/*"
-
-        startActivityForResult(pictureChooseIntent, BaseSystemPickerView.GALLERY_REQUEST_CODE)
+        startActivityForResult(pictureChooseIntent, BaseSystemPickerFragment.CAMERA_REQUEST_CODE)
     }
 
     override fun getActivityResultUri(data: Intent?): Uri? {
-        return data?.data
+        return cameraPictureUrl
+    }
+
+    private fun createImageUri(): Uri? {
+        val contentResolver = activity!!.contentResolver
+        val cv = ContentValues()
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        cv.put(MediaStore.Images.Media.TITLE, timeStamp)
+        return contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv)
     }
 }

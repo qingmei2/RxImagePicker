@@ -7,8 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +18,7 @@ import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.function.parseResultNoExtraData
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
-import com.qingmei2.rximagepicker.ui.IGalleryCustomPickerView
+import com.qingmei2.rximagepicker.ui.gallery.IGalleryCustomPickerView
 import com.qingmei2.rximagepicker_extension.entity.Album
 import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
@@ -34,7 +32,6 @@ import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumsAdapter
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner
 import com.qingmei2.rximagepicker_extension_zhihu.R
 import io.reactivex.Observable
-import io.reactivex.annotations.Nullable
 import io.reactivex.subjects.PublishSubject
 import java.util.*
 

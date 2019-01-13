@@ -34,7 +34,7 @@ android {
     }
 }
 
-def dependRemote = true
+def dependRemote = false
 
 dependencies {
     implementation rootProject.ext.dependencies["kotlin-android"]
@@ -42,6 +42,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["design"]) {
         exclude group: 'androidx.recyclerview'
     }
+
     implementation rootProject.ext.dependencies["glide"]
     kapt rootProject.ext.dependencies["glide-compiler"]
 

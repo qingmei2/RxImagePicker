@@ -1,7 +1,7 @@
 package com.qingmei2.rximagepicker.entity.sources
 
 import androidx.annotation.IdRes
-import com.qingmei2.rximagepicker.ui.camera.SystemCameraPickerView
+import com.qingmei2.rximagepicker.ui.camera.SystemCameraFragment
 import kotlin.reflect.KClass
 
 /**
@@ -18,7 +18,7 @@ annotation class Camera(
         /**
          * the UI component that will be displayed.
          */
-        val componentClazz: KClass<*> = SystemCameraPickerView::class,
+        val componentClazz: KClass<*> = SystemCameraFragment::class,
 
         /**
          * the UI component type, as [Fragment] or [Activity].

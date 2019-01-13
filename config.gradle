@@ -1,4 +1,4 @@
-def kotlin_version = '1.2.71'
+def kotlin_version = '1.3.11'
 def espresso_version = '3.1.0'
 def glide_version = '4.8.0'
 
@@ -8,8 +8,8 @@ project.ext {
             compileSdkVersion: 28,
             minSdkVersion    : 16,
             targetSdkVersion : 28,
-            versionCode      : 23,
-            versionName      : "2.3.0-alpha03"
+            versionCode      : 24,
+            versionName      : "2.4.0-alpha01"
     ]
 
     constants = [
