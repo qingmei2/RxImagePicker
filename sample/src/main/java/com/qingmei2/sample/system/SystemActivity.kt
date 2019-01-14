@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_system.*
 @SuppressLint("CheckResult")
 class SystemActivity : AppCompatActivity() {
 
-    private lateinit var defaultImagePicker: BasicImagePicker
+    private lateinit var defaultImagePicker: SystemImagePicker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class SystemActivity : AppCompatActivity() {
     }
 
     private fun initRxImagePicker() {
-        defaultImagePicker = RxImagePicker.create(BasicImagePicker::class.java)
+        defaultImagePicker = RxImagePicker.create(SystemImagePicker::class.java)
     }
 
     private fun pickGallery() {
@@ -34,7 +34,10 @@ class SystemActivity : AppCompatActivity() {
                 .openGallery(
                         this,
                         DefaultSystemGalleryConfig.instance(
-                                mimesType = DefaultGalleryMimes.videoOnly()
+                                // mimesType = DefaultGalleryMimes.videoOnly()     // only video files
+                                // mimesType = DefaultGalleryMimes.imageOnly()     // only image files, default options.
+                                // mimesType = DefaultGalleryMimes.audioOnly()     // only audio files
+                                mimesType = DefaultGalleryMimes.customTypes("video/*;image/*") // multiType
                         )
                 )
                 .subscribe { result -> onPickUriSuccess(result.uri) }

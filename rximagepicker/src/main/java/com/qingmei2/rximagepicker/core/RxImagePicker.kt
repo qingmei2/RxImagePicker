@@ -1,14 +1,16 @@
 package com.qingmei2.rximagepicker.core
 
-import com.qingmei2.rximagepicker.ui.SystemImagePicker
+import com.qingmei2.rximagepicker.ui.BasicImagePicker
 import java.lang.reflect.Proxy
 
 object RxImagePicker {
 
-    fun create(): SystemImagePicker {
-        return create(SystemImagePicker::class.java)
+    @JvmStatic
+    fun create(): BasicImagePicker {
+        return create(BasicImagePicker::class.java)
     }
 
+    @JvmStatic
     @Suppress("UNCHECKED_CAST")
     fun <T> create(classProviders: Class<T>): T {
         val proxyProviders = ProxyProviders()

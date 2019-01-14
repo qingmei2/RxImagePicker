@@ -11,7 +11,7 @@ import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
-class SystemGalleryFragment : BaseSystemPickerFragment(), IGalleryCustomPickerView {
+class BasicGalleryFragment : BaseSystemPickerFragment(), IGalleryCustomPickerView {
 
     private var mDefaultSystemGalleryConfig: DefaultSystemGalleryConfig? = null
 

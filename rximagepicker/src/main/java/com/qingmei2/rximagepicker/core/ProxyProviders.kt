@@ -18,7 +18,7 @@ class ProxyProviders : InvocationHandler {
         return Observable.defer(Callable<ObservableSource<*>> {
             val configProvider = proxyTranslator.processMethod(method, args)
 
-            ImagePickerDisplayer(configProvider).display()
+            ImagePickerController(configProvider).display()
 
             val observable = rxImagePickerProcessor.process(configProvider)
 

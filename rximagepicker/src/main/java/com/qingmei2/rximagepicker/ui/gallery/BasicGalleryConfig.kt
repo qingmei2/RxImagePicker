@@ -74,5 +74,12 @@ sealed class DefaultGalleryMimes {
         fun imageOnly(): BaseMimesType = Image
 
         fun audioOnly(): BaseMimesType = Audio
+
+        // Call this function if you want to select multiple types at the same time.
+        // For example: "video/*;image/*"
+        fun customTypes(types: String): BaseMimesType = object : BaseMimesType() {
+
+            override fun getMimesType(): String = types
+        }
     }
 }

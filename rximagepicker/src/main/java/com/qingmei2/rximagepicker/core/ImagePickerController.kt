@@ -5,7 +5,7 @@ import com.qingmei2.rximagepicker.entity.ConfigProvider
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 
-class ImagePickerDisplayer(private val configProvider: ConfigProvider) {
+class ImagePickerController(private val configProvider: ConfigProvider) {
 
     fun display() {
         configProvider.config?.onDisplay()

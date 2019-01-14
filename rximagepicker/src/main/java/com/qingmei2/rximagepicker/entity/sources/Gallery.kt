@@ -1,7 +1,7 @@
 package com.qingmei2.rximagepicker.entity.sources
 
 import androidx.annotation.IdRes
-import com.qingmei2.rximagepicker.ui.gallery.SystemGalleryFragment
+import com.qingmei2.rximagepicker.ui.gallery.BasicGalleryFragment
 import kotlin.reflect.KClass
 
 /**
@@ -18,7 +18,7 @@ annotation class Gallery(
         /**
          * the UI component that will be displayed.
          */
-        val componentClazz: KClass<*> = SystemGalleryFragment::class,
+        val componentClazz: KClass<*> = BasicGalleryFragment::class,
 
         /**
          * the UI component type, as [Fragment] or [Activity].

@@ -15,7 +15,7 @@ import io.reactivex.subjects.PublishSubject
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SystemCameraFragment : BaseSystemPickerFragment(), ICameraCustomPickerView {
+class BasicCameraFragment : BaseSystemPickerFragment(), ICameraCustomPickerView {
 
     private var cameraPictureUrl: Uri? = null
 

@@ -7,10 +7,11 @@ import com.qingmei2.rximagepicker.entity.sources.Gallery
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import io.reactivex.Observable
 
-interface BasicImagePicker {
+interface SystemImagePicker {
 
     @Gallery
-    fun openGallery(context: Context, config: ICustomPickerConfiguration): Observable<Result>
+    fun openGallery(context: Context,
+                    config: ICustomPickerConfiguration?): Observable<Result>
 
     @Camera
     fun openCamera(context: Context): Observable<Result>

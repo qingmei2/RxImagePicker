@@ -8,7 +8,7 @@ import com.qingmei2.rximagepicker.ui.ICustomPickerView
 import kotlin.reflect.KClass
 
 /**
- * Entity class for user's configration.
+ * Entity class for user's configuration.
  */
 data class ConfigProvider(val componentClazz: KClass<*>,
                           val asFragment: Boolean,
