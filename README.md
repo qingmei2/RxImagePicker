@@ -23,7 +23,7 @@ RxImagePicker is a **reactive** picture selector for Android, which converts you
 
 ## Support
 
-- [x] Android Camera  Photograph
+- [x] Android Camera Photograph
 - [x] Android photo album picture selection
 - [x] Returns data in the format of reactive data stream ( such as `Observable/Flowable/Single/Maybe` )
 
@@ -95,7 +95,7 @@ implementation 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0'
 implementation 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0'
 ```
 
-> **If your project use `androidx`, please use version `2.3.0-alpha03`**.
+> **If your project use `androidx`, please use version `2.4.1`**.
 
 ### 2.Interface Configuration
 
@@ -107,7 +107,7 @@ public interface MyImagePicker {
     @Gallery    // open gallery
     Observable<Result> openGallery(Context context);
 
-    @Camera    // take photos
+    @Camera     // take photos
     Observable<Result> openCamera(Context context);
 }
 ```
@@ -117,13 +117,13 @@ public interface MyImagePicker {
 Instantiate the interface in your `Activity` or `Fragment` to open the default album and camera screen of system:
 
 ```Java
-RxImagePicker.INSTANCE
+RxImagePicker
         .create(MyImagePicker.class)
         .openGallery(this)
         .subscribe(new Consumer<Result>() {
             @Override
             public void accept(Result result) throws Exception {
-              // do something, ex:
+                // do something, ex:
                 Uri uri = result.getUri();
                 GlideApp.with(this)
                          .load(uri)
@@ -138,7 +138,7 @@ RxImagePicker.INSTANCE
 
 ```groovy
 // Zhihu picture selector
-implementation 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0'
+implementation 'com.github.qingmei2:rximagepicker_support_zhihu:${last_version}'
 ```
 
 ### 2.Interface Configuration
