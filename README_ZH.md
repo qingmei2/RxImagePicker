@@ -23,7 +23,7 @@ RxImagePicker的UI自动化测试，请参考：
 * **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
 * **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
 
-> **最新版本为`2.4.1`，自`2.3.0`版本之后，库只提供对官方`AndroidX`的支持**，详情请参考Android官方文档[AndroidX Overview](https://developer.android.com/jetpack/androidx/).
+> **最新版本为`2.4.2`，自`2.3.0`版本之后，库只提供对官方`AndroidX`的支持**，详情请参考Android官方文档[AndroidX Overview](https://developer.android.com/jetpack/androidx/).
 
 > 如果您的项目没有迁移`AndroidX`(即v7包的包名是`com.android.support`而非`androidx.appcompat`),请继续使用`2.2.0`的稳定版本，否则包名不同会导致编译错误！
 
@@ -116,10 +116,10 @@ compile 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0'    // 微信图
 如果您的项目已经迁移了`AndroidX`,请使用最新版本:
 
 ```groovy
-compile 'com.github.qingmei2:rximagepicker:2.4.1'
-compile 'com.github.qingmei2:rximagepicker_support:2.4.1'
-compile 'com.github.qingmei2:rximagepicker_support_zhihu:2.4.1'
-compile 'com.github.qingmei2:rximagepicker_support_wechat:2.4.1'
+compile 'com.github.qingmei2:rximagepicker:2.4.2'
+compile 'com.github.qingmei2:rximagepicker_support:2.4.2'
+compile 'com.github.qingmei2:rximagepicker_support_zhihu:2.4.2'
+compile 'com.github.qingmei2:rximagepicker_support_wechat:2.4.2'
 ```
 
 ### 2. 接口配置
@@ -201,6 +201,11 @@ private void onButtonClick() {
 ## 混淆
 
 > -keep class com.qingmei2.rximagepicker.**{*;}
+
+## Contributors
+
+* [13kmsteady](https://github.com/13kmsteady)
+* [guoleifei](https://github.com/guoleifei)
 
 License
 -------

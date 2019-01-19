@@ -5,6 +5,5 @@ import com.qingmei2.rximagepicker_extension_wechat.R
 
 class WechatSelectedPreviewActivity : SelectedPreviewActivity() {
 
-    override val layoutRes: Int
-        get() = R.layout.wechat_activity_media_preview
+    override val layoutRes: Int = R.layout.wechat_activity_media_preview
 }

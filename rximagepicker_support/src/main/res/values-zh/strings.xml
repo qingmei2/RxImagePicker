@@ -1,8 +1,15 @@
 <resources>
-    <string name="album_name_all">全部</string>
-    <string name="button_preview">预览</string>
-    <string name="button_apply_default">发送</string>
-    <string name="button_apply">使用(%1$d)</string>
-    <string name="empty_text">还没有图片或视频</string>
-    <string name="button_back">返回</string>
+	<string name="album_name_all">全部</string>
+	<string name="button_preview">预览</string>
+	<string name="button_apply_default">发送</string>
+	<string name="button_apply">使用(%1$d)</string>
+	<string name="empty_text">还没有图片或视频</string>
+	<string name="button_back">返回</string>
+	<string name="photo_grid_capture">相机</string>
+	<string name="button_ok">确认</string>
+
+	<string name="error_over_count">已达最大选择数量</string>
+	<string name="error_file_type">不支持的文件类型</string>
+	<string name="error_type_conflict">无法同时选中图片和视频</string>
+	<string name="error_no_video_activity">无法支持视频预览</string>
 </resources>

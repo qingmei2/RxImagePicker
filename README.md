@@ -95,7 +95,7 @@ implementation 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0'
 implementation 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0'
 ```
 
-> **If your project use `androidx`, please use version `2.4.1`**.
+> **If your project use `androidx`, please use version `2.4.2`**.
 
 ### 2.Interface Configuration
 
