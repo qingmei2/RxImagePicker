@@ -21,6 +21,7 @@ import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.qingmei2.rximagepicker_extension.R
@@ -33,7 +34,8 @@ import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter
 import com.qingmei2.rximagepicker_extension.ui.widget.MediaGridInset
 import com.qingmei2.rximagepicker_extension.utils.UIUtils
 
-class ZhihuImageListGridFragment : androidx.fragment.app.Fragment(), AlbumMediaAdapter.CheckStateListener, AlbumMediaAdapter.OnMediaClickListener, AlbumMediaCollection.AlbumMediaCallbacks {
+class ZhihuImageListGridFragment : Fragment(), AlbumMediaAdapter.CheckStateListener,
+        AlbumMediaAdapter.OnMediaClickListener, AlbumMediaCollection.AlbumMediaCallbacks {
 
     private val mAlbumMediaCollection = AlbumMediaCollection()
     private lateinit var mRecyclerView: RecyclerView
@@ -72,9 +74,13 @@ class ZhihuImageListGridFragment : androidx.fragment.app.Fragment(), AlbumMediaA
         val album = arguments!!.getParcelable<Album>(EXTRA_ALBUM)
 
         mAdapter = AlbumMediaAdapter(
-                context!!,
-                mSelectionProvider!!.provideSelectedItemCollection(),
-                mRecyclerView
+                context = context!!,
+                mSelectedCollection = mSelectionProvider!!.provideSelectedItemCollection(),
+                mRecyclerView = mRecyclerView,
+                mPhotoCaptureListener = when (activity) {
+                    is AlbumMediaAdapter.OnPhotoCapture -> activity as AlbumMediaAdapter.OnPhotoCapture
+                    else -> null
+                }
         ).apply {
             registerCheckStateListener(this@ZhihuImageListGridFragment)
             registerOnMediaClickListener(this@ZhihuImageListGridFragment)

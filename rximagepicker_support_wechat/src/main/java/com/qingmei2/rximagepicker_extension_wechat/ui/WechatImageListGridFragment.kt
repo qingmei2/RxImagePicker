@@ -74,8 +74,15 @@ class WechatImageListGridFragment : androidx.fragment.app.Fragment(), AlbumMedia
         super.onActivityCreated(savedInstanceState)
         val album = arguments!!.getParcelable<Album>(EXTRA_ALBUM)
 
-        mAdapter = WechatAlbumMediaAdapter(context!!,
-                mSelectionProvider!!.provideSelectedItemCollection(), mRecyclerView)
+        mAdapter = WechatAlbumMediaAdapter(
+                context = context!!,
+                selectedCollection = mSelectionProvider!!.provideSelectedItemCollection(),
+                recyclerView = mRecyclerView,
+                mPhotoCaptureListener = when (activity) {
+                    is AlbumMediaAdapter.OnPhotoCapture -> activity as AlbumMediaAdapter.OnPhotoCapture
+                    else -> null
+                }
+        )
         mAdapter.registerCheckStateListener(this)
         mAdapter.registerOnMediaClickListener(this)
         mRecyclerView.setHasFixedSize(true)

@@ -71,6 +71,7 @@ class WechatActivity : AppCompatActivity() {
     private fun openGallery() {
         rxImagePicker.openGallery(this,
                 WechatConfigrationBuilder(MimeType.ofImage(), false)
+                        .capture(true)
                         .maxSelectable(9)
                         .countable(true)
                         .spanCount(4)

@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
@@ -32,7 +33,7 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import java.util.*
 
-class WechatImagePickerFragment : androidx.fragment.app.Fragment(), IGalleryCustomPickerView,
+class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
         AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
         View.OnClickListener, WechatImageListGridFragment.SelectionProvider,
         AlbumMediaAdapter.OnMediaClickListener, AlbumMediaAdapter.CheckStateListener {

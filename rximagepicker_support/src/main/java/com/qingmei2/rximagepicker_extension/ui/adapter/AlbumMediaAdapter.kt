@@ -37,11 +37,12 @@ import com.qingmei2.rximagepicker_extension.ui.widget.MediaGrid
 
 open class AlbumMediaAdapter(context: Context,
                              private val mSelectedCollection: SelectedItemCollection,
-                             private val mRecyclerView: RecyclerView) :
+                             private val mRecyclerView: RecyclerView,
+                             private val mPhotoCaptureListener: OnPhotoCapture? = null) :
         RecyclerViewCursorAdapter<RecyclerView.ViewHolder>(null), MediaGrid.OnMediaGridClickListener {
 
     private var mPlaceholder: Drawable
-    private var mSelectionSpec: SelectionSpec
+    private val mSelectionSpec = SelectionSpec.instance
     private var mCheckStateListener: CheckStateListener? = null
     private var mOnMediaClickListener: OnMediaClickListener? = null
     private var mImageResize: Int = 0
@@ -49,30 +50,27 @@ open class AlbumMediaAdapter(context: Context,
     open val itemLayoutRes: Int = R.layout.media_grid_item
 
     init {
-        mSelectionSpec = SelectionSpec.instance
-
         val ta = context.theme.obtainStyledAttributes(intArrayOf(R.attr.item_placeholder))
         mPlaceholder = ta.getDrawable(0)
         ta.recycle()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == VIEW_TYPE_CAPTURE) {
-            val v = LayoutInflater.from(parent.context).inflate(R.layout.photo_capture_item, parent, false)
-            val holder = CaptureViewHolder(v)
-            holder.itemView.setOnClickListener { it ->
-                if (it.context is OnPhotoCapture) {
-                    (it.context as OnPhotoCapture).capture()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+            when (viewType) {
+                VIEW_TYPE_CAPTURE -> {
+                    CaptureViewHolder(
+                            LayoutInflater.from(parent.context).inflate(R.layout.photo_capture_item, parent, false)
+                    ).apply {
+                        itemView.setOnClickListener {
+                            mPhotoCaptureListener?.capture()
+                        }
+                    }
                 }
+                VIEW_TYPE_MEDIA -> {
+                    MediaViewHolder(LayoutInflater.from(parent.context).inflate(itemLayoutRes, parent, false))
+                }
+                else -> throw IllegalArgumentException("except VIEW_TYPE_CAPTURE(0x01) or VIEW_TYPE_MEDIA(0x02), but is $viewType")
             }
-            holder
-        } else if (viewType == VIEW_TYPE_MEDIA) {
-            val v = LayoutInflater.from(parent.context).inflate(itemLayoutRes, parent, false)
-            MediaViewHolder(v)
-        } else {
-            null!!
-        }
-    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, cursor: Cursor?) {
         if (holder is CaptureViewHolder) {
@@ -265,5 +263,4 @@ open class AlbumMediaAdapter(context: Context,
         private const val VIEW_TYPE_CAPTURE = 0x01
         private const val VIEW_TYPE_MEDIA = 0x02
     }
-
 }

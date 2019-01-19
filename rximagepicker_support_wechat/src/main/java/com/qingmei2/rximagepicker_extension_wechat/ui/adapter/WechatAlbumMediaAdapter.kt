@@ -9,9 +9,9 @@ import com.qingmei2.rximagepicker_extension_wechat.R
 
 class WechatAlbumMediaAdapter(context: Context,
                               selectedCollection: SelectedItemCollection,
-                              recyclerView: RecyclerView)
-    : AlbumMediaAdapter(context, selectedCollection, recyclerView) {
+                              recyclerView: RecyclerView,
+                              mPhotoCaptureListener: OnPhotoCapture? = null)
+    : AlbumMediaAdapter(context, selectedCollection, recyclerView, mPhotoCaptureListener) {
 
-    override val itemLayoutRes: Int
-        get() = R.layout.wechat_media_grid_item
+    override val itemLayoutRes: Int = R.layout.wechat_media_grid_item
 }
