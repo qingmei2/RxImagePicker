@@ -19,14 +19,15 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Path
 import android.graphics.RectF
-import androidx.appcompat.widget.AppCompatImageView
 import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatImageView
 
 class RoundedRectangleImageView : AppCompatImageView {
 
     private var mRadius: Float = 0.toFloat() // dp
-    private var mRoundedRectPath: Path? = null
-    private var mRectF: RectF? = null
+
+    private lateinit var mRoundedRectPath: Path
+    private lateinit var mRectF: RectF
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -49,12 +50,12 @@ class RoundedRectangleImageView : AppCompatImageView {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        mRectF!!.set(0.0f, 0.0f, width.toFloat(), height.toFloat())
-        mRoundedRectPath!!.addRoundRect(mRectF, mRadius, mRadius, Path.Direction.CW)
+        mRectF.set(0.0f, 0.0f, measuredWidth.toFloat(), measuredHeight.toFloat())
+        mRoundedRectPath.addRoundRect(mRectF, mRadius, mRadius, Path.Direction.CW)
     }
 
     override fun onDraw(canvas: Canvas) {
-        canvas.clipPath(mRoundedRectPath!!)
+        canvas.clipPath(mRoundedRectPath)
         super.onDraw(canvas)
     }
 }

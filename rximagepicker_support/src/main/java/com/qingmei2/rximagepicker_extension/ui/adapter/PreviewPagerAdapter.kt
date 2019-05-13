@@ -54,5 +54,4 @@ class PreviewPagerAdapter internal constructor(manager: androidx.fragment.app.Fr
 
         fun onPrimaryItemSet(position: Int)
     }
-
 }

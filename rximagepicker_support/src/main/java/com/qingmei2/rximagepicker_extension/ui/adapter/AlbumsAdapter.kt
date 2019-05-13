@@ -32,13 +32,13 @@ import java.io.File
 
 class AlbumsAdapter : CursorAdapter {
 
-    private val mPlaceholder: Drawable?
+    private var mPlaceholder: Drawable
 
     constructor(context: Context, c: Cursor?, autoRequery: Boolean) : super(context, c, autoRequery) {
 
         val ta = context.theme.obtainStyledAttributes(
                 intArrayOf(R.attr.album_thumbnail_placeholder))
-        mPlaceholder = ta.getDrawable(0)
+        mPlaceholder = ta.getDrawable(0)!!
         ta.recycle()
     }
 
@@ -46,12 +46,12 @@ class AlbumsAdapter : CursorAdapter {
 
         val ta = context.theme.obtainStyledAttributes(
                 intArrayOf(R.attr.album_thumbnail_placeholder))
-        mPlaceholder = ta.getDrawable(0)
+        mPlaceholder = ta.getDrawable(0)!!
         ta.recycle()
     }
 
     override fun newView(context: Context, cursor: Cursor, parent: ViewGroup): View {
-        val contextThemeWrapper = ContextThemeWrapper(context, SelectionSpec.instance!!.themeId)
+        val contextThemeWrapper = ContextThemeWrapper(context, SelectionSpec.instance.themeId)
         return LayoutInflater.from(context)
                 .cloneInContext(contextThemeWrapper)
                 .inflate(R.layout.album_list_item, parent, false)
@@ -62,10 +62,12 @@ class AlbumsAdapter : CursorAdapter {
         (view.findViewById<View>(R.id.album_name) as TextView).text = album.getDisplayName(context)
         (view.findViewById<View>(R.id.album_media_count) as TextView).text = album.count.toString()
 
-        SelectionSpec.instance?.imageEngine?.loadThumbnail(context,
+        SelectionSpec.instance.imageEngine.loadThumbnail(
+                context,
                 context.resources.getDimensionPixelSize(R.dimen.media_grid_size),
-                mPlaceholder!!,
+                mPlaceholder,
                 view.findViewById(R.id.album_cover),
-                Uri.fromFile(File(album.coverPath)))
+                Uri.fromFile(File(album.coverPath))
+        )
     }
 }

@@ -32,16 +32,16 @@ class ZhihuGlideEngine : ImageEngine {
 
     override fun loadThumbnail(context: Context, resize: Int, placeholder: Drawable, imageView: ImageView, uri: Uri) {
         Glide.with(context)
+                .asBitmap()     // some .jpeg files are actually gif
                 .load(uri)
-                .apply(RequestOptions.centerCropTransform()
-                        .placeholder(placeholder))
+                .apply(RequestOptions.centerCropTransform().placeholder(placeholder))
                 .into(imageView)
     }
 
     override fun loadGifThumbnail(context: Context, resize: Int, placeholder: Drawable, imageView: ImageView,
                                   uri: Uri) {
         Glide.with(context)
-                .asGif()
+                .asBitmap()     // some .jpeg files are actually gif
                 .load(uri)
                 .apply(RequestOptions.centerCropTransform()
                         .placeholder(placeholder))
@@ -63,8 +63,6 @@ class ZhihuGlideEngine : ImageEngine {
                 .into(imageView)
     }
 
-    override fun supportAnimatedGif(): Boolean {
-        return true
-    }
+    override fun supportAnimatedGif(): Boolean { return true }
 
 }

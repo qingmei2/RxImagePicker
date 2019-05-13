@@ -33,8 +33,7 @@ class WechatGlideEngine : ImageEngine {
     override fun loadThumbnail(context: Context, resize: Int, placeholder: Drawable, imageView: ImageView, uri: Uri) {
         Glide.with(context)
                 .load(uri)
-                .apply(RequestOptions.centerCropTransform()
-                        .placeholder(placeholder))
+                .apply(RequestOptions.centerCropTransform().placeholder(placeholder))
                 .into(imageView)
     }
 
