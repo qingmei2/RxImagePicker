@@ -23,9 +23,7 @@ RxImagePicker的UI自动化测试，请参考：
 * **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
 * **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
 
-> **最新版本为`2.4.2`，自`2.3.0`版本之后，库只提供对官方`AndroidX`的支持**，详情请参考Android官方文档[AndroidX Overview](https://developer.android.com/jetpack/androidx/).
-
-> 如果您的项目没有迁移`AndroidX`(即v7包的包名是`com.android.support`而非`androidx.appcompat`),请继续使用`2.2.0`的稳定版本，否则包名不同会导致编译错误！
+> 自`2.3.0`版本之后，库只提供对官方`AndroidX`的支持**，详情请参考Android官方文档[AndroidX Overview](https://developer.android.com/jetpack/androidx/).
 
 <h2 id="overview">简介</h2>
 
@@ -99,28 +97,25 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 
 ### 1. 添加依赖在Module的build.gradle文件中：
 
-如果您的v7包等依赖包名为`com.android.support`,请使用稳定版本`2.2.0`:
+如果您的项目已经迁移了`AndroidX`，建议依赖最新版本：
+
+<a target="_blank" href="https://bintray.com/mq2553299/maven/rximagepicker"><img
+        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"></a>
+</a>
 
 ```groovy
 // 最基础的架构，仅提供了系统默认的图片选择和拍照功能
-compile 'com.github.qingmei2:rximagepicker:2.2.0'
+compile 'com.github.qingmei2:rximagepicker:${last_version}'
 
 // 提供了自定义UI图片选择器的基本组件，自定义UI的需求需要添加该依赖
-compile 'com.github.qingmei2:rximagepicker_support:2.2.0'
+compile 'com.github.qingmei2:rximagepicker_support:${last_version}'
 
 // 如果需要额外的UI支持，请选择依赖对应的UI拓展库
-compile 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0'     // 知乎图片选择器
-compile 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0'    // 微信图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_zhihu:${last_version}'     // 知乎图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_wechat:${last_version}'    // 微信图片选择器
 ```
 
-如果您的项目已经迁移了`AndroidX`,请使用最新版本:
-
-```groovy
-compile 'com.github.qingmei2:rximagepicker:2.4.2'
-compile 'com.github.qingmei2:rximagepicker_support:2.4.2'
-compile 'com.github.qingmei2:rximagepicker_support_zhihu:2.4.2'
-compile 'com.github.qingmei2:rximagepicker_support_wechat:2.4.2'
-```
+> 如果您的项目没有迁移`AndroidX`(即v7包的包名是`com.android.support`而非`androidx.appcompat`),请继续使用`2.2.0`的稳定版本，否则包名不同会导致编译错误！
 
 ### 2. 接口配置
 

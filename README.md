@@ -23,10 +23,9 @@ RxImagePicker is a **reactive** picture selector for Android, which converts you
 
 ## Support
 
-- [x] Android Camera Photograph
-- [x] Android photo album picture selection
-- [x] Returns data in the format of reactive data stream ( such as `Observable/Flowable/Single/Maybe` )
-
+- [x] Android Camera Photograph  
+- [x] Android photo album picture selection  
+- [x] Returns data in the format of reactive data stream ( such as `Observable/Flowable/Single/Maybe` )  
 - [x] [AndroidX](https://developer.android.com/jetpack/androidx/) support ( after v2.3.0 )
 
 ## Support of UI
@@ -79,23 +78,27 @@ The following code will show you how to use photo album or camera at the Android
 // The most basic architecture, only provides the default
 // picture selector and photographing function of system.
 
-implementation 'com.github.qingmei2:rximagepicker:2.2.0'
+implementation 'com.github.qingmei2:rximagepicker:${last_version}'
 
 // Provide the basic components of custom UI picture selector
 // and this dependency needs to be added to the requirements of the custom UI
-implementation 'com.github.qingmei2:rximagepicker_support:2.2.0'
+implementation 'com.github.qingmei2:rximagepicker_support:${last_version}'
 
 
 // If you need additional UI support, choose to rely on the corresponding UI extension library
 
 // Zhihu picture selector
-implementation 'com.github.qingmei2:rximagepicker_support_zhihu:2.2.0'
+implementation 'com.github.qingmei2:rximagepicker_support_zhihu:${last_version}'
 
 // WeChat picture selector
-implementation 'com.github.qingmei2:rximagepicker_support_wechat:2.2.0'
+implementation 'com.github.qingmei2:rximagepicker_support_wechat:${last_version}'
 ```
 
-> **If your project use `androidx`, please use version `2.4.2`**.
+<a target="_blank" href="https://bintray.com/mq2553299/maven/rximagepicker"><img
+        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"></a>
+</a>
+
+> **If your project not use `androidx`, please use version `2.2.0`**.
 
 ### 2.Interface Configuration
 
