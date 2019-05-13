@@ -23,7 +23,7 @@ RxImagePicker的UI自动化测试，请参考：
 * **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
 * **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
 
-> 自`2.3.0`版本之后，库只提供对官方`AndroidX`的支持**，详情请参考Android官方文档[AndroidX Overview](https://developer.android.com/jetpack/androidx/).
+> 自`2.3.0`版本之后，库只提供对官方`AndroidX`的支持，详情请参考Android官方文档[AndroidX Overview](https://developer.android.com/jetpack/androidx/).
 
 <h2 id="overview">简介</h2>
 
