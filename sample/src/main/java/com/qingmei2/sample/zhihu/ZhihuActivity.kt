@@ -3,6 +3,7 @@ package com.qingmei2.sample.zhihu
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -11,6 +12,7 @@ import com.qingmei2.rximagepicker.core.RxImagePicker
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker_extension.MimeType
 import com.qingmei2.rximagepicker_extension_zhihu.ZhihuConfigurationBuilder
+import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerFragment
 import com.qingmei2.sample.R
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -105,6 +107,18 @@ class ZhihuActivity : AppCompatActivity() {
         }
 
         override fun onNext(result: Result) {
+            // Usage
+            // val isGif: Boolean
+            //  get() = if (mimeType == null) false else mimeType == MimeType.GIF.toString()
+            // val isImage: Boolean
+            //  get() = if (mimeType == null) false else mimeType == MimeType.JPEG.toString()
+            //        || mimeType == MimeType.PNG.toString()
+            //        || mimeType == MimeType.GIF.toString()
+            //        || mimeType == MimeType.BMP.toString()
+            //        || mimeType == MimeType.WEBP.toString()
+            val mimeType = result.getStringExtra(ZhihuImagePickerFragment.EXTRA_OPTIONAL_MIME_TYPE, "")
+            Log.d("tag", "mime types: $mimeType")
+
             Glide.with(this@ZhihuActivity)
                     .load(result.uri)
                     .into(imageView)

@@ -3,7 +3,6 @@ package com.qingmei2.rximagepicker_extension_wechat.ui
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -233,11 +232,9 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
     }
 
     private fun emitSelectUri() {
-        val selectedUris = mSelectedCollection!!.asListOfUri() as ArrayList<Uri>
-        for (uri in selectedUris) {
-            publishSubject.onNext(
-                    instanceResult(uri)
-            )
+        val selected = mSelectedCollection!!.asList() as ArrayList<Item>
+        for (item in selected) {
+            publishSubject.onNext(instanceResult(item))
         }
         endPickImage()
     }
@@ -261,13 +258,9 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
                 if (selected != null) {
                     for (item in selected) {
                         if (activity is WechatImagePickerActivity) {
-                            ActivityPickerViewController.instance.emitResult(
-                                    instanceResult(item.contentUri)
-                            )
+                            ActivityPickerViewController.instance.emitResult(instanceResult(item))
                         } else {
-                            publishSubject.onNext(
-                                    instanceResult(item.contentUri)
-                            )
+                            publishSubject.onNext(instanceResult(item))
                         }
                     }
                 }
@@ -284,14 +277,19 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
         }
     }
 
-    private fun instanceResult(uri: Uri?): Result {
-        return Result.Builder(uri!!)
+    private fun instanceResult(item: Item): Result {
+        return Result.Builder(item.contentUri)
                 .putBooleanExtra(EXTRA_ORIGINAL_IMAGE, imageOriginalMode)
+                .putStringExtra(EXTRA_OPTIONAL_MIME_TYPE, item.mimeType ?: "")
                 .build()
     }
 
     companion object {
 
+        // Whether to display the original image.
         const val EXTRA_ORIGINAL_IMAGE = "EXTRA_ORIGINAL_IMAGE"
+
+        // The Uri's mime type.
+        const val EXTRA_OPTIONAL_MIME_TYPE = "EXTRA_OPTIONAL_MIME_TYPE"
     }
 }

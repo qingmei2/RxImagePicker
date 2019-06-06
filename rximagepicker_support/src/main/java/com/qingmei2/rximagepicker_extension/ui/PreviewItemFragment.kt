@@ -59,7 +59,7 @@ class PreviewItemFragment : androidx.fragment.app.Fragment() {
         val image = view.findViewById<ImageViewTouch>(R.id.image_view)
         image.displayType = ImageViewTouchBase.DisplayType.FIT_TO_SCREEN
 
-        val size = PhotoMetadataUtils.getBitmapSize(item.contentUri!!, activity!!)
+        val size = PhotoMetadataUtils.getBitmapSize(item.contentUri, activity!!)
         if (item.isGif) {
             SelectionSpec.instance.imageEngine.loadGifImage(context!!, size.x, size.y, image,
                     item.contentUri)

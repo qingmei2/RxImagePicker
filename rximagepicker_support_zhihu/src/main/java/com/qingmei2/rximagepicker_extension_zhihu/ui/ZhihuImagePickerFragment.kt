@@ -3,7 +3,6 @@ package com.qingmei2.rximagepicker_extension_zhihu.ui
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -15,7 +14,6 @@ import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import com.qingmei2.rximagepicker.entity.Result
-import com.qingmei2.rximagepicker.function.parseResultNoExtraData
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
 import com.qingmei2.rximagepicker.ui.gallery.IGalleryCustomPickerView
@@ -222,9 +220,9 @@ class ZhihuImagePickerFragment : androidx.fragment.app.Fragment(), IGalleryCusto
     }
 
     private fun emitSelectUri() {
-        val selectedUris = mSelectedCollection.asListOfUri() as ArrayList<Uri>
-        for (uri in selectedUris) {
-            publishSubject.onNext(parseResultNoExtraData(uri))
+        val selectedItems = mSelectedCollection.asList() as ArrayList<Item>
+        for (item in selectedItems) {
+            publishSubject.onNext(instanceResult(item))
         }
         endPickImage()
     }
@@ -248,13 +246,9 @@ class ZhihuImagePickerFragment : androidx.fragment.app.Fragment(), IGalleryCusto
                 if (selected != null) {
                     for (item in selected) {
                         if (activity is ZhihuImagePickerActivity) {
-                            ActivityPickerViewController.instance.emitResult(
-                                    parseResultNoExtraData(item.contentUri!!)
-                            )
+                            ActivityPickerViewController.instance.emitResult(instanceResult(item))
                         } else {
-                            publishSubject.onNext(
-                                    parseResultNoExtraData(item.contentUri!!)
-                            )
+                            publishSubject.onNext(instanceResult(item))
                         }
                     }
                 }
@@ -269,5 +263,17 @@ class ZhihuImagePickerFragment : androidx.fragment.app.Fragment(), IGalleryCusto
                 updateBottomToolbar()
             }
         }
+    }
+
+    private fun instanceResult(item: Item): Result {
+        return Result.Builder(item.contentUri)
+                .putStringExtra(EXTRA_OPTIONAL_MIME_TYPE, item.mimeType ?: "")
+                .build()
+    }
+
+    companion object {
+
+        // The Uri's mime type.
+        const val EXTRA_OPTIONAL_MIME_TYPE = "EXTRA_OPTIONAL_MIME_TYPE"
     }
 }

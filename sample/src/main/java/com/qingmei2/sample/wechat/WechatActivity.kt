@@ -83,7 +83,19 @@ class WechatActivity : AppCompatActivity() {
     private fun onNext(): Consumer<Result> =
             Consumer { result ->
                 val originalMode = result.getBooleanExtra(WechatImagePickerFragment.EXTRA_ORIGINAL_IMAGE, false)
+                val mimeType = result.getStringExtra(WechatImagePickerFragment.EXTRA_OPTIONAL_MIME_TYPE, "")
                 Log.d(TAG, "select image original:" + originalMode + " , uri path: " + result.uri.path)
+
+                // Usage
+                // val isGif: Boolean
+                //  get() = if (mimeType == null) false else mimeType == MimeType.GIF.toString()
+                // val isImage: Boolean
+                //  get() = if (mimeType == null) false else mimeType == MimeType.JPEG.toString()
+                //        || mimeType == MimeType.PNG.toString()
+                //        || mimeType == MimeType.GIF.toString()
+                //        || mimeType == MimeType.BMP.toString()
+                //        || mimeType == MimeType.WEBP.toString()
+                Log.d(TAG, "mime types: $mimeType")
 
                 Glide.with(this@WechatActivity)
                         .load(result.uri)

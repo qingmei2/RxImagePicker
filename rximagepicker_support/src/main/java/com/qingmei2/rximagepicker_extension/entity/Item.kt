@@ -26,9 +26,10 @@ import android.provider.MediaStore
 import com.qingmei2.rximagepicker_extension.MimeType
 
 class Item : Parcelable {
+
     val id: Long
     val mimeType: String?
-    val contentUri: Uri?
+    val contentUri: Uri
     val size: Long
     val duration: Long // only for video, in ms
 
