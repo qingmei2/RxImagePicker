@@ -12,6 +12,8 @@
 
 ## 通知（重要）
 
+* `RxImagePicker 3.0.0-alpha01`已发布，3.x版本提供了对`RxJava3`的支持，详情请参考下方更新日志。
+
 * **[详细文档，包括进阶使用和拓展功能,请点击查看wiki！](https://github.com/qingmei2/RxImagePicker/wiki)**
 * **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
 * **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
