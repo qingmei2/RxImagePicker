@@ -126,7 +126,7 @@ class ZhihuActivity : AppCompatActivity() {
 
         override fun onError(e: Throwable) {
             e.printStackTrace()
-            Toast.makeText(this@ZhihuActivity, "Failed: " + e.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@ZhihuActivity, "Failed: $e", Toast.LENGTH_SHORT).show()
         }
 
         override fun onComplete() {
