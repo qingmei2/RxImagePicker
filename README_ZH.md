@@ -9,13 +9,6 @@
 <a target="_blank"><img src="https://img.shields.io/badge/API-16+-green.svg"></a>
 <a target="_blank" href="https://github.com/qingmei2/RxImagePicker/blob/2.x/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 
-RxImagePicker的设计起源，请参考：
-
-> [RxImagePicker:从零实现灵活且可高度定制的Android图片选择架构](https://www.jianshu.com/p/fecf3a13e615)
-
-RxImagePicker的UI自动化测试，请参考：
-
-> [全副武装！AndroidUI自动化测试在RxImagePicker中的实践历程](https://www.jianshu.com/p/6b78f6f93430)
 
 ## 通知（重要）
 
@@ -23,7 +16,8 @@ RxImagePicker的UI自动化测试，请参考：
 * **[常见问题](https://github.com/qingmei2/RxImagePicker/wiki/常见问题)** : 提issue之前查看一下，也许能节省您很多的时间！  
 * **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
 
-> 自`2.3.0`版本之后，库只提供对官方`AndroidX`的支持，详情请参考Android官方文档[AndroidX Overview](https://developer.android.com/jetpack/androidx/).
+* `RxImagePicker`的设计起源，请参考[这篇文章](https://www.jianshu.com/p/fecf3a13e615)
+* `RxImagePicker`的的UI自动化测试，请参考[这篇文章](https://www.jianshu.com/p/6b78f6f93430)
 
 <h2 id="overview">简介</h2>
 
@@ -46,6 +40,7 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 - [x] 覆盖全面的**UI自动化测试**，详见下方示例截图。
 
 - [x] 对[AndroidX](https://developer.android.com/jetpack/androidx/)的支持（after v2.3.0+）。
+- [x] 支持 `RxJava2` 和 `RxJava3`。
 
 ### UI的支持
 
@@ -117,6 +112,10 @@ compile 'com.github.qingmei2:rximagepicker_support_wechat:${last_version}'    //
 
 > 如果您的项目没有迁移`AndroidX`(即v7包的包名是`com.android.support`而非`androidx.appcompat`),请继续使用`2.2.0`的稳定版本，否则包名不同会导致编译错误！
 
+> 如果您的项目没有迁移`RxJava3`,请继续使用`2.5.0`的稳定版本，否则`groupId`不同会导致编译错误！
+
+个人开发者时间有限，故接下来的版本更新支持主要以 **3.x** （`RxJava3`+`AndroidX`） 为主，`RxJava2`的支持将会和官方保持同步（截止至2020年）。
+
 ### 2. 接口配置
 
 声明一个接口，并进行基础的配置：
@@ -165,7 +164,7 @@ private void onButtonClick() {
 
 ## 其他RxJava项目
 
-* [RxWeaver: A lightweight and flexible error handler tools of RxJava2.](https://github.com/qingmei2/RxWeaver)
+* [RxWeaver: A lightweight and flexible error handler tools of RxJava.](https://github.com/qingmei2/RxWeaver)
 
 * [MVVM-Rhine: The MVVM using RxJava and Android databinding.](https://github.com/qingmei2/MVVM-Rhine)
 
@@ -175,22 +174,15 @@ private void onButtonClick() {
 
 * [Retrofit:Type-safe HTTP client for Android and Java by Square, Inc. ](https://github.com/square/retrofit)  
 	Retrofit是聚集了诸多优秀的 **设计思想** 和 **架构设计** 于一身的库，它将复杂多样的 **网络请求** 需求转换成了接口供开发者配置，我认为RxImagePicker也可以这样做。
-
 * [RxJava:a library for composing asynchronous and event-based programs using observable sequences for the Java VM.](https://github.com/ReactiveX/RxJava)  
 	一个在 Java VM 上使用可观测的序列来组成异步的、基于事件的程序的库, 随着程序逻辑变得越来越复杂，它依然能够保持简洁。它是构成RxImagePicker的 **基础组件** 。
-
 * [RxAndroid:RxJava bindings for Android](https://github.com/ReactiveX/RxAndroid)  
 	RxJava的一个扩展库，更好的兼容了Android特性，比如主线程，UI事件等。它是构成RxImagePicker的 **基础组件** 。
-
 * [RxImagePicker:Android. Pick image from camera or gallery using RxJava2](https://github.com/MLSDev/RxImagePicker)  
 * [RxPermissions:Android runtime permissions powered by RxJava2](https://github.com/tbruyelle/RxPermissions)  
 * [RxLifecycle:Lifecycle handling APIs for Android apps using RxJava](https://github.com/trello/RxLifecycle)  
 	这三个优秀的RxJava拓展库，在数据的传递方案上，给与了我很大的启示。
-* [RxCache:Reactive caching library for Android and Java](https://github.com/VictorAlbertos/RxCache)  
-	优秀的RxJava拓展库，用于处理RxJava的数据缓存，库底层通过Dagger完成对配置的处理，我借鉴在了RxImagePicker中。
-* [Dagger2：A fast dependency injector for Android and Java.](https://github.com/google/dagger)  
-	Google优秀的依赖注入框架，0.4.0版本之前，它是构成RxImagePicker的 **基础组件** 。
-* [Matisse:A well-designed local image and video selector for Android](https://github.com/zhihu/Matisse)  
+* [Matisse:A well-designed local image and video selector for Android](https://github.com/zhihu/Matisse)
 	知乎开源，优秀的Android图片选择库，拥有非常 **Material Design** 的设计。在RxImagePicker中，Matisse被抽出来放入了RxImagePicker_Support，成为了 **UI层的基础组件** 。
 
 ## 混淆
@@ -201,6 +193,7 @@ private void onButtonClick() {
 
 * [13kmsteady](https://github.com/13kmsteady)
 * [guoleifei](https://github.com/guoleifei)
+* [SunnyQjm](https://github.com/SunnyQjm)
 
 License
 -------

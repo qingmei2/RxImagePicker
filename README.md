@@ -10,7 +10,7 @@
 <a target="_blank" href="https://github.com/qingmei2/RxImagePicker/blob/2.x/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 
 
-Support for `RxJava2`. Flexible picture selector of Android, provides the support for theme of Zhihu and WeChat.
+Support for `RxJava2` and **`RxJava3`**. Flexible picture selector of Android, provides the support for theme of Zhihu and WeChat.
 
 > `Zhihu`: Famous Online Q&A Community APP in China.  
 > `WeChat`: Most Used Instant Messaging Social Networking App in China.
@@ -27,12 +27,13 @@ RxImagePicker is a **reactive** picture selector for Android, which converts you
 - [x] Android photo album picture selection  
 - [x] Returns data in the format of reactive data stream ( such as `Observable/Flowable/Single/Maybe` )  
 - [x] [AndroidX](https://developer.android.com/jetpack/androidx/) support ( after v2.3.0 )
+- [x] **RxJava2** & **RxJava3** ( after v3.0.0 )
 
-## Support of UI
+## Themes
 
 - [x] System Picture Selector
 - [x] [Optional] Theme Picture Selector of Zhihu
-- [x] [Optional] Theme Picture Selector of WeChat ()
+- [x] [Optional] Theme Picture Selector of WeChat
 - [x] [Optional] Custom UI Picture Selector
 
 ## Screenshots
@@ -98,7 +99,9 @@ implementation 'com.github.qingmei2:rximagepicker_support_wechat:${last_version}
         src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"></a>
 </a>
 
-> **If your project not use `androidx`, please use version `2.2.0`**.
+> **If your project not use `androidx`, please use version `2.2.0`.**
+
+> **If your project not migrate to `RxJava3`, please use version `2.5.0`.**
 
 ### 2.Interface Configuration
 
@@ -300,12 +303,6 @@ Though RxImagePicker provides the UI style of `WeChat` picture selector and `Zhi
 RxImagePicker provides enough degree of freedom interface to provide private customized UI for developers. Whether a new `Activity` is created or displayed in a `ViewGroup` container at present, it is enough.
 
 The above WeChat theme and Zhihu theme are based on its to implement. Please refer to the source code for detailed implementation.
-
-## Another author's libraries using RxJava:
-
-* [RxWeaver: A lightweight and flexible error handler tools of RxJava2.](https://github.com/qingmei2/RxWeaver)
-
-* [MVVM-Rhine: The MVVM using RxJava and Android databinding.](https://github.com/qingmei2/MVVM-Rhine)
 
 ## License
     The RxImagePicker：MIT License
