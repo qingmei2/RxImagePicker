@@ -56,7 +56,7 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
     private var imageOriginalMode = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val contextThemeWrapper = ContextThemeWrapper(activity, SelectionSpec.instance!!.themeId)
+        val contextThemeWrapper = ContextThemeWrapper(activity, SelectionSpec.instance.themeId)
         val localInflater = inflater
                 .cloneInContext(contextThemeWrapper)
         return localInflater.inflate(R.layout.fragment_picker_wechat, container, false)

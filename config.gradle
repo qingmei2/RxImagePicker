@@ -8,8 +8,8 @@ project.ext {
             compileSdkVersion: 28,
             minSdkVersion    : 16,
             targetSdkVersion : 28,
-            versionCode      : 28,
-            versionName      : "2.5.0"
+            versionCode      : 29,
+            versionName      : "3.0.0-alpha01"
     ]
 
     constants = [
@@ -19,7 +19,6 @@ project.ext {
     ]
 
     dependencies = [
-            //android-support
             "support-v4"              : "androidx.legacy:legacy-support-v4:1.0.0",
             "appcompat"               : "androidx.appcompat:appcompat:1.0.0",
             "recyclerview"            : "androidx.recyclerview:recyclerview:1.0.0",
@@ -32,10 +31,8 @@ project.ext {
             "kotlin-reflect"          : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
 
             //rx
-            "rxJava2"                 : "io.reactivex.rxjava2:rxjava:2.2.0",
+            "rxjava3"                 : "io.reactivex.rxjava3:rxjava:3.0.0-RC0",
             "rxandroid"               : "io.reactivex.rxjava2:rxandroid:2.1.0",
-            "rxkotlin"                : "io.reactivex.rxjava2:rxkotlin:2.2.0",
-            "rxbinding"               : "com.jakewharton.rxbinding2:rxbinding:2.0.0",
 
             //glide
             "glide"                   : "com.github.bumptech.glide:glide:${glide_version}",

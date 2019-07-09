@@ -53,7 +53,7 @@ class ZhihuImagePickerFragment : androidx.fragment.app.Fragment(), IGalleryCusto
     private lateinit var mEmptyView: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val contextThemeWrapper = ContextThemeWrapper(activity, SelectionSpec.instance!!.themeId)
+        val contextThemeWrapper = ContextThemeWrapper(activity, SelectionSpec.instance.themeId)
         val localInflater = inflater
                 .cloneInContext(contextThemeWrapper)
         return localInflater.inflate(R.layout.fragment_picker_zhihu, container, false)

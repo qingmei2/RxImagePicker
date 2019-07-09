@@ -102,7 +102,7 @@ class Item : Parcelable {
         val other = obj as Item?
         return (id == other!!.id
                 && (mimeType != null && mimeType == other.mimeType || mimeType == null && other.mimeType == null)
-                && (contentUri != null && contentUri == other.contentUri || contentUri == null && other.contentUri == null)
+                && (contentUri == other.contentUri)
                 && size == other.size
                 && duration == other.duration)
     }

@@ -32,10 +32,14 @@ android {
 dependencies {
     compileOnly rootProject.ext.dependencies["appcompat"]
 
-    api rootProject.ext.dependencies["rxkotlin"]
-    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["rxjava3"]
+    api(rootProject.ext.dependencies["rxandroid"]) {
+        exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+    }
+
     implementation rootProject.ext.dependencies["kotlin-android"]
     implementation rootProject.ext.dependencies["kotlin-reflect"]
+
     testImplementation rootProject.ext.dependencies["junit"]
     testImplementation rootProject.ext.dependencies["mockito-kotlin"]
 }

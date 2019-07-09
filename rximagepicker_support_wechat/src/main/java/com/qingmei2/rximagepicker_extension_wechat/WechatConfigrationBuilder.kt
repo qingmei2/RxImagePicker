@@ -120,8 +120,7 @@ class WechatConfigrationBuilder
         if (mSelectionSpec.filters == null) {
             mSelectionSpec.filters = ArrayList()
         }
-        if (filter == null) throw IllegalArgumentException("filter cannot be null")
-        mSelectionSpec.filters!!.add(filter)
+        mSelectionSpec.filters?.add(filter)
         return this
     }
 

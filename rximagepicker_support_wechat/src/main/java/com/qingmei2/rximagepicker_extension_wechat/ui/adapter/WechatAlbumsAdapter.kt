@@ -36,7 +36,7 @@ class WechatAlbumsAdapter : CursorAdapter {
     }
 
     override fun newView(context: Context, cursor: Cursor, parent: ViewGroup): View {
-        val contextThemeWrapper = ContextThemeWrapper(context, SelectionSpec.instance!!.themeId)
+        val contextThemeWrapper = ContextThemeWrapper(context, SelectionSpec.instance.themeId)
         return LayoutInflater.from(context)
                 .cloneInContext(contextThemeWrapper)
                 .inflate(R.layout.wechat_album_list_item, parent, false)
