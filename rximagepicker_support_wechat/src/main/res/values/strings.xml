@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">rximagepicker_extension_wechat</string>
     <string name="album_name_all">All Media</string>
     <string name="send_original">Original</string>
 </resources>
