@@ -1,13 +1,13 @@
 # RxImagePicker
 
-#### English Documentation | [中文文档](https://github.com/qingmei2/RxImagePicker/blob/2.x/README_ZH.md)
+#### English Documentation | [中文文档](https://github.com/qingmei2/RxImagePicker/blob/3.x/README_ZH.md)
 
 <p/>
 
 <a target="_blank" href="https://bintray.com/mq2553299/maven/rximagepicker"><img
         src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"></a>
 <a target="_blank"><img src="https://img.shields.io/badge/API-16+-green.svg"></a>
-<a target="_blank" href="https://github.com/qingmei2/RxImagePicker/blob/2.x/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+<a target="_blank" href="https://github.com/qingmei2/RxImagePicker/blob/3.x/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 
 
 Support for `RxJava2` and **`RxJava3`**. Flexible picture selector of Android, provides the support for theme of Zhihu and WeChat.
@@ -41,32 +41,32 @@ RxImagePicker is a **reactive** picture selector for Android, which converts you
 ### Selection and result display of system picture:
 
 <div align:left;display:inline;>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_sysytem.png"/>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_result.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/3.x/screenshot/screenshot_sysytem.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/3.x/screenshot/screenshot_result.png"/>
 </div>
 
 ### Theme of Zhihu
 
 <div align:left;display:inline;>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_zhihu_dracula.png"/>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_zhihu_normal.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/3.x/screenshot/screenshot_zhihu_dracula.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/3.x/screenshot/screenshot_zhihu_normal.png"/>
 </div>
 
 ### Theme of WeChat
 
 <div align:left;display:inline;>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_wechat.png"/>
-<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/screenshot_wechat_expand.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/3.x/screenshot/screenshot_wechat.png"/>
+<img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/3.x/screenshot/screenshot_wechat_expand.png"/>
 </div>
 
 ### UI Test
 
 <div align:left;display:inline;>
-<img width="235" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/rximagepicker_test.gif"/>
+<img width="235" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/3.x/screenshot/rximagepicker_test.gif"/>
 </div>
 
 <div align:left;display:inline;>
-<img width="608" height="175" src="https://github.com/qingmei2/RxImagePicker/blob/2.x/screenshot/test_result.png"/>
+<img width="608" height="175" src="https://github.com/qingmei2/RxImagePicker/blob/3.x/screenshot/test_result.png"/>
 </div>
 
 ## Basic Usage
@@ -192,7 +192,7 @@ rxImagePicker.openGalleryAsNormal(this,
                 }
 ```
 
-see [sample](https://github.com/qingmei2/RxImagePicker/blob/2.x/sample/src/main/java/com/qingmei2/sample/zhihu/ZhihuActivity.kt) for more informations.
+see [sample](https://github.com/qingmei2/RxImagePicker/blob/3.x/sample/src/main/java/com/qingmei2/sample/zhihu/ZhihuActivity.kt) for more informations.
 
 ## Advanced Usage
 
@@ -248,7 +248,7 @@ interface ZhihuImagePicker {
 }
 ```
 
-For more information, please refer to the [ZhihuActivity](https://github.com/qingmei2/RxImagePicker/blob/2.x/sample/src/main/java/com/qingmei2/sample/zhihu/ZhihuActivity.kt) in sample.
+For more information, please refer to the [ZhihuActivity](https://github.com/qingmei2/RxImagePicker/blob/3.x/sample/src/main/java/com/qingmei2/sample/zhihu/ZhihuActivity.kt) in sample.
 
 At the same time, when UI needs to be displayed as `Fragment`, `RxImagePicker` needs to be informed of the `id` of the `ViewGroup` control so that `RxImagePicker` can be correctly displayed in the corresponding `ViewGroup`.
 
@@ -276,7 +276,7 @@ interface ICustomPickerView {
 }
 ```
 
-It has several classic implementation classes, for example, [ImagePickerDisplayer](https://github.com/qingmei2/RxImagePicker/blob/2.x/rximagepicker/src/main/java/com/qingmei2/rximagepicker/core/ImagePickerDisplayer.kt) when open the corresponding activity through configuration;
+It has several classic implementation classes, for example, [ImagePickerDisplayer](https://github.com/qingmei2/RxImagePicker/blob/3.x/rximagepicker/src/main/java/com/qingmei2/rximagepicker/core/ImagePickerDisplayer.kt) when open the corresponding activity through configuration;
 
 ### 3.Context: necessary parameters.
 
@@ -294,7 +294,7 @@ Note, This `Context` must be a `FragmentActivity`, not `Application` or others, 
 
 As for opening the system photo album or system camera, it makes no sense to configure, but **it must be configured for custom UI** ( such as `WeChat` theme and `Zhihu` theme ).
 
-The basic components of RxImagePicker do not provide the implementation class, please refer to [SelectionSpec](https://github.com/qingmei2/RxImagePicker/blob/2.x/rximagepicker_support/src/main/java/com/qingmei2/rximagepicker_extension/entity/SelectionSpec.kt) if any questions.
+The basic components of RxImagePicker do not provide the implementation class, please refer to [SelectionSpec](https://github.com/qingmei2/RxImagePicker/blob/3.x/rximagepicker_support/src/main/java/com/qingmei2/rximagepicker_extension/entity/SelectionSpec.kt) if any questions.
 
 ### 2.5 Complete full custom UI
 
