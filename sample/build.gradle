@@ -34,35 +34,43 @@ android {
     }
 }
 
-def dependRemote = false
+final boolean useRemote = false
+final String substituteReason = 'we work with the unreleased development version.'
+
+final String rxImagePickerRemote = "com.github.qingmei2:rximagepicker:$rootProject.ext.android.versionName"
+final String rxImagePickerUiRemote = "com.github.qingmei2:rximagepicker_support:$rootProject.ext.android.versionName"
+final String rxImagePickerZhihuRemote = "com.github.qingmei2:rximagepicker_support_zhihu:$rootProject.ext.android.versionName"
+final String rxImagePickerWechatRemote = "com.github.qingmei2:rximagepicker_support_wechat:$rootProject.ext.android.versionName"
 
 dependencies {
-    implementation rootProject.ext.dependencies["kotlin-android"]
-    implementation rootProject.ext.dependencies["appcompat"]
-    implementation(rootProject.ext.dependencies["design"]) {
-        exclude group: 'androidx.recyclerview'
+    configurations.all {
+        resolutionStrategy.dependencySubstitution {
+            if (!useRemote) {
+                substitute module(rxImagePickerRemote) because substituteReason with project(':rximagepicker')
+                substitute module(rxImagePickerUiRemote) because substituteReason with project(':rximagepicker_support')
+                substitute module(rxImagePickerZhihuRemote) because substituteReason with project(':rximagepicker_support_wechat')
+                substitute module(rxImagePickerWechatRemote) because substituteReason with project(':rximagepicker_support_zhihu')
+            }
+        }
     }
 
-    implementation rootProject.ext.dependencies["glide"]
-    kapt rootProject.ext.dependencies["glide-compiler"]
+    implementation rootProject.ext.dependencies['kotlin-android']
+    implementation rootProject.ext.dependencies['appcompat']
+    implementation rootProject.ext.dependencies['design']
 
-    androidTestImplementation rootProject.ext.dependencies["espresso-core"]
-    androidTestImplementation rootProject.ext.dependencies["espresso-contrib"]
-    androidTestImplementation rootProject.ext.dependencies["espresso-intent"]
-    androidTestImplementation rootProject.ext.dependencies["test-runner"]
-    androidTestImplementation rootProject.ext.dependencies["test-rules"]
+    implementation rootProject.ext.dependencies['glide']
+    kapt rootProject.ext.dependencies['glide-compiler']
 
-    if (dependRemote) {
-        implementation "com.github.qingmei2:rximagepicker:$rootProject.ext.android.versionName"
-        implementation "com.github.qingmei2:rximagepicker_support:$rootProject.ext.android.versionName"
-        implementation "com.github.qingmei2:rximagepicker_support_zhihu:$rootProject.ext.android.versionName"
-        implementation "com.github.qingmei2:rximagepicker_support_wechat:$rootProject.ext.android.versionName"
-    } else {
-        implementation project(':rximagepicker')
-        implementation project(':rximagepicker_support')
-        implementation project(':rximagepicker_support_wechat')
-        implementation project(':rximagepicker_support_zhihu')
-    }
+    androidTestImplementation rootProject.ext.dependencies['espresso-core']
+    androidTestImplementation rootProject.ext.dependencies['espresso-contrib']
+    androidTestImplementation rootProject.ext.dependencies['espresso-intent']
+    androidTestImplementation rootProject.ext.dependencies['test-runner']
+    androidTestImplementation rootProject.ext.dependencies['test-rules']
+
+    implementation rxImagePickerRemote
+    implementation rxImagePickerUiRemote
+    implementation rxImagePickerZhihuRemote
+    implementation rxImagePickerWechatRemote
 
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["junit"]
