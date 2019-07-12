@@ -34,7 +34,7 @@ android {
     }
 }
 
-final boolean useRemote = false
+final boolean useRemote = true
 final String substituteReason = 'we work with the unreleased development version.'
 
 final String rxImagePickerRemote = "com.github.qingmei2:rximagepicker:$rootProject.ext.android.versionName"
@@ -42,8 +42,8 @@ final String rxImagePickerUiRemote = "com.github.qingmei2:rximagepicker_support:
 final String rxImagePickerZhihuRemote = "com.github.qingmei2:rximagepicker_support_zhihu:$rootProject.ext.android.versionName"
 final String rxImagePickerWechatRemote = "com.github.qingmei2:rximagepicker_support_wechat:$rootProject.ext.android.versionName"
 
-dependencies {
-    configurations.all {
+configurations{
+    all {
         resolutionStrategy.dependencySubstitution {
             if (!useRemote) {
                 substitute module(rxImagePickerRemote) because substituteReason with project(':rximagepicker')
@@ -53,7 +53,10 @@ dependencies {
             }
         }
     }
+    compile.exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+}
 
+dependencies {
     implementation rootProject.ext.dependencies['kotlin-android']
     implementation rootProject.ext.dependencies['appcompat']
     implementation rootProject.ext.dependencies['design']
