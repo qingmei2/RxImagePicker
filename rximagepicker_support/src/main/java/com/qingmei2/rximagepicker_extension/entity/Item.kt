@@ -57,17 +57,15 @@ class Item : Parcelable {
                 || mimeType == MimeType.TS.toString()
                 || mimeType == MimeType.AVI.toString()
 
-    private constructor(id: Long, mimeType: String, size: Long, duration: Long) {
+    private constructor(id: Long, mimeType: String?, size: Long, duration: Long) {
         this.id = id
         this.mimeType = mimeType
         val contentUri: Uri
-        if (isImage) {
-            contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        } else if (isVideo) {
-            contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-        } else {
-            // ?
-            contentUri = MediaStore.Files.getContentUri("external")
+        contentUri = when {
+            isImage -> MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            isVideo -> MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+            else -> // ?
+                MediaStore.Files.getContentUri("external")
         }
         this.contentUri = ContentUris.withAppendedId(contentUri, id)
         this.size = size
@@ -120,7 +118,8 @@ class Item : Parcelable {
     }
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<Item> = object : Parcelable.Creator<Item> {
+        @JvmField
+        val CREATOR: Parcelable.Creator<Item> = object : Parcelable.Creator<Item> {
             override fun createFromParcel(source: Parcel): Item? {
                 return Item(source)
             }
