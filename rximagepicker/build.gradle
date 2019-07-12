@@ -29,26 +29,13 @@ android {
     }
 }
 
-configurations {
-    compile.exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
-    all {
-        resolutionStrategy {
-            eachDependency { DependencyResolveDetails details ->
-                if (details.requested.group == 'io.reactivex.rxjava3' &&
-                        details.requested.name == 'rxjava') {
-                    details.useVersion '3.0.0-RC0'
-                    details.because 'Unified dependency version.'
-                }
-            }
-        }
-    }
-}
-
 dependencies {
     compileOnly rootProject.ext.dependencies['appcompat']
 
     api rootProject.ext.dependencies['rxjava3']
-    api rootProject.ext.dependencies['rxandroid']
+    api(rootProject.ext.dependencies['rxandroid']) {
+        exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+    }
 
     implementation rootProject.ext.dependencies['kotlin-android']
     implementation rootProject.ext.dependencies['kotlin-reflect']

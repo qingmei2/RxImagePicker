@@ -42,18 +42,27 @@ final String rxImagePickerUiRemote = "com.github.qingmei2:rximagepicker_support:
 final String rxImagePickerZhihuRemote = "com.github.qingmei2:rximagepicker_support_zhihu:$rootProject.ext.android.versionName"
 final String rxImagePickerWechatRemote = "com.github.qingmei2:rximagepicker_support_wechat:$rootProject.ext.android.versionName"
 
-configurations{
+configurations {
     all {
-        resolutionStrategy.dependencySubstitution {
-            if (!useRemote) {
-                substitute module(rxImagePickerRemote) because substituteReason with project(':rximagepicker')
-                substitute module(rxImagePickerUiRemote) because substituteReason with project(':rximagepicker_support')
-                substitute module(rxImagePickerZhihuRemote) because substituteReason with project(':rximagepicker_support_wechat')
-                substitute module(rxImagePickerWechatRemote) because substituteReason with project(':rximagepicker_support_zhihu')
+        resolutionStrategy {
+            eachDependency { DependencyResolveDetails details ->
+                if (details.requested.group == 'io.reactivex.rxjava3' &&
+                        details.requested.name == 'rxjava') {
+                    details.useVersion '3.0.0-RC0'
+                    details.because 'Unified dependency version.'
+                }
+            }
+            dependencySubstitution {
+                if (!useRemote) {
+                    substitute module(rxImagePickerRemote) because substituteReason with project(':rximagepicker')
+                    substitute module(rxImagePickerUiRemote) because substituteReason with project(':rximagepicker_support')
+                    substitute module(rxImagePickerZhihuRemote) because substituteReason with project(':rximagepicker_support_wechat')
+                    substitute module(rxImagePickerWechatRemote) because substituteReason with project(':rximagepicker_support_zhihu')
+                }
             }
         }
     }
-    compile.exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+//    compile.exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
 }
 
 dependencies {
