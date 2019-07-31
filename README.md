@@ -5,7 +5,9 @@
 <p/>
 
 <a target="_blank" href="https://bintray.com/mq2553299/maven/rximagepicker"><img
-        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"></a>
+        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=3.0.0-beta01"></a>(For RxJava3)
+<a target="_blank" href='https://bintray.com/mq2553299/maven/rximagepicker/2.5.1/link'><img
+        src='https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=2.5.1'></a>(For RxJava2)
 <a target="_blank"><img src="https://img.shields.io/badge/API-16+-green.svg"></a>
 <a target="_blank" href="https://github.com/qingmei2/RxImagePicker/blob/3.x/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 
@@ -95,13 +97,9 @@ implementation 'com.github.qingmei2:rximagepicker_support_zhihu:${last_version}'
 implementation 'com.github.qingmei2:rximagepicker_support_wechat:${last_version}'
 ```
 
-<a target="_blank" href="https://bintray.com/mq2553299/maven/rximagepicker"><img
-        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"></a>
-</a>
-
 > **If your project not use `androidx`, please use version `2.2.0`.**
 
-> **If your project not migrate to `RxJava3`, please use version `2.5.0`.**
+> **If your project not migrate to `RxJava3`, please use version `2.x`.**
 
 ### 2.Interface Configuration
 
