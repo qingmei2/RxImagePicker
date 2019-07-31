@@ -5,9 +5,9 @@
 <p/>
 
 <a target="_blank" href="https://bintray.com/mq2553299/maven/rximagepicker"><img
-        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=3.0.0-beta01"></a>
+        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=3.0.0-beta01"></a>(RxJava2)
 <a target="_blank" href='https://bintray.com/mq2553299/maven/rximagepicker/2.5.1/link'><img
-        src='https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=2.5.1'></a>
+        src='https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=2.5.1'></a>(RxJava2)
 <a target="_blank"><img src="https://img.shields.io/badge/API-16+-green.svg"></a>
 <a target="_blank" href="https://github.com/qingmei2/RxImagePicker/blob/2.x/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 
@@ -106,11 +106,7 @@ RxImagePicker的UI自动化测试，请参考：
 
 ### 1. 添加依赖在Module的build.gradle文件中：
 
-如果您的项目已经迁移了`AndroidX`，建议依赖最新版本：
-
-<a target="_blank" href="https://bintray.com/mq2553299/maven/rximagepicker"><img
-        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"></a>
-</a>
+如果您的项目已经迁移了`AndroidX`，建议依赖最新版本,`last_version`版本号请参考文档顶部版本信息标签；
 
 ```groovy
 // 最基础的架构，仅提供了系统默认的图片选择和拍照功能
