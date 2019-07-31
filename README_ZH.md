@@ -5,17 +5,11 @@
 <p/>
 
 <a target="_blank" href="https://bintray.com/mq2553299/maven/rximagepicker"><img
-        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg"></a>
+        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=3.0.0-beta01"></a>
+<a target="_blank" href='https://bintray.com/mq2553299/maven/rximagepicker/2.5.1/link'><img
+        src='https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=2.5.1'></a>
 <a target="_blank"><img src="https://img.shields.io/badge/API-16+-green.svg"></a>
 <a target="_blank" href="https://github.com/qingmei2/RxImagePicker/blob/2.x/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
-
-RxImagePicker的设计起源，请参考：
-
-> [RxImagePicker:从零实现灵活且可高度定制的Android图片选择架构](https://www.jianshu.com/p/fecf3a13e615)
-
-RxImagePicker的UI自动化测试，请参考：
-
-> [全副武装！AndroidUI自动化测试在RxImagePicker中的实践历程](https://www.jianshu.com/p/6b78f6f93430)
 
 ## 通知（重要）
 
@@ -24,6 +18,13 @@ RxImagePicker的UI自动化测试，请参考：
 * **[更新日志](https://github.com/qingmei2/RxImagePicker/wiki/ChangeLog)** : 升级库之前，请查看新版本关于API有可能出现的变动。
 
 > 自`2.3.0`版本之后，库只提供对官方`AndroidX`的支持，详情请参考Android官方文档[AndroidX Overview](https://developer.android.com/jetpack/androidx/).
+
+> `RxImagePicker`提供了对`RxJava2`和`RxJava3`的支持：
+
+* 2.x版本: Kotlin实现，支持AndroidX和RxJava2;
+* 3.x版本: Kotlin实现，支持AndroidX和RxJava3;
+
+最新版本号请参考顶部标签信息。
 
 <h2 id="overview">简介</h2>
 
@@ -37,6 +38,15 @@ RxImagePicker存在的目的是：让开发者能够**简单**并且**灵活**�
 
 RxImagePicker是一个用于Android的响应式图片选择器，它将您的图片选择需求转换为一个接口进行配置，并在任何一个Activity或者Fragment中展示任何样式的图片选择UI。
 
+RxImagePicker的设计起源，请参考：
+
+> [RxImagePicker:从零实现灵活且可高度定制的Android图片选择架构](https://www.jianshu.com/p/fecf3a13e615)
+
+RxImagePicker的UI自动化测试，请参考：
+
+> [全副武装！AndroidUI自动化测试在RxImagePicker中的实践历程](https://www.jianshu.com/p/6b78f6f93430)
+
+
 ### 支持的功能
 
 - [x] Android Camera拍照
@@ -44,7 +54,6 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 - [x] 以响应式数据流的格式返回数据（支持Observable/Flowable/Single/Maybe）
 - [x] 支持拓展数据，比如用于实现微信 **发送原图** 等功能，完全由您自定义灵活进行配置
 - [x] 覆盖全面的**UI自动化测试**，详见下方示例截图。
-
 - [x] 对[AndroidX](https://developer.android.com/jetpack/androidx/)的支持（after v2.3.0+）。
 
 ### UI的支持
