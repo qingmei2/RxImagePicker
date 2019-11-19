@@ -75,7 +75,7 @@ class Item : Parcelable {
     private constructor(source: Parcel) {
         id = source.readLong()
         mimeType = source.readString()
-        contentUri = source.readParcelable(Uri::class.java.classLoader)
+        contentUri = source.readParcelable(Uri::class.java.classLoader)!!
         size = source.readLong()
         duration = source.readLong()
     }

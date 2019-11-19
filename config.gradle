@@ -5,11 +5,11 @@ def glide_version = '4.9.0'
 project.ext {
 
     android = [
-            compileSdkVersion: 28,
+            compileSdkVersion: 29,
             minSdkVersion    : 16,
-            targetSdkVersion : 28,
-            versionCode      : 32,
-            versionName      : "2.5.1"
+            targetSdkVersion : 29,
+            versionCode      : 36,
+            versionName      : "2.5.2"
     ]
 
     constants = [
