@@ -1,8 +1,8 @@
 package com.qingmei2.rximagepicker.core
 
 import com.qingmei2.rximagepicker.scheduler.RxImagePickerSchedulers
-import io.reactivex.*
-import io.reactivex.functions.Supplier
+import io.reactivex.rxjava3.core.*
+import io.reactivex.rxjava3.functions.Supplier
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 

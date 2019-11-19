@@ -8,7 +8,7 @@ import com.qingmei2.rximagepicker.entity.sources.Gallery;
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration;
 import com.qingmei2.rximagepicker_extension_wechat.ui.WechatImagePickerActivity;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 
 public interface WechatImagePicker {
 

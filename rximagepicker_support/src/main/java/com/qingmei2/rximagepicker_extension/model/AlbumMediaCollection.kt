@@ -33,21 +33,21 @@ class AlbumMediaCollection : androidx.loader.app.LoaderManager.LoaderCallbacks<C
     private var mLoaderManager: androidx.loader.app.LoaderManager? = null
     private var mCallbacks: AlbumMediaCallbacks? = null
 
-    override fun onCreateLoader(id: Int, args: Bundle?): androidx.loader.content.Loader<Cursor> {
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         val context = mContext!!.get()
-        val album = args!!.getParcelable<Album>(ARGS_ALBUM)
+        val album = requireNotNull(args!!.getParcelable<Album>(ARGS_ALBUM))
 
         return AlbumMediaLoader.newInstance(context, album,
                 album.isAll && args.getBoolean(ARGS_ENABLE_CAPTURE, false))
     }
 
-    override fun onLoadFinished(loader: androidx.loader.content.Loader<Cursor>, data: Cursor) {
+    override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
         mContext?.get() ?: return
 
         mCallbacks!!.onAlbumMediaLoad(data)
     }
 
-    override fun onLoaderReset(loader: androidx.loader.content.Loader<Cursor>) {
+    override fun onLoaderReset(loader: Loader<Cursor>) {
         mContext?.get() ?: return
 
         mCallbacks!!.onAlbumMediaReset()

@@ -29,8 +29,8 @@ import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumsAdapter
 import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner
 import com.qingmei2.rximagepicker_extension_zhihu.R
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.PublishSubject
 import java.util.*
 
 class ZhihuImagePickerFragment : androidx.fragment.app.Fragment(), IGalleryCustomPickerView, AlbumCollection.AlbumCallbacks,

@@ -12,8 +12,8 @@ import com.qingmei2.rximagepicker.ui.camera.BasicCameraFragment
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
 import com.qingmei2.rximagepicker_extension.ui.adapter.AlbumMediaAdapter
 import com.qingmei2.rximagepicker_extension_zhihu.R
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
 
 class ZhihuImagePickerActivity : AppCompatActivity(), AlbumMediaAdapter.OnPhotoCapture {
 

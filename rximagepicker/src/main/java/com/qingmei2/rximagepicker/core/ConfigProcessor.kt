@@ -4,7 +4,7 @@ import com.qingmei2.rximagepicker.entity.ConfigProvider
 import com.qingmei2.rximagepicker.scheduler.IRxImagePickerSchedulers
 import com.qingmei2.rximagepicker.entity.sources.SourcesFrom
 import com.qingmei2.rximagepicker.ui.ActivityPickerViewController
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 /**
  * [ConfigProcessor] is the class that processing reactive data stream.

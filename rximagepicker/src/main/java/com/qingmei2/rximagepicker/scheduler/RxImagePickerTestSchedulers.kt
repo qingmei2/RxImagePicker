@@ -1,7 +1,7 @@
 package com.qingmei2.rximagepicker.scheduler
 
-import io.reactivex.Scheduler
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 /**
  * An extra layer of packaging, using [RxImagePickerTestSchedulers] for easier testing.

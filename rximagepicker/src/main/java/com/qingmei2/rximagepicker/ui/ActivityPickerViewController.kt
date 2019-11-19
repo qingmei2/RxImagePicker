@@ -2,12 +2,11 @@ package com.qingmei2.rximagepicker.ui
 
 import android.app.Activity
 import android.content.Intent
-import androidx.fragment.app.FragmentActivity
 
 import com.qingmei2.rximagepicker.entity.Result
+import io.reactivex.rxjava3.core.Observable
 
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.rxjava3.subjects.PublishSubject
 
 class ActivityPickerViewController private constructor() : ICustomPickerView {
 

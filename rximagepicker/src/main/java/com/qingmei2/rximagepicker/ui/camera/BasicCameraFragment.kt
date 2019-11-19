@@ -10,8 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerFragment
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.rxjava3.subjects.PublishSubject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,7 +34,7 @@ class BasicCameraFragment : BaseSystemPickerFragment(), ICameraCustomPickerView 
         }
     }
 
-    override fun pickImage(): Observable<Result> {
+    override fun pickImage(): io.reactivex.rxjava3.core.Observable<Result> {
         publishSubject = PublishSubject.create<Result>()
         return uriObserver
     }
@@ -48,7 +47,7 @@ class BasicCameraFragment : BaseSystemPickerFragment(), ICameraCustomPickerView 
         val pictureChooseIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         pictureChooseIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraPictureUrl)
 
-        startActivityForResult(pictureChooseIntent, BaseSystemPickerFragment.CAMERA_REQUEST_CODE)
+        startActivityForResult(pictureChooseIntent, CAMERA_REQUEST_CODE)
     }
 
     override fun getActivityResultUri(data: Intent?): Uri? {

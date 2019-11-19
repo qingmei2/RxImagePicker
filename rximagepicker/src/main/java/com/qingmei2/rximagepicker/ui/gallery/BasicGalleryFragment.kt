@@ -8,8 +8,8 @@ import androidx.fragment.app.FragmentActivity
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.ui.BaseSystemPickerFragment
 import com.qingmei2.rximagepicker.ui.ICustomPickerConfiguration
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.PublishSubject
 
 class BasicGalleryFragment : BaseSystemPickerFragment(), IGalleryCustomPickerView {
 

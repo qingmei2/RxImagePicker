@@ -1,6 +1,6 @@
 package com.qingmei2.rximagepicker.scheduler
 
-import io.reactivex.Scheduler
+import io.reactivex.rxjava3.core.Scheduler
 
 /**
  * [IRxImagePickerSchedulers] is used to manage the [Scheduler].

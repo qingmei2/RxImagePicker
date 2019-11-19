@@ -4,7 +4,7 @@ import android.content.Context
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker.entity.sources.Camera
 import com.qingmei2.rximagepicker.entity.sources.Gallery
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 interface BasicImagePicker {
 

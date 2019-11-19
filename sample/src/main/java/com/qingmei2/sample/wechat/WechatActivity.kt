@@ -15,7 +15,7 @@ import com.qingmei2.rximagepicker_extension.MimeType
 import com.qingmei2.rximagepicker_extension_wechat.WechatConfigrationBuilder
 import com.qingmei2.rximagepicker_extension_wechat.ui.WechatImagePickerFragment
 import com.qingmei2.sample.R
-import io.reactivex.functions.Consumer
+import io.reactivex.rxjava3.functions.Consumer
 import kotlinx.android.synthetic.main.activity_wechat.*
 
 @SuppressLint("CheckResult")

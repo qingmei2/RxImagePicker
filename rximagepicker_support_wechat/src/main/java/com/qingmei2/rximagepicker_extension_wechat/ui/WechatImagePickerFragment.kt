@@ -28,9 +28,8 @@ import com.qingmei2.rximagepicker_extension.ui.widget.AlbumsSpinner
 import com.qingmei2.rximagepicker_extension_wechat.R
 import com.qingmei2.rximagepicker_extension_wechat.ui.adapter.WechatAlbumsAdapter
 import com.qingmei2.rximagepicker_extension_wechat.ui.widget.WechatAlbumsSpinner
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
-import java.util.*
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.PublishSubject
 
 class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
         AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
@@ -112,7 +111,7 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
         return publishSubject
     }
 
-    fun closure() {
+    private fun closure() {
         if (activity is WechatImagePickerActivity) {
             (activity as WechatImagePickerActivity).closure()
         } else {

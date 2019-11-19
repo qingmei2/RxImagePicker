@@ -4,7 +4,7 @@ import androidx.annotation.IdRes
 
 import com.qingmei2.rximagepicker.entity.Result
 
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 /**
  *

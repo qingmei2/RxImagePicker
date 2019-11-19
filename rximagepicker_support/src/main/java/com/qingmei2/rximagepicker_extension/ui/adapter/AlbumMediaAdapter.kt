@@ -51,7 +51,7 @@ open class AlbumMediaAdapter(context: Context,
 
     init {
         val ta = context.theme.obtainStyledAttributes(intArrayOf(R.attr.item_placeholder))
-        mPlaceholder = ta.getDrawable(0)
+        mPlaceholder = ta.getDrawable(0)!!
         ta.recycle()
     }
 

@@ -34,7 +34,7 @@ dependencies {
 
     api rootProject.ext.dependencies['rxjava3']
     api(rootProject.ext.dependencies['rxandroid']) {
-        exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+        exclude group: 'io.reactivex.rxjava3', module: 'rxjava'
     }
 
     implementation rootProject.ext.dependencies['kotlin-android']

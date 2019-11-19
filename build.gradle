@@ -14,6 +14,7 @@ buildscript {
 
         // plugin for jcenter
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
@@ -24,6 +25,7 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" }
+        maven { url "https://oss.jfrog.org/libs-snapshot/" }
     }
 
     tasks.withType(Javadoc) {

@@ -26,8 +26,9 @@ open class SelectedPreviewActivity : BasePreviewActivity() {
         super.onCreate(savedInstanceState)
 
         val bundle = intent.getBundleExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE)
-        val selected = bundle.getParcelableArrayList<Item>(SelectedItemCollection.STATE_SELECTION)
-        mAdapter.addAll(selected)
+        val selected =
+                bundle.getParcelableArrayList<Item>(SelectedItemCollection.STATE_SELECTION)
+        mAdapter.addAll(requireNotNull(selected))
         mAdapter.notifyDataSetChanged()
         if (mSpec.countable) {
             mCheckView.setCheckedNum(1)

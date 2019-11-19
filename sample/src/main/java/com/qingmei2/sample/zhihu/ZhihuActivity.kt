@@ -14,8 +14,8 @@ import com.qingmei2.rximagepicker_extension.MimeType
 import com.qingmei2.rximagepicker_extension_zhihu.ZhihuConfigurationBuilder
 import com.qingmei2.rximagepicker_extension_zhihu.ui.ZhihuImagePickerFragment
 import com.qingmei2.sample.R
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_zhihu.*
 
 class ZhihuActivity : AppCompatActivity() {
