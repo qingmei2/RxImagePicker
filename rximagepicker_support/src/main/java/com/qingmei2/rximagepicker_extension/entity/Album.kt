@@ -47,9 +47,9 @@ class Album : Parcelable {
     }
 
     internal constructor(source: Parcel) {
-        id = source.readString()
-        coverPath = source.readString()
-        mDisplayName = source.readString()
+        id = source.readString() ?: ""
+        coverPath = source.readString() ?: ""
+        mDisplayName = source.readString() ?: ""
         count = source.readLong()
     }
 
@@ -93,11 +93,12 @@ class Album : Parcelable {
          * This method is not responsible for managing cursor resource, such as close, iterate, and so on.
          */
         fun valueOf(cursor: Cursor): Album {
+            val columnUri = cursor.getString(cursor.getColumnIndex(AlbumLoader.COLUMN_URI))
             return Album(
-                    cursor.getString(cursor.getColumnIndex("bucket_id")),
-                    cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA)),
-                    cursor.getString(cursor.getColumnIndex("bucket_display_name")),
-                    cursor.getLong(cursor.getColumnIndex(AlbumLoader.COLUMN_COUNT)))
+                cursor.getString(cursor.getColumnIndex(AlbumLoader.COLUMN_BUCKET_ID)),
+                columnUri ?: "",
+                cursor.getString(cursor.getColumnIndex(AlbumLoader.COLUMN_BUCKET_DISPLAY_NAME)),
+                cursor.getLong(cursor.getColumnIndex(AlbumLoader.COLUMN_COUNT)))
         }
     }
 
