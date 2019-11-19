@@ -21,42 +21,156 @@ import android.database.Cursor
 import android.database.MatrixCursor
 import android.database.MergeCursor
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
-import androidx.loader.content.CursorLoader
 
 import com.qingmei2.rximagepicker_extension.entity.Album
+import android.content.ContentUris
+
 
 /**
  * Load all albums (grouped by bucket_id) into a single cursor.
  */
-class AlbumLoader private constructor(context: Context, selection: String, selectionArgs: Array<String>) : androidx.loader.content.CursorLoader(context, QUERY_URI, PROJECTION, selection, selectionArgs, BUCKET_ORDER_BY) {
+class AlbumLoader private constructor(context: Context, selection: String, selectionArgs: Array<String>)
+    : androidx.loader.content.CursorLoader(
+    context,
+    QUERY_URI,
+    if (beforeAndroidTen()) PROJECTION else PROJECTION_29,
+    selection,
+    selectionArgs,
+    BUCKET_ORDER_BY
+) {
 
     override fun loadInBackground(): Cursor? {
         val albums = super.loadInBackground()
         val allAlbum = MatrixCursor(COLUMNS)
-        var totalCount = 0
-        var allAlbumCoverPath = ""
-        if (albums != null) {
-            while (albums.moveToNext()) {
-                totalCount += albums.getInt(albums.getColumnIndex(COLUMN_COUNT))
-            }
-            if (albums.moveToFirst()) {
-                allAlbumCoverPath = albums.getString(albums.getColumnIndex(MediaStore.MediaColumns.DATA))
-            }
-        }
-        allAlbum.addRow(arrayOf(Album.ALBUM_ID_ALL, Album.ALBUM_ID_ALL, Album.ALBUM_NAME_ALL, allAlbumCoverPath, totalCount.toString()))
 
-        return MergeCursor(arrayOf<Cursor>(allAlbum, albums!!))
+        if(beforeAndroidTen()){
+            var totalCount = 0
+
+            var allAlbumCoverUri: Uri? = null
+
+            val otherAlbums = MatrixCursor(COLUMNS)
+
+            if (albums != null) {
+                while (albums.moveToNext()) {
+                    val fileId = albums.getLong(
+                        albums.getColumnIndex(MediaStore.Files.FileColumns._ID))
+                    val bucketId = albums.getLong(
+                        albums.getColumnIndex(COLUMN_BUCKET_ID))
+                    val bucketDisplayName = albums.getString(
+                        albums.getColumnIndex(COLUMN_BUCKET_DISPLAY_NAME))
+
+                    val uri = getAlbumUri(albums)
+                    val count = albums.getInt(albums.getColumnIndex(COLUMN_COUNT))
+
+                    otherAlbums.addRow(arrayOf(fileId.toString(), bucketId.toString(), bucketDisplayName, uri.toString(), count.toString()))
+
+                    totalCount += count
+                }
+
+                if (albums.moveToFirst()) {
+                    allAlbumCoverUri = getAlbumUri(albums)
+                }
+            }
+
+            allAlbum.addRow(arrayOf(Album.ALBUM_ID_ALL, Album.ALBUM_ID_ALL, Album.ALBUM_NAME_ALL, allAlbumCoverUri?.toString(), totalCount.toString()))
+
+            return MergeCursor(arrayOf<Cursor>(allAlbum, otherAlbums))
+        } else{
+            var totalCount = 0
+
+            var allAlbumCoverUri: Uri? = null
+
+            // Pseudo GROUP BY
+            val countMap = mutableMapOf<Long, Long>()
+            if (albums != null) {
+                while (albums.moveToNext()) {
+                    val bucketId = albums.getLong(albums.getColumnIndex(COLUMN_BUCKET_ID))
+                    var count = countMap[bucketId]
+                    if(count == null){
+                        count = 1L
+                    } else{
+                        count += 1
+                    }
+                    countMap[bucketId] = count
+                }
+            }
+
+            val otherAlbums = MatrixCursor(COLUMNS)
+            if(albums != null){
+                if (albums.moveToFirst()) {
+                    allAlbumCoverUri = getAlbumUri(albums)
+
+                    val done = mutableSetOf<Long>()
+                    do {
+                        val bucketId = albums.getLong(albums.getColumnIndex(COLUMN_BUCKET_ID))
+                        if (done.contains(bucketId)) {
+                            continue
+                        }
+                        val fileId = albums.getLong(
+                            albums.getColumnIndex(MediaStore.Files.FileColumns._ID))
+                        val bucketDisplayName = albums.getString(
+                            albums.getColumnIndex(COLUMN_BUCKET_DISPLAY_NAME))
+                        val uri = getAlbumUri(albums)
+                        val count = countMap[bucketId]!!
+
+                        otherAlbums.addRow(arrayOf(fileId.toString(), bucketId.toString(), bucketDisplayName, uri.toString(), count.toString()))
+                        done.add(bucketId)
+
+                        totalCount += count.toInt()
+                    } while (albums.moveToNext())
+                }
+            }
+
+            allAlbum.addRow(arrayOf(Album.ALBUM_ID_ALL, Album.ALBUM_ID_ALL, Album.ALBUM_NAME_ALL, allAlbumCoverUri?.toString(), totalCount.toString()))
+
+            return MergeCursor(arrayOf<Cursor>(allAlbum, otherAlbums))
+        }
     }
 
     override fun onContentChanged() {}
 
     companion object {
+        /**
+         * 是否是 Android 10 （Q） 之前的版本
+         */
+        private fun beforeAndroidTen() : Boolean = android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.Q
+
+        private fun getAlbumUri(cursor : Cursor) : Uri{
+            val id = cursor.getLong(cursor.getColumnIndex(MediaStore.Files.FileColumns._ID))
+            val contentUri: Uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+
+            return ContentUris.withAppendedId(contentUri, id)
+        }
 
         const val COLUMN_COUNT = "count"
+        const val COLUMN_BUCKET_ID = "bucket_id"
+        const val COLUMN_BUCKET_DISPLAY_NAME = "bucket_display_name"
+        const val COLUMN_URI = "uri"
+
         private val QUERY_URI = MediaStore.Files.getContentUri("external")
-        private val COLUMNS = arrayOf(MediaStore.Files.FileColumns._ID, "bucket_id", "bucket_display_name", MediaStore.MediaColumns.DATA, COLUMN_COUNT)
-        private val PROJECTION = arrayOf(MediaStore.Files.FileColumns._ID, "bucket_id", "bucket_display_name", MediaStore.MediaColumns.DATA, "COUNT(*) AS $COLUMN_COUNT")
+
+        private val COLUMNS = arrayOf(
+            MediaStore.Files.FileColumns._ID,
+            COLUMN_BUCKET_ID,
+            COLUMN_BUCKET_DISPLAY_NAME,
+            COLUMN_URI,
+            COLUMN_COUNT
+        )
+
+        private val PROJECTION = arrayOf(
+            MediaStore.Files.FileColumns._ID,
+            COLUMN_BUCKET_ID,
+            COLUMN_BUCKET_DISPLAY_NAME,
+            "COUNT(*) AS $COLUMN_COUNT"
+        )
+
+        private val PROJECTION_29 = arrayOf(
+            MediaStore.Files.FileColumns._ID,
+            COLUMN_BUCKET_ID,
+            COLUMN_BUCKET_DISPLAY_NAME
+        )
 
         // === params for showSingleMediaType: true ===
         private val SELECTION_FOR_SINGLE_MEDIA_TYPE = (
@@ -64,21 +178,24 @@ class AlbumLoader private constructor(context: Context, selection: String, selec
                         + " AND " + MediaStore.MediaColumns.SIZE + ">0"
                         + ") GROUP BY (bucket_id")
 
+        private val SELECTION_FOR_SINGLE_MEDIA_TYPE_29 = (
+                MediaStore.Files.FileColumns.MEDIA_TYPE + "=?"
+                        + " AND " + MediaStore.MediaColumns.SIZE + ">0"
+                )
+
         private fun getSelectionArgsForSingleMediaType(mediaType: Int): Array<String> {
             return arrayOf(mediaType.toString())
         }
         // =============================================
 
-        private val BUCKET_ORDER_BY = "datetaken DESC"
+        private const val BUCKET_ORDER_BY = "datetaken DESC"
 
         fun newInstance(context: Context?): androidx.loader.content.CursorLoader {
-            context ?: NullPointerException("context can't be null!")
+            context ?: throw NullPointerException("context can't be null!")
 
-            val selection: String
-            val selectionArgs: Array<String>
-            selection = SELECTION_FOR_SINGLE_MEDIA_TYPE
-            selectionArgs = getSelectionArgsForSingleMediaType(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE)
-            return AlbumLoader(context!!, selection, selectionArgs)
+            val selection: String = if(beforeAndroidTen()) SELECTION_FOR_SINGLE_MEDIA_TYPE else SELECTION_FOR_SINGLE_MEDIA_TYPE_29
+            val selectionArgs: Array<String> = getSelectionArgsForSingleMediaType(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE)
+            return AlbumLoader(context, selection, selectionArgs)
         }
     }
 }
