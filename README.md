@@ -5,9 +5,9 @@
 <p/>
 
 <a target="_blank" href="https://bintray.com/mq2553299/maven/rximagepicker"><img
-        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=3.0.0-beta01"></a>(For RxJava3)
-<a target="_blank" href='https://bintray.com/mq2553299/maven/rximagepicker/2.5.1/link'><img
-        src='https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=2.5.1'></a>(For RxJava2)
+        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=3.0.0-beta02"></a>(For RxJava3)
+<a target="_blank" href='https://bintray.com/mq2553299/maven/rximagepicker/2.5.2/link'><img
+        src='https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=2.5.2'></a>(For RxJava2)
 <a target="_blank"><img src="https://img.shields.io/badge/API-16+-green.svg"></a>
 <a target="_blank" href="https://github.com/qingmei2/RxImagePicker/blob/3.x/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 
@@ -29,7 +29,7 @@ RxImagePicker is a **reactive** picture selector for Android, which converts you
 - [x] Android photo album picture selection  
 - [x] Returns data in the format of reactive data stream ( such as `Observable/Flowable/Single/Maybe` )  
 - [x] [AndroidX](https://developer.android.com/jetpack/androidx/) support ( after v2.3.0 )
-- [x] **RxJava2** & **RxJava3** ( after v3.0.0 )
+- [x] **RxJava2** & **RxJava3**
 
 ## Themes
 
