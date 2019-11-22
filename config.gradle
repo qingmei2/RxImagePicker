@@ -8,7 +8,7 @@ project.ext {
             compileSdkVersion: 29,
             minSdkVersion    : 16,
             targetSdkVersion : 29,
-            versionCode      : 36,
+            versionCode      : 37,
             versionName      : "2.5.2"
     ]
 
