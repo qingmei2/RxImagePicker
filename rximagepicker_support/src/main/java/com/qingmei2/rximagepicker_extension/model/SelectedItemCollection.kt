@@ -20,17 +20,13 @@ import android.content.Context
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
-
 import com.qingmei2.rximagepicker_extension.R
 import com.qingmei2.rximagepicker_extension.entity.IncapableCause
 import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
 import com.qingmei2.rximagepicker_extension.ui.widget.CheckView
-import com.qingmei2.rximagepicker_extension.utils.PathUtils
 import com.qingmei2.rximagepicker_extension.utils.PhotoMetadataUtils
-
-import java.util.ArrayList
-import java.util.LinkedHashSet
+import java.util.*
 
 class SelectedItemCollection(private val mContext: Context) {
     private var mItems: MutableSet<Item>? = null
@@ -51,8 +47,8 @@ class SelectedItemCollection(private val mContext: Context) {
         if (bundle == null) {
             mItems = LinkedHashSet()
         } else {
-            val saved = bundle.getParcelableArrayList<Item>(STATE_SELECTION)
-            mItems = LinkedHashSet(saved!!)
+            val saved = bundle.getParcelableArrayList(STATE_SELECTION) ?: emptyList<Item>()
+            mItems = LinkedHashSet(saved)
             collectionType = bundle.getInt(STATE_COLLECTION_TYPE, COLLECTION_UNDEFINED)
         }
     }
@@ -212,18 +208,22 @@ class SelectedItemCollection(private val mContext: Context) {
 
         const val STATE_SELECTION = "state_selection"
         const val STATE_COLLECTION_TYPE = "state_collection_type"
+
         /**
          * Empty collection
          */
         const val COLLECTION_UNDEFINED = 0x00
+
         /**
          * Collection only with images
          */
         const val COLLECTION_IMAGE = 0x01
+
         /**
          * Collection only with videos
          */
         const val COLLECTION_VIDEO = 0x01 shl 1
+
         /**
          * Collection with images and videos.
          */

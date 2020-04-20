@@ -44,7 +44,7 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
 
     private var publishSubject: PublishSubject<Result> = PublishSubject.create()
 
-    private var mSelectedCollection: SelectedItemCollection? = null
+    private lateinit var mSelectedCollection: SelectedItemCollection
 
     private lateinit var mButtonPreview: TextView
     private lateinit var mButtonApply: TextView
@@ -78,7 +78,10 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
         val mButtonBack = view.findViewById<ImageView>(R.id.button_back)
         mButtonBack.setOnClickListener(this)
 
-        mSelectedCollection!!.onCreate(savedInstanceState)
+        mSelectedCollection.onCreate(savedInstanceState)
+        if (savedInstanceState != null) {
+            instanceGridFragmentAndInject(null)
+        }
         updateBottomToolbar()
 
         mAlbumsAdapter = WechatAlbumsAdapter(context!!, null, false)
@@ -90,6 +93,11 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
         mAlbumCollection.onCreate(activity!!, this)
         mAlbumCollection.onRestoreInstanceState(savedInstanceState)
         mAlbumCollection.loadAlbums()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        mSelectedCollection.onSaveInstanceState(outState)
+        super.onSaveInstanceState(outState)
     }
 
     override fun display(fragmentActivity: androidx.fragment.app.FragmentActivity,
@@ -182,12 +190,22 @@ class WechatImagePickerFragment : Fragment(), IGalleryCustomPickerView,
         } else {
             mContainer.visibility = View.VISIBLE
             mEmptyView.visibility = View.GONE
+            instanceGridFragmentAndInject(album)
+        }
+    }
+
+    private fun instanceGridFragmentAndInject(album: Album?) {
+        val tag = WechatImageListGridFragment::class.java.simpleName
+        if (album != null) {
             val fragment = WechatImageListGridFragment.instance(album)
             fragment.injectDependencies(this, this, this)
             childFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, fragment, WechatImageListGridFragment::class.java.simpleName)
+                    .replace(R.id.container, fragment, tag)
                     .commitAllowingStateLoss()
+        } else {
+            val fragment = childFragmentManager.findFragmentByTag(tag) as? WechatImageListGridFragment
+            fragment?.injectDependencies(this, this, this)
         }
     }
 

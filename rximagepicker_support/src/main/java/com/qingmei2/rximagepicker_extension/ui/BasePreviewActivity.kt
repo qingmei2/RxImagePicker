@@ -36,11 +36,11 @@ import com.qingmei2.rximagepicker_extension.ui.widget.CheckView
 import com.qingmei2.rximagepicker_extension.utils.PhotoMetadataUtils
 import com.qingmei2.rximagepicker_extension.utils.Platform
 
-abstract class BasePreviewActivity : AppCompatActivity(), androidx.viewpager.widget.ViewPager.OnPageChangeListener {
+abstract class BasePreviewActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
     protected val mSelectedCollection = SelectedItemCollection(this)
     protected lateinit var mSpec: SelectionSpec
-    protected lateinit var mPager: androidx.viewpager.widget.ViewPager
+    protected lateinit var mPager: ViewPager
 
     protected lateinit var mAdapter: PreviewPagerAdapter
 
