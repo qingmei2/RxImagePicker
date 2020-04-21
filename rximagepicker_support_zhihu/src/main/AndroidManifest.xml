@@ -1,9 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.qingmei2.rximagepicker_extension_zhihu">
+	package="com.qingmei2.rximagepicker_extension_zhihu">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <application>
-        <activity android:name=".ui.ZhihuImagePickerActivity" />
-    </application>
+	<application>
+		<activity
+			android:name=".ui.ZhihuImagePickerActivity"
+			android:screenOrientation="portrait" />
+	</application>
 </manifest>
