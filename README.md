@@ -5,9 +5,9 @@
 <p/>
 
 <a target="_blank" href="https://bintray.com/mq2553299/maven/rximagepicker"><img
-        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=3.0.0-beta01"></a>(RxJava3)
-<a target="_blank" href='https://bintray.com/mq2553299/maven/rximagepicker/2.5.1/link'><img
-        src='https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=2.5.1'></a>(RxJava2)
+        src="https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=3.0.0-beta02"></a>(RxJava3)
+<a target="_blank" href='https://bintray.com/mq2553299/maven/rximagepicker/2.5.4/link'><img
+        src='https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg?version=2.5.4'></a>(RxJava2)
 <a target="_blank"><img src="https://img.shields.io/badge/API-16+-green.svg"></a>
 <a target="_blank" href="https://github.com/qingmei2/RxImagePicker/blob/2.x/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 
