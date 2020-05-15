@@ -38,15 +38,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:foreground="?selectableItemBackground"
             android:padding="16dp"
             android:text="@string/button_back"
-            android:textColor="?attr/preview.bottomToolbar.back.textColor"
+            android:textColor="@color/wechat_preview_bottom_toolbar_back_text"
             android:textSize="16sp"
             tools:height="50dp"
             tools:text="back"
-            tools:textColor="?attr/bottomToolbar.apply.textColor"
+            tools:textColor="@color/wechat_preview_bottom_toolbar_back_text"
             tools:visibility="visible" />
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/button_back"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/button_back"/>-->
 
         <TextView
             android:id="@+id/size"
@@ -64,11 +70,17 @@
             android:layout_gravity="end"
             android:foreground="?selectableItemBackground"
             android:padding="16dp"
-            android:textColor="?attr/preview.bottomToolbar.apply.textColor"
+            android:textColor="@color/wechat_preview_bottom_toolbar_apply"
             android:textSize="16sp"
             tools:height="50dp"
             tools:text="apply"
-            tools:textColor="?attr/bottomToolbar.apply.textColor" />
+            tools:textColor="@color/wechat_preview_bottom_toolbar_apply" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/button_apply"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="16sp" />-->
 
     </FrameLayout>
 

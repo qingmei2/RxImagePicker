@@ -2,7 +2,9 @@ package com.qingmei2.sample.wechat
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -12,16 +14,24 @@ import com.bumptech.glide.Glide
 import com.qingmei2.rximagepicker.core.RxImagePicker
 import com.qingmei2.rximagepicker.entity.Result
 import com.qingmei2.rximagepicker_extension.MimeType
+import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
+import com.qingmei2.rximagepicker_extension.model.SelectedItemCollection
+import com.qingmei2.rximagepicker_extension.ui.BasePreviewActivity
 import com.qingmei2.rximagepicker_extension_wechat.WechatConfigrationBuilder
+import com.qingmei2.rximagepicker_extension_wechat.ui.EXTRA_DATA
+import com.qingmei2.rximagepicker_extension_wechat.ui.EXTRA_POSITION
+import com.qingmei2.rximagepicker_extension_wechat.ui.WechatAlbumPreviewActivity
 import com.qingmei2.rximagepicker_extension_wechat.ui.WechatImagePickerFragment
 import com.qingmei2.sample.R
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_wechat.*
+import java.util.*
 
 @SuppressLint("CheckResult")
 class WechatActivity : AppCompatActivity() {
 
     private lateinit var rxImagePicker: WechatImagePicker
+    private val data = mutableListOf<Uri>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +40,21 @@ class WechatActivity : AppCompatActivity() {
         initRxImagePicker()
         fabPickCamera.setOnClickListener { checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA) }
         fabGallery.setOnClickListener { checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY) }
+        fabPreview.setOnClickListener {
+            if(data.isEmpty()){
+                Toast.makeText(this,"请选择图片后预览",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val items = WechatAlbumPreviewActivity.getItemList(data, this)
+            val intent = Intent(this, WechatAlbumPreviewActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelableArrayList(SelectedItemCollection.STATE_SELECTION, ArrayList())
+            intent.putParcelableArrayListExtra(EXTRA_DATA, ArrayList(items))
+            intent.putExtra(EXTRA_POSITION, 0)
+            intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, bundle)
+            SelectionSpec.instance.themeId = R.style.Wechat
+            startActivity(intent)
+        }
     }
 
     private fun checkPermissionAndRequest(requestCode: Int) {
@@ -69,8 +94,9 @@ class WechatActivity : AppCompatActivity() {
     }
 
     private fun openGallery() {
+        data.clear()
         rxImagePicker.openGallery(this,
-                WechatConfigrationBuilder(MimeType.ofImage(), false)
+                WechatConfigrationBuilder(MimeType.ofAll(), false)
                         .capture(true)
                         .maxSelectable(9)
                         .countable(true)
@@ -96,7 +122,7 @@ class WechatActivity : AppCompatActivity() {
                 //        || mimeType == MimeType.BMP.toString()
                 //        || mimeType == MimeType.WEBP.toString()
                 Log.d(TAG, "mime types: $mimeType")
-
+                data.add(result.uri)
                 Glide.with(this@WechatActivity)
                         .load(result.uri)
                         .into(imageView)
@@ -105,7 +131,7 @@ class WechatActivity : AppCompatActivity() {
     private fun onError(): Consumer<Throwable> =
             Consumer { e ->
                 e.printStackTrace()
-                Toast.makeText(this@WechatActivity, "Failed: " + e.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@WechatActivity, "Failed: $e", Toast.LENGTH_SHORT).show()
             }
 
     companion object {

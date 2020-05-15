@@ -40,6 +40,8 @@ dependencies {
     implementation rootProject.ext.dependencies["constraint-layout"]
     implementation rootProject.ext.dependencies["kotlin-android"]
 
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     compileOnly rootProject.ext.dependencies["glide"]
     kapt rootProject.ext.dependencies["glide-compiler"]
     testImplementation rootProject.ext.dependencies["junit"]

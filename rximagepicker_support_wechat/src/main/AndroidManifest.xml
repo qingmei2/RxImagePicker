@@ -1,17 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.qingmei2.rximagepicker_extension_wechat">
+    package="com.qingmei2.rximagepicker_extension_wechat">
 
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-	<application>
-		<activity
-			android:name=".ui.WechatImagePickerActivity"
-			android:screenOrientation="portrait" />
-		<activity
-			android:name=".ui.WechatAlbumPreviewActivity"
-			android:screenOrientation="portrait" />
-		<activity
-			android:name=".ui.WechatSelectedPreviewActivity"
-			android:screenOrientation="portrait" />
-	</application>
+    <application>
+
+        <activity android:name=".ui.WechatImagePickerActivity" />
+        <activity android:name=".ui.WechatAlbumPreviewActivity" />
+        <activity android:name=".ui.WechatSelectedPreviewActivity" />
+    </application>
+
 </manifest>
