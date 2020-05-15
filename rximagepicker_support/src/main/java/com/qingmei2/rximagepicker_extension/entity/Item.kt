@@ -72,6 +72,14 @@ class Item : Parcelable {
         this.duration = duration
     }
 
+     constructor(uri: Uri, mimeType: String?, size: Long, duration: Long) {
+        this.id = 0
+        this.mimeType = mimeType
+        this.contentUri = uri
+        this.size = size
+        this.duration = duration
+    }
+
     private constructor(source: Parcel) {
         id = source.readLong()
         mimeType = source.readString()

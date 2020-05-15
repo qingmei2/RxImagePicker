@@ -44,13 +44,16 @@ class PreviewItemFragment : androidx.fragment.app.Fragment() {
         if (item.isVideo) {
             videoPlayButton.visibility = View.VISIBLE
             videoPlayButton.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.setDataAndType(item.contentUri, "video/*")
-                try {
-                    startActivity(intent)
-                } catch (e: ActivityNotFoundException) {
-                    Toast.makeText(context, R.string.error_no_video_activity, Toast.LENGTH_SHORT).show()
-                }
+//                val intent = Intent(Intent.ACTION_VIEW)
+//                intent.setDataAndType(item.contentUri, "video/*")
+//                try {
+//                    startActivity(intent)
+//                } catch (e: ActivityNotFoundException) {
+//                    Toast.makeText(context, R.string.error_no_video_activity, Toast.LENGTH_SHORT).show()
+//                }
+                val intent = Intent(context,PreViewVideoActivity::class.java)
+                intent.data = item.contentUri
+                startActivity(intent)
             }
         } else {
             videoPlayButton.visibility = View.GONE
