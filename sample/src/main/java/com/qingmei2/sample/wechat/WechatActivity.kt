@@ -23,6 +23,10 @@ import com.qingmei2.rximagepicker_extension_wechat.entity.BaseItem
 import com.qingmei2.rximagepicker_extension_wechat.entity.IMAGE_TYPE
 import com.qingmei2.rximagepicker_extension_wechat.entity.VIDEO_TYPE
 import com.qingmei2.rximagepicker_extension_wechat.ui.*
+import com.qingmei2.rximagepicker_extension_wechat.ui.EXTRA_DATA
+import com.qingmei2.rximagepicker_extension_wechat.ui.EXTRA_POSITION
+import com.qingmei2.rximagepicker_extension_wechat.ui.WechatAlbumPreviewActivity
+import com.qingmei2.rximagepicker_extension_wechat.ui.WechatImagePickerFragment
 import com.qingmei2.sample.R
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_wechat.*
@@ -46,23 +50,15 @@ class WechatActivity : AppCompatActivity() {
                 Toast.makeText(this,"请选择图片后预览",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            arrayListOf("https://wanandroid.com/blogimgs/14c9d08b-0051-41de-a219-18bdf74e41ab.png","https://www.wanandroid.com/blogimgs/50c115c2-cf6c-4802-aa7b-a4334de444cd.png","https://www.runoob.com/try/demo_source/movie.mp4")
 
-//            val items = WechatAlbumPreviewActivity.getItemList(data, this)
-//            val intent = Intent(this, WechatAlbumPreviewActivity::class.java)
-//            val bundle = Bundle()
-//            bundle.putParcelableArrayList(SelectedItemCollection.STATE_SELECTION, ArrayList())
-//            intent.putParcelableArrayListExtra(EXTRA_DATA, ArrayList(items))
-//            intent.putExtra(EXTRA_POSITION, 0)
-//            intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, bundle)
-//            SelectionSpec.instance.themeId = R.style.Wechat
-//            startActivity(intent)
-            val intent = Intent(this,CustomPreviewActivity::class.java).also {
-                it.putParcelableArrayListExtra(PREVIEW_DATA, arrayListOf(BaseItem(IMAGE_TYPE,"https://wanandroid.com/blogimgs/14c9d08b-0051-41de-a219-18bdf74e41ab.png"),
-                BaseItem(IMAGE_TYPE,"https://www.wanandroid.com/blogimgs/50c115c2-cf6c-4802-aa7b-a4334de444cd.png"),
-                BaseItem(VIDEO_TYPE,"https://flv2.bn.netease.com/videolib1/1811/26/OqJAZ893T/HD/OqJAZ893T-mobile.mp4")))
-            }
-            MediaPlayer()
+            val items = WechatAlbumPreviewActivity.getItemList(data, this)
+            val intent = Intent(this, WechatAlbumPreviewActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelableArrayList(SelectedItemCollection.STATE_SELECTION, ArrayList())
+            intent.putParcelableArrayListExtra(EXTRA_DATA, ArrayList(items))
+            intent.putExtra(EXTRA_POSITION, 0)
+            intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, bundle)
+            SelectionSpec.instance.themeId = R.style.Wechat
             startActivity(intent)
         }
     }

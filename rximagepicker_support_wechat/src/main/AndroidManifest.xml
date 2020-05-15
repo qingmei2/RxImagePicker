@@ -3,10 +3,9 @@
     package="com.qingmei2.rximagepicker_extension_wechat">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application>
-        <activity android:name=".ui.CustomPreviewActivity"></activity>
+
         <activity android:name=".ui.WechatImagePickerActivity" />
         <activity android:name=".ui.WechatAlbumPreviewActivity" />
         <activity android:name=".ui.WechatSelectedPreviewActivity" />

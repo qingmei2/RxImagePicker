@@ -24,6 +24,7 @@ import android.view.WindowManager
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.qingmei2.rximagepicker_extension.R
 import com.qingmei2.rximagepicker_extension.entity.IncapableCause
 import com.qingmei2.rximagepicker_extension.entity.Item

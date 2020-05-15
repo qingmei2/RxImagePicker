@@ -34,7 +34,7 @@ android {
     }
 }
 
-def dependRemote = true
+def dependRemote = false
 
 dependencies {
     implementation rootProject.ext.dependencies["kotlin-android"]

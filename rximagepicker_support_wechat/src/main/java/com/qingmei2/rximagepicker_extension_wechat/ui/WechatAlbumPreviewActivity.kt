@@ -48,7 +48,7 @@ class WechatAlbumPreviewActivity : AlbumPreviewActivity() {
                 val cursor = context.managedQuery(uris[i], arrayOf(MediaStore.Files.FileColumns._ID,
                         MediaStore.MediaColumns.DISPLAY_NAME,
                         MediaStore.MediaColumns.MIME_TYPE,
-                        MediaStore.MediaColumns.SIZE), null, null, null)
+                        MediaStore.MediaColumns.SIZE, "duration"), null, null, null)
                 cursor.moveToFirst()
                 data.add(Item.valueOf(cursor))
             }
