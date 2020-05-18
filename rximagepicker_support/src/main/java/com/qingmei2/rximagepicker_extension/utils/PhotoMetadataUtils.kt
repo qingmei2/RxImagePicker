@@ -32,10 +32,13 @@ import com.qingmei2.rximagepicker_extension.R
 import com.qingmei2.rximagepicker_extension.entity.IncapableCause
 import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
+import java.io.File
 
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 import java.text.DecimalFormat
 
 class PhotoMetadataUtils private constructor() {
@@ -59,10 +62,26 @@ class PhotoMetadataUtils private constructor() {
             val imageSize = getBitmapBound(resolver, uri)
             var w = imageSize.x
             var h = imageSize.y
-            if (PhotoMetadataUtils.shouldRotate(resolver, uri)) {
+            if (shouldRotate(resolver, uri)) {
                 w = imageSize.y
                 h = imageSize.x
             }
+            if (h == 0) return Point(MAX_WIDTH, MAX_WIDTH)
+            val metrics = DisplayMetrics()
+            activity.windowManager.defaultDisplay.getMetrics(metrics)
+            val screenWidth = metrics.widthPixels.toFloat()
+            val screenHeight = metrics.heightPixels.toFloat()
+            val widthScale = screenWidth / w
+            val heightScale = screenHeight / h
+            return if (widthScale > heightScale) {
+                Point((w * widthScale).toInt(), (h * heightScale).toInt())
+            } else Point((w * widthScale).toInt(), (h * heightScale).toInt())
+        }
+
+        fun getBitmapSize(path:String, activity: Activity): Point {
+            val imageSize = getBitmapBound(path)
+            val w = imageSize.x
+            val h = imageSize.y
             if (h == 0) return Point(MAX_WIDTH, MAX_WIDTH)
             val metrics = DisplayMetrics()
             activity.windowManager.defaultDisplay.getMetrics(metrics)
@@ -96,6 +115,43 @@ class PhotoMetadataUtils private constructor() {
                     }
 
                 }
+            }
+        }
+
+        private fun getBitmapBound(path:String): Point {
+
+            if(path.startsWith("http")){
+                var inputStream: InputStream? = null
+                try {
+                    val connection = URL(path).openConnection() as HttpURLConnection
+                    inputStream =  connection.inputStream
+                    val options = BitmapFactory.Options()
+                    options.inJustDecodeBounds = true
+                    BitmapFactory.decodeStream(inputStream, null, options)
+                    val width = options.outWidth
+                    val height = options.outHeight
+                    return Point(width, height)
+                } catch ( e:IOException) {
+                    return Point(0, 0)
+                }finally {
+                    try {
+                        inputStream?.close()
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+            }else{
+
+            }
+            return try {
+                val options = BitmapFactory.Options()
+                options.inJustDecodeBounds = true
+                BitmapFactory.decodeFile(path, options)
+                val width = options.outWidth
+                val height = options.outHeight
+                Point(width, height)
+            } catch (e: Exception) {
+                Point(0, 0)
             }
         }
 
