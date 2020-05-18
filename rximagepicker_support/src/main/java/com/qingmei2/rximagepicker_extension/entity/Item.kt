@@ -141,6 +141,12 @@ class Item : Parcelable {
         const val ITEM_DISPLAY_NAME_CAPTURE = "Capture"
 
         fun valueOf(cursor: Cursor): Item {
+            if(cursor.getColumnIndex("duration") == -1){
+                return Item(cursor.getLong(cursor.getColumnIndex(MediaStore.Files.FileColumns._ID)),
+                        cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.MIME_TYPE)),
+                        cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.SIZE)),
+                        0L)
+            }
             return Item(cursor.getLong(cursor.getColumnIndex(MediaStore.Files.FileColumns._ID)),
                     cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.MIME_TYPE)),
                     cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.SIZE)),
