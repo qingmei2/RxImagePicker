@@ -41,7 +41,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation rootProject.ext.dependencies["junit"]
-    implementation 'it.sephiroth.android.library.imagezoom:imagezoom:2.3.0'
+    api 'it.sephiroth.android.library.imagezoom:imagezoom:2.3.0'
 //    api "com.github.yjfnypeu:EasyAndroid:1.3.1"
 }
 repositories {

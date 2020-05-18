@@ -71,6 +71,28 @@ interface ImageEngine {
     fun loadGifImage(context: Context, resizeX: Int, resizeY: Int, imageView: ImageView, uri: Uri)
 
     /**
+     * Load a static image resource.
+     *
+     * @param context   Context
+     * @param resizeX   Desired x-size of the origin image
+     * @param resizeY   Desired y-size of the origin image
+     * @param imageView ImageView widget
+     * @param uri       Uri of the loaded image
+     */
+    fun loadImage(context: Context, resizeX: Int, resizeY: Int, imageView: ImageView, path: String)
+
+    /**
+     * Load a gif image resource.
+     *
+     * @param context   Context
+     * @param resizeX   Desired x-size of the origin image
+     * @param resizeY   Desired y-size of the origin image
+     * @param imageView ImageView widget
+     * @param uri       Uri of the loaded image
+     */
+    fun loadGifImage(context: Context, resizeX: Int, resizeY: Int, imageView: ImageView, path: String)
+
+    /**
      * Whether this implementation supports animated gif.
      * Just knowledge of it, convenient for users.
      *
