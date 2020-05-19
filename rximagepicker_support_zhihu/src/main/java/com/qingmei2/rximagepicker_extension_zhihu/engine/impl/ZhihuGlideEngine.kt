@@ -55,10 +55,25 @@ class ZhihuGlideEngine : ImageEngine {
                 .into(imageView)
     }
 
+    override fun loadImage(context: Context, resizeX: Int, resizeY: Int, imageView: ImageView, path: String) {
+        Glide.with(context)
+                .load(path)
+                .apply(RequestOptions.priorityOf(Priority.HIGH))
+                .into(imageView)
+    }
+
     override fun loadGifImage(context: Context, resizeX: Int, resizeY: Int, imageView: ImageView, uri: Uri) {
         Glide.with(context)
                 .asGif()
                 .load(uri)
+                .apply(RequestOptions.priorityOf(Priority.HIGH))
+                .into(imageView)
+    }
+
+    override fun loadGifImage(context: Context, resizeX: Int, resizeY: Int, imageView: ImageView, path: String) {
+        Glide.with(context)
+                .asGif()
+                .load(path)
                 .apply(RequestOptions.priorityOf(Priority.HIGH))
                 .into(imageView)
     }

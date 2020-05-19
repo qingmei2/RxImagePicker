@@ -19,6 +19,11 @@ open class BaseItem() :Parcelable{
     /** 文件资源 */
     var itemUri: Uri? = null
 
+    constructor(type:Int,path:String,uri:Uri? = null): this(){
+        this.itemType = type
+        this.itemPath = path
+        this.itemUri = uri
+    }
     constructor(parcel: Parcel) : this() {
         itemType = parcel.readInt()
         itemPath = parcel.readString()?:""

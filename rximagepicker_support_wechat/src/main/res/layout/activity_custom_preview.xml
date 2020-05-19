@@ -6,7 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.CustomPreviewActivity">
 
-    <com.qingmei2.rximagepicker_extension.ui.widget.PreviewViewPager
+<!--    <com.qingmei2.rximagepicker_extension.ui.widget.PreviewViewPager-->
+<!--        android:id="@+id/pager"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@android:color/black" />-->
+
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
