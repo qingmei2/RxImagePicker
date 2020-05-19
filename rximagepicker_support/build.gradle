@@ -31,10 +31,11 @@ android {
 }
 
 dependencies {
+    api project(':rximagepicker')
+
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["recyclerview"]
 
-    implementation project(':rximagepicker')
     implementation rootProject.ext.dependencies["kotlin-android"]
     implementation rootProject.ext.dependencies["constraint-layout"]
 

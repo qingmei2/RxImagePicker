@@ -6,7 +6,6 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
-import com.qingmei2.rximagepicker_extension.ui.adapter.PreviewPagerAdapter
 import com.qingmei2.rximagepicker_extension.utils.Platform
 import com.qingmei2.rximagepicker_extension_wechat.R
 import com.qingmei2.rximagepicker_extension_wechat.entity.BaseItem
@@ -18,7 +17,10 @@ const val PREVIEW_POSITION = "extra_position"
 
 class CustomPreviewActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
-    protected var mPreviousPos = -1
+    private var mPreviousPos = -1
+    private val mAdapter by lazy {
+        MediaPreviewPagerAdapter<BaseItem>(supportFragmentManager)
+    }
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,14 +34,15 @@ class CustomPreviewActivity : AppCompatActivity(), ViewPager.OnPageChangeListene
         if (SelectionSpec.instance.needOrientationRestriction()) {
             requestedOrientation = SelectionSpec.instance.orientation
         }
-        pager.addOnPageChangeListener(this)
-        val adapter = MediaPreviewPagerAdapter<BaseItem>(fm = supportFragmentManager)
         val data = intent.getParcelableArrayListExtra<BaseItem>(PREVIEW_DATA)
-        adapter.addAll(data.toList())
-        pager.adapter = adapter
+        mAdapter.addAll(data.toList())
+        pager.adapter = mAdapter
+        pager.addOnPageChangeListener(this)
         val position = intent.getIntExtra(PREVIEW_POSITION, -1)
         if (position != -1) {
             pager.currentItem = position
+        }else{
+            pager.currentItem = 0
         }
 
     }
@@ -54,10 +57,10 @@ class CustomPreviewActivity : AppCompatActivity(), ViewPager.OnPageChangeListene
 
     @SuppressLint("SetTextI18n")
     override fun onPageSelected(position: Int) {
-        val adapter = pager.adapter as PreviewPagerAdapter
+        tv_page.text = "${position + 1}/${mAdapter.count}"
         if (mPreviousPos != -1 && mPreviousPos != position) {
-            (adapter.instantiateItem(pager, mPreviousPos) as MediaItemFragment<*>).resetView()
-            tv_page.text = "${position + 1}/${adapter.count}"
+            (mAdapter.getItem(mPreviousPos) as MediaItemFragment<BaseItem>).resetView()
+//            (mAdapter.instantiateItem(pager, mPreviousPos) as MediaItemFragment<BaseItem>).resetView()
         }
         mPreviousPos = position
     }
