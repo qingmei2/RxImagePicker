@@ -12,8 +12,8 @@ import androidx.test.espresso.intent.matcher.IntentMatchers.toPackage
 import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import androidx.test.runner.AndroidJUnit4
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -25,7 +25,7 @@ class MainActivityTest {
 
     @Rule
     @JvmField
-    var tasksActivityTestRule = IntentsTestRule<MainActivity>(MainActivity::class.java)
+    var tasksActivityTestRule = IntentsTestRule(MainActivity::class.java)
 
     @Test
     fun testJump2SystemActivity() {

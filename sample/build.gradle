@@ -52,6 +52,10 @@ dependencies {
     androidTestImplementation rootProject.ext.dependencies["test-runner"]
     androidTestImplementation rootProject.ext.dependencies["test-rules"]
 
+    testImplementation rootProject.ext.dependencies["junit"]
+    androidTestImplementation rootProject.ext.dependencies["junit"]
+    androidTestImplementation rootProject.ext.dependencies["androidtest-junit"]
+
     if (dependRemote) {
         implementation "com.github.qingmei2:rximagepicker:$rootProject.ext.android.versionName"
         implementation "com.github.qingmei2:rximagepicker_support:$rootProject.ext.android.versionName"
@@ -63,7 +67,4 @@ dependencies {
         implementation project(':rximagepicker_support_wechat')
         implementation project(':rximagepicker_support_zhihu')
     }
-
-    testImplementation rootProject.ext.dependencies["junit"]
-    androidTestImplementation rootProject.ext.dependencies["junit"]
 }

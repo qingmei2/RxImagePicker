@@ -42,7 +42,8 @@ project.ext {
             "glide-compiler"          : "com.github.bumptech.glide:compiler:${glide_version}",
 
             //junit
-            "junit"                   : "junit:junit:4.12",
+            "junit"                   : "junit:junit:4.13",
+            "androidtest-junit"       : "androidx.test.ext:junit:1.1.1",
 
             //mock
             "mockito-kotlin"          : "com.nhaarman:mockito-kotlin-kt1.1:1.5.0",
