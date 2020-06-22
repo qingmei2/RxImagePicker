@@ -1,5 +1,5 @@
-def kotlin_version = '1.3.31'
-def espresso_version = '3.1.0'
+def kotlin_version = '1.3.72'
+def espresso_version = '3.1.1'
 def glide_version = '4.9.0'
 
 project.ext {
