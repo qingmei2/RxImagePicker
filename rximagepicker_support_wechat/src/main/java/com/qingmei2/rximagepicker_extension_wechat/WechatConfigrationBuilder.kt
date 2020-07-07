@@ -14,13 +14,12 @@ import com.qingmei2.rximagepicker_extension.filter.Filter
 import com.qingmei2.rximagepicker_extension_wechat.engine.impl.WechatGlideEngine
 import java.util.*
 
-class WechatConfigrationBuilder
 /**
  * Constructs a new specification builder on the context.
  *
  * @param mimeTypes MIME type set to select.
  */
-(mimeTypes: Set<MimeType>, mediaTypeExclusive: Boolean) {
+class WechatConfigrationBuilder(mimeTypes: Set<MimeType>, mediaTypeExclusive: Boolean) {
 
     private val mSelectionSpec: SelectionSpec
 

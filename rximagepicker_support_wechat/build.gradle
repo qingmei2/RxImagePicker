@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-//    implementation project(':rximagepicker')
     api project(':rximagepicker_support')
 
     implementation rootProject.ext.dependencies["appcompat"]
