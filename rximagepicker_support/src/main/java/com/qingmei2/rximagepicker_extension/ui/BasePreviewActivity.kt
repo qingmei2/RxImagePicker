@@ -19,13 +19,11 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.LayoutRes
-import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
-
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import com.qingmei2.rximagepicker_extension.R
 import com.qingmei2.rximagepicker_extension.entity.IncapableCause
 import com.qingmei2.rximagepicker_extension.entity.Item
@@ -58,6 +56,7 @@ abstract class BasePreviewActivity : AppCompatActivity(), androidx.viewpager.wid
     override fun onCreate(savedInstanceState: Bundle?) {
         mSpec = SelectionSpec.instance
         setTheme(mSpec.themeId)
+//        this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
         setContentView(layoutRes)
         if (Platform.hasKitKat()) {
@@ -68,6 +67,8 @@ abstract class BasePreviewActivity : AppCompatActivity(), androidx.viewpager.wid
             requestedOrientation = mSpec.orientation
         }
 
+
+        /*** 建议下方单独设为initView()，方便子类维护时无需复制上方代码 */
         if (savedInstanceState == null) {
             mSelectedCollection.onCreate(intent.getBundleExtra(EXTRA_DEFAULT_BUNDLE))
         } else {

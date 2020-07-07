@@ -32,10 +32,16 @@ import com.qingmei2.rximagepicker_extension.R
 import com.qingmei2.rximagepicker_extension.entity.IncapableCause
 import com.qingmei2.rximagepicker_extension.entity.Item
 import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
+import java.io.File
 
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 import java.text.DecimalFormat
 
 class PhotoMetadataUtils private constructor() {
@@ -59,7 +65,7 @@ class PhotoMetadataUtils private constructor() {
             val imageSize = getBitmapBound(resolver, uri)
             var w = imageSize.x
             var h = imageSize.y
-            if (PhotoMetadataUtils.shouldRotate(resolver, uri)) {
+            if (shouldRotate(resolver, uri)) {
                 w = imageSize.y
                 h = imageSize.x
             }
@@ -73,6 +79,27 @@ class PhotoMetadataUtils private constructor() {
             return if (widthScale > heightScale) {
                 Point((w * widthScale).toInt(), (h * heightScale).toInt())
             } else Point((w * widthScale).toInt(), (h * heightScale).toInt())
+        }
+
+        fun getBitmapSize(path: String, activity: Activity,callback:((point:Point) -> Unit)){
+            getBitmapBound(path){imageSize ->
+                val w = imageSize.x
+                val h = imageSize.y
+                if (h == 0) {
+                    callback.invoke(Point(MAX_WIDTH, MAX_WIDTH))
+                    return@getBitmapBound
+                }
+                val metrics = DisplayMetrics()
+                activity.windowManager.defaultDisplay.getMetrics(metrics)
+                val screenWidth = metrics.widthPixels.toFloat()
+                val screenHeight = metrics.heightPixels.toFloat()
+                val widthScale = screenWidth / w
+                val heightScale = screenHeight / h
+                callback.invoke(if (widthScale > heightScale) {
+                    Point((w * widthScale).toInt(), (h * heightScale).toInt())
+                } else Point((w * widthScale).toInt(), (h * heightScale).toInt()))
+            }
+
         }
 
         private fun getBitmapBound(resolver: ContentResolver, uri: Uri): Point {
@@ -97,6 +124,51 @@ class PhotoMetadataUtils private constructor() {
 
                 }
             }
+        }
+
+        private fun getBitmapBound(path: String,callback:((point:Point) -> Unit)) {
+
+
+            if (path.startsWith("http")) {
+                Observable.create<Point> {
+                    var inputStream: InputStream? = null
+                    try {
+                        val connection = URL(path).openConnection() as HttpURLConnection
+                        inputStream = connection.inputStream
+                        val options = BitmapFactory.Options()
+                        options.inJustDecodeBounds = true
+                        BitmapFactory.decodeStream(inputStream, null, options)
+                        val width = options.outWidth
+                        val height = options.outHeight
+                        it.onNext(Point(width, height))
+                        return@create
+                    } catch (e: IOException) {
+                        it.onNext(Point(0, 0))
+                    } finally {
+                        try {
+                            inputStream?.close()
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
+                    }
+                }.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            callback.invoke(it)
+                        }
+            }else{
+                try {
+                    val options = BitmapFactory.Options()
+                    options.inJustDecodeBounds = true
+                    BitmapFactory.decodeFile(path, options)
+                    val width = options.outWidth
+                    val height = options.outHeight
+                    callback.invoke(Point(width, height))
+                } catch (e: Exception) {
+                    callback.invoke(Point(0, 0))
+                }
+            }
+
         }
 
         fun getPath(resolver: ContentResolver, uri: Uri?): String? {

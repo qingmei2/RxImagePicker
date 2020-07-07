@@ -1,10 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qingmei2.rximagepicker_extension">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application>
+        <activity android:name=".ui.CustomPreviewActivity"/>
+        <activity android:name=".ui.PreViewVideoActivity"/>
         <activity android:name=".ui.AlbumPreviewActivity" />
         <activity android:name=".ui.SelectedPreviewActivity" />
     </application>
+
 </manifest>

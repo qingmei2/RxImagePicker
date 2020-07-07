@@ -72,6 +72,14 @@ class Item : Parcelable {
         this.duration = duration
     }
 
+     constructor(uri: Uri, mimeType: String?, size: Long, duration: Long) {
+        this.id = 0
+        this.mimeType = mimeType
+        this.contentUri = uri
+        this.size = size
+        this.duration = duration
+    }
+
     private constructor(source: Parcel) {
         id = source.readLong()
         mimeType = source.readString()
@@ -133,6 +141,12 @@ class Item : Parcelable {
         const val ITEM_DISPLAY_NAME_CAPTURE = "Capture"
 
         fun valueOf(cursor: Cursor): Item {
+            if(cursor.getColumnIndex("duration") == -1){
+                return Item(cursor.getLong(cursor.getColumnIndex(MediaStore.Files.FileColumns._ID)),
+                        cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.MIME_TYPE)),
+                        cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.SIZE)),
+                        0L)
+            }
             return Item(cursor.getLong(cursor.getColumnIndex(MediaStore.Files.FileColumns._ID)),
                     cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.MIME_TYPE)),
                     cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.SIZE)),

@@ -19,13 +19,9 @@ package com.qingmei2.rximagepicker_extension.model
 import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
-import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
-
 import com.qingmei2.rximagepicker_extension.entity.Album
 import com.qingmei2.rximagepicker_extension.loader.AlbumMediaLoader
-
 import java.lang.ref.WeakReference
 
 class AlbumMediaCollection : androidx.loader.app.LoaderManager.LoaderCallbacks<Cursor> {
@@ -43,14 +39,12 @@ class AlbumMediaCollection : androidx.loader.app.LoaderManager.LoaderCallbacks<C
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
         mContext?.get() ?: return
-
-        mCallbacks!!.onAlbumMediaLoad(data)
+        mCallbacks?.onAlbumMediaLoad(data)
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
         mContext?.get() ?: return
-
-        mCallbacks!!.onAlbumMediaReset()
+        mCallbacks?.onAlbumMediaReset()
     }
 
     fun onCreate(context: androidx.fragment.app.FragmentActivity, callbacks: AlbumMediaCallbacks) {
@@ -60,7 +54,7 @@ class AlbumMediaCollection : androidx.loader.app.LoaderManager.LoaderCallbacks<C
     }
 
     fun onDestroy() {
-        mLoaderManager!!.destroyLoader(LOADER_ID)
+        mLoaderManager?.destroyLoader(LOADER_ID)
         mCallbacks = null
     }
 
@@ -69,7 +63,7 @@ class AlbumMediaCollection : androidx.loader.app.LoaderManager.LoaderCallbacks<C
         val args = Bundle()
         args.putParcelable(ARGS_ALBUM, target)
         args.putBoolean(ARGS_ENABLE_CAPTURE, enableCapture)
-        mLoaderManager!!.initLoader(LOADER_ID, args, this)
+        mLoaderManager?.initLoader(LOADER_ID, args, this)
     }
 
     interface AlbumMediaCallbacks {

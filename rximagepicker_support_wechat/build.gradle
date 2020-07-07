@@ -32,8 +32,8 @@ android {
 }
 
 dependencies {
-    implementation project(':rximagepicker')
-    implementation project(':rximagepicker_support')
+//    implementation project(':rximagepicker')
+    api project(':rximagepicker_support')
 
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["recyclerview"]

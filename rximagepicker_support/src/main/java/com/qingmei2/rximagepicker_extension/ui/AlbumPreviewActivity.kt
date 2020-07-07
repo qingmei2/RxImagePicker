@@ -28,13 +28,17 @@ import java.util.ArrayList
 
 open class AlbumPreviewActivity : BasePreviewActivity(), AlbumMediaCollection.AlbumMediaCallbacks {
 
-    private val mCollection = AlbumMediaCollection()
+     private val mCollection = AlbumMediaCollection()
 
-    private var mIsAlreadySetPosition: Boolean = false
+     private var mIsAlreadySetPosition: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initData()
 
+    }
+
+    open fun initData() {
         mCollection.onCreate(this, this)
         val album = intent.getParcelableExtra<Album>(EXTRA_ALBUM)
         mCollection.load(album)
