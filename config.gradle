@@ -8,8 +8,8 @@ project.ext {
             compileSdkVersion: 29,
             minSdkVersion    : 16,
             targetSdkVersion : 29,
-            versionCode      : 39,
-            versionName      : "2.5.4"
+            versionCode      : 40,
+            versionName      : "2.5.5"
     ]
 
     constants = [
