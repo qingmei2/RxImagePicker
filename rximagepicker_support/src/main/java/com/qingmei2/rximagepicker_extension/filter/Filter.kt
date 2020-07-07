@@ -37,7 +37,7 @@ abstract class Filter {
      *
      * @return null if selectable, [IncapableCause] if not selectable.
      */
-    abstract fun filter(context: Context, item: Item): IncapableCause
+    abstract fun filter(context: Context, item: Item): IncapableCause?
 
     /**
      * Whether an [Item] need filtering.
