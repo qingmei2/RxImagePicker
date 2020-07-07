@@ -11,17 +11,16 @@ import com.qingmei2.rximagepicker_extension.ui.adapter.PreviewPagerAdapter
 
 const val EXTRA_DATA = "extra_data"
 const val EXTRA_POSITION = "extra_position"
+
 class WechatAlbumPreviewActivity : AlbumPreviewActivity() {
 
     override val layoutRes: Int = com.qingmei2.rximagepicker_extension_wechat.R.layout.wechat_activity_media_preview
 
-
-
     override fun initData() {
-        val position = intent.getIntExtra(EXTRA_POSITION,-1)
-        if(position == -1){
+        val position = intent.getIntExtra(EXTRA_POSITION, -1)
+        if (position == -1) {
             super.initData()
-        }else{
+        } else {
 
             mCheckView.visibility = View.GONE
             val data = intent.getParcelableArrayListExtra<Item>(EXTRA_DATA)
@@ -48,7 +47,7 @@ class WechatAlbumPreviewActivity : AlbumPreviewActivity() {
                 val cursor = context.managedQuery(uris[i], arrayOf(MediaStore.Files.FileColumns._ID,
                         MediaStore.MediaColumns.DISPLAY_NAME,
                         MediaStore.MediaColumns.MIME_TYPE,
-                        MediaStore.MediaColumns.SIZE, "duration"), null, null, null)
+                        MediaStore.MediaColumns.SIZE), null, null, null)
                 cursor.moveToFirst()
                 data.add(Item.valueOf(cursor))
             }

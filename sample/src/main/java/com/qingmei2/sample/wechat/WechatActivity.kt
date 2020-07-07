@@ -19,10 +19,6 @@ import com.qingmei2.rximagepicker_extension.entity.SelectionSpec
 import com.qingmei2.rximagepicker_extension.model.SelectedItemCollection
 import com.qingmei2.rximagepicker_extension.ui.BasePreviewActivity
 import com.qingmei2.rximagepicker_extension_wechat.WechatConfigrationBuilder
-import com.qingmei2.rximagepicker_extension_wechat.entity.BaseItem
-import com.qingmei2.rximagepicker_extension_wechat.entity.IMAGE_TYPE
-import com.qingmei2.rximagepicker_extension_wechat.entity.VIDEO_TYPE
-import com.qingmei2.rximagepicker_extension_wechat.ui.*
 import com.qingmei2.rximagepicker_extension_wechat.ui.EXTRA_DATA
 import com.qingmei2.rximagepicker_extension_wechat.ui.EXTRA_POSITION
 import com.qingmei2.rximagepicker_extension_wechat.ui.WechatAlbumPreviewActivity
@@ -45,9 +41,10 @@ class WechatActivity : AppCompatActivity() {
         initRxImagePicker()
         fabPickCamera.setOnClickListener { checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CAMERA) }
         fabGallery.setOnClickListener { checkPermissionAndRequest(REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_GALLERY) }
+
         fabPreview.setOnClickListener {
-            if(data.isEmpty()){
-                Toast.makeText(this,"请选择图片后预览",Toast.LENGTH_SHORT).show()
+            if (data.isEmpty()) {
+                Toast.makeText(this, "请选择图片后预览", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
