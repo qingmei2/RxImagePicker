@@ -63,7 +63,12 @@ class AlbumMediaCollection : androidx.loader.app.LoaderManager.LoaderCallbacks<C
         val args = Bundle()
         args.putParcelable(ARGS_ALBUM, target)
         args.putBoolean(ARGS_ENABLE_CAPTURE, enableCapture)
-        mLoaderManager?.initLoader(LOADER_ID, args, this)
+        val loader = mLoaderManager?.getLoader<Cursor>(LOADER_ID)
+        if (loader != null || mLoaderManager?.hasRunningLoaders() == true) {
+            mLoaderManager?.restartLoader(LOADER_ID, args, this)
+        } else {
+            mLoaderManager?.initLoader(LOADER_ID, args, this)
+        }
     }
 
     interface AlbumMediaCallbacks {
