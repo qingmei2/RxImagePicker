@@ -3,9 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
@@ -55,44 +52,6 @@ repositories {
     mavenCentral()
 }
 
-version = rootProject.ext.android["versionName"]
-group = rootProject.ext.constants["group"]
-def siteUrl = rootProject.ext.constants["siteUrl"]
-def gitUrl = rootProject.ext.constants["gitUrl"]
-def libName = "rximagepicker_support_wechat"
-def projectName = "RxImagePicker"
-
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom {
-            project {
-                packaging 'aar'
-                name projectName
-                url siteUrl
-                licenses {
-                    license {
-                        name 'MIT license'
-                        url 'https://github.com/qingmei2/RxImagePicker/blob/2.x/LICENSE'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'qingmei2'
-                        name 'qingmei2'
-                        email 'mq2553299@qq.com'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
-
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
@@ -112,21 +71,4 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives javadocJar
     archives sourcesJar
-}
-
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-    configurations = ['archives']
-    pkg {
-        repo = "maven"
-        name = libName
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["MIT"]
-        publish = true
-    }
 }
