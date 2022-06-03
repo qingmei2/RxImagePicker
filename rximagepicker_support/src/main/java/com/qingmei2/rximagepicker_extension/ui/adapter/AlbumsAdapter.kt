@@ -67,7 +67,7 @@ class AlbumsAdapter : CursorAdapter {
                 context.resources.getDimensionPixelSize(R.dimen.media_grid_size),
                 mPlaceholder,
                 view.findViewById(R.id.album_cover),
-                Uri.fromFile(File(album.coverPath))
+                Uri.parse(album.coverPath)
         )
     }
 }

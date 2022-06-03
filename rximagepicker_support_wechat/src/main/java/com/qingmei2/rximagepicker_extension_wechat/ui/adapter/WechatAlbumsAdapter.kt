@@ -51,6 +51,6 @@ class WechatAlbumsAdapter : CursorAdapter {
                 context.resources.getDimensionPixelSize(R.dimen.wechat_media_grid_size),
                 mPlaceholder!!,
                 view.findViewById(R.id.album_cover),
-                Uri.fromFile(File(album.coverPath)))
+                Uri.parse(album.coverPath))
     }
 }
